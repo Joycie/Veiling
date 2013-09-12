@@ -1,0 +1,127 @@
+@font-face {
+	font-family: 'Conv_simplesnails';
+	src: url('fonts/simplesnails.eot');
+	src: local('☺'), url('fonts/simplesnails.woff') format('woff'), url('fonts/simplesnails.ttf') format('truetype'), url('fonts/simplesnails.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body
+{
+	font-family: arial;
+	background-color: #DEDEDE;
+	margin: auto;
+}
+
+.page
+{
+	width: 1000px;
+	margin:  0px auto;
+	background-color: #FFFFFF;
+}
+
+.header h1
+{
+	font-family: 'Conv_simplesnails',Sans-Serif;
+	font-size: 35pt;
+	padding: 25px;
+	padding-top: 15px;
+	margin:  0px;
+}
+
+.header img
+{
+	width: 50px;
+	height: 50px;
+}
+
+.header .options
+{
+	float: right;
+	font-size: 10pt;
+	margin: 30px;
+	margin-top: 2	0px;
+	
+}
+
+.header .options div
+{
+	text-align: right;
+}
+
+.header .options div a
+{
+	color: #999999;
+	text-decoration: none;
+}
+
+.header .options div a:hover
+{
+	text-decoration: underline;
+}
+
+.header input[type="search"]
+{
+	border: 1px solid #DEDEDE;
+	margin-top: 10px;
+	font-size: 10pt;
+	font-family: arial;
+	padding: 5px;
+	
+}
+
+.header form
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+ul.menu
+{
+	background-color: #007893;
+	float:left;
+	width:100%;
+	padding:0;
+	margin:0;
+	list-style-type:none;
+}
+
+.menu a
+{
+	float:left;
+	text-decoration:none;
+	color:white;
+	background-color: #007893;
+	padding:12px;
+}
+
+.menu a:hover, .menu li.selected a
+{
+	background-color:#0094B5;
+}
+.menu li
+{
+	display:inline;
+}
+
+.content
+{
+	padding: 10px;
+}
+
+.footer
+{
+	background-color: #DEDEDE;
+	color: #999999;
+	padding: 10px;
+}
+
+.footer .options
+{
+	float: right;
+}
+
+.clear
+{
+	clear: both;
+}
