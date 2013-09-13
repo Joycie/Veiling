@@ -22,9 +22,13 @@
 			<ul class="menu">
 				<li class="selected"><a href="#">Home</a></li>
 				<li><a href="#">Literatuur</a></li>
-				<li><a href="#">Naslagwerken</a></li>
+				<li><a href="#">Geschiedenis</a></li>
+				<li><a href="#">Toerisme</a></li>
+				<li><a href="#">Techniek</a></li>
 				<li><a href="#">Kookboeken</a></li>
+				<li><a href="#">Flora en fauna</a></li>
 				<li><a href="#">Kunst en cultuur</a></li>
+				<li><a href="#">Naslagwerken</a></li>
 			</ul>
 			<div class="clear"></div>
 		</div>
