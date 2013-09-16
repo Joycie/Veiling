@@ -10,7 +10,7 @@
 		<div class="header">
 			<div class="options">
 				<div>
-					<a href="jsp/login.jsp">Inloggen</a>
+					<a href="jsp/login.jsp">Inloggen/Registreren</a>
 				</div>
 				<form>
 					<input type="search" placeholder="Zoeken" />
@@ -33,7 +33,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="content">
-			<h2>Inloggen</h2>
+			<h2>Welkom</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
 				et velit vel nisi viverra porttitor nec sit amet tellus. In et
 				volutpat turpis. Nulla vitae nibh et urna volutpat luctus. Sed
