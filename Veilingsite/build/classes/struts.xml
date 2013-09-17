@@ -18,4 +18,5 @@
 				<result name="success">logoutsuccess.jsp</result>
 			</action>
 		</package>	
+		<include file="veilingAction/veiling.xml"/>
 	</struts>

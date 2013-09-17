@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
 <title>Multatuli Boekenveiling</title>
@@ -29,6 +29,7 @@
 				<li><a href="#">Flora en fauna</a></li>
 				<li><a href="#">Kunst en cultuur</a></li>
 				<li><a href="#">Naslagwerken</a></li>
+				
 			</ul>
 			<div class="clear"></div>
 		</div>

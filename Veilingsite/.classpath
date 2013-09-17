@@ -14,5 +14,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container/MijnBieb_practicum2"/>
+	<classpathentry kind="lib" path="C:/Jars/struts2-core-2.3.15.1.jar"/>
+	<classpathentry kind="lib" path="C:/Jars/ojdbc6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
