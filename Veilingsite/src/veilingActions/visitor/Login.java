@@ -1,14 +1,26 @@
 package veilingActions.visitor;
+import java.util.Map;
+import domein.Gebruiker;
+import com.opensymphony.xwork2.ActionSupport;
+import java.sql.*;
 
-public class Login {
-	private String username, pass;
+public class Login extends ActionSupport{
+	private Gebruiker gebruiker;
+	@SuppressWarnings("rawtypes")
+	private String email, pass;
+	private Map session;
 
-	public String getUsername(){
-		return username;
+	public String execute(){
+		
+		return SUCCESS;
 	}
 	
-	public void setUsername(String username){
-		this.username = username;
+	public String getEmail(){
+		return email;
+	}
+	
+	public void setEmail(String email){
+		this.email = email;
 	}
 	
 	public String getPass(){
@@ -17,6 +29,12 @@ public class Login {
 	
 	public void setPass(String pass){
 		this.pass = pass;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void setSession(Map session) {
+		this.session = session;
+		
 	}
 	
 }
