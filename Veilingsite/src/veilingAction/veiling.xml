@@ -4,7 +4,7 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="visitor" namespace="/" extends="struts-default">
+	<package name="visitor" extends="struts-default">
 		<action name="UserList" class="veilingActions.visitor.UserList">
 			<result name="success">/jsp/users.jsp</result>
 		</action>

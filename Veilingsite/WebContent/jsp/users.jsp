@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <html>
 <head>
@@ -34,6 +35,20 @@
 		</div>
 		<div class="content">
 			<h2>Users:</h2>
+			<table>
+		    <tr class="thcolor">
+			    <th>Klant nummer</th>
+			    <th>Voornaam</th>
+			    <th>Achternaam</th>
+		    </tr>
+		    <s:iterator value="books">
+			    <tr class="tdcolor">
+				    <td><s:property value="klantnr" /></td>
+					<td><s:property value="voornaam" /></td>
+		     		<td><s:property value="achternaam" /></td>
+		        </tr>
+ 		    </s:iterator>
+	    </table>
 		</div>
 		<div class="footer">
 			<div class="options">
