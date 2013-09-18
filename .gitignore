@@ -1,5 +1,7 @@
 *.class
-
+bin/
+build/*
+!build/build.xml
 # Specific files #
 
 build.xml
@@ -9,3 +11,4 @@ build.xml
 *.war
 *.ear
 .classpath
+
