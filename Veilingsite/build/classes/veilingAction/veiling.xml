@@ -8,5 +8,9 @@
 		<action name="UserList" class="veilingActions.visitor.UserList">
 			<result name="success">/jsp/users.jsp</result>
 		</action>
+		<action name="Register" class="veilingActions.visitor.Register">
+			<result name="success">/jsp/login.jsp</result>
+		</action>
+		
 	</package>
 </struts>

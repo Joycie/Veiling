@@ -20,11 +20,10 @@ public class UserList extends ActionSupport {
 		Connection connection = null;
 
 		try {
-
+			DBT.getDBConnection();
 			connection = DriverManager.getConnection(
 					"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
 					"tho5_2013_2a_team3", "welkom_02");
-			DBT.selectRecordsFromDbUserTable();
 			if (connection != null) {
 				System.out.println("Connectie geslaagd");
 			} else {

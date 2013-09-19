@@ -23,11 +23,6 @@ public class Databasetest {
 		Connection connection = null;
 
 		Databasetest.getDBConnection();
-		if (connection != null) {
-			System.out.println("Connectie geslaagd");
-		} else {
-			System.out.println("Mislukt");
-		}
 		try {
 				dbt.selectRecordsFromDbUserTable();
 			} catch (SQLException e) {
