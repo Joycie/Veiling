@@ -1,12 +1,18 @@
 package veilingActions.visitor;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import com.opensymphony.xwork2.ActionSupport;
+
+import database.Databasetest;
 
 public class Register extends ActionSupport {
 
 	private String voornaam, tussenvoegsel, achternaam, password,
-			passwordCheck, email, adress, postcode, plaats, telefoonnummer,
-			rekeningnummer;
+			passwordCheck, email, adress, postcode, plaats, telefoonnummer, rekeningnummer;
+	private Databasetest DBT;
 
 	public String execute() {
 		if (voornaam.equals("")) {
@@ -47,7 +53,27 @@ public class Register extends ActionSupport {
 			System.out.println("test");
 			return ActionSupport.INPUT;
 		}else{
-			System.out.println("test2");
+			Connection connection = null;
+			try {
+				DBT.getDBConnection();
+				connection = DriverManager.getConnection(
+						"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
+						"tho5_2013_2a_team3", "welkom_02");
+				if (connection != null) {
+					System.out.println("Connectie geslaagd");
+				} else {
+					System.out.println("Mislukt");
+				}
+
+			} catch (SQLException e) {
+
+				System.out.println("Connectie mislukt!");
+				e.printStackTrace();
+			}
+			System.out.println("Opvragen van email + wachtwoord: ");
+			Databasetest.insertRecordsToDbUserTable("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES ('"+voornaam +"', '"+tussenvoegsel+"', '"+achternaam+"', '"+adress+"', '"+postcode+"', '"+email+"', '"+password+"', '"+telefoonnummer+"', '"+rekeningnummer+"', '"+plaats+"')");
+			
+		
 		return ActionSupport.SUCCESS;}
 	}
 

@@ -96,6 +96,44 @@ public class Databasetest {
 			}
 		}
 	}
+	public static void insertRecordsToDbUserTable(String insertTableSQL) {
+
+		Connection dbConnection = null;
+		Statement statement = null;
+
+		try {
+			dbConnection = getDBConnection();
+			statement = dbConnection.createStatement();
+
+			statement.executeQuery(insertTableSQL);
+			
+
+		} catch (SQLException e) {
+			System.out
+					.println("Fout in catch van selectRecordsFromDbUserTable()");
+			System.out.println(e.getMessage());
+
+		} finally {
+
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println("Kan statement niet sluiten ");
+					e.printStackTrace();
+				}
+			}
+
+			if (dbConnection != null) {
+				try {
+					dbConnection.close();
+				} catch (SQLException e) {
+					System.out.println("Kan connectie niet sluiten ");
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 	public static int getKlantnr() {
 		return klantnr;
