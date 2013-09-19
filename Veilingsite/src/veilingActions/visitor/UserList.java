@@ -13,7 +13,7 @@ import domein.Gebruiker;
 
 @SuppressWarnings("serial")
 public class UserList extends ActionSupport {
-	private List<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
+	private ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
 	private Databasetest DBT;
 
 	public String execute() {
@@ -36,12 +36,12 @@ public class UserList extends ActionSupport {
 			e.printStackTrace();
 		}
 		System.out.println("Opvragen van email + wachtwoord: ");
-		Databasetest.selectRecordsFromDbUserTable("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
-		
+		Databasetest.selectUsersfromGebruikers("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
+		gebruikerslijst = Databasetest.getGebruikers();
 		return ActionSupport.SUCCESS;
 	}
 
-	public List<Gebruiker> getGebruikers() {
-		return gebruikers;
+	public List<Gebruiker> getGebruikerslijst() {
+		return gebruikerslijst;
 	}
 }

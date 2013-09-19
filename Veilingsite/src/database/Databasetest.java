@@ -11,13 +11,13 @@ import oracle.jdbc.driver.OracleDriver;
 import domein.Gebruiker;
 
 public class Databasetest {
-
-	private static String klantnr;
+	
+	private static int klantnr;
 	private static String voornaam;
 	private static String tussenvoegsel = "";
 	private static String achternaam;
 	
-	private ArrayList<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
+	private static ArrayList<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
 
 	public static Connection getDBConnection() {
 
@@ -49,8 +49,7 @@ public class Databasetest {
 
 	}
 
-	public static void selectRecordsFromDbUserTable(String selectTableSQL) {
-
+	public static void selectUsersfromGebruikers(String selectTableSQL) {
 		Connection dbConnection = null;
 		Statement statement = null;
 
@@ -59,18 +58,18 @@ public class Databasetest {
 			statement = dbConnection.createStatement();
 
 			ResultSet rs = statement.executeQuery(selectTableSQL);
+			gebruikers.clear();
 			while (rs.next()) {
-
-				klantnr = rs.getString("KLANTNR");
+				klantnr = rs.getInt("KLANTNR");
 				voornaam = rs.getString("VOORNAAM");
 				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
 				achternaam = rs.getString("ACHTERNAAM");
-
+				Gebruiker geb = new Gebruiker(klantnr, voornaam, tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
+				gebruikers.add(geb);
 				System.out.println("Klantnr: " + klantnr + " || voornaam: " +  voornaam
 						+  " || tussenvoegsel: " + tussenvoegsel + " || achternaam " + achternaam);
-
 			}
-
+			System.out.println(gebruikers.toString());
 		} catch (SQLException e) {
 			System.out
 					.println("Fout in catch van selectRecordsFromDbUserTable()");
@@ -98,11 +97,11 @@ public class Databasetest {
 		}
 	}
 
-	public static String getKlantnr() {
+	public static int getKlantnr() {
 		return klantnr;
 	}
 
-	public static void setKlantnr(String klantnr) {
+	public static void setKlantnr(int klantnr) {
 		Databasetest.klantnr = klantnr;
 	}
 
@@ -118,6 +117,14 @@ public class Databasetest {
 		return tussenvoegsel;
 	}
 
+	public static ArrayList<Gebruiker> getGebruikers() {
+		return gebruikers;
+	}
+
+	public static void setGebruikers(ArrayList<Gebruiker> gebruikers) {
+		Databasetest.gebruikers = gebruikers;
+	}
+
 	public static void setTussenvoegsel(String tussenvoegsel) {
 		Databasetest.tussenvoegsel = tussenvoegsel;
 	}
@@ -129,5 +136,6 @@ public class Databasetest {
 	public static void setAchternaam(String achternaam) {
 		Databasetest.achternaam = achternaam;
 	}
+
 
 }
