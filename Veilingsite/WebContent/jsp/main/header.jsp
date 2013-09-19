@@ -30,6 +30,7 @@
 				<li><a href="#">Flora en fauna</a></li>
 				<li><a href="#">Kunst en cultuur</a></li>
 				<li><a href="#">Naslagwerken</a></li>
+				 <li><a href="<s:url action='UserList'/>">UserList</a></li>
 				</ul>
 				<div class="clear">
 				</div>
