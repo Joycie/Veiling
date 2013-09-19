@@ -21,7 +21,7 @@
 					<h1><img src="<%=request.getContextPath()%>/css/images/logo.jpg"/> Multatuli Boekenveiling</h1>
 				</a>
 				<ul class="menu">
-				<li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
+				<li><a href="<%=request.getContextPath()%>">Home</a></li>
 				<li><a href="#">Literatuur</a></li>
 				<li><a href="#">Geschiedenis</a></li>
 				<li><a href="#">Toerisme</a></li>
