@@ -4,21 +4,22 @@
 	<head>
 		<title>Multatuli
 		</title>
-		<link href="../css/style.css" rel="stylesheet" type="text/css">
+		<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div class="page">
 			<div class="header">
 				<div class="options">
-					<div><a href="../jsp/login.jsp">Inloggen/Registreren</a>
+					<div><a href="<%=request.getContextPath()%>/jsp/login.jsp">Inloggen</a>
+					<a href="<%=request.getContextPath()%>/jsp/register.jsp">Registreren</a>
 					</div>
 					<form>
 						<input type="search" placeholder="Zoeken" />
 					</form>
 				</div>
-				<h1><img src="../css/images/logo.jpg"/> Multatuli Boekenveiling</h1>
+				<h1><img src="<%=request.getContextPath()%>/css/images/logo.jpg"/> Multatuli Boekenveiling</h1>
 				<ul class="menu">
-				<li><a href="../index.jsp">Home</a></li>
+				<li><a href="<%=request.getContextPath()%>/index.jsp">Home</a></li>
 				<li><a href="#">Literatuur</a></li>
 				<li><a href="#">Geschiedenis</a></li>
 				<li><a href="#">Toerisme</a></li>
