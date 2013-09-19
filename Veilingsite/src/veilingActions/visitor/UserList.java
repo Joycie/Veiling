@@ -35,6 +35,9 @@ public class UserList extends ActionSupport {
 			System.out.println("Connectie mislukt!");
 			e.printStackTrace();
 		}
+		System.out.println("Opvragen van email + wachtwoord: ");
+		Databasetest.selectRecordsFromDbUserTable("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
+		
 		return ActionSupport.SUCCESS;
 	}
 
