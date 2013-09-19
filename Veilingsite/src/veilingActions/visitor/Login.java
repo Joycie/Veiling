@@ -4,16 +4,13 @@ import domein.Gebruiker;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.*;
 
-public class Login extends ActionSupport{
-	private Gebruiker gebruiker;
-	@SuppressWarnings("rawtypes")
-	private String email, pass;
-	private Map session;
+import org.apache.struts2.dispatcher.SessionMap;
 
-	public String execute(){
-		
-		return SUCCESS;
-	}
+public class Login extends ActionSupport{
+
+	private String email, pass;
+	SessionMap<String, String> sessionmap;
+
 	
 	public String getEmail(){
 		return email;
@@ -30,11 +27,13 @@ public class Login extends ActionSupport{
 	public void setPass(String pass){
 		this.pass = pass;
 	}
-
-	@SuppressWarnings("rawtypes")
-	public void setSession(Map session) {
-		this.session = session;
-		
-	}
 	
+	public String execute(){
+		if(LoginDAO.validate(email, pass)){
+		return SUCCESS;
+	}
+		else{
+			return "error";
+		}
+	}
 }
