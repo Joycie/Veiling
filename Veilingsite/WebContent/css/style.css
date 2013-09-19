@@ -149,6 +149,7 @@ ul.menu
 	color: red;
 }
 table {
+	width:100%;
 	border-collapse: collapse;
 }
 
@@ -158,18 +159,19 @@ tr.thcolor {
 }
 
 tr.tdcolor {
-	background-color: #eeeeee;
+	background-color: #DEDEDE;
 	color: black;
 }
 
 th {
-	border: 2px solid darkblue;
+	border-bottom: 1px solid white;
 	padding: 3px;
 	color: white;
 	font-size: 15px;
+	text-align: left;
 }
 
 td {
-	border: 2px solid darkblue;
+	border-bottom: 1px solid white;
 	padding: 3px;
 }
