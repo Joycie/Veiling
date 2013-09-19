@@ -148,3 +148,28 @@ ul.menu
 {
 	color: red;
 }
+table {
+	border-collapse: collapse;
+}
+
+tr.thcolor {
+	background-color: #007893;
+	color: black;
+}
+
+tr.tdcolor {
+	background-color: #eeeeee;
+	color: black;
+}
+
+th {
+	border: 2px solid darkblue;
+	padding: 3px;
+	color: white;
+	font-size: 15px;
+}
+
+td {
+	border: 2px solid darkblue;
+	padding: 3px;
+}
