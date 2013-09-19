@@ -8,12 +8,12 @@
 		    	  <s:textfield name="achternaam" label="Achternaam"/>
 		    	  <s:password name="password" label="Wachtwoord"/>
 		    	  <s:password name="passwordCheck" label="Wachtwoord check"/>
-		    	  <s:password name="email" label="E-mail"/>
-		    	  <s:password name="adress" label="Adress"/>
-		    	  <s:password name="postcode" label="Postcode"/>
-		    	  <s:password name="plaats" label="Plaats"/>
-		    	  <s:password name="rekeningnummer" label="rekeningnummer"/>
-		    	  <s:password name="telefoonnummer" label="Telefoonnummer"/>
+		    	  <s:textfield name="email" label="E-mail"/>
+		    	  <s:textfield name="adress" label="Adress"/>
+		    	  <s:textfield name="postcode" label="Postcode"/>
+		    	  <s:textfield name="plaats" label="Plaats"/>
+		    	  <s:textfield name="rekeningnummer" label="rekeningnummer"/>
+		    	  <s:textfield name="telefoonnummer" label="Telefoonnummer"/>
 		    	  <s:submit value="Register"/>
 				</s:form>
 			</div>

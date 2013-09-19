@@ -9,7 +9,8 @@
 			<result name="success">/jsp/users.jsp</result>
 		</action>
 		<action name="Register" class="veilingActions.visitor.Register">
-			<result name="success">/jsp/login.jsp</result>
+			<result name="input">/jsp/register.jsp</result>
+			<result name="success">/jsp/index.jsp</result>
 		</action>
 		
 	</package>
