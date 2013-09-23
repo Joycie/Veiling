@@ -5,8 +5,8 @@
 
 <struts>
 	<package name="visitor" extends="struts-default">
-		<action name="UserList" class="veilingActions.visitor.UserList">
-			<result name="success">/jsp/users.jsp</result>
+		<action name="UserList" class="veilingActions.admin.UserList">
+			<result name="success">/jsp/admin/users.jsp</result>
 		</action>
 		<action name="Register" class="veilingActions.visitor.Register">
 			<result name="input">/jsp/register.jsp</result>
