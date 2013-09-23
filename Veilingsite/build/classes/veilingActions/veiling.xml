@@ -5,11 +5,9 @@
 
 <struts>
 	<package name="admin" namespace ="/admin" extends="struts-default">
-		<action name="UserList" class="veilingActions.admin">
+		<action name="UserList" class="veilingActions.admin.UserList">
 			<result name="success">/jsp/admin/users.jsp</result>
 		</action>
-		
-		
 	</package>
 	<package name="visitor" namespace ="/visitor" extends="struts-default">
 		<action name="Register" class="veilingActions.visitor.Register">

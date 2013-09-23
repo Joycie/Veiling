@@ -15,13 +15,13 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class UserList extends ActionSupport {
 	private ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
-	private DatabaseQuery DBT;
+	private DatabaseQuery DQ;
 
 	public String execute() {
 		Connection connection = null;
 
 		try {
-			DBT.getDBConnection();
+			DQ.getDBConnection();
 			connection = DriverManager.getConnection(
 					"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
 					"tho5_2013_2a_team3", "welkom_02");
