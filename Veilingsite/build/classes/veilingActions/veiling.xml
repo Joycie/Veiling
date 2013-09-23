@@ -4,14 +4,17 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="visitor" extends="struts-default">
-		<action name="UserList" class="veilingActions.admin.UserList">
+	<package name="admin" namespace ="/admin" extends="struts-default">
+		<action name="UserList" class="veilingActions.admin">
 			<result name="success">/jsp/admin/users.jsp</result>
 		</action>
-		<action name="Register" class="veilingActions.visitor.Register">
-			<result name="input">/jsp/register.jsp</result>
-			<result name="success">/jsp/index.jsp</result>
-		</action>
+		
 		
 	</package>
+	<package name="visitor" namespace ="/visitor" extends="struts-default">
+		<action name="Register" class="veilingActions.visitor.Register">
+			<result name="input">/jsp/visitor/register.jsp</result>
+			<result name="success">/jsp/visitor/index.jsp</result>
+		</action>
+		</package>
 </struts>

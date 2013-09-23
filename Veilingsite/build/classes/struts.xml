@@ -4,9 +4,9 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
     
     <struts>
-		<package name="default" namespace="/" extends="struts-default"> 
+		<package name="default" extends="struts-default"> 
 			<action name="Login">
-				<result>/jsp/login.jsp</result>
+				<result>/jsp/visitor/login.jsp</result>
 			</action>
 			
 			<action name="Loginprocess">
@@ -18,5 +18,5 @@
 				<result name="success">logoutsuccess.jsp</result>
 			</action>
 		</package>	
-		<include file="veilingAction/veiling.xml"/>
+		<include file="veilingActions/veiling.xml"/>
 	</struts>
