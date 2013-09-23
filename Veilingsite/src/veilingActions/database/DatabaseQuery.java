@@ -1,4 +1,4 @@
-package database;
+package veilingActions.database;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.driver.OracleDriver;
-import domein.Gebruiker;
+import veilingDomain.Gebruiker;
 
-public class Databasetest {
+public class DatabaseQuery {
 	
 	private static int klantnr;
 	private static String voornaam;
@@ -140,7 +140,7 @@ public class Databasetest {
 	}
 
 	public static void setKlantnr(int klantnr) {
-		Databasetest.klantnr = klantnr;
+		DatabaseQuery.klantnr = klantnr;
 	}
 
 	public static String getVoornaam() {
@@ -148,7 +148,7 @@ public class Databasetest {
 	}
 
 	public static void setVoornaam(String voornaam) {
-		Databasetest.voornaam = voornaam;
+		DatabaseQuery.voornaam = voornaam;
 	}
 
 	public static String getTussenvoegsel() {
@@ -160,11 +160,11 @@ public class Databasetest {
 	}
 
 	public static void setGebruikers(ArrayList<Gebruiker> gebruikers) {
-		Databasetest.gebruikers = gebruikers;
+		DatabaseQuery.gebruikers = gebruikers;
 	}
 
 	public static void setTussenvoegsel(String tussenvoegsel) {
-		Databasetest.tussenvoegsel = tussenvoegsel;
+		DatabaseQuery.tussenvoegsel = tussenvoegsel;
 	}
 
 	public static String getAchternaam() {
@@ -172,7 +172,7 @@ public class Databasetest {
 	}
 
 	public static void setAchternaam(String achternaam) {
-		Databasetest.achternaam = achternaam;
+		DatabaseQuery.achternaam = achternaam;
 	}
 
 

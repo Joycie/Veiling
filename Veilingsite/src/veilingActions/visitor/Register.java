@@ -4,15 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import veilingActions.database.DatabaseQuery;
+
 import com.opensymphony.xwork2.ActionSupport;
 
-import database.Databasetest;
 
 public class Register extends ActionSupport {
 
 	private String voornaam, tussenvoegsel, achternaam, password,
 			passwordCheck, email, adress, postcode, plaats, telefoonnummer, rekeningnummer;
-	private Databasetest DBT;
+	private DatabaseQuery DBT;
 
 	public String execute() {
 		if (voornaam.equals("")) {
@@ -71,7 +72,7 @@ public class Register extends ActionSupport {
 				e.printStackTrace();
 			}
 			System.out.println("Opvragen van email + wachtwoord: ");
-			Databasetest.insertRecordsToDbUserTable("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES ('"+voornaam +"', '"+tussenvoegsel+"', '"+achternaam+"', '"+adress+"', '"+postcode+"', '"+email+"', '"+password+"', '"+telefoonnummer+"', '"+rekeningnummer+"', '"+plaats+"')");
+			DatabaseQuery.insertRecordsToDbUserTable("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES ('"+voornaam +"', '"+tussenvoegsel+"', '"+achternaam+"', '"+adress+"', '"+postcode+"', '"+email+"', '"+password+"', '"+telefoonnummer+"', '"+rekeningnummer+"', '"+plaats+"')");
 			
 		
 		return ActionSupport.SUCCESS;}

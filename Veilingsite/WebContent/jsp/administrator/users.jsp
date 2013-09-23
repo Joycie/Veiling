@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ include file="main/header.jsp" %>
+<%@ include file="../main/header.jsp" %>
 		<div class="content">
 			<h2>Users:</h2>
 			<table>
@@ -20,6 +20,6 @@
  		    </s:iterator>
 	    </table>
 		</div>
-<%@ include file="main/footer.jsp" %>
+<%@ include file="../main/footer.jsp" %>
 </body>
 </html>

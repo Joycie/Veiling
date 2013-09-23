@@ -1,4 +1,4 @@
-package veilingActions.visitor;
+package veilingActions.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

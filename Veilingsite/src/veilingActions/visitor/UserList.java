@@ -6,15 +6,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import veilingActions.database.DatabaseQuery;
+import veilingDomain.Gebruiker;
+
 import com.opensymphony.xwork2.ActionSupport;
 
-import database.Databasetest;
-import domein.Gebruiker;
 
 @SuppressWarnings("serial")
 public class UserList extends ActionSupport {
 	private ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
-	private Databasetest DBT;
+	private DatabaseQuery DBT;
 
 	public String execute() {
 		Connection connection = null;
@@ -36,8 +37,8 @@ public class UserList extends ActionSupport {
 			e.printStackTrace();
 		}
 		System.out.println("Opvragen van email + wachtwoord: ");
-		Databasetest.selectUsersfromGebruikers("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
-		gebruikerslijst = Databasetest.getGebruikers();
+		DatabaseQuery.selectUsersfromGebruikers("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
+		gebruikerslijst = DatabaseQuery.getGebruikers();
 		return ActionSupport.SUCCESS;
 	}
 

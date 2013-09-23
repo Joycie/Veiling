@@ -1,4 +1,4 @@
-package domein;
+package veilingDomain;
 
 public class Gebruiker {
 

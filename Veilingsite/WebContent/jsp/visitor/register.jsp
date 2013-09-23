@@ -1,4 +1,4 @@
-<%@ include file="main/header.jsp" %>
+<%@ include file="../main/header.jsp" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 			<div class="content">
 				<h3>Registreren</h3>
@@ -17,4 +17,4 @@
 		    	  <s:submit value="Register"/>
 				</s:form>
 			</div>
-<%@ include file="main/footer.jsp" %>
+<%@ include file="../main/footer.jsp" %>

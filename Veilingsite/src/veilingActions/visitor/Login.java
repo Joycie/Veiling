@@ -1,10 +1,12 @@
 package veilingActions.visitor;
 import java.util.Map;
-import domein.Gebruiker;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.*;
 
 import org.apache.struts2.dispatcher.SessionMap;
+
+import veilingActions.DAO.LoginDAO;
+import veilingDomain.Gebruiker;
 
 public class Login extends ActionSupport{
 
