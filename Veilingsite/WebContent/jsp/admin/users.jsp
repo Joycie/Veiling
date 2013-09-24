@@ -12,7 +12,7 @@
 		    </tr>
 		    <s:iterator value="gebruikerslijst">
 			    <tr class="tdcolor">
-				    <td><s:property value="klantnr" /></td>
+				    <td><s:property value="klantnummer" /></td>
 					<td><s:property value="voornaam" /></td>
 					<td><s:property value="tussenvoegsel" /></td>
 		     		<td><s:property value="achternaam" /></td>

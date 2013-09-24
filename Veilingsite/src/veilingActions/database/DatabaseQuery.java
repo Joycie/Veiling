@@ -12,7 +12,7 @@ import veilingDomain.Gebruiker;
 
 public class DatabaseQuery {
 	
-	private static int klantnr;
+	private static int klantnummer;
 	private static String voornaam;
 	private static String tussenvoegsel = "";
 	private static String achternaam;
@@ -60,13 +60,13 @@ public class DatabaseQuery {
 			ResultSet rs = statement.executeQuery(selectTableSQL);
 			gebruikers.clear();
 			while (rs.next()) {
-				klantnr = rs.getInt("KLANTNR");
+				klantnummer = rs.getInt("klantnr");
 				voornaam = rs.getString("VOORNAAM");
 				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
 				achternaam = rs.getString("ACHTERNAAM");
-				Gebruiker geb = new Gebruiker(klantnr, voornaam, tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
+				Gebruiker geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
 				gebruikers.add(geb);
-				System.out.println("Klantnr: " + klantnr + " || voornaam: " +  voornaam
+				System.out.println("Klantnr: " + klantnummer + " || voornaam: " +  voornaam
 						+  " || tussenvoegsel: " + tussenvoegsel + " || achternaam " + achternaam);
 			}
 			System.out.println(gebruikers.toString());
@@ -136,11 +136,11 @@ public class DatabaseQuery {
 	}
 
 	public static int getKlantnr() {
-		return klantnr;
+		return klantnummer;
 	}
 
 	public static void setKlantnr(int klantnr) {
-		DatabaseQuery.klantnr = klantnr;
+		DatabaseQuery.klantnummer = klantnr;
 	}
 
 	public static String getVoornaam() {
