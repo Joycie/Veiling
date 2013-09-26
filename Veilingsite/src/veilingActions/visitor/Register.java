@@ -16,6 +16,7 @@ public class Register extends ActionSupport {
 	private DatabaseQuery DBT;
 
 	public String execute() {
+		System.out.println("Test registreren");
 		if (voornaam.equals("")) {
 			addFieldError("voornaam", "geen geldige waarde");
 		}

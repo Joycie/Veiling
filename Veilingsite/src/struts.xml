@@ -5,18 +5,7 @@
     
     <struts>
 		<package name="default" extends="struts-default"> 
-			<action name="Login">
-				<result>/jsp/visitor/login.jsp</result>
-			</action>
-			
-			<action name="Loginprocess">
-				<result name="success">loginsuccess.jsp</result>
-				<result name="error">loginerror.jsp</result>
-			</action>
-			
-			<action name="logout">
-				<result name="success">logoutsuccess.jsp</result>
-			</action>
+
 		</package>	
 		<include file="veilingActions/veiling.xml"/>
 	</struts>

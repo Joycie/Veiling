@@ -1,5 +1,7 @@
 package veilingActions.visitor;
 import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.*;
 
@@ -13,6 +15,19 @@ public class Login extends ActionSupport{
 	private String email, pass;
 	SessionMap<String, String> sessionmap;
 	private LoginDAO logindao;
+
+	public String execute(){
+		System.out.println("Test 123" + email);
+		Gebruiker geb = LoginDAO.validate(email, pass);
+		if(geb != null ){
+			Map<String, Gebruiker> session = ActionContext.getContext().getSession();
+			session.put("gebruiker", geb);
+			return SUCCESS;
+		}
+		else{
+			return INPUT;
+		}
+	}
 	
 	public Login(){
 		logindao = new LoginDAO();
@@ -34,12 +49,4 @@ public class Login extends ActionSupport{
 		this.pass = pass;
 	}
 	
-	public String execute(){
-		if(LoginDAO.validate(email, pass)){
-		return SUCCESS;
-	}
-		else{
-			return "error";
-		}
-	}
 }

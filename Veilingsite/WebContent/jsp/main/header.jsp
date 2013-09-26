@@ -8,7 +8,8 @@
 	</head>
 	<body>
 		<div class="page">
-			<div class="header">
+<%=session.getAttribute("gebruiker")%>
+<div class="header">
 				<div class="options">
 					<div><a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">Inloggen</a>
 					<a href="<%=request.getContextPath()%>/jsp/visitor/register.jsp">Registreren</a>
