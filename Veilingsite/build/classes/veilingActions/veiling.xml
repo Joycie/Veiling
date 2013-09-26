@@ -14,5 +14,5 @@
 			<result name="input">/jsp/visitor/register.jsp</result>
 			<result name="success">/jsp/visitor/index.jsp</result>
 		</action>
-		</package>
+	</package>
 </struts>

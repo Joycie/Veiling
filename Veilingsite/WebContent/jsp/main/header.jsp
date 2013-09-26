@@ -29,7 +29,7 @@
 				<li><a href="#">Kookboeken</a></li>
 				<li><a href="#">Flora en fauna</a></li>
 				<li><a href="#">Kunst en cultuur</a></li>
-				 <li><a href="<s:url action='UserList' namespace="admin"/>">UserList</a></li>
+				 <li><a href="<%=request.getContextPath()%>/<s:url action='UserList' namespace="admin"/>">UserList</a></li>
 				</ul>
 				<div class="clear">
 				</div>

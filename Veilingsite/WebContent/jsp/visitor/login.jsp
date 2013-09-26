@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 			<div class="content">
 				<h3>Inloggen</h3>
-				<s:form action="Login">
+				<s:form action="Login" namespace="/visitor">
 		    	  <s:textfield name="username" label="Naam"/>
 		    	  <s:password name="password" label="Wachtwoord"/>
 		    	  <s:submit value="log in"/>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 			<div class="content">
 				<h3>Registreren</h3>
-				<s:form action="Register">
+				<s:form action="Register" namespace="/visitor">
 		    	  <s:textfield name="voornaam" label="Naam"/>
 		    	  <s:textfield name="tussenvoegsel" label="Tussenvoegsel"/>
 		    	  <s:textfield name="achternaam" label="Achternaam"/>
