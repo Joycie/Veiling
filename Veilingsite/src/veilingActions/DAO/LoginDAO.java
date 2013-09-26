@@ -14,7 +14,7 @@ public class LoginDAO {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				Connection con=DriverManager.getConnection("jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl", 
 															"tho5_2013_2a_team3", "welkom_02");
-				PreparedStatement ps=con.prepareStatement("select * from gebruikers where name=? and password=?");
+				PreparedStatement ps=con.prepareStatement("select * from gebruikers where email=? and wachtwoord=?");
 				ps.setString(1,email);
 				ps.setString(2,pass);
 				ResultSet rs=ps.executeQuery();
@@ -23,4 +23,3 @@ public class LoginDAO {
 			return status;
 			}
 	}
-

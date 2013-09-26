@@ -12,8 +12,12 @@ public class Login extends ActionSupport{
 
 	private String email, pass;
 	SessionMap<String, String> sessionmap;
-
+	private LoginDAO logindao;
 	
+	public Login(){
+		logindao = new LoginDAO();
+	}
+		
 	public String getEmail(){
 		return email;
 	}

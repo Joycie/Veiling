@@ -15,4 +15,10 @@
 			<result name="success">/jsp/index.jsp</result>
 		</action>
 	</package>
+		<package name="visitor" namespace ="/visitor" extends="struts-default">
+		<action name="Login" class="veilingActions.visitor.Login">
+			<result name="input">/jsp/visitor/login.jsp</result>
+			<result name="success">/jsp/index.jsp</result>
+		</action>
+	</package>
 </struts>
