@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import oracle.jdbc.driver.OracleDriver;
+import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
 
 public class DatabaseQuery {
@@ -18,6 +19,7 @@ public class DatabaseQuery {
 	private static String achternaam;
 	
 	private static ArrayList<Gebruiker> gebruikers = new ArrayList<Gebruiker>();
+	private static ArrayList<Boek> boeken = new ArrayList<Boek>();
 
 	public static Connection getDBConnection() {
 
@@ -69,7 +71,6 @@ public class DatabaseQuery {
 				System.out.println("Klantnr: " + klantnummer + " || voornaam: " +  voornaam
 						+  " || tussenvoegsel: " + tussenvoegsel + " || achternaam " + achternaam);
 			}
-			System.out.println(gebruikers.toString());
 		} catch (SQLException e) {
 			System.out
 					.println("Fout in catch van selectRecordsFromDbUserTable()");
@@ -158,11 +159,19 @@ public class DatabaseQuery {
 	public static ArrayList<Gebruiker> getGebruikers() {
 		return gebruikers;
 	}
+	
+	public static ArrayList<Boek> getBoeken() {
+		return boeken;
+	}
+
+	public static void setBoeken(ArrayList<Boek> boeken) {
+		DatabaseQuery.boeken = boeken;
+	}
 
 	public static void setGebruikers(ArrayList<Gebruiker> gebruikers) {
 		DatabaseQuery.gebruikers = gebruikers;
 	}
-
+	
 	public static void setTussenvoegsel(String tussenvoegsel) {
 		DatabaseQuery.tussenvoegsel = tussenvoegsel;
 	}

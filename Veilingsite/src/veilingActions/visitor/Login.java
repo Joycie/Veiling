@@ -20,7 +20,7 @@ public class Login extends ActionSupport{
 		System.out.println("Test 123" + email);
 		Gebruiker geb = LoginDAO.validate(email, pass);
 		if(geb != null ){
-			Map<String, Gebruiker> session = ActionContext.getContext().getSession();
+			Map<String, Object> session = ActionContext.getContext().getSession();
 			session.put("gebruiker", geb);
 			return SUCCESS;
 		}
