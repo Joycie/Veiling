@@ -14,10 +14,8 @@
 			<tr class="tdcolor">
 				<td><s:property value="titel" /></td>
 				<td><s:property value="auteur" /></td>
-			</tr>
 		</s:iterator>
 		<s:iterator value="veilingen">
-			<tr class="tdcolor">
 				<td><s:property value="startprijs" /></td>
 				<td><s:property value="eindtijd" /></td>
 			</tr>
