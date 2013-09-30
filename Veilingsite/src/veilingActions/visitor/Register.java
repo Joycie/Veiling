@@ -18,37 +18,38 @@ public class Register extends ActionSupport {
 	public String execute() {
 		System.out.println("Test registreren");
 		if (voornaam.equals("")) {
-			addFieldError("voornaam", "geen geldige waarde");
+			addFieldError("voornaam", "Geef je voornaam op");
 		}
 		if (achternaam.equals("")) {
-			addFieldError("achternaam", "geen geldige waarde");
+			addFieldError("achternaam", "Geef je achternaam op");
 		}
-		if (password.equals("")) {
-			addFieldError("password", "geen geldige waarde");
+		if (!password.matches("^(?=.*).{4,8}$")) {
+			addFieldError("password", "Geef een wachtwoord op met minimaal 6 tekens, 1 cijfer");
 		}
 		if (passwordCheck.equals("")) {
 			if (password.equals(passwordCheck)) {
-				addFieldError("passwordCheck", "wachtwoorden komen niet overeen");
+				addFieldError("passwordCheck", "Wachtwoorden komen niet overeen");
+			} else {
+			addFieldError("passwordCheck", "Geef het opgegeven wachtwoord opnieuw op");
 			}
-			addFieldError("passwordCheck", "geen geldige waarde");
 		}
-		if (email.equals("")) {
-			addFieldError("email", "geen geldige waarde");
+		if (!email.matches("\b[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}\b")) {
+			addFieldError("email", "Geef een geldig e-mailadres op");
 		}
 		if (adress.equals("")) {
-			addFieldError("adress", "geen geldige waarde");
+			addFieldError("adress", "Geef je adres op");
 		}
 		if (postcode.equals("")) {
-			addFieldError("postcode", "geen geldige waarde");
+			addFieldError("postcode", "Geef een geldige postcode op");
 		}
 		if (plaats.equals("")) {
-			addFieldError("plaats", "geen geldige waarde");
+			addFieldError("plaats", "Geef een je plaats op");
 		}
 		if (telefoonnummer.equals("")) {
-			addFieldError("telefoonnummer", "geen geldige waarde");
+			addFieldError("telefoonnummer", "Geef een gelig telefoonnummer op");
 		}
 		if (rekeningnummer.equals("")) {
-			addFieldError("rekeningnummer", "geen geldige waarde");
+			addFieldError("rekeningnummer", "Geef je rekeningnummer op");
 		}
 		System.out.println("test 3");
 		if (hasErrors()){
