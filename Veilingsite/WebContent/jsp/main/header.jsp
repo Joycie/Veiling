@@ -8,11 +8,22 @@
 	</head>
 	<body>
 		<div class="page">
-<%=session.getAttribute("gebruiker")%>
+<!-- %=session.getAttribute("gebruiker")%> -->
 <div class="header">
 				<div class="options">
-					<div><a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">Inloggen</a>
-					<a href="<%=request.getContextPath()%>/jsp/visitor/register.jsp">Registreren</a>
+					<div>
+						<s:if test="#session.gebruiker != null">    
+						   <s:iterator value="#session.gebruiker">
+						      Welkom <s:property value="voornaam"/>
+						      <s:property value="tussenvoegsel"/>
+						       <s:property value="achternaam"/>! 
+						       <a href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>
+						  </s:iterator>
+						</s:if>
+						<s:else>
+							<a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">Inloggen</a>
+							<a href="<%=request.getContextPath()%>/jsp/visitor/register.jsp">Registreren</a>
+						</s:else>
 					</div>
 					<form>
 						<input type="search" placeholder="Zoeken" />

@@ -32,14 +32,16 @@ public class LoginDAO {
 				//status=rs.next();
 				
 				while (rs.next()) {
-					klantnummer = rs.getInt("klantnr");
-					voornaam = rs.getString("VOORNAAM");
-					tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-					achternaam = rs.getString("ACHTERNAAM");
-					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
-					
-					System.out.println("Klantnr: " + klantnummer + " || voornaam: " +  voornaam
-							+  " || tussenvoegsel: " + tussenvoegsel + " || achternaam " + achternaam);
+					if(pass.equals(rs.getString("wachtwoord"))) {
+						klantnummer = rs.getInt("klantnr");
+						voornaam = rs.getString("VOORNAAM");
+						tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+						achternaam = rs.getString("ACHTERNAAM");
+						geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
+						
+						System.out.println("Klantnr: " + klantnummer + " || voornaam: " +  voornaam
+								+  " || tussenvoegsel: " + tussenvoegsel + " || achternaam " + achternaam);
+					}
 				}
 				System.out.println(status);
 			}catch(Exception e){
