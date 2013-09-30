@@ -1,7 +1,7 @@
 <%@ include file="../main/header.jsp" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 			<div class="content">
-				<h3>Registreren</h3>
+				<h2>Registreren</h2>
 				<s:form action="Register" namespace="/visitor">
 		    	  <s:textfield name="voornaam" label="Naam"/>
 		    	  <s:textfield name="tussenvoegsel" label="Tussenvoegsel"/>

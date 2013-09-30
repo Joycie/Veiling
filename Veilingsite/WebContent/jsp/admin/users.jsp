@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ include file="../main/header.jsp" %>
 		<div class="content">
-			<h2>Users:</h2>
+			<h2>Users</h2>
 			<table>
 		    <tr class="thcolor">
 			    <th>Klant nummer</th>

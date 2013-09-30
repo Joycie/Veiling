@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ include file="../main/header.jsp"%>
 <div class="content">
-	Huidige aanbiedingen:
+	<h2>Huidige aanbiedingen<h2>
 	<table class="veilingtable">
 		<tr class="thcolor">
 			<th>Titel</th>
