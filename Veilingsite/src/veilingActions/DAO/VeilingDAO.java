@@ -28,7 +28,7 @@ public class VeilingDAO {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				Connection con=DriverManager.getConnection("jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl", 
 															"tho5_2013_2a_team3", "welkom_02");
-				PreparedStatement ps = con.prepareStatement("SELECT titel, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and eindtijd > sysdate");
+				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				boekenlijst.clear();
