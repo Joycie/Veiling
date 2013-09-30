@@ -10,18 +10,15 @@ import veilingDomain.Boek;
 
 public class HuidigeVeilingen extends ActionSupport{
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private double startprijs;
-	private Date eindtijd;
 	private VeilingDAO veilingdao;
-	private static ArrayList<Aanbieding> veilingen = new ArrayList<Aanbieding>();
+	private ArrayList<Aanbieding> veilingen = new ArrayList<Aanbieding>();
+	private ArrayList<Boek> boeken = new ArrayList<Boek>();
 	
 	public String execute(){
-		System.out.println("ID: " + id + "|| startprijs: " + startprijs + "|| Eindtijd: " + eindtijd);
 		Aanbieding aanb = VeilingDAO.validate();
 		if(aanb != null ){
 			veilingen = VeilingDAO.getVeilingenlijst();
-			System.out.println(veilingen);
+			boeken = VeilingDAO.getBoekenlijst();
 			return SUCCESS;
 		}
 		else{
@@ -32,30 +29,6 @@ public class HuidigeVeilingen extends ActionSupport{
 	{
 		veilingdao = new VeilingDAO();
 	}
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public double getStartprijs() {
-		return startprijs;
-	}
-
-	public void setStartprijs(double startprijs) {
-		this.startprijs = startprijs;
-	}
-
-	public Date getEindtijd() {
-		return eindtijd;
-	}
-
-	public void setEindtijd(Date eindtijd) {
-		this.eindtijd = eindtijd;
-	}
-
 	public VeilingDAO getVeilingdao() {
 		return veilingdao;
 	}
@@ -63,13 +36,16 @@ public class HuidigeVeilingen extends ActionSupport{
 	public void setVeilingdao(VeilingDAO veilingdao) {
 		this.veilingdao = veilingdao;
 	}
-
-	public static ArrayList<Aanbieding> getVeilingen() {
+	public ArrayList<Aanbieding> getVeilingen() {
 		return veilingen;
 	}
-
-	public static void setVeilingen(ArrayList<Aanbieding> veilingen) {
-		HuidigeVeilingen.veilingen = veilingen;
+	public void setVeilingen(ArrayList<Aanbieding> veilingen) {
+		this.veilingen = veilingen;
 	}
-	
+	public ArrayList<Boek> getBoeken() {
+		return boeken;
+	}
+	public void setBoeken(ArrayList<Boek> boeken) {
+		this.boeken = boeken;
+	}
 }
