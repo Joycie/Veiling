@@ -8,8 +8,9 @@ public class Aanbieding {
 	private double startprijs;
 	private Date eindtijd;
 	private int gebruikers_klantnr, drukken_isbn, drukken_nummer;
+	private Boek boek;
 
-	public Aanbieding(int id, double start, Date eind, int geb_klant, int druk_isbn, int druk_nr) 
+	public Aanbieding(int id, double start, Date eind, int geb_klant, int druk_isbn, int druk_nr, Boek b) 
 	{
 		this.id = id;
 		startprijs = start;
@@ -17,6 +18,7 @@ public class Aanbieding {
 		gebruikers_klantnr = geb_klant;
 		drukken_isbn = druk_isbn;
 		drukken_nummer = druk_nr;
+		boek = b;
 	}
 
 	public int getId() {
@@ -66,5 +68,13 @@ public class Aanbieding {
 	public void setDrukken_nummer(int drukken_nummer) {
 		this.drukken_nummer = drukken_nummer;
 	}
+	public Boek getBoek() {
+		return boek;
+	}
+
+	public void setBoek(Boek boek) {
+		this.boek = boek;
+	}
+
 	
 }

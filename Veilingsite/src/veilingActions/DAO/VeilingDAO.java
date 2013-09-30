@@ -19,7 +19,6 @@ public class VeilingDAO {
 	private static double startprijs;
 	private static Date eindtijd;
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
-	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
 	
 	public static Aanbieding validate(){
 		Aanbieding aanb = null;
@@ -31,18 +30,17 @@ public class VeilingDAO {
 				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
-				boekenlijst.clear();
 				while (rs.next()) {
 					titel = rs.getString("TITEL");
 					auteur = rs.getString("AUTEUR");
 					startprijs = rs.getDouble("STARTPRIJS");
 					eindtijd = rs.getDate("EINDTIJD");
-					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0,0);
 					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
+					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0,0, boek);
 					veilingenlijst.add(aanb);
-					boekenlijst.add(boek);
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs
 							+  " || Eindtijd: " + eindtijd);
+					System.out.println(veilingenlijst);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -89,14 +87,5 @@ public class VeilingDAO {
 	public static void setVeilingenlijst(ArrayList<Aanbieding> veilingenlijst) {
 		VeilingDAO.veilingenlijst = veilingenlijst;
 	}
-
-	public static ArrayList<Boek> getBoekenlijst() {
-		return boekenlijst;
-	}
-
-	public static void setBoekenlijst(ArrayList<Boek> boekenlijst) {
-		VeilingDAO.boekenlijst = boekenlijst;
-	}
-
 
 }

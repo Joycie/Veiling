@@ -18,7 +18,6 @@ public class HuidigeVeilingen extends ActionSupport{
 		Aanbieding aanb = VeilingDAO.validate();
 		if(aanb != null ){
 			veilingen = VeilingDAO.getVeilingenlijst();
-			boeken = VeilingDAO.getBoekenlijst();
 			return SUCCESS;
 		}
 		else{
