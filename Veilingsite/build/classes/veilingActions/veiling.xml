@@ -34,7 +34,7 @@
 
 		<global-results>
 			<result name="login" type="redirect">
-				/visitor/Login.action
+				../jsp/visitor/login.jsp
 			</result>
 		</global-results>
 		<action name="Logout" class="veilingActions.member.Logout">

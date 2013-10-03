@@ -24,7 +24,8 @@ public class Login extends ActionSupport{
 			session.put("gebruiker", geb);
 			return SUCCESS;
 		}
-		else{
+		else {
+			addFieldError("pass", "Email en wachtwoord combinatie is niet bekend");
 			return INPUT;
 		}
 	}
