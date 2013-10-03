@@ -4,12 +4,12 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="admin" namespace ="/admin" extends="struts-default">
+	<package name="admin" namespace="/admin" extends="struts-default">
 		<action name="UserList" class="veilingActions.admin.UserList">
 			<result name="success">/jsp/admin/users.jsp</result>
 		</action>
 	</package>
-	<package name="visitor" namespace ="/visitor" extends="struts-default">
+	<package name="visitor" namespace="/visitor" extends="struts-default">
 		<action name="Register" class="veilingActions.visitor.Register">
 			<result name="input">/jsp/visitor/register.jsp</result>
 			<result name="success">/jsp/index.jsp</result>
@@ -19,8 +19,24 @@
 			<result name="success">/jsp/index.jsp</result>
 		</action>
 	</package>
-	
-	<package name="member" namespace ="/member" extends="struts-default">
+
+	<package name="member" namespace="/member" extends="struts-default">
+		<interceptors>
+			<interceptor name="authenticationInterceptor"
+				class="veilingInterceptors.AuthenticationInterceptor" />
+
+			<interceptor-stack name="MemberStack">
+				<interceptor-ref name="authenticationInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="MemberStack" />
+
+		<global-results>
+			<result name="login" type="redirect">
+				/visitor/Login.action
+			</result>
+		</global-results>
 		<action name="Logout" class="veilingActions.member.Logout">
 			<result name="success">/jsp/visitor/login.jsp</result>
 		</action>
