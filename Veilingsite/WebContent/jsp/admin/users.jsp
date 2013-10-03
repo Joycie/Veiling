@@ -5,7 +5,7 @@
 			<h2>Users</h2>
 			<table>
 		    <tr class="thcolor">
-			    <th>Klant nummer</th>
+			    <th>Klant nummer </th>
 			    <th>Voornaam</th>
 			    <th>Tussenvoegsel</th>
 			    <th>Achternaam</th>

@@ -1,48 +1,41 @@
 package veilingActions.admin;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import veilingActions.database.DatabaseQuery;
+import veilingActions.DAO.UserListDAO;
 import veilingDomain.Gebruiker;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 
 @SuppressWarnings("serial")
 public class UserList extends ActionSupport {
 	private ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
-	private DatabaseQuery DQ;
+	private UserListDAO userlistdao;
 
 	public String execute() {
-		Connection connection = null;
+		Gebruiker gebruiker = UserListDAO.validate();
+		gebruikerslijst = UserListDAO.getGebruikerslijst();	
 
-		try {
-			DQ.getDBConnection();
-			connection = DriverManager.getConnection(
-					"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
-					"tho5_2013_2a_team3", "welkom_02");
-			if (connection != null) {
-				System.out.println("Connectie geslaagd");
-			} else {
-				System.out.println("Mislukt");
-			}
-
-		} catch (SQLException e) {
-
-			System.out.println("Connectie mislukt!");
-			e.printStackTrace();
-		}
-		System.out.println("Opvragen van email + wachtwoord: ");
-		DatabaseQuery.selectUsersfromGebruikers("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
-		gebruikerslijst = DatabaseQuery.getGebruikers();
-		return ActionSupport.SUCCESS;
+		return SUCCESS;
 	}
 
+	public UserList()
+	{
+		userlistdao = new UserListDAO();
+	}
 	public List<Gebruiker> getGebruikerslijst() {
 		return gebruikerslijst;
+	}
+
+	public UserListDAO getUserlistdao() {
+		return userlistdao;
+	}
+
+	public void setUserlistdao(UserListDAO userlistdao) {
+		this.userlistdao = userlistdao;
+	}
+
+	public void setGebruikerslijst(ArrayList<Gebruiker> gebruikerslijst) {
+		this.gebruikerslijst = gebruikerslijst;
 	}
 }
