@@ -26,7 +26,6 @@
 		</action>
 		<action name="HuidigeVeilingen" class="veilingActions.member.HuidigeVeilingen">
 			<result name="success">/jsp/member/huidigeveilingen.jsp</result>
-			<result name="input">/jsp/index.jsp</result>
 		</action>
 	</package>
 </struts>
