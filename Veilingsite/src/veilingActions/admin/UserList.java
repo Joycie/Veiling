@@ -4,6 +4,8 @@ import java.util.List;
 
 import veilingActions.DAO.UserListDAO;
 import veilingDomain.Gebruiker;
+import veilingService.VeilingService;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 
@@ -13,8 +15,8 @@ public class UserList extends ActionSupport {
 	private UserListDAO userlistdao;
 
 	public String execute() {
-		Gebruiker gebruiker = UserListDAO.validate();
-		gebruikerslijst = UserListDAO.getGebruikerslijst();	
+		Gebruiker gebruiker = VeilingService.validateUserList();
+		gebruikerslijst = VeilingService.getGebruikerslijst();	
 
 		return SUCCESS;
 	}

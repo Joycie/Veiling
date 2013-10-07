@@ -1,12 +1,12 @@
 package veilingActions.member;
 import java.util.ArrayList;
-import java.util.Date;
-
-import com.opensymphony.xwork2.ActionSupport;
 
 import veilingActions.DAO.VeilingDAO;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
+import veilingService.VeilingService;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 public class HuidigeVeilingen extends ActionSupport{
 	private static final long serialVersionUID = 1L;
@@ -15,9 +15,9 @@ public class HuidigeVeilingen extends ActionSupport{
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
 	
 	public String execute(){
-		Aanbieding aanb = VeilingDAO.validate();
+		Aanbieding aanb = VeilingService.validateVeiling();
 		if(aanb != null ){
-			veilingen = VeilingDAO.getVeilingenlijst();
+			veilingen = VeilingService.getVeilingenlijst();
 		}
 		return SUCCESS;
 	}

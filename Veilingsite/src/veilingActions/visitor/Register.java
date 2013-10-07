@@ -1,19 +1,14 @@
 package veilingActions.visitor;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import veilingActions.database.DatabaseQuery;
+import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
-
 
 public class Register extends ActionSupport {
 
 	private String voornaam, tussenvoegsel, achternaam, password,
-			passwordCheck, email, adress, postcode, plaats, telefoonnummer, rekeningnummer;
-	private DatabaseQuery DBT;
+			passwordCheck, email, adress, postcode, plaats, telefoonnummer,
+			rekeningnummer;
 
 	public String execute() {
 		System.out.println("Test registreren");
@@ -24,13 +19,16 @@ public class Register extends ActionSupport {
 			addFieldError("achternaam", "Geef je achternaam op");
 		}
 		if (!password.matches("^(?=.*).{4,8}$")) {
-			addFieldError("password", "Geef een wachtwoord op met minimaal 6 tekens, 1 cijfer");
+			addFieldError("password",
+					"Geef een wachtwoord op met minimaal 6 tekens, 1 cijfer");
 		}
 		if (passwordCheck.equals("")) {
 			if (password.equals(passwordCheck)) {
-				addFieldError("passwordCheck", "Wachtwoorden komen niet overeen");
+				addFieldError("passwordCheck",
+						"Wachtwoorden komen niet overeen");
 			} else {
-			addFieldError("passwordCheck", "Geef het opgegeven wachtwoord opnieuw op");
+				addFieldError("passwordCheck",
+						"Geef het opgegeven wachtwoord opnieuw op");
 			}
 		}
 		if (!email.matches("\b[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}\b")) {
@@ -52,32 +50,19 @@ public class Register extends ActionSupport {
 			addFieldError("rekeningnummer", "Geef je rekeningnummer op");
 		}
 		System.out.println("test 3");
-		if (hasErrors()){
+		if (hasErrors()) {
 			System.out.println("test");
 			return ActionSupport.INPUT;
-		}else{
-			Connection connection = null;
-			try {
-				DBT.getDBConnection();
-				connection = DriverManager.getConnection(
-						"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
-						"tho5_2013_2a_team3", "welkom_02");
-				if (connection != null) {
-					System.out.println("Connectie geslaagd");
-				} else {
-					System.out.println("Mislukt");
-				}
+		} else {
+			if (VeilingService.maakuser(voornaam, tussenvoegsel, achternaam,
+					adress, postcode, email, password, telefoonnummer,
+					rekeningnummer, plaats) == true) {
 
-			} catch (SQLException e) {
-
-				System.out.println("Connectie mislukt!");
-				e.printStackTrace();
+				return ActionSupport.SUCCESS;
+			}else {
+				return ActionSupport.INPUT;
 			}
-			System.out.println("Opvragen van email + wachtwoord: ");
-			DatabaseQuery.insertRecordsToDbUserTable("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES ('"+voornaam +"', '"+tussenvoegsel+"', '"+achternaam+"', '"+adress+"', '"+postcode+"', '"+email+"', '"+password+"', '"+telefoonnummer+"', '"+rekeningnummer+"', '"+plaats+"')");
-			
-		
-		return ActionSupport.SUCCESS;}
+		}
 	}
 
 	public void setVoornaam(String voornaam) {
