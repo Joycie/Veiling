@@ -13,7 +13,7 @@ import java.util.Date;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 
-public class VeilingDAO {
+public class GetVeilingenDAO {
 	private static String titel;
 	private static String auteur;
 	private static int drukken_nummer;
@@ -28,7 +28,7 @@ public class VeilingDAO {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				Connection con=DriverManager.getConnection("jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl", 
 															"tho5_2013_2a_team3", "welkom_02");
-				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, drukken_nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and eindtijd > sysdate");
+				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
@@ -36,7 +36,7 @@ public class VeilingDAO {
 					auteur = rs.getString("AUTEUR");
 					startprijs = rs.getDouble("STARTPRIJS");
 					eindtijd = rs.getDate("EINDTIJD");
-					drukken_nummer = rs.getInt("DRUKKEN_NUMMER");
+					drukken_nummer = rs.getInt("NUMMER");
 					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
 					veilingenlijst.add(aanb);
@@ -54,7 +54,7 @@ public class VeilingDAO {
 	}
 
 	public static void setTitel(String titel) {
-		VeilingDAO.titel = titel;
+		GetVeilingenDAO.titel = titel;
 	}
 
 	public static String getAuteur() {
@@ -62,7 +62,7 @@ public class VeilingDAO {
 	}
 
 	public static void setAuteur(String auteur) {
-		VeilingDAO.auteur = auteur;
+		GetVeilingenDAO.auteur = auteur;
 	}
 
 	public static double getStartprijs() {
@@ -70,7 +70,7 @@ public class VeilingDAO {
 	}
 
 	public static void setStartprijs(double startprijs) {
-		VeilingDAO.startprijs = startprijs;
+		GetVeilingenDAO.startprijs = startprijs;
 	}
 
 	public static Date getEindtijd() {
@@ -78,7 +78,7 @@ public class VeilingDAO {
 	}
 
 	public static void setEindtijd(Date eindtijd) {
-		VeilingDAO.eindtijd = eindtijd;
+		GetVeilingenDAO.eindtijd = eindtijd;
 	}
 
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
@@ -86,7 +86,7 @@ public class VeilingDAO {
 	}
 
 	public static void setVeilingenlijst(ArrayList<Aanbieding> veilingenlijst) {
-		VeilingDAO.veilingenlijst = veilingenlijst;
+		GetVeilingenDAO.veilingenlijst = veilingenlijst;
 	}
 
 	public static int getDrukken_nummer() {
@@ -94,7 +94,7 @@ public class VeilingDAO {
 	}
 
 	public static void setDrukken_nummer(int drukken_nummer) {
-		VeilingDAO.drukken_nummer = drukken_nummer;
+		GetVeilingenDAO.drukken_nummer = drukken_nummer;
 	}
 	
 }

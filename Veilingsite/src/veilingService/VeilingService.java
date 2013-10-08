@@ -6,7 +6,7 @@ import veilingActions.DAO.CheckIsbnDAO;
 import veilingActions.DAO.LoginDAO;
 import veilingActions.DAO.RegisterDAO;
 import veilingActions.DAO.UserListDAO;
-import veilingActions.DAO.VeilingDAO;
+import veilingActions.DAO.GetVeilingenDAO;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
@@ -26,7 +26,7 @@ public class VeilingService {
 		UserListDAO.validate();
 	}
 	public static void validateVeiling() {
-		VeilingDAO.validate();
+		GetVeilingenDAO.validate();
 	}
 	public static boolean checkBoek(int isbn) {
 		CheckIsbnDAO.zoekBoek(isbn);
@@ -50,7 +50,7 @@ public class VeilingService {
 		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
 	}
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
-		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(VeilingDAO.getVeilingenlijst());
+		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(GetVeilingenDAO.getVeilingenlijst());
 		return veilingenlijst;
 	}
 	public static ArrayList<Boek> getBoekenlijst(){

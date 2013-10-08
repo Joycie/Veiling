@@ -2,14 +2,14 @@ package veilingActions.member;
 
 import java.util.ArrayList;
 
-import veilingActions.DAO.VeilingDAO;
+import veilingActions.DAO.GetVeilingenDAO;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class HuidigeVeilingen extends ActionSupport {
+public class GetVeilingen extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Aanbieding> veilingen = new ArrayList<Aanbieding>();
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
