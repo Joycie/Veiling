@@ -37,18 +37,16 @@ public class CheckIsbnDAO {
 				aantalpagina = rs.getInt("aantalpagina");
 				auteur = rs.getString("auteur");
 				System.out.println("hoi");
-				}
+			}
 			PreparedStatement pst=con.prepareStatement("select * from drukken where boeken_isbn=" + isbn );
 			ResultSet rst=pst.executeQuery();
+			boekenlijst.clear();
 			while (rst.next()){
 				druk = rst.getString("nummer");
 				boek = new Boek(isbn, aantalpagina, titel,druk, beschrijving, uitgeverij, taal, auteur, null);
 				System.out.println(boek);
 				boekenlijst.add(boek);
-			}
-			
-
-			
+			}	
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -20,7 +20,7 @@ public class VeilingDAO {
 	private static Date eindtijd;
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
 	
-	public static Aanbieding validate(){
+	public static void validate(){
 		Aanbieding aanb = null;
 		Boek boek = null;
 			try{
@@ -45,7 +45,6 @@ public class VeilingDAO {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			return aanb;
 	}
 
 	public static String getTitel() {

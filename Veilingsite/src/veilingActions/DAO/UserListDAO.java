@@ -137,5 +137,5 @@ public class UserListDAO {
 	public static void setGebruikerslijst(ArrayList<Gebruiker> gebruikerslijst) {
 		UserListDAO.gebruikerslijst = gebruikerslijst;
 	}
-	
+
 }

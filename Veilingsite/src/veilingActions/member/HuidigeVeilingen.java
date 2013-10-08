@@ -1,4 +1,5 @@
 package veilingActions.member;
+
 import java.util.ArrayList;
 
 import veilingActions.DAO.VeilingDAO;
@@ -8,39 +9,31 @@ import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class HuidigeVeilingen extends ActionSupport{
+public class HuidigeVeilingen extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-	private VeilingDAO veilingdao;
 	private ArrayList<Aanbieding> veilingen = new ArrayList<Aanbieding>();
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
-	
-	public String execute(){
-		Aanbieding aanb = VeilingService.validateVeiling();
-		if(aanb != null ){
-			veilingen = VeilingService.getVeilingenlijst();
-		}
+
+	public String execute() {
+		VeilingService.validateVeiling();
+
+		veilingen = VeilingService.getVeilingenlijst();
+
 		return SUCCESS;
 	}
-	public HuidigeVeilingen()
-	{
-		veilingdao = new VeilingDAO();
-	}
-	public VeilingDAO getVeilingdao() {
-		return veilingdao;
-	}
 
-	public void setVeilingdao(VeilingDAO veilingdao) {
-		this.veilingdao = veilingdao;
-	}
 	public ArrayList<Aanbieding> getVeilingen() {
 		return veilingen;
 	}
+
 	public void setVeilingen(ArrayList<Aanbieding> veilingen) {
 		this.veilingen = veilingen;
 	}
+
 	public ArrayList<Boek> getBoeken() {
 		return boeken;
 	}
+
 	public void setBoeken(ArrayList<Boek> boeken) {
 		this.boeken = boeken;
 	}

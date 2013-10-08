@@ -13,7 +13,6 @@ import veilingDomain.Gebruiker;
 
 public class VeilingService {
 	private static ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
-	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
 	
 	public static boolean maakuser(String voornaam, String tussenvoegsel, String achternaam, String adress, String postcode, String email, String password, String telefoonnummer, String rekeningnummer, String plaats){
 		return RegisterDAO.createUser(voornaam, tussenvoegsel, achternaam,
@@ -26,8 +25,8 @@ public class VeilingService {
 	public static Gebruiker validateUserList(){
 		return UserListDAO.validate();
 	}
-	public static Aanbieding validateVeiling() {
-		return VeilingDAO.validate();
+	public static void validateVeiling() {
+		VeilingDAO.validate();
 	}
 	public static boolean checkBoek(int isbn) {
 		CheckIsbnDAO.zoekBoek(isbn);
@@ -50,11 +49,8 @@ public class VeilingService {
 		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
 	}
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
+		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(VeilingDAO.getVeilingenlijst());
 		return veilingenlijst;
-	}
-
-	public static void setVeilingenlijst() {
-		VeilingService.veilingenlijst = VeilingDAO.getVeilingenlijst();
 	}
 	public static ArrayList<Boek> getBoekenlijst(){
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
