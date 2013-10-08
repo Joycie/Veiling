@@ -9,7 +9,6 @@ public class Register extends ActionSupport {
 	private String voornaam, tussenvoegsel, achternaam, password,
 			passwordCheck, email, adress, postcode, plaats, telefoonnummer,
 			rekeningnummer;
-
 	public String execute() {
 		System.out.println("Test registreren");
 		if (voornaam.equals("")) {
@@ -31,7 +30,10 @@ public class Register extends ActionSupport {
 						"Geef het opgegeven wachtwoord opnieuw op");
 			}
 		}
-		if (!email.matches("\b[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}\b")) {
+		String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+		if (!email.matches(emailreg))
+		{
 			addFieldError("email", "Geef een geldig e-mailadres op");
 		}
 		if (adress.equals("")) {
