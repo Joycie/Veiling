@@ -22,8 +22,8 @@ public class VeilingService {
 	public static Gebruiker validateUser(String email, String pass){
 		return LoginDAO.validate(email, pass);
 	}
-	public static Gebruiker validateUserList(){
-		return UserListDAO.validate();
+	public static void validateUserList(){
+		UserListDAO.validate();
 	}
 	public static void validateVeiling() {
 		VeilingDAO.validate();
@@ -42,9 +42,10 @@ public class VeilingService {
 	// vanaf hier getters en setters
 	
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
+		ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>(UserListDAO.getGebruikerslijst());
 		return gebruikerslijst;
 	}
-
+	
 	public static void setGebruikerslijst() {
 		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
 	}

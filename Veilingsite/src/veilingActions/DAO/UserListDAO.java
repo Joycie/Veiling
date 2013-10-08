@@ -13,7 +13,7 @@ public class UserListDAO {
 	private static int klantnummer, telefoonnummer, rekeningnummer;
 	private static ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
 
-	public static Gebruiker validate() {
+	public static void validate() {
 		Gebruiker gebruiker = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -39,7 +39,6 @@ public class UserListDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return gebruiker;
 	}
 
 	public static String getVoornaam() {

@@ -15,7 +15,7 @@ public class UserList extends ActionSupport {
 	private UserListDAO userlistdao;
 
 	public String execute() {
-		Gebruiker gebruiker = VeilingService.validateUserList();
+		VeilingService.validateUserList();
 		gebruikerslijst = VeilingService.getGebruikerslijst();	
 
 		return SUCCESS;

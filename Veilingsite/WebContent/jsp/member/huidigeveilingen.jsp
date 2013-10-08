@@ -9,6 +9,7 @@
 				<tr class="thcolor">
 					<th>Titel</th>
 					<th>Auteur</th>
+					<th>Druk</th>
 					<th>Startprijs</th>
 					<th>Eindtijd</th>
 				</tr>
@@ -16,6 +17,7 @@
 					<tr class="tdcolor">
 						<td><s:property value="boek.titel" /></td>
 						<td><s:property value="boek.auteur" /></td>
+						<td><s:property value="drukken_nummer" /></td>
 						<td><s:property value="startprijs" /></td>
 						<td><s:property value="eindtijd" /></td>
 					</tr>

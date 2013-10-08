@@ -16,6 +16,7 @@ import veilingDomain.Boek;
 public class VeilingDAO {
 	private static String titel;
 	private static String auteur;
+	private static int drukken_nummer;
 	private static double startprijs;
 	private static Date eindtijd;
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
@@ -27,7 +28,7 @@ public class VeilingDAO {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				Connection con=DriverManager.getConnection("jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl", 
 															"tho5_2013_2a_team3", "welkom_02");
-				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and eindtijd > sysdate");
+				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, drukken_nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
@@ -35,8 +36,9 @@ public class VeilingDAO {
 					auteur = rs.getString("AUTEUR");
 					startprijs = rs.getDouble("STARTPRIJS");
 					eindtijd = rs.getDate("EINDTIJD");
+					drukken_nummer = rs.getInt("DRUKKEN_NUMMER");
 					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
-					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0,0, boek);
+					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
 					veilingenlijst.add(aanb);
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs
 							+  " || Eindtijd: " + eindtijd);
@@ -87,4 +89,12 @@ public class VeilingDAO {
 		VeilingDAO.veilingenlijst = veilingenlijst;
 	}
 
+	public static int getDrukken_nummer() {
+		return drukken_nummer;
+	}
+
+	public static void setDrukken_nummer(int drukken_nummer) {
+		VeilingDAO.drukken_nummer = drukken_nummer;
+	}
+	
 }
