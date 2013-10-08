@@ -2,11 +2,13 @@ package veilingService;
 
 import java.util.ArrayList;
 
+import veilingActions.DAO.CheckIsbnDAO;
 import veilingActions.DAO.LoginDAO;
 import veilingActions.DAO.RegisterDAO;
 import veilingActions.DAO.UserListDAO;
 import veilingActions.DAO.VeilingDAO;
 import veilingDomain.Aanbieding;
+import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
 
 public class VeilingService {
@@ -27,6 +29,15 @@ public class VeilingService {
 	public static Aanbieding validateVeiling() {
 		return VeilingDAO.validate();
 	}
+	public static boolean checkBoek(int isbn) {
+		CheckIsbnDAO.zoekBoek(isbn);
+		boolean b = false;
+		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
+		if (!boekenlijst.isEmpty()){
+			b = true;
+		}
+		return b;
+	}
 
 	
 	// vanaf hier getters en setters
@@ -35,15 +46,19 @@ public class VeilingService {
 		return gebruikerslijst;
 	}
 
-	public static void setGebruikerslijst(ArrayList<Gebruiker> gebruikerslijst) {
+	public static void setGebruikerslijst() {
 		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
 	}
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
 		return veilingenlijst;
 	}
 
-	public static void setVeilingenlijst(ArrayList<Aanbieding> veilingenlijst) {
+	public static void setVeilingenlijst() {
 		VeilingService.veilingenlijst = VeilingDAO.getVeilingenlijst();
+	}
+	public static ArrayList<Boek> getBoekenlijst(){
+		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
+		return boekenlijst;
 	}
 
 }
