@@ -9,10 +9,10 @@
 		    	  <s:password name="password" label="Wachtwoord"/>
 		    	  <s:password name="passwordCheck" label="Wachtwoord check"/>
 		    	  <s:textfield name="email" label="E-mail"/>
-		    	  <s:textfield name="adress" label="Adress"/>
+		    	  <s:textfield name="adres" label="Adres"/>
 		    	  <s:textfield name="postcode" label="Postcode"/>
 		    	  <s:textfield name="plaats" label="Plaats"/>
-		    	  <s:textfield name="rekeningnummer" label="rekeningnummer"/>
+		    	  <s:textfield name="rekeningnummer" label="Rekeningnummer"/>
 		    	  <s:textfield name="telefoonnummer" label="Telefoonnummer"/>
 		    	  <s:submit value="Register"/>
 				</s:form>

@@ -7,8 +7,9 @@ import com.opensymphony.xwork2.ActionSupport;
 public class Register extends ActionSupport {
 
 	private String voornaam, tussenvoegsel, achternaam, password,
-			passwordCheck, email, adress, postcode, plaats, telefoonnummer,
+			passwordCheck, email, adres, postcode, plaats, telefoonnummer,
 			rekeningnummer;
+
 	public String execute() {
 		System.out.println("Test registreren");
 		if (voornaam.equals("")) {
@@ -17,7 +18,14 @@ public class Register extends ActionSupport {
 		if (achternaam.equals("")) {
 			addFieldError("achternaam", "Geef je achternaam op");
 		}
-		if (!password.matches("^(?=.*[0-9]).{6,}$"))  {
+		if (postcode.equals("")) {
+			addFieldError("postcode", "Geef een postcode op");
+		}
+		if (!postcode.equals("")
+				&& !postcode.matches("^[1-9]{1}[0-9]{3} ?[A-Z]{2}$")) {
+			addFieldError("postcode", "Geen juiste postcode");
+		}
+		if (!password.matches("^(?=.*[0-9]).{6,}$")) {
 			addFieldError("password",
 					"Geef een wachtwoord op met minimaal 6 tekens, 1 cijfer");
 		}
@@ -32,24 +40,23 @@ public class Register extends ActionSupport {
 		}
 		String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
-		if (!email.matches(emailreg))
-		{
+		if (!email.matches(emailreg)) {
 			addFieldError("email", "Geef een geldig e-mailadres op");
 		}
-		if (adress.equals("")) {
-			addFieldError("adress", "Geef je adres op");
-		}
-		if (postcode.equals("")) {
-			addFieldError("postcode", "Geef een geldige postcode op");
+		if (adres.equals("")) {
+			addFieldError("adres", "Geef je adres op");
 		}
 		if (plaats.equals("")) {
 			addFieldError("plaats", "Geef een je plaats op");
 		}
 		if (telefoonnummer.equals("")) {
-			addFieldError("telefoonnummer", "Geef een gelig telefoonnummer op");
+			addFieldError("telefoonnummer", "Geef een telefoonnummer op");
+		}
+		if (!telefoonnummer.equals("") && !telefoonnummer.matches("[0-9]{10}")) {
+			addFieldError("telefoonnummer", "Geef een geldig telefoonnummer op");
 		}
 		if (rekeningnummer.equals("")) {
-			addFieldError("rekeningnummer", "Geef je rekeningnummer op");
+			addFieldError("rekeningnummer", "Geen geldig telefoonnummer");
 		}
 		System.out.println("test 3");
 		if (hasErrors()) {
@@ -57,11 +64,11 @@ public class Register extends ActionSupport {
 			return ActionSupport.INPUT;
 		} else {
 			if (VeilingService.maakuser(voornaam, tussenvoegsel, achternaam,
-					adress, postcode, email, password, telefoonnummer,
+					adres, postcode, email, password, telefoonnummer,
 					rekeningnummer, plaats) == true) {
 
 				return ActionSupport.SUCCESS;
-			}else {
+			} else {
 				return ActionSupport.INPUT;
 			}
 		}
@@ -99,10 +106,52 @@ public class Register extends ActionSupport {
 
 	}
 
-	public void setAdress(String adress) {
+	public String getAdres() {
+		return adres;
+	}
 
-		this.adress = adress;
+	public void setAdres(String adres) {
+		this.adres = adres;
+	}
 
+	public String getVoornaam() {
+		return voornaam;
+	}
+
+	public String getTussenvoegsel() {
+		return tussenvoegsel;
+	}
+
+	public String getAchternaam() {
+		return achternaam;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getPasswordCheck() {
+		return passwordCheck;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public String getPlaats() {
+		return plaats;
+	}
+
+	public String getTelefoonnummer() {
+		return telefoonnummer;
+	}
+
+	public String getRekeningnummer() {
+		return rekeningnummer;
 	}
 
 	public void setPostcode(String postcode) {
