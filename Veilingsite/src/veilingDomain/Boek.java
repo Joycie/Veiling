@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Boek {
 
-	private int isbn, aantalpagina;
-	private String titel, druk, beschrijving, uitgeverij, taal, auteur;
+	private int aantalpagina;
+	private String titel, druk, beschrijving, uitgeverij, taal, auteur, isbn ;
 	private Date datum;
 
-	public Boek(int is, int ap, String ttl, String drk, String besch, String uit, String tl, String aut, Date dat) 
+	public Boek(String is, int ap, String ttl, String drk, String besch, String uit, String tl, String aut, Date dat) 
 	{
 		isbn = is;
 		aantalpagina = ap;
@@ -22,11 +22,11 @@ public class Boek {
 
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(int isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 

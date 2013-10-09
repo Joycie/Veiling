@@ -44,11 +44,15 @@
 			<result name="success">/jsp/member/huidigeveilingen.jsp</result>
 		</action>
 		<action name="CheckIsbn" class="veilingActions.member.CheckIsbn">
-			<result name="input">/jsp/visitor/login.jsp</result>
+			<result name="input">/jsp/member/boektoevoegen.jsp</result>
 			<result name="success" type="redirectAction">BookInfo</result>
 		</action>
 		<action name="BookInfo" class="veilingActions.member.BoekInfo">
-			<result name="success">/jsp/member/bookinfo.jsp</result>
+			<result name="success">/jsp/member/checkisbn.jsp</result>
+		</action>
+		<action name="BoekToevoegen" class="veilingActions.member.BoekToevoegen">
+			<result name="success">/jsp/member/checkisbn.jsp</result>
+			<result name="input">/jsp/member/boektoevoegen.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -38,7 +38,7 @@ public class GetVeilingenDAO {
 					startprijs = rs.getDouble("STARTPRIJS");
 					eindtijd = rs.getTimestamp("EINDTIJD");
 					drukken_nummer = rs.getInt("NUMMER");
-					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
+					boek = new Boek("", 0, titel, titel, titel, titel, titel, auteur, eindtijd);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
 					veilingenlijst.add(aanb);
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs
@@ -54,7 +54,7 @@ public class GetVeilingenDAO {
 					startprijs = rs2.getDouble("STARTPRIJS");
 					eindtijd = rs2.getTimestamp("EINDTIJD");
 					drukken_nummer = rs2.getInt("NUMMER");
-					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
+					boek = new Boek("", 0, titel, titel, titel, titel, titel, auteur, eindtijd);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
 					recenteveilinglijst.add(aanb);
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs

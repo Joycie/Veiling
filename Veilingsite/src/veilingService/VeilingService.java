@@ -2,6 +2,7 @@ package veilingService;
 
 import java.util.ArrayList;
 
+import veilingActions.DAO.BoekToevoegenDAO;
 import veilingActions.DAO.CheckIsbnDAO;
 import veilingActions.DAO.LoginDAO;
 import veilingActions.DAO.RegisterDAO;
@@ -28,7 +29,7 @@ public class VeilingService {
 	public static void validateVeiling() {
 		GetVeilingenDAO.validate();
 	}
-	public static boolean checkBoek(int isbn) {
+	public static boolean checkBoek(String isbn) {
 		CheckIsbnDAO.zoekBoek(isbn);
 		boolean b = false;
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
@@ -60,6 +61,9 @@ public class VeilingService {
 	public static ArrayList<Boek> getBoekenlijst(){
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
 		return boekenlijst;
+	}
+	public static boolean voegBoekToe(Boek boek) {
+		return BoekToevoegenDAO.VoegBoekToe(boek);
 	}
 
 }

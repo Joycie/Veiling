@@ -9,7 +9,7 @@ import veilingActions.database.DatabaseQuery;
 import veilingDomain.Boek;
 
 public class CheckIsbnDAO {
-	private static int isbn;
+	private static String isbn;
 	private static String titel;
 	private static String beschrijving;
 	private static String uitgeverij;
@@ -20,15 +20,16 @@ public class CheckIsbnDAO {
 	private static String druk;
 	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
 
-	public static void zoekBoek(int isbn){
+	public static void zoekBoek(String isbn){
 		Boek boek =null;
+		setIsbn(isbn);
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DatabaseQuery.getDBConnection();
 			PreparedStatement ps=con.prepareStatement("select * from boeken where isbn=" + isbn );
 			ResultSet rs=ps.executeQuery();
 			while (rs.next()){
-				isbn = rs.getInt("isbn");
+				isbn = rs.getString("isbn");
 				titel = rs.getString("titel");
 				beschrijving = rs.getString("beschrijving");
 				uitgeverij = rs.getString("uitgeverij");
@@ -59,5 +60,11 @@ public class CheckIsbnDAO {
 	}
 	public static void setVeilingenlijst() {
 		CheckIsbnDAO.boekenlijst = boekenlijst;
+	}
+	public static String getIsbn(){
+		return isbn;
+	}
+	public static void setIsbn(String isbn2){
+		CheckIsbnDAO.isbn = isbn2;
 	}
 }

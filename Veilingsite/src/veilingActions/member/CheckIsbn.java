@@ -7,7 +7,7 @@ import veilingDomain.Boek;
 import veilingService.VeilingService;
 
 public class CheckIsbn extends ActionSupport{
-	private int isbn;
+	private String isbn;
 	
 	
 	public String execute(){
@@ -18,11 +18,11 @@ public class CheckIsbn extends ActionSupport{
 		}
 	}
 	
-	public int getIsbn(){
+	public String getIsbn(){
 		return isbn;
 	}
 	
-	public void setIsbn(int isbn){
+	public void setIsbn(String isbn){
 		this.isbn = isbn;
 	}
 
