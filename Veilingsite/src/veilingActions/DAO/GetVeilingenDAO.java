@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public class GetVeilingenDAO {
 	private static String auteur;
 	private static int drukken_nummer;
 	private static double startprijs;
-	private static Date eindtijd;
+	private static Timestamp eindtijd;
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
 	private static ArrayList<Aanbieding> recenteveilinglijst = new ArrayList<Aanbieding>();
 	public static void validate(){
@@ -35,7 +36,7 @@ public class GetVeilingenDAO {
 					titel = rs.getString("TITEL");
 					auteur = rs.getString("AUTEUR");
 					startprijs = rs.getDouble("STARTPRIJS");
-					eindtijd = rs.getDate("EINDTIJD");
+					eindtijd = rs.getTimestamp("EINDTIJD");
 					drukken_nummer = rs.getInt("NUMMER");
 					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
@@ -51,7 +52,7 @@ public class GetVeilingenDAO {
 					titel = rs2.getString("TITEL");
 					auteur = rs2.getString("AUTEUR");
 					startprijs = rs2.getDouble("STARTPRIJS");
-					eindtijd = rs2.getDate("EINDTIJD");
+					eindtijd = rs2.getTimestamp("EINDTIJD");
 					drukken_nummer = rs2.getInt("NUMMER");
 					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
@@ -88,12 +89,12 @@ public class GetVeilingenDAO {
 	public static void setStartprijs(double startprijs) {
 		GetVeilingenDAO.startprijs = startprijs;
 	}
-
-	public static Date getEindtijd() {
+	
+	public static Timestamp getEindtijd() {
 		return eindtijd;
 	}
 
-	public static void setEindtijd(Date eindtijd) {
+	public static void setEindtijd(Timestamp eindtijd) {
 		GetVeilingenDAO.eindtijd = eindtijd;
 	}
 

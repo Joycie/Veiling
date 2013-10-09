@@ -17,11 +17,11 @@
 				<td><s:property value="boek.auteur" /></td>
 				<td><s:property value="drukken_nummer" /></td>
 				<td><s:property value="startprijs" /></td>
-				<td><s:property value="eindtijd" /></td>
+				<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' hh:mm" /></td>
 			</tr>
 		</s:iterator>
 	</table>
-	<h2>Alle aanbiedingen</h2>
+	<h2>A aanbiedingen</h2>
 	<table>
 		<tr class="thcolor">
 			<th>Titel</th>
@@ -36,7 +36,7 @@
 				<td><s:property value="boek.auteur" /></td>
 				<td><s:property value="drukken_nummer" /></td>
 				<td><s:property value="startprijs" /></td>
-				<td><s:property value="eindtijd" /></td>
+				<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' hh:mm" /></td>
 			</tr>
 		</s:iterator>
 	</table>

@@ -1,16 +1,16 @@
 package veilingDomain;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Aanbieding {
 
 	private int id;
 	private double startprijs;
-	private Date eindtijd;
+	private Timestamp eindtijd;
 	private int gebruikers_klantnr, drukken_isbn, drukken_nummer;
 	private Boek boek;
 
-	public Aanbieding(int id, double start, Date eind, int geb_klant, int druk_isbn, int druk_nr, Boek b) 
+	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, int druk_isbn, int druk_nr, Boek b) 
 	{
 		this.id = id;
 		startprijs = start;
@@ -36,12 +36,12 @@ public class Aanbieding {
 	public void setStartprijs(double startprijs) {
 		this.startprijs = startprijs;
 	}
-
-	public Date getEindtijd() {
+	
+	public Timestamp getEindtijd() {
 		return eindtijd;
 	}
 
-	public void setEindtijd(Date eindtijd) {
+	public void setEindtijd(Timestamp eindtijd) {
 		this.eindtijd = eindtijd;
 	}
 
