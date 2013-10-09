@@ -20,7 +20,7 @@ public class GetVeilingenDAO {
 	private static double startprijs;
 	private static Date eindtijd;
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
-	
+	private static ArrayList<Aanbieding> recenteveilinglijst = new ArrayList<Aanbieding>();
 	public static void validate(){
 		Aanbieding aanb = null;
 		Boek boek = null;
@@ -43,6 +43,22 @@ public class GetVeilingenDAO {
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs
 							+  " || Eindtijd: " + eindtijd);
 					System.out.println(veilingenlijst);
+				}
+				PreparedStatement ps2 = con.prepareStatement("SELECT insert_date, startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and insert_date + 1 > sysdate");
+				ResultSet rs2 = ps2.executeQuery();
+				recenteveilinglijst.clear();
+				while (rs2.next()) {
+					titel = rs2.getString("TITEL");
+					auteur = rs2.getString("AUTEUR");
+					startprijs = rs2.getDouble("STARTPRIJS");
+					eindtijd = rs2.getDate("EINDTIJD");
+					drukken_nummer = rs2.getInt("NUMMER");
+					boek = new Boek(0, 0, titel, titel, titel, titel, titel, auteur, eindtijd);
+					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
+					recenteveilinglijst.add(aanb);
+					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs
+							+  " || Eindtijd: " + eindtijd);
+					System.out.println(recenteveilinglijst);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -95,6 +111,15 @@ public class GetVeilingenDAO {
 
 	public static void setDrukken_nummer(int drukken_nummer) {
 		GetVeilingenDAO.drukken_nummer = drukken_nummer;
+	}
+
+	public static ArrayList<Aanbieding> getRecenteveilinglijst() {
+		return recenteveilinglijst;
+	}
+
+	public static void setRecenteveilinglijst(
+			ArrayList<Aanbieding> recenteveilinglijst) {
+		GetVeilingenDAO.recenteveilinglijst = recenteveilinglijst;
 	}
 	
 }

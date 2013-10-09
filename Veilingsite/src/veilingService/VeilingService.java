@@ -53,6 +53,10 @@ public class VeilingService {
 		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(GetVeilingenDAO.getVeilingenlijst());
 		return veilingenlijst;
 	}
+	public static ArrayList<Aanbieding> getRecenteveilingen() {
+		ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>(GetVeilingenDAO.getRecenteveilinglijst());
+		return recenteveilingen;
+	}
 	public static ArrayList<Boek> getBoekenlijst(){
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
 		return boekenlijst;

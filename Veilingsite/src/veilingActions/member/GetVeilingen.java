@@ -12,12 +12,14 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GetVeilingen extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Aanbieding> veilingen = new ArrayList<Aanbieding>();
+	private ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>();
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
 
 	public String execute() {
 		VeilingService.validateVeiling();
 
 		veilingen = VeilingService.getVeilingenlijst();
+		recenteveilingen = VeilingService.getRecenteveilingen();
 
 		return SUCCESS;
 	}
@@ -37,4 +39,13 @@ public class GetVeilingen extends ActionSupport {
 	public void setBoeken(ArrayList<Boek> boeken) {
 		this.boeken = boeken;
 	}
+
+	public ArrayList<Aanbieding> getRecenteveilingen() {
+		return recenteveilingen;
+	}
+
+	public void setRecenteveilingen(ArrayList<Aanbieding> recenteveilingen) {
+		this.recenteveilingen = recenteveilingen;
+	}
+	
 }
