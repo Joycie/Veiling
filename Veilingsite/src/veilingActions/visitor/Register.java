@@ -17,7 +17,7 @@ public class Register extends ActionSupport {
 		if (achternaam.equals("")) {
 			addFieldError("achternaam", "Geef je achternaam op");
 		}
-		if (!password.matches("^(?=.*).{4,8}$")) {
+		if (!password.matches("^(?=.*[0-9]).{6,}$"))  {
 			addFieldError("password",
 					"Geef een wachtwoord op met minimaal 6 tekens, 1 cijfer");
 		}

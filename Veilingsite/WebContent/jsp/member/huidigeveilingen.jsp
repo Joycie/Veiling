@@ -21,7 +21,7 @@
 			</tr>
 		</s:iterator>
 	</table>
-	<h2>A aanbiedingen</h2>
+	<h2>Alle aanbiedingen</h2>
 	<table>
 		<tr class="thcolor">
 			<th>Titel</th>
