@@ -1,28 +1,33 @@
-<%@ include file="../main/header.jsp" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-			<div class="content">
-				<h2>Registreren</h2>
-				<s:form action="CheckIsbn" namespace="/member">
-		    	  <s:textfield name="isbn" label="ISBN"/>
-		    	  <s:submit value="Controleer Isbn"/>
-				</s:form>
-				<table>
-				<tr class="thcolor">
-					<th>Titel</th>
-					<th>Auteur</th>
-					<th>uitgeverij</th>
-					<th>druk</th>
-					<th>isbn</th>
-				</tr>
-				<s:iterator value="books">
-					<tr class="tdcolor">
-						<td><s:textfield name="titel" value="%{#Boek.titel}"/></td>
-						<td><s:textfield name="auteur" value="%{#Boek.getAuteur}"/></td>
-						<td><s:textfield name="uitgeverij" value="%{#books.uitgeverij}"/></td>
-						<td><s:textfield name="druk" value="%{#boek.titel}"/></td>
-						<td><s:textfield name="isbn" value="%{#book.titel}"/></td>
-					</tr>
-				</s:iterator>
-				</table>
-			</div>
-<%@ include file="../main/footer.jsp" %>
+<%@ include file="../main/header.jsp"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<div class="content">
+	<h2>Registreren</h2>
+	<s:form action="CheckIsbn" namespace="/member">
+		<s:textfield name="isbn" label="ISBN" />
+		<s:submit value="Controleer Isbn" />
+	</s:form>
+	<s:if test="hasActionErrors()">
+		<s:actionerror />
+	</s:if>
+	<s:if test="hasActionMessages()">
+		<s:actionmessage />
+	</s:if>
+
+	<s:form action="BoekToevoegen" namespace="/member">
+		<s:iterator value="books">
+			<tr class="tdcolor">
+				<s:textfield name="isbn" label="Isbn" />
+				<s:textfield name="titel" label="Titel" />
+				<s:textfield name="beschrijving" label="Beschrijving" />
+				<s:textfield name="druk" label="Druk" />
+				<s:textfield name="uitgeverij" label="Uitgeverij" />
+				<s:textfield name="auteur" label="Auteur" />
+				<s:textfield name="taal" label="Taal" />
+				<s:textfield name="aantalpagina" label="Aantal Pagina's" />
+				<s:textfield name="datum" label="Datum" />
+			</tr>
+		</s:iterator>
+		<s:submit value="Voeg Toe" />
+	</s:form>
+</div>
+<%@ include file="../main/footer.jsp"%>

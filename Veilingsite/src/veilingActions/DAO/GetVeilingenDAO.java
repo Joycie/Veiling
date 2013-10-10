@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
 import veilingActions.database.GetConnection;
 import veilingDomain.Aanbieding;
@@ -21,6 +21,7 @@ public class GetVeilingenDAO {
 	private static int drukken_nummer;
 	private static double startprijs;
 	private static Timestamp eindtijd;
+	private static Date datum;
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
 	private static ArrayList<Aanbieding> recenteveilinglijst = new ArrayList<Aanbieding>();
 	public static void validate(){
@@ -34,7 +35,7 @@ public class GetVeilingenDAO {
 				} else {
 					System.out.println("|| Connection failed ||");
 				}
-				PreparedStatement ps = connection.prepareStatement("SELECT startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
+				PreparedStatement ps = connection.prepareStatement("SELECT startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
@@ -43,14 +44,15 @@ public class GetVeilingenDAO {
 					startprijs = rs.getDouble("STARTPRIJS");
 					eindtijd = rs.getTimestamp("EINDTIJD");
 					drukken_nummer = rs.getInt("NUMMER");
-					boek = new Boek("", 0, titel, titel, titel, titel, titel, auteur, eindtijd);
+					datum = rs.getDate("DATUM");
+					boek = new Boek("", 0, titel, 0, titel, titel, titel, auteur, datum);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
 					veilingenlijst.add(aanb);
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs
 							+  " || Eindtijd: " + eindtijd);
 					System.out.println(veilingenlijst);
 				}
-				PreparedStatement ps2 = connection.prepareStatement("SELECT insert_date, startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and insert_date + 1 > sysdate");
+				PreparedStatement ps2 = connection.prepareStatement("SELECT insert_date, startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and insert_date + 1 > sysdate");
 				ResultSet rs2 = ps2.executeQuery();
 				recenteveilinglijst.clear();
 				while (rs2.next()) {
@@ -59,7 +61,8 @@ public class GetVeilingenDAO {
 					startprijs = rs2.getDouble("STARTPRIJS");
 					eindtijd = rs2.getTimestamp("EINDTIJD");
 					drukken_nummer = rs2.getInt("NUMMER");
-					boek = new Boek("", 0, titel, titel, titel, titel, titel, auteur, eindtijd);
+					datum = rs2.getDate("DATUM");
+					boek = new Boek("", 0, titel, 0, titel, titel, titel, auteur, datum);
 					aanb = new Aanbieding(0, startprijs, eindtijd, 0,0, drukken_nummer, boek);
 					recenteveilinglijst.add(aanb);
 					System.out.println("Titel: " + titel + "|| Auteur: " +  auteur + "|| Startprijs: " +  startprijs

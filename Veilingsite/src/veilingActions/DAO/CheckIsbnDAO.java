@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.Date;
 
 import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
@@ -13,11 +14,11 @@ public class CheckIsbnDAO {
 	private static String titel;
 	private static String beschrijving;
 	private static String uitgeverij;
-	private static String datum;
+	private static Date datum;
 	private static String taal;
 	private static int aantalpagina;
 	private static String auteur;
-	private static String druk;
+	private static int druk;
 	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
 
 	public static void zoekBoek(String isbn){
@@ -38,7 +39,7 @@ public class CheckIsbnDAO {
 				titel = rs.getString("titel");
 				beschrijving = rs.getString("beschrijving");
 				uitgeverij = rs.getString("uitgeverij");
-				datum = rs.getString("datum");
+				datum = rs.getDate("datum");
 				taal = rs.getString("taal");
 				aantalpagina = rs.getInt("aantalpagina");
 				auteur = rs.getString("auteur");
@@ -48,11 +49,11 @@ public class CheckIsbnDAO {
 			ResultSet rst=pst.executeQuery();
 			boekenlijst.clear();
 			while (rst.next()){
-				druk = rst.getString("nummer");
-				boek = new Boek(isbn, aantalpagina, titel,druk, beschrijving, uitgeverij, taal, auteur, null);
+				druk = rst.getInt("nummer");
+				boek = new Boek(isbn, aantalpagina, titel,druk, beschrijving, uitgeverij, taal, auteur, datum);
 				System.out.println(boek);
-				boekenlijst.add(boek);
-			}	
+			}
+			boekenlijst.add(boek);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

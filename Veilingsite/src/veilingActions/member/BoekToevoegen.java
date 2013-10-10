@@ -1,6 +1,6 @@
 package veilingActions.member;
 
-import java.util.Date;
+import java.sql.Date;
 
 import veilingDomain.Boek;
 import veilingService.VeilingService;
@@ -13,7 +13,7 @@ public class BoekToevoegen extends ActionSupport {
 	private String beschrijving;
 	private String uitgeverij;
 	private Date datum;
-	private String druk;
+	private int druk;
 	private String taal;
 	private int aantalbladzijde;
 	private String auteur;
@@ -22,8 +22,10 @@ public class BoekToevoegen extends ActionSupport {
 		Boek boek = new Boek(isbn, aantalbladzijde, titel, druk, beschrijving,
 				uitgeverij, taal, auteur, datum);
 		if (VeilingService.voegBoekToe(boek) == true) {
+			addActionMessage("Boek : " + titel + " is toegevoegd.");
 			return SUCCESS;
 		} else {
+			addActionError("Toevoegen niet gelukt");
 			return INPUT;
 		}
 	}
@@ -65,14 +67,15 @@ public class BoekToevoegen extends ActionSupport {
 	}
 
 	public void setDatum(Date datum) {
+		System.out.println("Datum: " + datum);
 		this.datum = datum;
 	}
-
-	public String getDruk() {
+	
+	public int getDruk() {
 		return druk;
 	}
 
-	public void setDruk(String druk) {
+	public void setDruk(int druk) {
 		this.druk = druk;
 	}
 
