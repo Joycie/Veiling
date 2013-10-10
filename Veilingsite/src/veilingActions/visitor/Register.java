@@ -11,7 +11,17 @@ public class Register extends ActionSupport {
 			rekeningnummer;
 
 	public String execute() {
-		System.out.println("Test registreren");
+		if (VeilingService.maakuser(voornaam, tussenvoegsel, achternaam, adres,
+				postcode, email, password, telefoonnummer, rekeningnummer,
+				plaats) == true) {
+			return ActionSupport.SUCCESS;
+
+		}
+		return ActionSupport.INPUT;
+	}
+
+	public void validate() {
+		System.out.println("|| Start register ||");
 		if (voornaam.equals("")) {
 			addFieldError("voornaam", "Geef je voornaam op");
 		}
@@ -58,25 +68,10 @@ public class Register extends ActionSupport {
 		if (rekeningnummer.equals("")) {
 			addFieldError("rekeningnummer", "Geen geldig telefoonnummer");
 		}
-		System.out.println("test 3");
-		if (hasErrors()) {
-			System.out.println("test");
-			return ActionSupport.INPUT;
-		} else {
-			if (VeilingService.maakuser(voornaam, tussenvoegsel, achternaam,
-					adres, postcode, email, password, telefoonnummer,
-					rekeningnummer, plaats) == true) {
-
-				return ActionSupport.SUCCESS;
-			} else {
-				return ActionSupport.INPUT;
-			}
-		}
 	}
 
 	public void setVoornaam(String voornaam) {
 		this.voornaam = voornaam;
-		System.out.println(this.voornaam);
 
 	}
 
@@ -98,7 +93,6 @@ public class Register extends ActionSupport {
 
 	public void setPasswordCheck(String passwordCheck) {
 		this.passwordCheck = passwordCheck;
-		System.out.println(passwordCheck);
 	}
 
 	public void setEmail(String email) {

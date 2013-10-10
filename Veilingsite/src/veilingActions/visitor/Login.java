@@ -1,4 +1,5 @@
 package veilingActions.visitor;
+
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -9,45 +10,48 @@ import org.apache.struts2.dispatcher.SessionMap;
 
 import veilingActions.DAO.LoginDAO;
 import veilingDomain.Gebruiker;
+import veilingService.VeilingService;
 
-public class Login extends ActionSupport{
+public class Login extends ActionSupport {
 
 	private String email, pass;
 	SessionMap<String, String> sessionmap;
-	private LoginDAO logindao;
 
-	public String execute(){
-		System.out.println("Test 123" + email);
-		Gebruiker geb = LoginDAO.validate(email, pass);
-		if(geb != null ){
-			Map<String, Object> session = ActionContext.getContext().getSession();
-			session.put("gebruiker", geb);
-			return SUCCESS;
-		}
-		else {
-			addFieldError("pass", "Email en wachtwoord combinatie is niet bekend");
-			return INPUT;
+	public String execute() {
+
+		return ActionSupport.SUCCESS;
+	}
+
+	public void validate() {
+		Gebruiker geb = VeilingService.validateUser(email);
+		if (geb != null) {
+			if (geb.getWachtwoord().equals(pass)) {
+				Map<String, Object> session = ActionContext.getContext()
+						.getSession();
+				session.put("gebruiker", geb);
+			} else {
+				addFieldError("pass", "Geen object");
+			}
+		} else {
+			addFieldError("pass",
+					"Email en wachtwoord combinatie is niet bekend");
 		}
 	}
-	
-	public Login(){
-		logindao = new LoginDAO();
-	}
-		
-	public String getEmail(){
+
+	public String getEmail() {
 		return email;
 	}
-	
-	public void setEmail(String email){
+
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public String getPass(){
+
+	public String getPass() {
 		return pass;
 	}
-	
-	public void setPass(String pass){
+
+	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	
+
 }

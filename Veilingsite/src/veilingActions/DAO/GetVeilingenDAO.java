@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import veilingActions.database.GetConnection;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 
@@ -26,10 +27,14 @@ public class GetVeilingenDAO {
 		Aanbieding aanb = null;
 		Boek boek = null;
 			try{
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				Connection con=DriverManager.getConnection("jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl", 
-															"tho5_2013_2a_team3", "welkom_02");
-				PreparedStatement ps = con.prepareStatement("SELECT startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
+				Connection connection = null;
+				connection = GetConnection.getDBConnection();
+				if (connection != null) {
+					System.out.println("|| Connection ready || ");
+				} else {
+					System.out.println("|| Connection failed ||");
+				}
+				PreparedStatement ps = connection.prepareStatement("SELECT startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
@@ -45,7 +50,7 @@ public class GetVeilingenDAO {
 							+  " || Eindtijd: " + eindtijd);
 					System.out.println(veilingenlijst);
 				}
-				PreparedStatement ps2 = con.prepareStatement("SELECT insert_date, startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and insert_date + 1 > sysdate");
+				PreparedStatement ps2 = connection.prepareStatement("SELECT insert_date, startprijs, eindtijd, titel, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and insert_date + 1 > sysdate");
 				ResultSet rs2 = ps2.executeQuery();
 				recenteveilinglijst.clear();
 				while (rs2.next()) {
@@ -64,6 +69,7 @@ public class GetVeilingenDAO {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			GetConnection.closeConnection();
 	}
 
 	public static String getTitel() {

@@ -20,8 +20,9 @@ public class VeilingService {
 				adress, postcode, email, password, telefoonnummer,
 				rekeningnummer, plaats);
 	}
-	public static Gebruiker validateUser(String email, String pass){
-		return LoginDAO.validate(email, pass);
+	public static Gebruiker validateUser(String email){
+		LoginDAO loginDAO = new LoginDAO();
+		return loginDAO.Retrieve(email);
 	}
 	public static void validateUserList(){
 		UserListDAO.validate();

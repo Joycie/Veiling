@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 
-import veilingActions.database.DatabaseQuery;
+import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
 
 public class BoekToevoegenDAO {
@@ -22,19 +22,23 @@ public class BoekToevoegenDAO {
 		String auteur = boek.getAuteur();
 		String druk = boek.getDruk();
 		try{
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DatabaseQuery.getDBConnection();
-			PreparedStatement ps=con.prepareStatement("INSERT INTO BOEKEN (ISBN, TITEL, BESCHRIJVING, UITGEVERIJ, DATUM, TAAL, AANTALPAGINA, AUTEUR) VALUES ('"+isbn +"', '"+titel+"', '"+beschrijving+"', '"+uitgeverij+"', 'sysdate', '"+taal+"', '"+aantalpagina+"', '"+auteur+"')");
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO BOEKEN (ISBN, TITEL, BESCHRIJVING, UITGEVERIJ, DATUM, TAAL, AANTALPAGINA, AUTEUR) VALUES ('"+isbn +"', '"+titel+"', '"+beschrijving+"', '"+uitgeverij+"', '"+datum+"', '"+taal+"', '"+aantalpagina+"', '"+auteur+"')");
 			ResultSet rs=ps.executeQuery();
-			PreparedStatement pst=con.prepareStatement("INSERT INTO DRUKKEN (BOEKEN_ISBN , NUMMER) VALUES ('" + isbn + "', '" + druk + "')" );
+			PreparedStatement pst = connection.prepareStatement("INSERT INTO DRUKKEN (BOEKEN_ISBN , NUMMER) VALUES ('" + isbn + "', '" + druk + "')" );
 			ResultSet rst=pst.executeQuery();
-			 b = true;
-			
+			b = true;
 		}catch(Exception e){
 			e.printStackTrace();
 			b = false;
 		}
-		
+		GetConnection.closeConnection();
 		return b;
 	}
 

@@ -5,10 +5,11 @@ public class Gebruiker {
 	private int klantnummer, telefoonnummer, rekeningnummer;
 	private String voornaam, tussenvoegsel, achternaam, adres, postcode,
 			plaats, email, wachtwoord;
+	private double krediet;
 
 	public Gebruiker(int klnr, String vrn, String tv, String an, String adr,
 			String post, String plts, String em, String ww, int telnr,
-			int reknr) 
+			int reknr, double kred) 
 	{
 		klantnummer = klnr;
 		voornaam = vrn;
@@ -21,8 +22,9 @@ public class Gebruiker {
 		wachtwoord = ww;
 		telefoonnummer = telnr;
 		rekeningnummer = reknr;
+		krediet = kred;
+		
 	}
-
 	public int getKlantnummer() {
 		return klantnummer;
 	}
@@ -110,5 +112,11 @@ public class Gebruiker {
 	public void setWachtwoord(String wachtwoord) {
 		this.wachtwoord = wachtwoord;
 	}
-
+	public double getKrediet() {
+		return krediet;
+	}
+	public void setKrediet(double krediet) {
+		this.krediet = krediet;
+	}
+	
 }

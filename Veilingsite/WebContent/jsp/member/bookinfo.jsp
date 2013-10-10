@@ -4,7 +4,7 @@
 <div class="content">
 	<h2>
 		Boek
-		<h2>
+		</h2>
 			<table>
 				<tr class="thcolor">
 					<th>Titel</th>

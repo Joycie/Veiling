@@ -5,48 +5,60 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import veilingActions.database.GetConnection;
 import veilingDomain.Gebruiker;
+import veilingInterface.VeilingInterface;
 
 
-public class LoginDAO {
-	private static int klantnummer;
-	private static String voornaam;
-	private static String tussenvoegsel = "";
-	private static String achternaam;
-	
-	public static Gebruiker validate(String email, String pass){
-		boolean status=false;
+public class LoginDAO implements VeilingInterface<Gebruiker> {
+
+	@Override
+	public void Create(Object T) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Gebruiker Retrieve(String email) {
 		Gebruiker geb = null;
-			try{
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				Connection con=DriverManager.getConnection("jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl", 
-															"tho5_2013_2a_team3", "welkom_02");
-				//PreparedStatement ps=con.prepareStatement("select * from gebruikers where email=? and wachtwoord=?");
-				//
-				//ps.setString(2,pass);
-				PreparedStatement ps=con.prepareStatement("select * from gebruikers where email=?");
+			try {
+				Connection connection = null;
+				connection = GetConnection.getDBConnection();
+				if (connection != null) {
+					System.out.println("|| Connection ready || ");
+				} else {
+					System.out.println("|| Connection failed ||");
+				}
+				PreparedStatement ps=connection.prepareStatement("select * from gebruikers where email=?");
 				ps.setString(1,email);
-				System.out.println(email);
-				
+				System.out.println("Gebruiker: " + email);
 				ResultSet rs=ps.executeQuery();
-				//status=rs.next();
 				
 				while (rs.next()) {
-					if(pass.equals(rs.getString("wachtwoord"))) {
-						klantnummer = rs.getInt("klantnr");
-						voornaam = rs.getString("VOORNAAM");
-						tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-						achternaam = rs.getString("ACHTERNAAM");
-						geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
-						
-						System.out.println("Klantnr: " + klantnummer + " || voornaam: " +  voornaam
-								+  " || tussenvoegsel: " + tussenvoegsel + " || achternaam " + achternaam);
-					}
+					int klantnummer = rs.getInt("KLANTNR");
+					String voornaam = rs.getString("VOORNAAM");
+					String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+					String achternaam = rs.getString("ACHTERNAAM");
+					String wachtwoord =  rs.getString("WACHTWOORD");
+					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", email, wachtwoord, 0, 0, 0);
+					System.out.println("Klantnummer: " +  klantnummer + " | Voornaam: " + voornaam + 
+							" | Tussenvoegsel: " + tussenvoegsel + " | Achternaam: " + achternaam + " | Email:  " + email + " | wachtwoord: "+ wachtwoord);
 				}
-				System.out.println(status);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			GetConnection.closeConnection();
 			return geb;
+	}
+
+	@Override
+	public void Update(Object T) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Delete(Object T) {
+		// TODO Auto-generated method stub
+		
 	}
 }

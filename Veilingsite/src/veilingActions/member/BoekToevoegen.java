@@ -28,39 +28,76 @@ public class BoekToevoegen extends ActionSupport {
 		}
 	}
 
+	public String getIsbn() {
+		return isbn;
+	}
+
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public String getTitel() {
+		return titel;
 	}
 
 	public void setTitel(String titel) {
 		this.titel = titel;
 	}
 
+	public String getBeschrijving() {
+		return beschrijving;
+	}
+
 	public void setBeschrijving(String beschrijving) {
 		this.beschrijving = beschrijving;
+	}
+
+	public String getUitgeverij() {
+		return uitgeverij;
 	}
 
 	public void setUitgeverij(String uitgeverij) {
 		this.uitgeverij = uitgeverij;
 	}
 
-	public void setDatum(String jaar, String maand, String dag) {
+	public Date getDatum() {
+		return datum;
+	}
 
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
+	public String getDruk() {
+		return druk;
 	}
 
 	public void setDruk(String druk) {
 		this.druk = druk;
 	}
 
+	public String getTaal() {
+		return taal;
+	}
+
 	public void setTaal(String taal) {
 		this.taal = taal;
 	}
 
-	public void setAantalbladzijde(String aantalbladzijde) {
-		this.aantalbladzijde = Integer.parseInt(aantalbladzijde);
+	public int getAantalbladzijde() {
+		return aantalbladzijde;
+	}
+
+	public void setAantalbladzijde(int aantalbladzijde) {
+		this.aantalbladzijde = aantalbladzijde;
+	}
+
+	public String getAuteur() {
+		return auteur;
 	}
 
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
+	
 }

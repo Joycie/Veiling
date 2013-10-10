@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import veilingActions.database.GetConnection;
 import veilingDomain.Gebruiker;
 
 public class UserListDAO {
@@ -16,12 +18,14 @@ public class UserListDAO {
 	public static void validate() {
 		Gebruiker gebruiker = null;
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(
-					"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
-					"tho5_2013_2a_team3", "welkom_02");
-			PreparedStatement ps = con
-					.prepareStatement("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection.prepareStatement("SELECT KLANTNR, VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM from GEBRUIKERS");
 			ResultSet rs = ps.executeQuery();
 			gebruikerslijst.clear();
 			while (rs.next()) {
@@ -30,7 +34,7 @@ public class UserListDAO {
 				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
 				achternaam = rs.getString("ACHTERNAAM");
 				Gebruiker geb = new Gebruiker(klantnummer, voornaam,
-						tussenvoegsel, achternaam, "", "", "", "", "", 0, 0);
+						tussenvoegsel, achternaam, "", "", "", "", "", 0, 0, 0);
 				gebruikerslijst.add(geb);
 				System.out.println("Klantnr: " + klantnummer + " || voornaam: "
 						+ voornaam + " || tussenvoegsel: " + tussenvoegsel
@@ -39,6 +43,7 @@ public class UserListDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		GetConnection.closeConnection();
 	}
 
 	public static String getVoornaam() {

@@ -2,34 +2,37 @@ package veilingActions.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import veilingActions.database.DatabaseQuery;
+import veilingActions.database.GetConnection;
+import veilingDomain.Gebruiker;
+import veilingInterface.VeilingInterface;
 
 public class RegisterDAO {
 	
 	public static boolean createUser(String voornaam, String tussenvoegsel, String achternaam, String adress, String postcode, String email, String password, String telefoonnummer, String rekeningnummer, String plaats){
-		Connection connection = null;
 		boolean b = true;
-		try {
-			DatabaseQuery.getDBConnection();
-			connection = DriverManager.getConnection(
-					"jdbc:oracle:thin:@ondora01.hu.nl:8521/cursus01.hu.nl",
-					"tho5_2013_2a_team3", "welkom_02");
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
 			if (connection != null) {
-				System.out.println("Connectie geslaagd");
+				System.out.println("|| Connection ready || ");
 			} else {
-				System.out.println("Mislukt");
+				System.out.println("|| Connection failed ||");
 				b= false;
 			}
+		try {
+			System.out.println(" || Excecuting query ");
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES ('"+voornaam +"', '"+tussenvoegsel+"', '"+achternaam+"', '"+adress+"', '"+postcode+"', '"+email+"', '"+password+"', '"+telefoonnummer+"', '"+rekeningnummer+"', '"+plaats+"')");
+			ResultSet rs = ps.executeQuery();
 
 		} catch (SQLException e) {
 
-			System.out.println("Connectie mislukt!");
+			System.out.println("|| Failed to complete query || ");
 			e.printStackTrace();
 		}
-		DatabaseQuery.insertRecordsToDbUserTable("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES ('"+voornaam +"', '"+tussenvoegsel+"', '"+achternaam+"', '"+adress+"', '"+postcode+"', '"+email+"', '"+password+"', '"+telefoonnummer+"', '"+rekeningnummer+"', '"+plaats+"')");
+		GetConnection.closeConnection();
 		return b;
 	}
-
 }

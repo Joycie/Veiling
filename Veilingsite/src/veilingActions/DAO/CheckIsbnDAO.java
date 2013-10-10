@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import veilingActions.database.DatabaseQuery;
+import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
 
 public class CheckIsbnDAO {
@@ -24,9 +24,14 @@ public class CheckIsbnDAO {
 		Boek boek =null;
 		setIsbn(isbn);
 		try{
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DatabaseQuery.getDBConnection();
-			PreparedStatement ps=con.prepareStatement("select * from boeken where isbn=" + isbn );
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection.prepareStatement("select * from boeken where isbn=" + isbn );
 			ResultSet rs=ps.executeQuery();
 			while (rs.next()){
 				isbn = rs.getString("isbn");
@@ -39,7 +44,7 @@ public class CheckIsbnDAO {
 				auteur = rs.getString("auteur");
 				System.out.println("hoi");
 			}
-			PreparedStatement pst=con.prepareStatement("select * from drukken where boeken_isbn=" + isbn );
+			PreparedStatement pst = connection.prepareStatement("select * from drukken where boeken_isbn=" + isbn );
 			ResultSet rst=pst.executeQuery();
 			boekenlijst.clear();
 			while (rst.next()){
@@ -52,7 +57,7 @@ public class CheckIsbnDAO {
 			e.printStackTrace();
 		}
 		
-		
+		GetConnection.closeConnection();
 	}
 	public static ArrayList<Boek> getBoekenlijst() {
 		System.out.println(boekenlijst);
