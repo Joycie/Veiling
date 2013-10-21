@@ -1,4 +1,4 @@
-package veilingActions.member;
+package veilingActions.visitor;
 
 import java.util.ArrayList;
 

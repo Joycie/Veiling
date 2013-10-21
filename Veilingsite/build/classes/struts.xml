@@ -5,7 +5,9 @@
     
     <struts>
 		<package name="default" extends="struts-default"> 
-
+			<action name="Menu" class="veilingActions.visitor.GetVeilingen">
+			<result>/jsp/visitor/huidigeveilingen.jsp</result>
+		</action>
 		</package>	
 		<include file="veilingActions/veiling.xml"/>
 	</struts>

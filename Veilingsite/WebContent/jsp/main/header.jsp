@@ -41,7 +41,7 @@
 				<li><a href="#">Kookboeken</a></li>
 				<li><a href="#">Flora en fauna</a></li>
 				 <li><a href="<%=request.getContextPath()%>/<s:url action='BoekToevoegenForm' namespace="member"/>">Boek toevoegen</a></li>
-				<li><a href="<%=request.getContextPath()%>/<s:url action='HuidigeVeilingen' namespace="member"/>">Huidige veilingen</a></li>
+				<li><a href="<%=request.getContextPath()%>/<s:url action='HuidigeVeilingen' namespace="visitor"/>">Huidige veilingen</a></li>
 				</ul>
 				<div class="clear">
 				</div>

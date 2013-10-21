@@ -12,11 +12,14 @@
 	<package name="visitor" namespace="/visitor" extends="struts-default">
 		<action name="Register" class="veilingActions.visitor.Register">
 			<result name="input">/jsp/visitor/register.jsp</result>
-			<result name="success">/jsp/index.jsp</result>
+			<result name="success">index.jsp</result>
 		</action>
 		<action name="Login" class="veilingActions.visitor.Login">
 			<result name="input">/jsp/visitor/login.jsp</result>
-			<result name="success">/jsp/index.jsp</result>
+			<result name="success">../index.jsp</result>
+		</action>
+		<action name="HuidigeVeilingen" class="veilingActions.visitor.GetVeilingen">
+			<result name="success">/jsp/visitor/huidigeveilingen.jsp</result>
 		</action>
 	</package>
 
@@ -39,9 +42,6 @@
 		</global-results>
 		<action name="Logout" class="veilingActions.member.Logout">
 			<result name="success">/jsp/visitor/login.jsp</result>
-		</action>
-		<action name="HuidigeVeilingen" class="veilingActions.member.GetVeilingen">
-			<result name="success">/jsp/member/huidigeveilingen.jsp</result>
 		</action>
 		<action name="BoekToevoegenForm">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
