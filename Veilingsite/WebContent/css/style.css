@@ -144,6 +144,9 @@ ul.menu
 {
 	clear: both;
 }
+.cursief {
+	font-style: italic;
+}
 .verplicht
 {
 	color: red;
