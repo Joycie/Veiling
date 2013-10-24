@@ -17,7 +17,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	private static ArrayList<Aanbieding> recenteveilinglijst = new ArrayList<Aanbieding>();
 
 	@Override
-	public void create(Object T) {
+	public boolean create(Object T) {
+		return false;
 		// TODO Auto-generated method stub
 
 	}

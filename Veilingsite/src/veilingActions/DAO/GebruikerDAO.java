@@ -14,7 +14,7 @@ import veilingInterface.VeilingInterface;
 public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 
 	@Override
-	public void create(Object T) {
+	public boolean create(Object T) {
 		Gebruiker gebruiker = (Gebruiker) T;
 		Connection connection = null;
 		connection = GetConnection.getDBConnection();
@@ -46,8 +46,10 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 	
 			System.out.println("|| Failed to complete query || ");
 			e.printStackTrace();
+			return false;
 		}
 		GetConnection.closeConnection();
+		return true;
 	}
 	@Override
 	public Gebruiker retrieve(String email) {
