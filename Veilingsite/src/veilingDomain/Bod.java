@@ -1,6 +1,6 @@
 package veilingDomain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Bod {
 	
@@ -17,6 +17,10 @@ public class Bod {
 		this.aanbieding = aanbieding;
 		this.geld = geld;
 	}
+	  
+	  public Bod(double geld){
+		  this.geld = geld;
+	  }
 
 	public int getId() {
 		return id;
