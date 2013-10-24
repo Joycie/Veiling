@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Boek {
 
-	private int druk, aantalpagina;
-	private String titel, beschrijving, uitgeverij, taal, auteur, isbn ;
+	private int druk, aantalpagina, categorie;
+	private String titel, beschrijving, uitgeverij, taal, auteur, isbn;
 	private Date datum;
 
-	public Boek(String is, int ap, String ttl, int drk, String besch, String uit, String tl, String aut, Date dat) 
+	public Boek(String is, int ap, String ttl, int drk, String besch, String uit, String tl, String aut, Date dat, int cat) 
 	{
 		isbn = is;
 		aantalpagina = ap;
@@ -19,7 +19,7 @@ public class Boek {
 		taal = tl;
 		auteur = aut;
 		datum = dat;
-
+		categorie = cat;
 	}
 
 	public String getIsbn() {
@@ -93,6 +93,14 @@ public class Boek {
 
 	public void setDatum(Date datum) {
 		this.datum = datum;
+	}
+
+	public int getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(int categorie) {
+		this.categorie = categorie;
 	}
 	
 }

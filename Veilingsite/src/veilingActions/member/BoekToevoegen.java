@@ -17,10 +17,13 @@ public class BoekToevoegen extends ActionSupport {
 	private String taal;
 	private int aantalbladzijde;
 	private String auteur;
+	private String categorielijst;
+	private int categorie;
 
 	public String execute() {
+		categorie = Integer.parseInt(categorielijst);
 		Boek boek = new Boek(isbn, aantalbladzijde, titel, druk, beschrijving,
-				uitgeverij, taal, auteur, datum);
+				uitgeverij, taal, auteur, datum, categorie);
 		if (VeilingService.voegBoekToe(boek) == true) {
 			addActionMessage("Boek : " + titel + " is toegevoegd.");
 			return SUCCESS;
@@ -102,5 +105,22 @@ public class BoekToevoegen extends ActionSupport {
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
+
+	public String getCategorielijst() {
+		return categorielijst;
+	}
+
+	public void setCategorielijst(String categorielijst) {
+		this.categorielijst = categorielijst;
+	}
+
+	public int getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(int categorie) {
+		this.categorie = categorie;
+	}
 	
 }
+	

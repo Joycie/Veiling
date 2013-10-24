@@ -10,10 +10,12 @@ import veilingActions.DAO.UserListDAO;
 import veilingActions.DAO.GetVeilingenDAO;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
+import veilingDomain.Categorie;
 import veilingDomain.Gebruiker;
 
 public class VeilingService {
 	private static ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
+	private static ArrayList<Categorie> categorielijst = new ArrayList<Categorie>();
 	
 	public static boolean maakuser(String voornaam, String tussenvoegsel, String achternaam, String adress, String postcode, String email, String password, String telefoonnummer, String rekeningnummer, String plaats){
 		return RegisterDAO.createUser(voornaam, tussenvoegsel, achternaam,
@@ -50,6 +52,14 @@ public class VeilingService {
 	
 	public static void setGebruikerslijst() {
 		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
+	}
+	public static ArrayList<Categorie> getCategorielijst() {
+		ArrayList<Categorie> categorielijst = new ArrayList<Categorie>(CheckIsbnDAO.getCategorielijst());
+		return categorielijst;
+	}
+	
+	public static void setCategorielijst() {
+		VeilingService.categorielijst = CheckIsbnDAO.getCategorielijst();
 	}
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
 		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(GetVeilingenDAO.getVeilingenlijst());

@@ -8,6 +8,7 @@ import java.sql.Date;
 
 import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
+import veilingDomain.Categorie;
 
 public class CheckIsbnDAO {
 	private static String isbn;
@@ -19,10 +20,14 @@ public class CheckIsbnDAO {
 	private static int aantalpagina;
 	private static String auteur;
 	private static int druk;
+	private static int categorieboek;
+	private static String naam;
 	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
-
+	private static ArrayList<Categorie> categorielijst = new ArrayList<Categorie>();
+	
 	public static void zoekBoek(String isbn){
-		Boek boek =null;
+		Boek boek = null;
+		Categorie categorie = null;
 		setIsbn(isbn);
 		try{
 			Connection connection = null;
@@ -38,6 +43,7 @@ public class CheckIsbnDAO {
 				isbn = rs.getString("isbn");
 				titel = rs.getString("titel");
 				beschrijving = rs.getString("beschrijving");
+				categorieboek = rs.getInt("categorie");
 				uitgeverij = rs.getString("uitgeverij");
 				datum = rs.getDate("datum");
 				taal = rs.getString("taal");
@@ -45,15 +51,26 @@ public class CheckIsbnDAO {
 				auteur = rs.getString("auteur");
 				System.out.println("hoi");
 			}
-			PreparedStatement pst = connection.prepareStatement("select * from drukken where boeken_isbn=" + isbn );
-			ResultSet rst=pst.executeQuery();
+			PreparedStatement ps2 = connection.prepareStatement("select * from drukken where boeken_isbn=" + isbn );
+			ResultSet rs2 = ps2.executeQuery();
 			boekenlijst.clear();
-			while (rst.next()){
-				druk = rst.getInt("nummer");
-				boek = new Boek(isbn, aantalpagina, titel,druk, beschrijving, uitgeverij, taal, auteur, datum);
+			while (rs2.next()){
+				druk = rs2.getInt("nummer");
+				boek = new Boek(isbn, aantalpagina, titel, druk, beschrijving, uitgeverij, taal, auteur, datum, categorieboek);
 				System.out.println(boek);
 			}
 			boekenlijst.add(boek);
+			
+			PreparedStatement ps3 = connection.prepareStatement("select naam from categorie");
+			ResultSet rs3 = ps3.executeQuery();
+			categorielijst.clear();
+			while (rs3.next()){
+				naam = rs3.getString("naam");
+				categorie = new Categorie(0, naam); 
+				categorielijst.add(categorie);
+			}
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -73,4 +90,11 @@ public class CheckIsbnDAO {
 	public static void setIsbn(String isbn2){
 		CheckIsbnDAO.isbn = isbn2;
 	}
+	public static ArrayList<Categorie> getCategorielijst() {
+		return categorielijst;
+	}
+	public static void setCategorielijst(ArrayList<Categorie> categorielijst) {
+		CheckIsbnDAO.categorielijst = categorielijst;
+	}
+	
 }

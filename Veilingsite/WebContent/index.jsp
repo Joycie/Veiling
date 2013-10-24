@@ -5,7 +5,7 @@
 <title>Welkom - Multatuli</title>
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet" type="text/css">
-<META HTTP-EQUIV="Refresh" CONTENT="0.5;URL=Menu.action">
+<META HTTP-EQUIV="Refresh" CONTENT="0;URL=Menu.action">
 </head>
 <body>
 	<div class="page">
