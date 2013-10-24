@@ -1,0 +1,113 @@
+package veilingActions.DAO;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import veilingActions.database.GetConnection;
+import veilingDomain.Aanbieding;
+import veilingDomain.Boek;
+import veilingInterface.VeilingInterface;
+
+public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
+	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
+	private static ArrayList<Aanbieding> recenteveilinglijst = new ArrayList<Aanbieding>();
+
+	@Override
+	public void create(Object T) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Aanbieding retrieve(String ID) {
+		Aanbieding aanb = null;
+		Boek boek = null;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
+			ResultSet rs = ps.executeQuery();
+			veilingenlijst.clear();
+			while (rs.next()) {
+				String titel = rs.getString("TITEL");
+				String auteur = rs.getString("AUTEUR");
+				double startprijs = rs.getDouble("STARTPRIJS");
+				Timestamp eindtijd = rs.getTimestamp("EINDTIJD");
+				int drukken_nummer = rs.getInt("NUMMER");
+				Date datum = rs.getDate("DATUM");
+				boek = new Boek("", 0, titel, 0, titel, "", "", auteur, datum, 0);
+				aanb = new Aanbieding(0, startprijs, eindtijd, 0, 0,
+						drukken_nummer, boek);
+				veilingenlijst.add(aanb);
+				System.out.println("Titel: " + titel + "|| Auteur: " + auteur
+						+ "|| Startprijs: " + startprijs + " || Eindtijd: "
+						+ eindtijd);
+				System.out.println(veilingenlijst);
+			}
+			PreparedStatement ps2 = connection
+					.prepareStatement("SELECT insert_date, startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and insert_date + 1 > sysdate");
+			ResultSet rs2 = ps2.executeQuery();
+			recenteveilinglijst.clear();
+			while (rs2.next()) {
+				String titel = rs2.getString("TITEL");
+				String auteur = rs2.getString("AUTEUR");
+				double startprijs = rs2.getDouble("STARTPRIJS");
+				Timestamp eindtijd = rs2.getTimestamp("EINDTIJD");
+				int drukken_nummer = rs2.getInt("NUMMER");
+				Date datum = rs2.getDate("DATUM");
+				boek = new Boek("", 0, titel, 0, titel, "", "", auteur, datum, 0);
+				aanb = new Aanbieding(0, startprijs, eindtijd, 0, 0,
+						drukken_nummer, boek);
+				recenteveilinglijst.add(aanb);
+				System.out.println("Titel: " + titel + "|| Auteur: " + auteur
+						+ "|| Startprijs: " + startprijs + " || Eindtijd: "
+						+ eindtijd);
+				System.out.println(recenteveilinglijst);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return aanb;
+	}
+
+	@Override
+	public void update(Object T) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Object T) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static ArrayList<Aanbieding> getVeilingenlijst() {
+		return veilingenlijst;
+	}
+
+	public static void setVeilingenlijst(ArrayList<Aanbieding> veilingenlijst) {
+		AanbiedingDAO.veilingenlijst = veilingenlijst;
+	}
+
+	public static ArrayList<Aanbieding> getRecenteveilinglijst() {
+		return recenteveilinglijst;
+	}
+
+	public static void setRecenteveilinglijst(
+			ArrayList<Aanbieding> recenteveilinglijst) {
+		AanbiedingDAO.recenteveilinglijst = recenteveilinglijst;
+	}
+
+}

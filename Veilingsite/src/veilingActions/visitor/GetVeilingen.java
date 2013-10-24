@@ -16,7 +16,7 @@ public class GetVeilingen extends ActionSupport {
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
 
 	public String execute() {
-		VeilingService.validateVeiling();
+		VeilingService.retrieveVeilingen();
 
 		veilingen = VeilingService.getVeilingenlijst();
 		recenteveilingen = VeilingService.getRecenteveilingen();
