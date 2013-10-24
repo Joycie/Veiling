@@ -2,7 +2,6 @@ package veilingActions.visitor;
 
 import java.util.ArrayList;
 
-import veilingActions.DAO.GetVeilingenDAO;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingService.VeilingService;

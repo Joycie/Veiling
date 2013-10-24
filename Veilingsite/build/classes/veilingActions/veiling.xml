@@ -36,8 +36,7 @@
 		<default-interceptor-ref name="MemberStack" />
 
 		<global-results>
-			<result name="login" type="redirect">
-				../jsp/visitor/login.jsp
+			<result name="login" type="redirect">../jsp/visitor/login.jsp
 			</result>
 		</global-results>
 		<action name="Logout" class="veilingActions.member.Logout">
@@ -52,6 +51,13 @@
 		</action>
 		<action name="BookInfo" class="veilingActions.member.BoekInfo">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
+		</action>
+		<action name="AccountForm">
+			<result name="success">/jsp/member/account.jsp</result>
+		</action>
+		<action name="Account" class="veilingActions.member.Account">
+			<result name="success">/jsp/member/account.jsp</result>
+			<result name="input">/jsp/member/account.jsp</result>
 		</action>
 		<action name="BoekToevoegen" class="veilingActions.member.BoekToevoegen">
 			<result name="success">/jsp/member/checkisbn.jsp</result>

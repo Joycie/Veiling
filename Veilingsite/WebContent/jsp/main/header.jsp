@@ -14,9 +14,10 @@
 					<div>
 						<s:if test="#session.gebruiker != null">    
 						   <s:iterator value="#session.gebruiker">
-						      Welkom <s:property value="voornaam"/>
+						      Welkom 
+						      <a href="<%=request.getContextPath()%>/member/AccountForm.action"><s:property value="voornaam"/>
 						      <s:property value="tussenvoegsel"/>
-						       <s:property value="achternaam"/>! 
+						       <s:property value="achternaam"/></a>! 
 						       <a href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>
 						  </s:iterator>
 						</s:if>
