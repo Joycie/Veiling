@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import veilingActions.DAO.BoekToevoegenDAO;
 import veilingActions.DAO.CheckIsbnDAO;
-import veilingActions.DAO.LoginDAO;
-import veilingActions.DAO.RegisterDAO;
+import veilingActions.DAO.GebruikerDAO;
 import veilingActions.DAO.UserListDAO;
 import veilingActions.DAO.GetVeilingenDAO;
 import veilingDomain.Aanbieding;
@@ -16,63 +15,84 @@ import veilingDomain.Gebruiker;
 public class VeilingService {
 	private static ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
 	private static ArrayList<Categorie> categorielijst = new ArrayList<Categorie>();
-	
-	public static boolean maakuser(String voornaam, String tussenvoegsel, String achternaam, String adress, String postcode, String email, String password, String telefoonnummer, String rekeningnummer, String plaats){
-		return RegisterDAO.createUser(voornaam, tussenvoegsel, achternaam,
-				adress, postcode, email, password, telefoonnummer,
-				rekeningnummer, plaats);
+
+	public static void createGebruiker(String voornaam, String tussenvoegsel,
+			String achternaam, String adress, String postcode, String email,
+			String password, String telefoonnummer, String rekeningnummer,
+			String plaats) {
+
+		Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
+				achternaam, adress, postcode, plaats, email, password,
+				Integer.parseInt(telefoonnummer),
+				Integer.parseInt(rekeningnummer));
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		gebruikerDAO.create(gebruiker);
 	}
-	public static Gebruiker validateUser(String email){
-		LoginDAO loginDAO = new LoginDAO();
-		return loginDAO.Retrieve(email);
+
+	public static Gebruiker validateUser(String email) {
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		return gebruikerDAO.retrieve(email);
 	}
-	public static void validateUserList(){
+
+	public static void validateUserList() {
 		UserListDAO.validate();
 	}
+
 	public static void validateVeiling() {
 		GetVeilingenDAO.validate();
 	}
+
 	public static boolean checkBoek(String isbn) {
 		CheckIsbnDAO.zoekBoek(isbn);
 		boolean b = false;
-		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
-		if (!boekenlijst.isEmpty()){
+		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(
+				CheckIsbnDAO.getBoekenlijst());
+		if (!boekenlijst.isEmpty()) {
 			b = true;
 		}
 		return b;
 	}
 
-	
 	// vanaf hier getters en setters
-	
+
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
-		ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>(UserListDAO.getGebruikerslijst());
+		ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>(
+				UserListDAO.getGebruikerslijst());
 		return gebruikerslijst;
 	}
-	
+
 	public static void setGebruikerslijst() {
 		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
 	}
+
 	public static ArrayList<Categorie> getCategorielijst() {
-		ArrayList<Categorie> categorielijst = new ArrayList<Categorie>(CheckIsbnDAO.getCategorielijst());
+		ArrayList<Categorie> categorielijst = new ArrayList<Categorie>(
+				CheckIsbnDAO.getCategorielijst());
 		return categorielijst;
 	}
-	
+
 	public static void setCategorielijst() {
 		VeilingService.categorielijst = CheckIsbnDAO.getCategorielijst();
 	}
+
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
-		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(GetVeilingenDAO.getVeilingenlijst());
+		ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>(
+				GetVeilingenDAO.getVeilingenlijst());
 		return veilingenlijst;
 	}
+
 	public static ArrayList<Aanbieding> getRecenteveilingen() {
-		ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>(GetVeilingenDAO.getRecenteveilinglijst());
+		ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>(
+				GetVeilingenDAO.getRecenteveilinglijst());
 		return recenteveilingen;
 	}
-	public static ArrayList<Boek> getBoekenlijst(){
-		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(CheckIsbnDAO.getBoekenlijst());
+
+	public static ArrayList<Boek> getBoekenlijst() {
+		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(
+				CheckIsbnDAO.getBoekenlijst());
 		return boekenlijst;
 	}
+
 	public static boolean voegBoekToe(Boek boek) {
 		return BoekToevoegenDAO.VoegBoekToe(boek);
 	}

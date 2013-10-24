@@ -7,13 +7,12 @@ import com.opensymphony.xwork2.ActionSupport;
 public class Register extends ActionSupport {
 
 	private String voornaam, tussenvoegsel, achternaam, password,
-			passwordCheck, email, adres, postcode, plaats, telefoonnummer,
-			rekeningnummer;
+			passwordCheck, email, adres, postcode, plaats, telefoonnummer, rekeningnummer;
 
 	public String execute() {
-		if (VeilingService.maakuser(voornaam, tussenvoegsel, achternaam, adres,
-				postcode, email, password, telefoonnummer, rekeningnummer,
-				plaats) == true) {
+		VeilingService.createGebruiker(voornaam, tussenvoegsel, achternaam, adres,
+				postcode, email, password, telefoonnummer, rekeningnummer, plaats);
+		if (true == true) {
 			return ActionSupport.SUCCESS;
 
 		}

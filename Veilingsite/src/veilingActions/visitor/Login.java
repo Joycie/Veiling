@@ -8,7 +8,7 @@ import java.sql.*;
 
 import org.apache.struts2.dispatcher.SessionMap;
 
-import veilingActions.DAO.LoginDAO;
+import veilingActions.DAO.GebruikerDAO;
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 

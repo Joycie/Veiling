@@ -2,9 +2,9 @@ package veilingInterface;
 
 public interface VeilingInterface<T> {
 	
-	void Create(Object T);
-	T Retrieve(String ID);
-	void Update(Object T);
-	void Delete(Object T);
+	void create(Object T);
+	T retrieve(String ID);
+	void update(Object T);
+	void delete(Object T);
 
 }

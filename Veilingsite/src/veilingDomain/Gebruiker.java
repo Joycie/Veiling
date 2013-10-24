@@ -6,6 +6,22 @@ public class Gebruiker {
 	private String voornaam, tussenvoegsel, achternaam, adres, postcode,
 			plaats, email, wachtwoord;
 	private double krediet;
+	
+	public Gebruiker(String vrn, String tv, String an, String adr,
+			String post, String plts, String em, String ww, int telnr,
+			int reknr) 
+	{
+		voornaam = vrn;
+		tussenvoegsel = tv;
+		achternaam = an;
+		adres = adr;
+		postcode = post;
+		plaats = plts;
+		email = em;
+		wachtwoord = ww;
+		telefoonnummer = telnr;
+		rekeningnummer = reknr;	
+	}
 
 	public Gebruiker(int klnr, String vrn, String tv, String an, String adr,
 			String post, String plts, String em, String ww, int telnr,
@@ -22,8 +38,7 @@ public class Gebruiker {
 		wachtwoord = ww;
 		telefoonnummer = telnr;
 		rekeningnummer = reknr;
-		krediet = kred;
-		
+		krediet = kred;	
 	}
 	public int getKlantnummer() {
 		return klantnummer;
