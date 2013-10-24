@@ -43,12 +43,12 @@ public class CheckIsbnDAO {
 				isbn = rs.getString("isbn");
 				titel = rs.getString("titel");
 				beschrijving = rs.getString("beschrijving");
-				categorieboek = rs.getInt("categorie");
 				uitgeverij = rs.getString("uitgeverij");
 				datum = rs.getDate("datum");
 				taal = rs.getString("taal");
 				aantalpagina = rs.getInt("aantalpagina");
 				auteur = rs.getString("auteur");
+				categorieboek = rs.getInt("categorie");
 				System.out.println("hoi");
 			}
 			PreparedStatement ps2 = connection.prepareStatement("select * from drukken where boeken_isbn=" + isbn );
@@ -61,12 +61,13 @@ public class CheckIsbnDAO {
 			}
 			boekenlijst.add(boek);
 			
-			PreparedStatement ps3 = connection.prepareStatement("select naam from categorie");
+			PreparedStatement ps3 = connection.prepareStatement("select * from categorie");
 			ResultSet rs3 = ps3.executeQuery();
 			categorielijst.clear();
 			while (rs3.next()){
 				naam = rs3.getString("naam");
-				categorie = new Categorie(0, naam); 
+				categorieboek = rs3.getInt("id");
+				categorie = new Categorie(categorieboek, naam); 
 				categorielijst.add(categorie);
 			}
 			
