@@ -82,7 +82,7 @@ public class VeilingService {
 	}
 
 	public static void setCategorielijst() {
-		VeilingService.categorielijst = CheckIsbnDAO.getCategorielijst();
+		VeilingService.categorielijst = CategorieDAO.getCategorielijst();
 	}
 
 	public static ArrayList<Aanbieding> getVeilingenlijst() {
