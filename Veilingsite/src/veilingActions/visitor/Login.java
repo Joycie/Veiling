@@ -30,7 +30,7 @@ public class Login extends ActionSupport {
 						.getSession();
 				session.put("gebruiker", geb);
 			} else {
-				addFieldError("pass", "Geen object");
+				addFieldError("pass", "Gebruikersnaam of wachtwoord onjuist");
 			}
 		} else {
 			addFieldError("pass",

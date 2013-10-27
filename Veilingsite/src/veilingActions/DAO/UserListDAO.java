@@ -34,7 +34,7 @@ public class UserListDAO {
 				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
 				achternaam = rs.getString("ACHTERNAAM");
 				Gebruiker geb = new Gebruiker(klantnummer, voornaam,
-						tussenvoegsel, achternaam, "", "", "", "", "", 0, 0, 0);
+						tussenvoegsel, achternaam, "", "", "", "", "", 0, 0, 0, 0);
 				gebruikerslijst.add(geb);
 				System.out.println("Klantnr: " + klantnummer + " || voornaam: "
 						+ voornaam + " || tussenvoegsel: " + tussenvoegsel

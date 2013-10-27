@@ -1,158 +1,139 @@
 @font-face {
 	font-family: 'Conv_simplesnails';
 	src: url('fonts/simplesnails.eot');
-	src: local('☺'), url('fonts/simplesnails.woff') format('woff'), url('fonts/simplesnails.ttf') format('truetype'), url('fonts/simplesnails.svg') format('svg');
+	src: local('☺'), url('fonts/simplesnails.woff') format('woff'),
+		url('fonts/simplesnails.ttf') format('truetype'),
+		url('fonts/simplesnails.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
 
-body
-{
+body {
 	font-family: arial;
 	background-color: #DEDEDE;
 	margin: auto;
 }
 
-.page
-{
+.page {
 	width: 1000px;
-	margin:  0px auto;
+	margin: 0px auto;
 	background-color: #FFFFFF;
 }
 
-.header a:link
-{
+.header a:link {
 	text-decoration: none;
 }
 
-.header a h1
-{
-	font-family: 'Conv_simplesnails',Sans-Serif;
+.header a h1 {
+	font-family: 'Conv_simplesnails', Sans-Serif;
 	font-size: 35pt;
 	padding: 25px;
 	padding-top: 15px;
-	margin:  0px;
+	margin: 0px;
 	color: black;
 	text-decoration: none;
 }
 
-.header a:hover h1
-{
+.header a:hover h1 {
 	text-decoration: underline;
 }
 
-
-
-h3
-{
+h3 {
 	font-family: Sans-Serif;
 	font-size: 14px;
 }
-.header img
-{
+
+.header img {
 	width: 50px;
 	height: 50px;
 }
 
-.header .options
-{
+.header .options {
 	float: right;
 	font-size: 10pt;
 	margin: 30px;
-	margin-top: 2	0px;
-	
+	margin-top: 2 0px;
 }
 
-.header .options div
-{
+.header .options div {
 	text-align: right;
 }
 
-.header .options div a
-{
+.header .options div a {
 	color: #999999;
 	text-decoration: none;
 }
 
-.header .options div a:hover
-{
+.header .options div a:hover {
 	text-decoration: underline;
 }
 
-.header input[type="search"]
-{
+.header input[type="search"] {
 	border: 1px solid #DEDEDE;
 	margin-top: 10px;
 	font-size: 10pt;
 	font-family: arial;
 	padding: 5px;
-	
 }
 
-.header form
-{
+.header form {
 	padding: 0px;
 	margin: 0px;
 }
 
-ul.menu
-{
+ul.menu {
 	background-color: #007893;
-	float:left;
-	width:100%;
-	padding:0;
-	margin:0;
-	list-style-type:none;
+	float: left;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
 }
 
-.menu a
-{
-	float:left;
-	text-decoration:none;
-	color:white;
+.menu a {
+	float: left;
+	text-decoration: none;
+	color: white;
 	background-color: #007893;
-	padding:12px;
+	padding: 12px;
 }
 
-.menu a:hover, .menu li.selected a
-{
-	background-color:#0094B5;
-}
-.menu li
-{
-	display:inline;
+.menu a:hover,.menu li.selected a {
+	background-color: #0094B5;
 }
 
-.content
-{
+.menu li {
+	display: inline;
+}
+
+.content {
 	padding: 10px;
 }
 
-.footer
-{
+.footer {
 	background-color: #DEDEDE;
 	color: #999999;
 	padding: 10px;
 }
 
-.footer .options
-{
+.footer .options {
 	float: right;
 }
 
-.clear
-{
+.clear {
 	clear: both;
 }
+
 .cursief {
 	font-style: italic;
 }
-.verplicht
-{
+
+.verplicht {
 	color: red;
 }
+
 table {
-	width:100%;
+	width: 100%;
 	border-collapse: collapse;
 }
 
@@ -178,3 +159,28 @@ td {
 	border-bottom: 1px solid white;
 	padding: 3px;
 }
+
+#nav,#nav ul {
+	padding: 3px 0 0 0;
+	margin: 0;
+	list-style: none;
+}
+
+#nav li {
+	float: left;
+}
+#nav li ul {
+	padding-top: 40px;
+}
+
+#nav ul {
+	position: absolute;
+	width: 120px;
+	left: -1000px;
+}
+
+#nav li:hover ul,#nav li.ie_does_hover ul {
+	left: auto;
+	background-position: 0 0;
+}
+

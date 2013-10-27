@@ -73,8 +73,9 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 					String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
 					String achternaam = rs.getString("ACHTERNAAM");
 					String wachtwoord =  rs.getString("WACHTWOORD");
+					int rol = rs.getInt("rol");
 					
-					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", email, wachtwoord, 0, 0, 0);
+					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", email, wachtwoord, 0, 0, 0, rol);
 					System.out.println("Klantnummer: " +  klantnummer + " | Voornaam: " + voornaam + 
 							" | Tussenvoegsel: " + tussenvoegsel + " | Achternaam: " + achternaam + " | Email:  " + email + " | wachtwoord: "+ wachtwoord);
 				}

@@ -2,7 +2,7 @@ package veilingDomain;
 
 public class Gebruiker {
 
-	private int klantnummer, telefoonnummer, rekeningnummer;
+	private int klantnummer, telefoonnummer, rekeningnummer, rol;
 	private String voornaam, tussenvoegsel, achternaam, adres, postcode,
 			plaats, email, wachtwoord;
 	private double krediet;
@@ -25,7 +25,7 @@ public class Gebruiker {
 
 	public Gebruiker(int klnr, String vrn, String tv, String an, String adr,
 			String post, String plts, String em, String ww, int telnr,
-			int reknr, double kred) 
+			int reknr, double kred, int rl) 
 	{
 		klantnummer = klnr;
 		voornaam = vrn;
@@ -39,6 +39,7 @@ public class Gebruiker {
 		telefoonnummer = telnr;
 		rekeningnummer = reknr;
 		krediet = kred;	
+		rol = rl;
 	}
 	public int getKlantnummer() {
 		return klantnummer;
@@ -133,5 +134,14 @@ public class Gebruiker {
 	public void setKrediet(double krediet) {
 		this.krediet = krediet;
 	}
+
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
+	}
+	
 	
 }
