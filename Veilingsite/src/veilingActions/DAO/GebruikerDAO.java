@@ -105,7 +105,9 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		try {
 			
 			System.out.println(" || Excecuting query ");
+			System.out.println("UPDATE GEBRUIKERS SET VOORNAAM = '" + gebruiker.getVoornaam() + "', TUSSENVOEGSEL = '" + gebruiker.getTussenvoegsel() + "', ACHTERNAAM = '" + gebruiker.getAchternaam() + "', ADRES = '" + gebruiker.getAdres() + "', POSTCODE = '" + gebruiker.getPostcode() + "', EMAIL = '" + gebruiker.getEmail() + "', TELEFOONNUMMER = " + gebruiker.getTelefoonnummer() + ", REKENINGNUMMER = " + gebruiker.getRekeningnummer() + ", PLAATS = " + gebruiker.getPlaats() + " WHERE KLANTNR = " + gebruiker.getKlantnummer());
 			PreparedStatement ps = connection.prepareStatement("UPDATE GEBRUIKERS SET VOORNAAM = ?, TUSSENVOEGSEL = ?, ACHTERNAAM = ?, ADRES = ?, POSTCODE = ?, EMAIL = ?, TELEFOONNUMMER = ?, REKENINGNUMMER = ?, PLAATS = ? WHERE KLANTNR = ?");
+			System.out.println(gebruiker.getVoornaam() + gebruiker.getTussenvoegsel() + gebruiker.getAchternaam() + gebruiker.getAdres() + gebruiker.getPostcode());
 			ps.setString(1,gebruiker.getVoornaam());
 			ps.setString(2,gebruiker.getTussenvoegsel());
 			ps.setString(3,gebruiker.getAchternaam());

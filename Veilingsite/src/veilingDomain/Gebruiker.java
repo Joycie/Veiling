@@ -88,6 +88,10 @@ public class Gebruiker {
 	public int getTelefoonnummer() {
 		return telefoonnummer;
 	}
+	
+	public String getTelefoonnummerForm() {
+		return String.format("%4d", telefoonnummer);
+	}
 
 	public void setTelefoonnummer(int telefoonnummer) {
 		this.telefoonnummer = telefoonnummer;

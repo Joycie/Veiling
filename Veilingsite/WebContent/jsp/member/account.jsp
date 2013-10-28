@@ -17,7 +17,7 @@
 			<s:textfield name="postcode" label="Postcode" />
 			<s:textfield name="plaats" label="Plaats" />
 			<s:textfield name="email" label="E-mailadres" />
-			<s:textfield name="telefoonnummer" label="Telefoonnummer" />
+			<s:textfield name="telefoonnummerForm" label="Telefoonnummer" />
 			<s:textfield name="rekeningnummer" label="Rekeningnummer" />
 		</s:iterator>
 		<s:submit value="Opslaan" />
