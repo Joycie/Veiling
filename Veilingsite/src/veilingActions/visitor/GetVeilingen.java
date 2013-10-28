@@ -13,9 +13,11 @@ public class GetVeilingen extends ActionSupport {
 	private ArrayList<Aanbieding> veilingen = new ArrayList<Aanbieding>();
 	private ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>();
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
-
+	private int categorie;
+	
 	public String execute() {
-		VeilingService.retrieveVeilingen();
+		String stringCategorie = Integer.toString(categorie);
+		VeilingService.retrieveVeilingen(stringCategorie);
 
 		veilingen = VeilingService.getVeilingenlijst();
 		recenteveilingen = VeilingService.getRecenteveilingen();
@@ -46,5 +48,14 @@ public class GetVeilingen extends ActionSupport {
 	public void setRecenteveilingen(ArrayList<Aanbieding> recenteveilingen) {
 		this.recenteveilingen = recenteveilingen;
 	}
+
+	public int getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(int categorie) {
+		this.categorie = categorie;
+	}
+	
 	
 }

@@ -36,9 +36,9 @@ public class VeilingService {
 		UserListDAO.validate();
 	}
 
-	public static void retrieveVeilingen() {
+	public static void retrieveVeilingen(String categorie) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
-		aanbiedingDAO.retrieve("");
+		aanbiedingDAO.retrieve(categorie);
 	}
 
 	public static boolean checkBoek(String isbn) {
