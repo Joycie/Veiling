@@ -6,7 +6,7 @@ public interface VeilingInterface<T> {
 	
 	boolean create(Object T);
 	T retrieve(String ID);
-	void update(Object T);
+	boolean update(Object T);
 	void delete(Object T);
 
 }

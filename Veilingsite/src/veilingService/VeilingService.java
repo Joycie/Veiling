@@ -26,6 +26,18 @@ public class VeilingService {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.create(gebruiker);
 	}
+	
+	public static boolean updateGebruiker(String voornaam, String tussenvoegsel,
+			String achternaam, String adress, String postcode, String email, String telefoonnummer, String rekeningnummer,
+			String plaats) {
+
+		Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
+				achternaam, adress, postcode, plaats, email,
+				plaats, Integer.parseInt(telefoonnummer),
+				Integer.parseInt(rekeningnummer));
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		return gebruikerDAO.create(gebruiker);
+	}
 
 	public static Gebruiker validateUser(String email) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();

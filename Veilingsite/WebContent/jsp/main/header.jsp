@@ -48,7 +48,8 @@
 						<li><a href="#">Techniek</a></li>
 						<li><a href="#">Kookboeken</a></li>
 						<li><a href="#">Flora en fauna</a></li>
-					</ul></li>
+					</ul>
+				</li>
 				<s:if test="#session.gebruiker != null">
 					<li><a
 						href="<%=request.getContextPath()%>/<s:url action='BoekToevoegenForm' namespace="member"/>">Boek

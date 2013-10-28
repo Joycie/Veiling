@@ -93,8 +93,42 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			return geb;
 	}
 	@Override
-	public void update(Object T) {
-		
+	public boolean update(Object T) {
+		Gebruiker gebruiker = (Gebruiker) T;
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		if (connection != null) {
+			System.out.println("|| Connection ready || ");
+		} else {
+			System.out.println("|| Connection failed ||");
+		}
+		try {
+			System.out.println(" || Excecuting query ");
+			PreparedStatement ps = connection.prepareStatement("UPDATE GEBRUIKERS SET VOORNAAM = ?, TUSSENVOEGSEL = ?, ACHTERNAAM = ?, ADRES = ?, POSTCODE = ?, EMAIL = ?, TELEFOONNUMMER = ?, REKENINGNUMMER = ?, PLAATS = ? WHERE KLANTNR = ?");
+			ps.setString(1,gebruiker.getVoornaam());
+			ps.setString(2,gebruiker.getTussenvoegsel());
+			ps.setString(3,gebruiker.getAchternaam());
+			ps.setString(4,gebruiker.getAdres());
+			ps.setString(5,gebruiker.getPostcode());
+			ps.setString(6,gebruiker.getEmail());
+			ps.setInt(8,gebruiker.getTelefoonnummer());
+			ps.setInt(9,gebruiker.getRekeningnummer());
+			ps.setString(10,gebruiker.getPlaats());
+			ps.setInt(9,gebruiker.getKlantnummer());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			ps.close();
+			rs.close();
+	
+		} catch (SQLException e) {
+	
+			System.out.println("|| Failed to complete query || ");
+			e.printStackTrace();
+			return false;
+		}
+		GetConnection.closeConnection();
+		return true;
 	}
 	@Override
 	public void delete(Object T) {

@@ -17,8 +17,6 @@
 			<s:textfield name="postcode" label="Postcode" />
 			<s:textfield name="plaats" label="Plaats" />
 			<s:textfield name="email" label="E-mailadres" />
-			<s:password name="wachtwoord" label="Wachtwoord" />
-			<s:password name="rewachtwoord" label="Wachtwoord herhalen" />
 			<s:textfield name="telefoonnummer" label="Telefoonnummer" />
 			<s:textfield name="rekeningnummer" label="Rekeningnummer" />
 		</s:iterator>

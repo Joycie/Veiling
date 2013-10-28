@@ -41,6 +41,24 @@ public class Gebruiker {
 		krediet = kred;	
 		rol = rl;
 	}
+	
+	public Gebruiker(int klnr, String vrn, String tv, String an, String adr,
+			String post, String plts, String em, int telnr,
+			int reknr, double kred) 
+	{
+		klantnummer = klnr;
+		voornaam = vrn;
+		tussenvoegsel = tv;
+		achternaam = an;
+		adres = adr;
+		postcode = post;
+		plaats = plts;
+		email = em;
+		telefoonnummer = telnr;
+		rekeningnummer = reknr;
+		krediet = kred;	
+	}
+	
 	public int getKlantnummer() {
 		return klantnummer;
 	}
