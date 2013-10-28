@@ -42,14 +42,13 @@
 				<li><a href="<%=request.getContextPath()%>">Home</a></li>
 				<li class="categorie"><a href="#">Boeken</a>
 					<ul class="sub">
-						<li><a href="#">Literatuur</a></li>
-						<li><a href="#">Geschiedenis</a></li>
-						<li><a href="#">Toerisme</a></li>
-						<li><a href="#">Techniek</a></li>
-						<li><a href="#">Kookboeken</a></li>
-						<li><a href="#">Flora en fauna</a></li>
-					</ul>
-				</li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=1">Literatuur</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=2">Geschiedenis</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=3">Toerisme</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=4">Techniek</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=5">Kookboeken</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=6">Flora en fauna</a></li>
+					</ul></li>
 				<s:if test="#session.gebruiker != null">
 					<li><a
 						href="<%=request.getContextPath()%>/<s:url action='BoekToevoegenForm' namespace="member"/>">Boek
