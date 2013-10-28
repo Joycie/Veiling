@@ -52,7 +52,7 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		return true;
 	}
 	@Override
-	public Gebruiker retrieve(String email) {
+	public Gebruiker retrieve(String loginEmail) {
 		Gebruiker geb = null;
 			try {
 				Connection connection = null;
@@ -63,8 +63,8 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 					System.out.println("|| Connection failed ||");
 				}
 				PreparedStatement ps=connection.prepareStatement("select * from gebruikers where email=?");
-				ps.setString(1,email);
-				System.out.println("Gebruiker: " + email);
+				ps.setString(1,loginEmail);
+				System.out.println("Gebruiker: " + loginEmail);
 				ResultSet rs=ps.executeQuery();
 				
 				while (rs.next()) {
@@ -72,10 +72,17 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 					String voornaam = rs.getString("VOORNAAM");
 					String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
 					String achternaam = rs.getString("ACHTERNAAM");
-					String wachtwoord =  rs.getString("WACHTWOORD");
+					String adres = rs.getString("ADRES");
+					String postcode = rs.getString("POSTCODE");
+					String email = rs.getString("EMAIL");
+					String wachtwoord = rs.getString("WACHTWOORD");
+					int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+					int rekeningnummer = rs.getInt("REKENINGNUMMER");
+					String plaats =  rs.getString("PLAATS");
+					int krediet = rs.getInt("KREDIET");
 					int rol = rs.getInt("rol");
 					
-					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, "", "", "", email, wachtwoord, 0, 0, 0, rol);
+					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, adres, postcode, plaats, email, wachtwoord, telefoonnummer, rekeningnummer, krediet, rol);
 					System.out.println("Klantnummer: " +  klantnummer + " | Voornaam: " + voornaam + 
 							" | Tussenvoegsel: " + tussenvoegsel + " | Achternaam: " + achternaam + " | Email:  " + email + " | wachtwoord: "+ wachtwoord);
 				}
