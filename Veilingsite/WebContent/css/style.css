@@ -98,12 +98,40 @@ ul.menu {
 	padding: 12px;
 }
 
-.menu a:hover,.menu li.selected a {
+.menu a:hover,.menu li.selected, .menu li:hover {
 	background-color: #0094B5;
 }
 
 .menu li {
 	display: inline;
+}
+
+.menu ul {
+	/*padding: 3px 0 0 0;
+	margin: 0;
+	list-style: none;*/
+	position: absolute;
+	width: 120px;
+	left: -1000px;
+}
+
+.menu li:hover ul {
+	left: auto;
+	background-position: 0 0;
+}
+
+.menu li {
+	float: left;
+}
+
+.menu li ul {
+	padding-top: 42px;
+	padding-left: 0px;
+}
+
+.menu .sub a
+{
+	width: 100px;
 }
 
 .content {
@@ -160,27 +188,5 @@ td {
 	padding: 3px;
 }
 
-#nav,#nav ul {
-	padding: 3px 0 0 0;
-	margin: 0;
-	list-style: none;
-}
 
-#nav li {
-	float: left;
-}
-#nav li ul {
-	padding-top: 40px;
-}
-
-#nav ul {
-	position: absolute;
-	width: 120px;
-	left: -1000px;
-}
-
-#nav li:hover ul,#nav li.ie_does_hover ul {
-	left: auto;
-	background-position: 0 0;
-}
 

@@ -38,10 +38,10 @@
 					Multatuli Boekenveiling
 				</h1>
 			</a>
-			<ul class="menu" id="nav">
+			<ul class="menu">
 				<li><a href="<%=request.getContextPath()%>">Home</a></li>
 				<li class="categorie"><a href="#">Boeken</a>
-					<ul>
+					<ul class="sub">
 						<li><a href="#">Literatuur</a></li>
 						<li><a href="#">Geschiedenis</a></li>
 						<li><a href="#">Toerisme</a></li>
