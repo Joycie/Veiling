@@ -18,8 +18,27 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 	@Override
 	public boolean create(Object T) {
-		return false;
-		// TODO Auto-generated method stub
+		Aanbieding aanbieding = (Aanbieding) T;
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		try {
+			if (connection != null) {
+
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO AANBIEDINGEN (STARTPRIJS, EINDTIJD, GEBRUIKERS_KLANTNR, DRUKKEN_BOEKEN_ISBN, DRUKKEN_NUMMER, INSERT_DATE) VALUES(?,?,?,?,?,sysdate)");
+			ps.setDouble(1, aanbieding.getStartprijs());
+			ps.setTimestamp(2, aanbieding.getEindtijd());
+			ps.setInt(3, aanbieding.getGebruikers_klantnr());
+			ps.setString(4, aanbieding.getDrukken_isbn());
+			ps.setInt(5, aanbieding.getDrukken_nummer());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 
 	}
 
@@ -47,7 +66,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				int drukken_nummer = rs.getInt("NUMMER");
 				Date datum = rs.getDate("DATUM");
 				boek = new Boek("", 0, titel, 0, titel, "", "", auteur, datum, 0);
-				aanb = new Aanbieding(0, startprijs, eindtijd, 0, 0,
+				aanb = new Aanbieding(0, startprijs, eindtijd, 0, "",
 						drukken_nummer, boek);
 				veilingenlijst.add(aanb);
 				System.out.println("Titel: " + titel + "|| Auteur: " + auteur
@@ -67,7 +86,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				int drukken_nummer = rs2.getInt("NUMMER");
 				Date datum = rs2.getDate("DATUM");
 				boek = new Boek("", 0, titel, 0, titel, "", "", auteur, datum, 0);
-				aanb = new Aanbieding(0, startprijs, eindtijd, 0, 0,
+				aanb = new Aanbieding(0, startprijs, eindtijd, 0, "",
 						drukken_nummer, boek);
 				recenteveilinglijst.add(aanb);
 				System.out.println("Titel: " + titel + "|| Auteur: " + auteur

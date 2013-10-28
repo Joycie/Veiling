@@ -7,10 +7,11 @@ public class Aanbieding {
 	private int id;
 	private double startprijs;
 	private Timestamp eindtijd;
-	private int gebruikers_klantnr, drukken_isbn, drukken_nummer;
+	private int gebruikers_klantnr, drukken_nummer;
+	private String drukken_isbn;
 	private Boek boek;
 
-	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, int druk_isbn, int druk_nr, Boek b) 
+	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b) 
 	{
 		this.id = id;
 		startprijs = start;
@@ -53,11 +54,11 @@ public class Aanbieding {
 		this.gebruikers_klantnr = gebruikers_klantnr;
 	}
 
-	public int getDrukken_isbn() {
+	public String getDrukken_isbn() {
 		return drukken_isbn;
 	}
 
-	public void setDrukken_isbn(int drukken_isbn) {
+	public void setDrukken_isbn(String drukken_isbn) {
 		this.drukken_isbn = drukken_isbn;
 	}
 
