@@ -7,20 +7,22 @@ import com.opensymphony.xwork2.ActionSupport;
 public class Register extends ActionSupport {
 
 	private String voornaam, tussenvoegsel, achternaam, password,
-			passwordCheck, email, adres, postcode, plaats, telefoonnummer,
-			rekeningnummer;
-
+			passwordCheck, email, adres, postcode, plaats;
+	private int telefoonnummer, rekeningnummer;
 	public String execute() {
 
 		if (VeilingService.createGebruiker(voornaam, tussenvoegsel, achternaam,
-				adres, postcode, email, password, telefoonnummer,
-				rekeningnummer, plaats)) {
+				adres, postcode, plaats, email, password, telefoonnummer,
+				rekeningnummer)) {
 			return ActionSupport.SUCCESS;
 		}
 		return ActionSupport.INPUT;
 	}
 
 	public void validate() {
+		
+		String stringTelefoonnummer = Integer.toString(telefoonnummer);
+		String stringRekeningnummer = Integer.toString(rekeningnummer);
 		System.out.println("|| Start register ||");
 		if (voornaam.equals("")) {
 			addFieldError("voornaam", "Geef je voornaam op");
@@ -59,13 +61,13 @@ public class Register extends ActionSupport {
 		if (plaats.equals("")) {
 			addFieldError("plaats", "Geef een je plaats op");
 		}
-		if (telefoonnummer.equals("")) {
+		if (stringTelefoonnummer == null) {
 			addFieldError("telefoonnummer", "Geef een telefoonnummer op");
 		}
-		if (!telefoonnummer.equals("") && !telefoonnummer.matches("[0-9]{10}")) {
+		if (!stringTelefoonnummer.equals("") && !stringTelefoonnummer.matches("[0-9]{9}")) {
 			addFieldError("telefoonnummer", "Geef een geldig telefoonnummer op");
 		}
-		if (rekeningnummer.equals("")) {
+		if (stringRekeningnummer.equals("")) {
 			addFieldError("rekeningnummer", "Geen geldig telefoonnummer");
 		}
 	}
@@ -140,14 +142,6 @@ public class Register extends ActionSupport {
 		return plaats;
 	}
 
-	public String getTelefoonnummer() {
-		return telefoonnummer;
-	}
-
-	public String getRekeningnummer() {
-		return rekeningnummer;
-	}
-
 	public void setPostcode(String postcode) {
 
 		this.postcode = postcode;
@@ -160,16 +154,21 @@ public class Register extends ActionSupport {
 
 	}
 
-	public void setTelefoonnummer(String telefoonnummer) {
+	public int getTelefoonnummer() {
+		return telefoonnummer;
+	}
 
+	public void setTelefoonnummer(int telefoonnummer) {
 		this.telefoonnummer = telefoonnummer;
-
 	}
 
-	public void setRekeningnummer(String rekeningnummer) {
+	public int getRekeningnummer() {
+		return rekeningnummer;
+	}
 
+	public void setRekeningnummer(int rekeningnummer) {
 		this.rekeningnummer = rekeningnummer;
-
 	}
+	
 
 }

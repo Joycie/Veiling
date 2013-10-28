@@ -118,10 +118,8 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			ps.setInt(10,gebruiker.getKlantnummer());
 			
 			ResultSet rs = ps.executeQuery();
-			
 			ps.close();
 			rs.close();
-	
 		} catch (SQLException e) {
 	
 			System.out.println("|| Failed to complete query || ");

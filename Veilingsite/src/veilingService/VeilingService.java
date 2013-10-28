@@ -15,24 +15,19 @@ public class VeilingService {
 	private static ArrayList<Categorie> categorielijst = new ArrayList<Categorie>();
 
 	public static boolean createGebruiker(String voornaam, String tussenvoegsel,
-			String achternaam, String adress, String postcode, String email,
-			String password, String telefoonnummer, String rekeningnummer,
-			String plaats) {
+			String achternaam, String adres, String postcode, String plaats, String email,
+			String password, int telefoonnummer, int rekeningnummer) {
 
 		Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
-				achternaam, adress, postcode, plaats, email, password,
-				Integer.parseInt(telefoonnummer),
-				Integer.parseInt(rekeningnummer));
+				achternaam, adres, postcode, plaats, email, password, telefoonnummer, rekeningnummer);
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.create(gebruiker);
 	}
 	
 	public static boolean updateGebruiker(String voornaam, String tussenvoegsel,
-			String achternaam, String adress, String postcode, String email, String telefoonnummer, String rekeningnummer,
-			String plaats, int klantnr) {
+			String achternaam, String adres, String postcode, String plaats, String email, int telefoonnummer, int rekeningnummer, int klantnr) {
 		Gebruiker gebruiker = new Gebruiker(klantnr, voornaam, tussenvoegsel,
-				achternaam, adress, postcode, plaats, email, Integer.parseInt(telefoonnummer),
-				Integer.parseInt(rekeningnummer));
+				achternaam, adres, postcode, plaats, email, telefoonnummer, rekeningnummer);
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.update(gebruiker);
 	}

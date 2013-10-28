@@ -12,8 +12,8 @@
 		    	  <s:textfield name="adres" label="Adres"/>
 		    	  <s:textfield name="postcode" label="Postcode"/>
 		    	  <s:textfield name="plaats" label="Plaats"/>
-		    	  <s:textfield name="rekeningnummer" label="Rekeningnummer"/>
 		    	  <s:textfield name="telefoonnummer" label="Telefoonnummer"/>
+		    	  <s:textfield name="rekeningnummer" label="Rekeningnummer"/>
 		    	  <s:submit value="Register"/>
 				</s:form>
 			</div>

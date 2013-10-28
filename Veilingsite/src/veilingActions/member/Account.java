@@ -9,6 +9,7 @@ import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class Account extends ActionSupport implements SessionAware {
@@ -22,34 +23,47 @@ public class Account extends ActionSupport implements SessionAware {
 	private String email;
 	private String wachtwoord;
 	private String rewachtwoord;
-	private String telefoonnummer;
-	private String rekeningnummer;
-	private Gebruiker gebruiker;
-	
-	public String execute(){
-		gebruiker = (Gebruiker) session.get("gebruiker");
-		if(VeilingService.updateGebruiker(voornaam, tussenvoegsel, achternaam, adres, postcode, email, telefoonnummer, rekeningnummer, plaats, gebruiker.getKlantnummer()))
+	private int telefoonnummer;
+	private int rekeningnummer;
+	private Gebruiker geb;
+
+	SessionMap<String, String> sessionmap;
+
+	public String execute() {
+		geb = (Gebruiker) session.get("gebruiker");
+		if (VeilingService.updateGebruiker(voornaam, tussenvoegsel, achternaam,
+				adres, postcode, plaats, email, telefoonnummer, rekeningnummer,
+				geb.getKlantnummer())) {
+			Gebruiker gebruiker = new Gebruiker(geb.getKlantnummer(), voornaam, tussenvoegsel, achternaam, adres, postcode, plaats, email, telefoonnummer, rekeningnummer, geb.getKrediet());
+			Map<String, Object> session = ActionContext.getContext()
+					.getSession();
+			session.put("gebruiker", gebruiker);
 			return SUCCESS;
-		else
+		} else {
 			return INPUT;
+		}
 	}
-	
+
 	public void validate() {
-		if(voornaam.equals(""))
+		
+		String stringTelefoonnummer = Integer.toString(telefoonnummer);
+		String stringRekeningnummer = Integer.toString(rekeningnummer);
+		if (voornaam.equals(""))
 			addFieldError("voornaam", "Geef je voornaam op");
-		if(achternaam.equals(""))
+		if (achternaam.equals(""))
 			addFieldError("achtenraam", "Geef je achternaam op");
-		if(adres.equals(""))
+		if (adres.equals(""))
 			addFieldError("voornaam", "Geef je adres op");
-		if(!postcode.matches("^[1-9]{1}[0-9]{3} ?[A-Z]{2}$"))
+		if (!postcode.matches("^[1-9]{1}[0-9]{3} ?[A-Z]{2}$"))
 			addFieldError("postcode", "Geef een geldige postcode op");
-		if(plaats.equals(""))
+		if (plaats.equals(""))
 			addFieldError("plaats", "Geef je plaats op");
-		if(!email.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"))
+		if (!email
+				.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"))
 			addFieldError("email", "Geef een geldig e-mailadres op");
-		if (!telefoonnummer.matches("[0-9]{10}"))
+		if (!stringTelefoonnummer.matches("[0-9]{10}"))
 			addFieldError("telefoonnummer", "Geef een geldig telefoonnummer op");
-		if(plaats.equals(""))
+		if (stringRekeningnummer.equals(""))
 			addFieldError("rekeningnummer", "Geef je rekeningnummer op");
 	}
 
@@ -58,7 +72,7 @@ public class Account extends ActionSupport implements SessionAware {
 		// TODO Auto-generated method stub
 		this.session = (SessionMap) session;
 	}
-	
+
 	public void setVoornaam(String voornaam) {
 		this.voornaam = voornaam;
 	}
@@ -95,11 +109,8 @@ public class Account extends ActionSupport implements SessionAware {
 		this.rewachtwoord = rewachtwoord;
 	}
 
-	public void setTelefoonnummer(String telefoonnummer) {
-		this.telefoonnummer = telefoonnummer;
-	}
-
-	public void setRekeningnummer(String rekeningnummer) {
+	public void setRekeningnummer(int rekeningnummer) {
 		this.rekeningnummer = rekeningnummer;
 	}
+	
 }

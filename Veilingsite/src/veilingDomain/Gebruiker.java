@@ -75,7 +75,8 @@ public class Gebruiker {
 		rekeningnummer = reknr;
 		krediet = kred;	
 	}
-	
+
+
 	public int getKlantnummer() {
 		return klantnummer;
 	}
