@@ -127,9 +127,9 @@ public class BoekDAO implements VeilingInterface<Boek> {
 	}
 
 	@Override
-	public void update(Object T) {
+	public boolean update(Object T) {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 	@Override

@@ -50,9 +50,9 @@ public class CategorieDAO implements VeilingInterface<Categorie> {
 	}
 
 	@Override
-	public void update(Object T) {
+	public boolean update(Object T) {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 	@Override

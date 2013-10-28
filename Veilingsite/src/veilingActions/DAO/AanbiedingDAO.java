@@ -167,9 +167,9 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	}
 
 	@Override
-	public void update(Object T) {
+	public boolean update(Object T) {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 	@Override
