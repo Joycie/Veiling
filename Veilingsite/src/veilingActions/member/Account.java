@@ -24,9 +24,11 @@ public class Account extends ActionSupport implements SessionAware {
 	private String rewachtwoord;
 	private String telefoonnummer;
 	private String rekeningnummer;
+	private Gebruiker gebruiker;
 	
 	public String execute(){
-		if(VeilingService.updateGebruiker(voornaam, tussenvoegsel, achternaam, adres, postcode, email, telefoonnummer, rekeningnummer, plaats))
+		gebruiker = (Gebruiker) session.get("gebruiker");
+		if(VeilingService.updateGebruiker(voornaam, tussenvoegsel, achternaam, adres, postcode, email, telefoonnummer, rekeningnummer, plaats, gebruiker.getKlantnummer()))
 			return SUCCESS;
 		else
 			return INPUT;
@@ -43,7 +45,7 @@ public class Account extends ActionSupport implements SessionAware {
 			addFieldError("postcode", "Geef een geldige postcode op");
 		if(plaats.equals(""))
 			addFieldError("plaats", "Geef je plaats op");
-		if(!postcode.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"))
+		if(!email.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"))
 			addFieldError("email", "Geef een geldig e-mailadres op");
 		if (!telefoonnummer.matches("[0-9]{10}"))
 			addFieldError("telefoonnummer", "Geef een geldig telefoonnummer op");
@@ -52,9 +54,9 @@ public class Account extends ActionSupport implements SessionAware {
 	}
 
 	@Override
-	public void setSession(Map<String, Object> arg0) {
+	public void setSession(Map<String, Object> session) {
 		// TODO Auto-generated method stub
-		
+		this.session = (SessionMap) session;
 	}
 	
 	public void setVoornaam(String voornaam) {

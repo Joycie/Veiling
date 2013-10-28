@@ -22,6 +22,23 @@ public class Gebruiker {
 		telefoonnummer = telnr;
 		rekeningnummer = reknr;	
 	}
+	
+	public Gebruiker(int klntnr, String vrn, String tv, String an, String adr,
+			String post, String plts, String em, int telnr,
+			int reknr) 
+	{
+		klantnummer = klntnr;
+		voornaam = vrn;
+		tussenvoegsel = tv;
+		achternaam = an;
+		adres = adr;
+		postcode = post;
+		plaats = plts;
+		email = em;
+		telefoonnummer = telnr;
+		rekeningnummer = reknr;	
+	}
+
 
 	public Gebruiker(int klnr, String vrn, String tv, String an, String adr,
 			String post, String plts, String em, String ww, int telnr,

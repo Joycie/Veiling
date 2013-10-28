@@ -29,14 +29,12 @@ public class VeilingService {
 	
 	public static boolean updateGebruiker(String voornaam, String tussenvoegsel,
 			String achternaam, String adress, String postcode, String email, String telefoonnummer, String rekeningnummer,
-			String plaats) {
-
-		Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
-				achternaam, adress, postcode, plaats, email,
-				plaats, Integer.parseInt(telefoonnummer),
+			String plaats, int klantnr) {
+		Gebruiker gebruiker = new Gebruiker(klantnr, voornaam, tussenvoegsel,
+				achternaam, adress, postcode, plaats, email, Integer.parseInt(telefoonnummer),
 				Integer.parseInt(rekeningnummer));
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
-		return gebruikerDAO.create(gebruiker);
+		return gebruikerDAO.update(gebruiker);
 	}
 
 	public static Gebruiker validateUser(String email) {

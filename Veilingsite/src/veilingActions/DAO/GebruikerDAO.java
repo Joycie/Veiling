@@ -103,6 +103,7 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			System.out.println("|| Connection failed ||");
 		}
 		try {
+			
 			System.out.println(" || Excecuting query ");
 			PreparedStatement ps = connection.prepareStatement("UPDATE GEBRUIKERS SET VOORNAAM = ?, TUSSENVOEGSEL = ?, ACHTERNAAM = ?, ADRES = ?, POSTCODE = ?, EMAIL = ?, TELEFOONNUMMER = ?, REKENINGNUMMER = ?, PLAATS = ? WHERE KLANTNR = ?");
 			ps.setString(1,gebruiker.getVoornaam());
@@ -111,10 +112,10 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			ps.setString(4,gebruiker.getAdres());
 			ps.setString(5,gebruiker.getPostcode());
 			ps.setString(6,gebruiker.getEmail());
-			ps.setInt(8,gebruiker.getTelefoonnummer());
-			ps.setInt(9,gebruiker.getRekeningnummer());
-			ps.setString(10,gebruiker.getPlaats());
-			ps.setInt(9,gebruiker.getKlantnummer());
+			ps.setInt(7,gebruiker.getTelefoonnummer());
+			ps.setInt(8,gebruiker.getRekeningnummer());
+			ps.setString(9,gebruiker.getPlaats());
+			ps.setInt(10,gebruiker.getKlantnummer());
 			
 			ResultSet rs = ps.executeQuery();
 			
