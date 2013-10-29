@@ -15,6 +15,7 @@ public class BoekInfo extends ActionSupport {
 	private ArrayList<Categorie> categorielijst = new ArrayList<Categorie>(VeilingService.getCategorielijst());
 	private List<Boek> books = new ArrayList<Boek>();
 	private List<Categorie> categories = new ArrayList<Categorie>();
+	
 	public String execute(){
 		books = boekenlijst;
 		categories = categorielijst;

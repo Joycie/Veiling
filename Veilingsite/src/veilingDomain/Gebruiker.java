@@ -90,7 +90,7 @@ public class Gebruiker {
 	}
 	
 	public String getTelefoonnummerForm() {
-		return String.format("%4d", telefoonnummer);
+		return String.format("%010d", telefoonnummer);
 	}
 
 	public void setTelefoonnummer(int telefoonnummer) {

@@ -23,30 +23,29 @@ public class Account extends ActionSupport implements SessionAware {
 	private String email;
 	private String wachtwoord;
 	private String rewachtwoord;
-	private int telefoonnummer;
+	private String telefoonnummer;
 	private int rekeningnummer;
 	private Gebruiker geb;
 
 	SessionMap<String, String> sessionmap;
 
 	public String execute() {
+		addActionMessage("De wijzigingen zijn opgeslagen");
+		int intTelefoonnummer = Integer.parseInt(telefoonnummer);
 		geb = (Gebruiker) session.get("gebruiker");
 		if (VeilingService.updateGebruiker(voornaam, tussenvoegsel, achternaam,
-				adres, postcode, plaats, email, telefoonnummer, rekeningnummer,
+				adres, postcode, plaats, email, intTelefoonnummer, rekeningnummer,
 				geb.getKlantnummer())) {
-			Gebruiker gebruiker = new Gebruiker(geb.getKlantnummer(), voornaam, tussenvoegsel, achternaam, adres, postcode, plaats, email, telefoonnummer, rekeningnummer, geb.getKrediet());
+			Gebruiker gebruiker = new Gebruiker(geb.getKlantnummer(), voornaam, tussenvoegsel, achternaam, adres, postcode, plaats, email, intTelefoonnummer, rekeningnummer, geb.getKrediet());
 			Map<String, Object> session = ActionContext.getContext()
 					.getSession();
 			session.put("gebruiker", gebruiker);
 			return SUCCESS;
-		} else {
+		} else
 			return INPUT;
-		}
 	}
 
 	public void validate() {
-		
-		String stringTelefoonnummer = Integer.toString(telefoonnummer);
 		String stringRekeningnummer = Integer.toString(rekeningnummer);
 		if (voornaam.equals(""))
 			addFieldError("voornaam", "Geef je voornaam op");
@@ -58,11 +57,10 @@ public class Account extends ActionSupport implements SessionAware {
 			addFieldError("postcode", "Geef een geldige postcode op");
 		if (plaats.equals(""))
 			addFieldError("plaats", "Geef je plaats op");
-		if (!email
-				.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"))
+		if (!email.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"))
 			addFieldError("email", "Geef een geldig e-mailadres op");
-		if (!stringTelefoonnummer.matches("[0-9]{10}"))
-			addFieldError("telefoonnummer", "Geef een geldig telefoonnummer op");
+		if (!telefoonnummer.matches("[0-9]{10}"))
+			addFieldError("telefoonnummerForm", "Geef een geldig telefoonnummer op");
 		if (stringRekeningnummer.equals(""))
 			addFieldError("rekeningnummer", "Geef je rekeningnummer op");
 	}
@@ -113,4 +111,7 @@ public class Account extends ActionSupport implements SessionAware {
 		this.rekeningnummer = rekeningnummer;
 	}
 	
+	public void setTelefoonnummerForm(String telefoonnummer) {
+		this.telefoonnummer = telefoonnummer;
+	}
 }

@@ -1,12 +1,12 @@
 <%@ include file="../main/header.jsp"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<s:if test="hasActionErrors()">
-	<s:actionerror />
-</s:if>
-<s:if test="hasActionMessages()">
-	<s:actionmessage />
-</s:if>
 <div class="content">
+	<s:if test="hasActionErrors()">
+		<s:actionerror />
+	</s:if>
+	<s:if test="hasActionMessages()">
+		<s:actionmessage />
+	</s:if>
 	<h2>Account wijzigen</h2>
 	<s:form action="Account" namespace="/member">
 		<s:iterator value="#session.gebruiker">
