@@ -1,5 +1,6 @@
 package veilingActions.DAO;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
 import veilingDomain.Categorie;
+import veilingDomain.Veiling;
 import veilingInterface.VeilingInterface;
 
 public class BoekDAO implements VeilingInterface<Boek> {
@@ -23,6 +25,7 @@ public class BoekDAO implements VeilingInterface<Boek> {
 	private static String auteur;
 	private static int categorieboek;
 	private static int druk;
+	private static File img;
 	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
 
 	@Override
@@ -124,6 +127,10 @@ public class BoekDAO implements VeilingInterface<Boek> {
 		}
 		GetConnection.closeConnection();
 		return boek;
+	}
+	
+	public void addImage(Veiling veiling, byte[] blob) {
+		
 	}
 
 	@Override

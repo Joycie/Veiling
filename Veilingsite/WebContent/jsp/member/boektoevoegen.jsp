@@ -8,7 +8,7 @@
 </s:if>
 <div class="content">
 	<h2>Boek Toevoegen</h2>
-	<s:form action="BoekToevoegen" namespace="/member">
+	<s:form action="BoekToevoegen" namespace="/member" enctype="multipart/form-data">
 		<s:textfield name="isbn" label="Isbn" />
 		<s:textfield name="titel" label="Titel" />
 		<s:textfield name="beschrijving" label="Beschrijving" />
@@ -25,6 +25,8 @@
 		<s:textfield name="taal" label="Taal" />
 		<s:textfield name="aantalpagina" label="Aantal Pagina's" />
 		<s:textfield name="datum" label="Datum" />
+		<s:file name="img" label="Selecteer foto" />
+		
 		<s:submit value="Voeg Toe" />
 	</s:form>
 </div>

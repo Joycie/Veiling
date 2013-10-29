@@ -1,8 +1,12 @@
 package veilingActions.member;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Date;
 
 import veilingDomain.Boek;
+import veilingDomain.Veiling;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,6 +23,8 @@ public class BoekToevoegen extends ActionSupport {
 	private String auteur;
 	private String categorielijst;
 	private int categorie;
+	private File img;
+
 
 	public String execute() {
 		categorie = Integer.parseInt(categorielijst);
@@ -26,11 +32,32 @@ public class BoekToevoegen extends ActionSupport {
 				uitgeverij, taal, auteur, datum, categorie);
 		if (VeilingService.voegBoekToe(boek) == true) {
 			addActionMessage("Boek : " + titel + " is toegevoegd.");
+			if(img != null){
+				byte[] blob = new byte[(int) img.length()];
+				try {
+					FileInputStream fileInputStream = new FileInputStream(img);
+				     //convert file into array of bytes
+				     fileInputStream.read(blob);
+				     fileInputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				veiling.setImage(blob);
+			}	
 			return SUCCESS;
 		} else {
 			addActionError("Toevoegen niet gelukt");
 			return INPUT;
 		}
+	}
+
+	public File getImg() {
+		return img;
+	}
+
+	public void setImg(File img) {
+		this.img = img;
 	}
 
 	public String getIsbn() {

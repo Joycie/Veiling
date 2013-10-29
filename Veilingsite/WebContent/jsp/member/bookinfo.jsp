@@ -23,5 +23,26 @@
 					</tr>
 				</s:iterator>
 			</table>
+			
+			
+				<table>
+					<tr class="thcolor">
+						<th>Bieder naam</th>
+						<th>Bod</th>
+					</tr>
+					<s:iterator value="veiling.biedingen">
+						<tr class="tdcolor">
+							<td><s:property value="bod.voornaam" />
+							<td><s:property value="geld" />
+						</tr>
+					</s:iterator>
+				</table>
 </div>
+
+<s:form action="bied" >
+	<hr />
+	<s:textfield name="gelds" label="Je bod:" />
+	<s:submit value="Plaats bod"/>
+</s:form>
+
 <%@ include file="../main/footer.jsp"%>
