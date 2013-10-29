@@ -75,7 +75,12 @@
 		</action>
 		<action name="BoekToevoegen" class="veilingActions.member.BoekToevoegen">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
-			<result name="input">/jsp/member/boektoevoegen.jsp</result>
+			<result name="input">/jsp/member/checkisbn.jsp</result>
+		</action>
+		<action name="VeilingToevoegen" class="veilingActions.member.VeilingToevoegen">
+			<result name="success">/jsp/member/veilingtoevoegen.jsp</result>
+			<result name="input">/jsp/member/veilingtoevoegen.jsp</result>
+			<result name="error">/jsp/member/checkisbn.jsp</result>
 		</action>
 	</package>
 </struts>

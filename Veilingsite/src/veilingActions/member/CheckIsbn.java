@@ -9,7 +9,10 @@ public class CheckIsbn extends ActionSupport{
 	private String isbn;
 	public String execute(){
 		if (VeilingService.checkBoek(isbn) == true){
-			return SUCCESS;
+			if (VeilingService.getBoek(isbn) != null){
+				return SUCCESS;
+			}
+			else return INPUT;
 		} else {
 			return INPUT;
 		}

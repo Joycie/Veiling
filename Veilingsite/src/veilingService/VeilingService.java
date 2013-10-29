@@ -67,6 +67,10 @@ public class VeilingService {
 		BoekDAO boekDAO = new BoekDAO();
 		return boekDAO.create(boek);
 	}
+	public static boolean voegVeilingToe(Aanbieding aanbieding){
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.create(aanbieding);
+	}
 
 	// vanaf hier getters en setters
 
@@ -106,6 +110,10 @@ public class VeilingService {
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(
 				BoekDAO.getBoekenlijst());
 		return boekenlijst;
+	}
+	public static Boek getBoek(String isbn){
+		BoekDAO boekDAO = new BoekDAO();
+		return boekDAO.retrieve(isbn);
 	}
 
 }

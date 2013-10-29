@@ -35,10 +35,18 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			ps.setInt(3, aanbieding.getGebruikers_klantnr());
 			ps.setString(4, aanbieding.getDrukken_isbn());
 			ps.setInt(5, aanbieding.getDrukken_nummer());
+			ResultSet rs = ps.executeQuery();
+			rs.close();
+			PreparedStatement ps2 = connection.prepareStatement("INSERT INTO DRUKKEN (BOEKEN_ISBN, NUMMER) VALUES (?, ?)");
+			ps.setString( 1, aanbieding.getDrukken_isbn());
+			ps.setInt(2, aanbieding.getDrukken_nummer());
+			ResultSet rs2 = ps2.executeQuery();
+			rs2.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
+		GetConnection.closeConnection();
 		return true;
 
 	}
@@ -46,7 +54,6 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	@Override
 	public Aanbieding retrieve(String stringCategorie) {
 		int categorie = Integer.parseInt(stringCategorie);
-		System.out.println(categorie);
 		Aanbieding aanb = null;
 		Boek boek = null;
 		try {
