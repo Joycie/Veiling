@@ -17,18 +17,28 @@ public class KredietOpwaarderen extends ActionSupport implements SessionAware {
 	private Gebruiker gebruiker;
 	private double saldo;
 	SessionMap<String, String> sessionmap;
+	
 	public String execute(){
 		gebruiker = (Gebruiker) session.get("gebruiker");
 		System.out.println("Klantnr: " + gebruiker.getKlantnummer());
 		if (VeilingService.updateKrediet(gebruiker.getKlantnummer(), saldo)) {
-			gebruiker = new Gebruiker(gebruiker.getKlantnummer(), gebruiker.getVoornaam(), gebruiker.getTussenvoegsel(), gebruiker.getAchternaam(), gebruiker.getAdres(), gebruiker.getPostcode(), gebruiker.getPlaats(), gebruiker.getEmail(), gebruiker.getTelefoonnummer(), gebruiker.getRekeningnummer(), saldo);
+			gebruiker = new Gebruiker(gebruiker.getKlantnummer(), gebruiker.getVoornaam(), gebruiker.getTussenvoegsel(), gebruiker.getAchternaam(), gebruiker.getAdres(), gebruiker.getPostcode(), gebruiker.getPlaats(), gebruiker.getEmail(), gebruiker.getTelefoonnummer(), gebruiker.getRekeningnummer(), gebruiker.getKrediet());
 			Map<String, Object> session = ActionContext.getContext()
 					.getSession();
+			
+			gebruiker.setKrediet(gebruiker.getKrediet() + saldo);
 			session.put("gebruiker", gebruiker);
 		}
 		return SUCCESS;
 	}
-
+	
+	public void validate()
+	{
+		if(saldo < 1.0 || saldo > 1000)
+		{
+			addActionError("Het saldo mag niet lager zijn dan 1 euro en niet hoger dan 1000 euro.");
+		}
+	}
 	@Override
 	public void setSession(Map<String, Object> session) {
 		// TODO Auto-generated method stub

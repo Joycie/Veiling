@@ -70,9 +70,12 @@
 		<action name="AccountWijzigenForm">
 			<result name="success">/jsp/member/accountwijzigen.jsp</result>
 		</action>
+		<action name="KredietOpwaarderenForm">
+			<result name="success">/jsp/member/kredietopwaarderen.jsp</result>
+		</action>
 		<action name="KredietOpwaarderen" class="veilingActions.member.KredietOpwaarderen">
-			<result name="success">../index.jsp</result>
-			<result name="input">/jsp/member/checkisbn.jsp</result>
+			<result name="success">/jsp/member/kredietopwaarderen.jsp</result>
+			<result name="input">/jsp/member/kredietopwaarderen.jsp</result>
 		</action>
 		<action name="Account" class="veilingActions.member.Account">
 			<result name="success">/jsp/member/account.jsp</result>

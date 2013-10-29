@@ -81,17 +81,12 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 				int telefoonnummer = rs.getInt("TELEFOONNUMMER");
 				int rekeningnummer = rs.getInt("REKENINGNUMMER");
 				String plaats = rs.getString("PLAATS");
-				int krediet = rs.getInt("KREDIET");
+				double krediet = rs.getDouble("KREDIET");
 				int rol = rs.getInt("rol");
 
 				geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
 						achternaam, adres, postcode, plaats, email, wachtwoord,
 						telefoonnummer, rekeningnummer, krediet, rol);
-				System.out.println("Klantnummer: " + klantnummer
-						+ " | Voornaam: " + voornaam + " | Tussenvoegsel: "
-						+ tussenvoegsel + " | Achternaam: " + achternaam
-						+ " | Email:  " + email + " | wachtwoord: "
-						+ wachtwoord);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

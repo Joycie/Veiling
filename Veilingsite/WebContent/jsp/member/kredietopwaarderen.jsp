@@ -3,20 +3,19 @@
 <%@ include file="../main/header.jsp"%>
 <div class="content">
 	<h2>Krediet opwaarderen</h2>
-	
-	<table>
-		<s:iterator value="huidigSaldo">
-			<tr class="tdcolor">
-				<td><s:property value="gebruiker.krediet" /></td>
 
-			</tr>
-		</s:iterator>
-	</table>
+	Huiding saldo:
+	<s:iterator value="#session.gebruiker">
+		<s:property value="krediet" />
+	</s:iterator>
 	
+	<s:if test="hasActionErrors()">
+		<s:actionerror />
+	</s:if>
 	<s:form action="KredietOpwaarderen" namespace="/member">
 		<s:textfield name="saldo" label="Bedrag" />
 		<s:submit value="Waardeer op" />
 	</s:form>
-	
-	</div>
+
+</div>
 <%@ include file="../main/footer.jsp"%>
