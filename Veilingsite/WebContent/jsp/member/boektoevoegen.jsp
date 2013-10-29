@@ -12,6 +12,13 @@
 		<s:textfield name="isbn" label="Isbn" />
 		<s:textfield name="titel" label="Titel" />
 		<s:textfield name="beschrijving" label="Beschrijving" />
+		Categorie:
+			<select name="categorielijst" id="categorielijst">
+				<s:iterator value="categories">
+					<option value="<s:property value="id" />">
+						<s:property value="naam" />
+					</option>
+				</s:iterator>
 		<s:textfield name="druk" label="Druk" />
 		<s:textfield name="uitgeverij" label="Uitgeverij" />
 		<s:textfield name="auteur" label="Auteur" />

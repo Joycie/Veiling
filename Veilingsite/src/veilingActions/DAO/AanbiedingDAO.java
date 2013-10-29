@@ -37,11 +37,13 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			ps.setInt(5, aanbieding.getDrukken_nummer());
 			ResultSet rs = ps.executeQuery();
 			rs.close();
+			ps.close();
 			PreparedStatement ps2 = connection.prepareStatement("INSERT INTO DRUKKEN (BOEKEN_ISBN, NUMMER) VALUES (?, ?)");
-			ps.setString( 1, aanbieding.getDrukken_isbn());
-			ps.setInt(2, aanbieding.getDrukken_nummer());
+			ps2.setString( 1, aanbieding.getDrukken_isbn());
+			ps2.setInt(2, aanbieding.getDrukken_nummer());
 			ResultSet rs2 = ps2.executeQuery();
 			rs2.close();
+			ps2.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
