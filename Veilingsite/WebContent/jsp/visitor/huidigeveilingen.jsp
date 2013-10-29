@@ -11,16 +11,28 @@
 			<th>Startprijs</th>
 			<th>Eindtijd</th>
 		</tr>
-		<s:iterator value="recenteveilingen">
+		<s:if test="%{recenteveilingen.isEmpty()}">
 			<tr class="tdcolor">
-				<td><s:property value="boek.titel" /></td>
-				<td><s:property value="boek.auteur" /></td>
-				<td><s:property value="drukken_nummer" /></td>
-				<td><s:property value="startprijs" /></td>
-				<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+				<td>Er zijn geen nieuwe aanbiedingen in de afgelopen 24 uur.</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
-		</s:iterator>
+		</s:if>
+		<s:else>
+			<s:iterator value="recenteveilingen">
+				<tr class="tdcolor">
+					<td><s:property value="boek.titel" /></td>
+					<td><s:property value="boek.auteur" /></td>
+					<td><s:property value="drukken_nummer" /></td>
+					<td><s:property value="startprijs" /></td>
+					<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+				</tr>
+			</s:iterator>
+		</s:else>
 	</table>
+
 	<h2>Alle aanbiedingen</h2>
 	<table>
 		<tr class="thcolor">
@@ -30,15 +42,26 @@
 			<th>Startprijs</th>
 			<th>Eindtijd</th>
 		</tr>
-		<s:iterator value="veilingen">
+		<s:if test="%{veilingen.isEmpty()}">
 			<tr class="tdcolor">
-				<td><s:property value="boek.titel" /></td>
-				<td><s:property value="boek.auteur" /></td>
-				<td><s:property value="drukken_nummer" /></td>
-				<td><s:property value="startprijs" /></td>
-				<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+				<td>Er zijn geen aanbiedingen op dit moment.</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
-		</s:iterator>
+		</s:if>
+		<s:else>
+			<s:iterator value="veilingen">
+				<tr class="tdcolor">
+					<td><s:property value="boek.titel" /></td>
+					<td><s:property value="boek.auteur" /></td>
+					<td><s:property value="drukken_nummer" /></td>
+					<td><s:property value="startprijs" /></td>
+					<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+				</tr>
+			</s:iterator>
+		</s:else>
 	</table>
 </div>
 <%@ include file="../main/footer.jsp"%>
