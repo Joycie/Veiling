@@ -5,7 +5,6 @@
 	<h2>Krediet opwaarderen</h2>
 	
 	<table>
-
 		<s:iterator value="huidigSaldo">
 			<tr class="tdcolor">
 				<td><s:property value="gebruiker.krediet" /></td>
@@ -15,7 +14,7 @@
 	</table>
 	
 	<s:form action="KredietOpwaarderen" namespace="/member">
-		<s:textfield name="bedrag" label="Bedrag" />
+		<s:textfield name="saldo" label="Bedrag" />
 		<s:submit value="Waardeer op" />
 	</s:form>
 	

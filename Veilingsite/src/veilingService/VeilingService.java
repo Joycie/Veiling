@@ -31,7 +31,12 @@ public class VeilingService {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.update(gebruiker);
 	}
-
+	public static boolean updateKrediet(int klantnr, double saldo)
+	{
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		return gebruikerDAO.updateKrediet(klantnr, saldo);
+		
+	}
 	public static Gebruiker validateUser(String email) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.retrieve(email);

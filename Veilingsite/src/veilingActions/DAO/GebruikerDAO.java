@@ -10,7 +10,6 @@ import veilingActions.database.GetConnection;
 import veilingDomain.Gebruiker;
 import veilingInterface.VeilingInterface;
 
-
 public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 
 	@Override
@@ -25,25 +24,26 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		}
 		try {
 			System.out.println(" || Excecuting query ");
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			ps.setString(1,gebruiker.getVoornaam());
-			ps.setString(2,gebruiker.getTussenvoegsel());
-			ps.setString(3,gebruiker.getAchternaam());
-			ps.setString(4,gebruiker.getAdres());
-			ps.setString(5,gebruiker.getPostcode());
-			ps.setString(6,gebruiker.getEmail());
-			ps.setString(7,gebruiker.getWachtwoord());
-			ps.setInt(8,gebruiker.getTelefoonnummer());
-			ps.setInt(9,gebruiker.getRekeningnummer());
-			ps.setString(10,gebruiker.getPlaats());
-			
+			PreparedStatement ps = connection
+					.prepareStatement("INSERT INTO GEBRUIKERS (VOORNAAM, TUSSENVOEGSEL, ACHTERNAAM, ADRES, POSTCODE, EMAIL, WACHTWOORD, TELEFOONNUMMER, REKENINGNUMMER, PLAATS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			ps.setString(1, gebruiker.getVoornaam());
+			ps.setString(2, gebruiker.getTussenvoegsel());
+			ps.setString(3, gebruiker.getAchternaam());
+			ps.setString(4, gebruiker.getAdres());
+			ps.setString(5, gebruiker.getPostcode());
+			ps.setString(6, gebruiker.getEmail());
+			ps.setString(7, gebruiker.getWachtwoord());
+			ps.setInt(8, gebruiker.getTelefoonnummer());
+			ps.setInt(9, gebruiker.getRekeningnummer());
+			ps.setString(10, gebruiker.getPlaats());
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			ps.close();
 			rs.close();
-	
+
 		} catch (SQLException e) {
-	
+
 			System.out.println("|| Failed to complete query || ");
 			e.printStackTrace();
 			return false;
@@ -51,47 +51,55 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		GetConnection.closeConnection();
 		return true;
 	}
+
 	@Override
 	public Gebruiker retrieve(String loginEmail) {
 		Gebruiker geb = null;
-			try {
-				Connection connection = null;
-				connection = GetConnection.getDBConnection();
-				if (connection != null) {
-					System.out.println("|| Connection ready || ");
-				} else {
-					System.out.println("|| Connection failed ||");
-				}
-				PreparedStatement ps=connection.prepareStatement("select * from gebruikers where email=?");
-				ps.setString(1,loginEmail);
-				System.out.println("Gebruiker: " + loginEmail);
-				ResultSet rs=ps.executeQuery();
-				
-				while (rs.next()) {
-					int klantnummer = rs.getInt("KLANTNR");
-					String voornaam = rs.getString("VOORNAAM");
-					String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-					String achternaam = rs.getString("ACHTERNAAM");
-					String adres = rs.getString("ADRES");
-					String postcode = rs.getString("POSTCODE");
-					String email = rs.getString("EMAIL");
-					String wachtwoord = rs.getString("WACHTWOORD");
-					int telefoonnummer = rs.getInt("TELEFOONNUMMER");
-					int rekeningnummer = rs.getInt("REKENINGNUMMER");
-					String plaats =  rs.getString("PLAATS");
-					int krediet = rs.getInt("KREDIET");
-					int rol = rs.getInt("rol");
-					
-					geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel, achternaam, adres, postcode, plaats, email, wachtwoord, telefoonnummer, rekeningnummer, krediet, rol);
-					System.out.println("Klantnummer: " +  klantnummer + " | Voornaam: " + voornaam + 
-							" | Tussenvoegsel: " + tussenvoegsel + " | Achternaam: " + achternaam + " | Email:  " + email + " | wachtwoord: "+ wachtwoord);
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
 			}
-			GetConnection.closeConnection();
-			return geb;
+			PreparedStatement ps = connection
+					.prepareStatement("select * from gebruikers where email=?");
+			ps.setString(1, loginEmail);
+			System.out.println("Gebruiker: " + loginEmail);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int klantnummer = rs.getInt("KLANTNR");
+				String voornaam = rs.getString("VOORNAAM");
+				String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+				String achternaam = rs.getString("ACHTERNAAM");
+				String adres = rs.getString("ADRES");
+				String postcode = rs.getString("POSTCODE");
+				String email = rs.getString("EMAIL");
+				String wachtwoord = rs.getString("WACHTWOORD");
+				int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+				int rekeningnummer = rs.getInt("REKENINGNUMMER");
+				String plaats = rs.getString("PLAATS");
+				int krediet = rs.getInt("KREDIET");
+				int rol = rs.getInt("rol");
+
+				geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
+						achternaam, adres, postcode, plaats, email, wachtwoord,
+						telefoonnummer, rekeningnummer, krediet, rol);
+				System.out.println("Klantnummer: " + klantnummer
+						+ " | Voornaam: " + voornaam + " | Tussenvoegsel: "
+						+ tussenvoegsel + " | Achternaam: " + achternaam
+						+ " | Email:  " + email + " | wachtwoord: "
+						+ wachtwoord);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return geb;
 	}
+
 	@Override
 	public boolean update(Object T) {
 		Gebruiker gebruiker = (Gebruiker) T;
@@ -103,27 +111,40 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			System.out.println("|| Connection failed ||");
 		}
 		try {
-			
+
 			System.out.println(" || Excecuting query ");
-			System.out.println("UPDATE GEBRUIKERS SET VOORNAAM = '" + gebruiker.getVoornaam() + "', TUSSENVOEGSEL = '" + gebruiker.getTussenvoegsel() + "', ACHTERNAAM = '" + gebruiker.getAchternaam() + "', ADRES = '" + gebruiker.getAdres() + "', POSTCODE = '" + gebruiker.getPostcode() + "', EMAIL = '" + gebruiker.getEmail() + "', TELEFOONNUMMER = " + gebruiker.getTelefoonnummer() + ", REKENINGNUMMER = " + gebruiker.getRekeningnummer() + ", PLAATS = " + gebruiker.getPlaats() + " WHERE KLANTNR = " + gebruiker.getKlantnummer());
-			PreparedStatement ps = connection.prepareStatement("UPDATE GEBRUIKERS SET VOORNAAM = ?, TUSSENVOEGSEL = ?, ACHTERNAAM = ?, ADRES = ?, POSTCODE = ?, EMAIL = ?, TELEFOONNUMMER = ?, REKENINGNUMMER = ?, PLAATS = ? WHERE KLANTNR = ?");
-			System.out.println(gebruiker.getVoornaam() + gebruiker.getTussenvoegsel() + gebruiker.getAchternaam() + gebruiker.getAdres() + gebruiker.getPostcode());
-			ps.setString(1,gebruiker.getVoornaam());
-			ps.setString(2,gebruiker.getTussenvoegsel());
-			ps.setString(3,gebruiker.getAchternaam());
-			ps.setString(4,gebruiker.getAdres());
-			ps.setString(5,gebruiker.getPostcode());
-			ps.setString(6,gebruiker.getEmail());
-			ps.setInt(7,gebruiker.getTelefoonnummer());
-			ps.setInt(8,gebruiker.getRekeningnummer());
-			ps.setString(9,gebruiker.getPlaats());
-			ps.setInt(10,gebruiker.getKlantnummer());
-			
+			System.out.println("UPDATE GEBRUIKERS SET VOORNAAM = '"
+					+ gebruiker.getVoornaam() + "', TUSSENVOEGSEL = '"
+					+ gebruiker.getTussenvoegsel() + "', ACHTERNAAM = '"
+					+ gebruiker.getAchternaam() + "', ADRES = '"
+					+ gebruiker.getAdres() + "', POSTCODE = '"
+					+ gebruiker.getPostcode() + "', EMAIL = '"
+					+ gebruiker.getEmail() + "', TELEFOONNUMMER = "
+					+ gebruiker.getTelefoonnummer() + ", REKENINGNUMMER = "
+					+ gebruiker.getRekeningnummer() + ", PLAATS = "
+					+ gebruiker.getPlaats() + " WHERE KLANTNR = "
+					+ gebruiker.getKlantnummer());
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET VOORNAAM = ?, TUSSENVOEGSEL = ?, ACHTERNAAM = ?, ADRES = ?, POSTCODE = ?, EMAIL = ?, TELEFOONNUMMER = ?, REKENINGNUMMER = ?, PLAATS = ? WHERE KLANTNR = ?");
+			System.out.println(gebruiker.getVoornaam()
+					+ gebruiker.getTussenvoegsel() + gebruiker.getAchternaam()
+					+ gebruiker.getAdres() + gebruiker.getPostcode());
+			ps.setString(1, gebruiker.getVoornaam());
+			ps.setString(2, gebruiker.getTussenvoegsel());
+			ps.setString(3, gebruiker.getAchternaam());
+			ps.setString(4, gebruiker.getAdres());
+			ps.setString(5, gebruiker.getPostcode());
+			ps.setString(6, gebruiker.getEmail());
+			ps.setInt(7, gebruiker.getTelefoonnummer());
+			ps.setInt(8, gebruiker.getRekeningnummer());
+			ps.setString(9, gebruiker.getPlaats());
+			ps.setInt(10, gebruiker.getKlantnummer());
+
 			ResultSet rs = ps.executeQuery();
 			ps.close();
 			rs.close();
 		} catch (SQLException e) {
-	
+
 			System.out.println("|| Failed to complete query || ");
 			e.printStackTrace();
 			return false;
@@ -131,9 +152,41 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		GetConnection.closeConnection();
 		return true;
 	}
+
 	@Override
 	public void delete(Object T) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public boolean updateKrediet(int klantnr, double saldo) {
+		System.out.println("Saldo: " + saldo);
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		if (connection != null) {
+			System.out.println("|| Connection ready || ");
+		} else {
+			System.out.println("|| Connection failed ||");
+		}
+		try {
+
+			System.out.println(" || Excecuting query ");
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET KREDIET = KREDIET + ? WHERE KLANTNR = ?");
+			ps.setDouble(1, saldo);
+			ps.setInt(2, klantnr);
+			ResultSet rs = ps.executeQuery();
+			ps.close();
+			rs.close();
+
+		} catch (SQLException e) {
+
+			System.out.println("|| Failed to complete query || ");
+			e.printStackTrace();
+			return false;
+		}
+		GetConnection.closeConnection();
+		return true;
+
 	}
 }
