@@ -20,7 +20,7 @@
 									<ul class="sub">
 										<li><a href="<%=request.getContextPath()%>/member/MijnVeilingen.action">Mijn veilingen</a></li>
 										<li><a href="<%=request.getContextPath()%>/member/AccountWijzigenForm.action">Account wijzigen</a></li>
-										<li><a href="<%=request.getContextPath()%>/member/SaldoWijzigenForm.action">Saldo wijzigen (<s:property value="krediet" />)</a></li>
+										<li><a href="<%=request.getContextPath()%>/member/KredietOpwaarderenForm.action">Saldo wijzigen (<s:property value="krediet" />)</a></li>
 										<li>
 									       <a
 											href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>

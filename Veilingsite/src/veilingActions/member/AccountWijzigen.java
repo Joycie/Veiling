@@ -12,7 +12,7 @@ import veilingService.VeilingService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class Account extends ActionSupport implements SessionAware {
+public class AccountWijzigen extends ActionSupport implements SessionAware {
 	private SessionMap session;
 	private String voornaam;
 	private String tussenvoegsel;

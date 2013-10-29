@@ -12,7 +12,8 @@ public class Logout  extends ActionSupport{
 	
 	public String execute() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		session.put("gebruiker", null);
+//		session.put("gebruiker", null);
+		session.clear();
 		return SUCCESS;
 	}
 }

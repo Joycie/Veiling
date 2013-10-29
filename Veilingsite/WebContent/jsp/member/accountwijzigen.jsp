@@ -8,7 +8,7 @@
 		<s:actionmessage />
 	</s:if>
 	<h2>Account wijzigen</h2>
-	<s:form action="Account" namespace="/member">
+	<s:form action="AccountWijzigen" namespace="/member">
 		<s:iterator value="#session.gebruiker">
 			<s:textfield name="voornaam" label="Voornaam" />
 			<s:textfield name="tussenvoegsel" label="Tussenvoegsel" />
