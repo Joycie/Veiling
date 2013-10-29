@@ -16,7 +16,7 @@
 						<s:iterator value="#session.gebruiker">
 						      Welkom 
 						      <a
-								href="<%=request.getContextPath()%>/member/AccountForm.action"><s:property
+								href="<%=request.getContextPath()%>/member/AccountWijzigenForm.action"><s:property
 									value="voornaam" /> <s:property value="tussenvoegsel" /> <s:property
 									value="achternaam" /></a>! 
 						       <a

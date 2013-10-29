@@ -67,8 +67,8 @@
 		<action name="BookInfo" class="veilingActions.member.BoekInfo">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
 		</action>
-		<action name="AccountForm">
-			<result name="success">/jsp/member/account.jsp</result>
+		<action name="AccountWijzigenForm">
+			<result name="success">/jsp/member/accountwijzigen.jsp</result>
 		</action>
 		<action name="KredietOpwaarderen" class="veilingActions.member.KredietOpwaarderen">
 			<result name="success">../index.jsp</result>
