@@ -8,7 +8,7 @@
 </s:if>
 <div class="content">
 	<h2>Veiling Toevoegen</h2>
-	<s:form action="VeilingToevoegen" namespace="/member">
+	<s:form action="VeilingToevoegen" namespace="/member" enctype="multipart/form-data">
 		<s:textfield name="startprijs" label="Startprijs" />
 			Eindtijd:
 			<select name="dagen" id="dagen">
@@ -20,6 +20,8 @@
 			</select>
 		<s:textfield name="isbn" label="Isbn" />
 		<s:textfield name="druk" label="Druk" />
+		<s:file name="img" label="Selecteer foto" />
+		
 		<s:submit value="Voeg Toe" />
 	</s:form>
 </div>

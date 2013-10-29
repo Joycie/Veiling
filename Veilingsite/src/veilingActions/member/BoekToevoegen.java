@@ -23,7 +23,6 @@ public class BoekToevoegen extends ActionSupport {
 	private String auteur;
 	private String categorielijst;
 	private int categorie;
-	private File img;
 
 
 	public String execute() {
@@ -32,19 +31,7 @@ public class BoekToevoegen extends ActionSupport {
 				uitgeverij, taal, auteur, datum, categorie);
 		if (VeilingService.voegBoekToe(boek) == true) {
 			addActionMessage("Boek : " + titel + " is toegevoegd.");
-			if(img != null){
-				byte[] blob = new byte[(int) img.length()];
-				try {
-					FileInputStream fileInputStream = new FileInputStream(img);
-				     //convert file into array of bytes
-				     fileInputStream.read(blob);
-				     fileInputStream.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				veiling.setImage(blob);
-			}	
+
 			return SUCCESS;
 		} else {
 			addActionError("Toevoegen niet gelukt");
@@ -52,13 +39,7 @@ public class BoekToevoegen extends ActionSupport {
 		}
 	}
 
-	public File getImg() {
-		return img;
-	}
 
-	public void setImg(File img) {
-		this.img = img;
-	}
 
 	public String getIsbn() {
 		return isbn;

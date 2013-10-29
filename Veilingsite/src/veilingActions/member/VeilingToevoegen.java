@@ -1,5 +1,8 @@
 package veilingActions.member;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
@@ -10,11 +13,13 @@ import org.apache.struts2.interceptor.SessionAware;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
+import veilingDomain.Veiling;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class VeilingToevoegen extends ActionSupport implements SessionAware {
+	private Veiling veiling = new Veiling();
 	private int id = 0;
 	private double startprijs;
 	private Timestamp eindtijd;
@@ -22,7 +27,8 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 	private String isbn;
 	private Aanbieding aanbieding;
 	private SessionMap session;
-	
+	private File img;
+	private byte[] blob;
 	SessionMap<String, String> sessionmap;
 
 	public VeilingToevoegen() {
@@ -50,12 +56,30 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 		Boek boek = VeilingService.getBoek(isbn);
 		aanbieding = new Aanbieding(id, startprijs, eindtijd,
 				gebruikers_klantnr, isbn, druk, boek);
+		if(img != null){
+			blob = new byte[(int) img.length()];
+			try {
+				FileInputStream fileInputStream = new FileInputStream(img);
+			     //convert file into array of bytes
+			     fileInputStream.read(blob);
+			     fileInputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			aanbieding.setImg(blob);
+			
+		}
+		
+		
 
 		if (!VeilingService.voegVeilingToe(aanbieding)) {
 			addActionError("Toevoegen niet gelukt");
 			return INPUT;
 		}
 		addActionError("Veiling toegevoegd");
+		
+		
 		return SUCCESS;
 
 	}
@@ -120,5 +144,12 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = (SessionMap) session;
 	}
+	
+	public File getImg() {
+		return img;
+	}
 
+	public void setImg(File img) {
+		this.img = img;
+	}
 }

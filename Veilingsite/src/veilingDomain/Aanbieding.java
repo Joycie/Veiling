@@ -1,5 +1,6 @@
 package veilingDomain;
 
+import java.io.File;
 import java.sql.Timestamp;
 
 public class Aanbieding {
@@ -10,6 +11,7 @@ public class Aanbieding {
 	private int gebruikers_klantnr, drukken_nummer;
 	private String drukken_isbn;
 	private Boek boek;
+	private byte[] img;
 
 	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b) 
 	{
@@ -20,6 +22,18 @@ public class Aanbieding {
 		drukken_isbn = druk_isbn;
 		drukken_nummer = druk_nr;
 		boek = b;
+	}
+	
+	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b, byte[] i) 
+	{
+		this.id = id;
+		startprijs = start;
+		eindtijd = eind;
+		gebruikers_klantnr = geb_klant;
+		drukken_isbn = druk_isbn;
+		drukken_nummer = druk_nr;
+		boek = b;
+		img = i;
 	}
 
 	public int getId() {
@@ -77,5 +91,13 @@ public class Aanbieding {
 		this.boek = boek;
 	}
 
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
+	}
+	
 	
 }

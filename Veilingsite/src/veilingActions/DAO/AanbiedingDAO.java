@@ -29,12 +29,13 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				System.out.println("|| Connection failed ||");
 			}
 			PreparedStatement ps = connection
-					.prepareStatement("INSERT INTO AANBIEDINGEN (STARTPRIJS, EINDTIJD, GEBRUIKERS_KLANTNR, DRUKKEN_BOEKEN_ISBN, DRUKKEN_NUMMER, INSERT_DATE) VALUES(?,?,?,?,?,sysdate)");
+					.prepareStatement("INSERT INTO AANBIEDINGEN (STARTPRIJS, EINDTIJD, GEBRUIKERS_KLANTNR, DRUKKEN_BOEKEN_ISBN, DRUKKEN_NUMMER, INSERT_DATE, IMAGE) VALUES(?,?,?,?,?,sysdate, ?)");
 			ps.setDouble(1, aanbieding.getStartprijs());
 			ps.setTimestamp(2, aanbieding.getEindtijd());
 			ps.setInt(3, aanbieding.getGebruikers_klantnr());
 			ps.setString(4, aanbieding.getDrukken_isbn());
 			ps.setInt(5, aanbieding.getDrukken_nummer());
+			ps.setBytes(6, aanbieding.getImg());
 			ResultSet rs = ps.executeQuery();
 			rs.close();
 			ps.close();
