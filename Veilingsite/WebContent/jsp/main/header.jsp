@@ -10,28 +10,39 @@
 	<div class="page">
 		<!-- %=session.getAttribute("gebruiker")%> -->
 		<div class="header">
-			<div class="options">
-				<div>
-					<s:if test="#session.gebruiker != null">
+				<ul class="options">
+					<s:if test="#session.gebruiker != null">				
 						<s:iterator value="#session.gebruiker">
-						      Welkom 
-						      <a
+						     <li><a
 								href="<%=request.getContextPath()%>/member/AccountWijzigenForm.action"><s:property
 									value="voornaam" /> <s:property value="tussenvoegsel" /> <s:property
-									value="achternaam" /></a>! 
-						       <a
-								href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>
+									value="achternaam" /></a>
+									<ul class="sub">
+										<li><a href="<%=request.getContextPath()%>/member/MijnVeilingen.action">Mijn veilingen</a></li>
+										<li><a href="<%=request.getContextPath()%>/member/AccountWijzigenForm.action">Account wijzigen</a></li>
+										<li><a href="<%=request.getContextPath()%>/member/SaldoWijzigenForm.action">Saldo wijzigen (<s:property value="krediet" />)</a></li>
+										<li>
+									       <a
+											href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>
+										</li>
+									</ul>
+							</li>
 						</s:iterator>
 					</s:if>
 					<s:else>
-						<a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">Inloggen</a>
-						<a href="<%=request.getContextPath()%>/jsp/visitor/register.jsp">Registreren</a>
+						<li>
+							<a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">Inloggen</a>
+						</li>
+						<li>
+							<a href="<%=request.getContextPath()%>/jsp/visitor/register.jsp">Registreren</a>
+						</li>
 					</s:else>
-				</div>
-				<form>
-					<input type="search" placeholder="Zoeken" />
-				</form>
-			</div>
+					<li>
+						<form>
+							<input type="search" placeholder="Zoeken" />
+						</form>
+					</li>
+				</ul>
 			<a href="<%=request.getContextPath()%>">
 				<h1>
 					<img src="<%=request.getContextPath()%>/css/images/logo.jpg" />

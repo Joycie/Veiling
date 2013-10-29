@@ -1,7 +1,7 @@
 @font-face {
 	font-family: 'Conv_simplesnails';
 	src: url('fonts/simplesnails.eot');
-	src: local('☺'), url('fonts/simplesnails.woff') format('woff'),
+	src: local('?'), url('fonts/simplesnails.woff') format('woff'),
 		url('fonts/simplesnails.ttf') format('truetype'),
 		url('fonts/simplesnails.svg') format('svg');
 	font-weight: normal;
@@ -51,7 +51,7 @@ h3 {
 .header .options {
 	float: right;
 	font-size: 10pt;
-	margin: 30px;
+	margin: 37px;
 	margin-top: 2 0px;
 }
 
@@ -70,10 +70,10 @@ h3 {
 
 .header input[type="search"] {
 	border: 1px solid #DEDEDE;
-	margin-top: 10px;
 	font-size: 10pt;
 	font-family: arial;
 	padding: 5px;
+	float:right;
 }
 
 .header form {
@@ -125,13 +125,75 @@ ul.menu {
 }
 
 .menu li ul {
-	padding-top: 42px;
+	margin-top: 42px;
 	padding-left: 0px;
 }
 
 .menu .sub a
 {
 	width: 120px;
+}
+
+//
+
+ul.options {
+	background-color: #007893;
+	float: left;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+.options a {
+	float: left;
+	text-decoration: none;
+	color: gray;
+	/*background-color: #007893;*/
+	padding: 8px;
+}
+
+.options a:hover,.menu li.selected, .menu li:hover {
+	//background-color: #DEDEDE;
+}
+
+.options li {
+	display: inline;
+}
+
+.options ul {
+	/*padding: 3px 0 0 0;
+	margin: 0;
+	list-style: none;*/
+	position: absolute;
+	width: 120px;
+	left: -1000px;
+}
+
+.options ul a:hover
+{
+	color: #DEDEDE;
+	background-color: gray;
+}
+
+.options li:hover ul {
+	left: auto;
+	background-position: 0 0;
+}
+
+.options li {
+	float: left;
+}
+
+.options li ul {
+	margin-top: 31px;
+	padding-left: 0px;
+}
+
+.options .sub a
+{
+	width: 120px;
+	background-color:#DEDEDE;
 }
 
 .content {
