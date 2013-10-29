@@ -5,6 +5,20 @@
 
 <struts>
 	<package name="admin" namespace="/admin" extends="struts-default">
+	<interceptors>
+			<interceptor name="adminInterceptor"
+				class="veilingInterceptors.AdminInterceptor" />
+
+			<interceptor-stack name="AdminStack">
+				<interceptor-ref name="adminInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="AdminStack" />
+		<global-results>
+			<result name="input" type="redirect">../jsp/visitor/404.jsp
+			</result>
+		</global-results>
 		<action name="UserList" class="veilingActions.admin.UserList">
 			<result name="success">/jsp/admin/users.jsp</result>
 		</action>

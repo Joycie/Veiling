@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ include file="../main/header.jsp" %>
 		<div class="content">
+		<s:if test="#session.gebruiker.rol == 1">
 			<h2>Users</h2>
 			<table>
 		    <tr class="thcolor">
@@ -19,6 +20,10 @@
 		        </tr>
  		    </s:iterator>
 	    </table>
+	    </s:if>
+	    <s:else>
+	    	Geen toegang.
+	    </s:else>
 		</div>
 <%@ include file="../main/footer.jsp" %>
 </body>

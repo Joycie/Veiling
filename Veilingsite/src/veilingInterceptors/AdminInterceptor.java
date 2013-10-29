@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
 @SuppressWarnings("serial")
-public class AuthenticationInterceptor implements Interceptor {
+public class AdminInterceptor implements Interceptor {
 
 	public void destroy() {
 	}
@@ -23,19 +23,15 @@ public class AuthenticationInterceptor implements Interceptor {
 		@SuppressWarnings("rawtypes")
 		Map session = actionInvocation.getInvocationContext().getSession();
 		
-		Gebruiker geb = (Gebruiker) session.get("gebruiker");
-		
-		if (geb == null) {
-		    return Action.LOGIN;
+		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker" );
+		if (gebruiker == null)
+		{
+			return Action.INPUT;
+		}
+		if (gebruiker.getRol() != 1){
+		    return Action.INPUT;
 		} 
-		else {
-				
-		    Action action = ( Action ) actionInvocation.getAction();
-		    
-		    if (action instanceof UserAware) {
-		        ((UserAware)action).setUser(geb);
-		    }
-		    
+		else {	    
 		    return actionInvocation.invoke();
 		}
 	}
