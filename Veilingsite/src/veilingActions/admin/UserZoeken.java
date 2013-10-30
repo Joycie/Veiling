@@ -1,6 +1,4 @@
 package veilingActions.admin;
-import java.util.ArrayList;
-import java.util.List;
 
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
@@ -14,9 +12,27 @@ public class UserZoeken extends ActionSupport {
 	private int klantnummer;
 	
 	public String execute() {
-		VeilingService.retrieveUser(klantnummer);
-
+		System.out.println("Klantnummer: " + klantnummer);
+		gebruiker = VeilingService.retrieveUser(klantnummer);
+		System.out.println(gebruiker.getVoornaam());
 		return SUCCESS;
 	}
 
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
+
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
+	}
+
+	public int getKlantnummer() {
+		return klantnummer;
+	}
+
+	public void setKlantnummer(int klantnummer) {
+		this.klantnummer = klantnummer;
+	}
+
+	
 }

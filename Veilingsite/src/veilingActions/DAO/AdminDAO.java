@@ -51,6 +51,7 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 				krediet = rs.getDouble("KREDIET");
 				rol = rs.getInt("ROL");
 
+				
 				Gebruiker geb = new Gebruiker(klantnummer, voornaam,
 						tussenvoegsel, achternaam, adres, postcode, plaats,
 						email, "", telefoonnummer, rekeningnummer, krediet, rol);
@@ -59,6 +60,8 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 						+ voornaam + " || tussenvoegsel: " + tussenvoegsel
 						+ " || achternaam " + achternaam);
 			}
+			ps.close();
+			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,20 +92,23 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 				System.out.println("|| Connection failed ||");
 			}
 			PreparedStatement ps = connection
-					.prepareStatement("SELECT * from GEBRUIKERS WHERE KLANTNUMMER = klantnummer");
+					.prepareStatement("SELECT * from GEBRUIKERS WHERE KLANTNR =" +  klantnummer);
 			ResultSet rs = ps.executeQuery();
-			voornaam = rs.getString("VOORNAAM");
-			tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-			achternaam = rs.getString("ACHTERNAAM");
-			adres = rs.getString("ADRES");
-			postcode = rs.getString("POSTCODE");
-			plaats = rs.getString("PLAATS");
-			email = rs.getString("EMAIL");
-			telefoonnummer = rs.getInt("TELEFOONNUMMER");
-			rekeningnummer = rs.getInt("REKENINGNUMMER");
-			krediet = rs.getDouble("KREDIET");
-			rol = rs.getInt("ROL");
-
+			while (rs.next()) {
+				voornaam = rs.getString("VOORNAAM");
+				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+				achternaam = rs.getString("ACHTERNAAM");
+				adres = rs.getString("ADRES");
+				postcode = rs.getString("POSTCODE");
+				plaats = rs.getString("PLAATS");
+				email = rs.getString("EMAIL");
+				telefoonnummer = rs.getInt("TELEFOONNUMMER");
+				rekeningnummer = rs.getInt("REKENINGNUMMER");
+				krediet = rs.getDouble("KREDIET");
+				rol = rs.getInt("ROL");
+			}
+			ps.close();
+			rs.close();
 			gebruiker = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
 					achternaam, adres, postcode, plaats, email, "",
 					telefoonnummer, rekeningnummer, krediet, rol);

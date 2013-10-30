@@ -23,7 +23,7 @@
 		</action>
 		<action name="UserZoeken" class="veilingActions.admin.UserZoeken">
 			<result name="success">/jsp/admin/userinformation.jsp</result>
-			<result name="success">/jsp/admin/users.jsp</result>
+			<result name="input">/jsp/admin/users.jsp</result>
 		</action>
 	</package>
 	
