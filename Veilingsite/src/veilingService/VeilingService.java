@@ -47,20 +47,25 @@ public class VeilingService {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.retrieve(email);
 	}
-
 	public static Gebruiker validateUserList(String ID) {
 		AdminDAO adminDAO = new AdminDAO();
 		return (Gebruiker) adminDAO.retrieve(ID);
 	}
-
-	public static void retrieveVeilingen(String categorie) {
-		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
-		aanbiedingDAO.retrieve(categorie);
-	}
-
 	public static Gebruiker retrieveUser(int klantnummer) {
 		AdminDAO adminDAO = new AdminDAO();
 		return adminDAO.retrieveUser(klantnummer);
+	}
+	public static void blockUser(int klantnummer) {
+		AdminDAO adminDAO = new AdminDAO();
+		adminDAO.blockUser(klantnummer);
+	}
+	public static void deblockUser(int klantnummer) {
+		AdminDAO adminDAO = new AdminDAO();
+		adminDAO.deblockUser(klantnummer);
+	}
+	public static void retrieveVeilingen(String categorie) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		aanbiedingDAO.retrieve(categorie);
 	}
 
 	public static boolean checkBoek(String isbn) {

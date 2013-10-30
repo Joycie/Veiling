@@ -25,13 +25,20 @@ public class Login extends ActionSupport {
 	public void validate() {
 		Gebruiker geb = VeilingService.validateUser(email);
 		if (geb != null) {
-			if (geb.getWachtwoord().equals(pass)) {
-				Map<String, Object> session = ActionContext.getContext()
-						.getSession();
-				session.put("gebruiker", geb);
+			if (geb.getRol() != 2) {
+				if (geb.getWachtwoord().equals(pass)) {
+					Map<String, Object> session = ActionContext.getContext()
+							.getSession();
+					session.put("gebruiker", geb);
+				} else {
+					addFieldError("pass",
+							"Gebruikersnaam of wachtwoord onjuist");
+				}
 			} else {
-				addFieldError("pass", "Gebruikersnaam of wachtwoord onjuist");
+				addFieldError("pass",
+						"Deze gebruiker is geblokkeerd. U kunt niet meer inloggen.");
 			}
+
 		} else {
 			addFieldError("pass",
 					"Email en wachtwoord combinatie is niet bekend");

@@ -118,7 +118,46 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 		GetConnection.closeConnection();
 		return gebruiker;
 	}
-
+	public void blockUser(int klantnummer)
+	{
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET ROL = 2 WHERE KLANTNR =" +  klantnummer);
+			ResultSet rs = ps.executeQuery();
+			ps.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+	}
+	public void deblockUser(int klantnummer)
+	{
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET ROL = 0 WHERE KLANTNR =" +  klantnummer);
+			ResultSet rs = ps.executeQuery();
+			ps.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+	}
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
 		return gebruikerslijst;
 	}
