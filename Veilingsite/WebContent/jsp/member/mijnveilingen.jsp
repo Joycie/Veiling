@@ -4,23 +4,27 @@
 <div class="content">
 	<h2>Mijn aanbiedingen</h2>
 	<table>
-		<tr class="thcolor">
-			<th>Titel</th>
-			<th>Auteur</th>
-			<th>Druk</th>
-			<th>Startprijs</th>
-			<th>Eindtijd</th>
-		</tr>
-		<s:if test="%{veilingen.isEmpty()}">
+		<s:if test="%{mijnveilingen.isEmpty()}">
+			<tr class="thcolor">
+			</tr>
 			<tr class="tdcolor">
 				<td>U heeft geen aanbiedingen op dit moment.</td>
-				<td></td>
+				<td><a
+					href="<%=request.getContextPath()%>/jsp/member/veilingtoevoegen.jsp">Nieuwe
+						veiling toevoegen</a></td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>
 		</s:if>
 		<s:else>
+			<tr class="thcolor">
+				<th>Titel</th>
+				<th>Auteur</th>
+				<th>Druk</th>
+				<th>Startprijs</th>
+				<th>Eindtijd</th>
+			</tr>
 			<s:iterator value="mijnveilingen">
 				<tr class="tdcolor">
 					<td><s:property value="boek.titel" /></td>
