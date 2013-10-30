@@ -152,5 +152,9 @@ public class VeilingService {
 		}
 		return false;
 	}
+	public static ArrayList<Aanbieding> getMijnveilingen(int klantnr) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
+	}
 
 }

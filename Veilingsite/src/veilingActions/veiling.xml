@@ -101,5 +101,8 @@
 			<result name="input">/jsp/member/veilingtoevoegen.jsp</result>
 			<result name="error">/jsp/member/checkisbn.jsp</result>
 		</action>
+		<action name="MijnVeilingen" class="veilingActions.member.GetMijnVeiling">
+			<result name="success">/jsp/member/mijnveilingen.jsp</result>
+		</action>
 	</package>
 </struts>

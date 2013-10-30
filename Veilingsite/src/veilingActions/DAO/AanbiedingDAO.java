@@ -15,6 +15,7 @@ import veilingService.VeilingService;
 
 public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	private static ArrayList<Aanbieding> veilingenlijst = new ArrayList<Aanbieding>();
+	private static ArrayList<Aanbieding> mijnveilingenlijst = new ArrayList<Aanbieding>();
 	private static ArrayList<Aanbieding> recenteveilinglijst = new ArrayList<Aanbieding>();
 
 	@Override
@@ -166,6 +167,44 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		GetConnection.closeConnection();
 		return aanb;
 	}
+	
+	public ArrayList<Aanbieding> retrieveMijnVeilingen(int klantnr){
+		Aanbieding aanb = null;
+		Boek boek = null;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+
+
+		PreparedStatement ps = connection
+				.prepareStatement("SELECT startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where gebruikers_klantnr = ? and boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
+		ps.setInt(1, klantnr);
+		ResultSet rs = ps.executeQuery();
+		mijnveilingenlijst.clear();
+		while (rs.next()) {
+			String titel = rs.getString("TITEL");
+			String auteur = rs.getString("AUTEUR");
+			double startprijs = rs.getDouble("STARTPRIJS");
+			Timestamp eindtijd = rs.getTimestamp("EINDTIJD");
+			int drukken_nummer = rs.getInt("NUMMER");
+			Date datum = rs.getDate("DATUM");
+			boek = new Boek("", 0, titel, 0, titel, "", "", auteur,
+					datum, 0);
+			aanb = new Aanbieding(0, startprijs, eindtijd, 0, "",
+					drukken_nummer, boek);
+			mijnveilingenlijst.add(aanb);
+		}} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return mijnveilingenlijst;
+	}
+	
 
 	@Override
 	public boolean update(Object T) {
