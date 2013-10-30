@@ -34,7 +34,6 @@
 			<result name="input" type="redirectAction">UserList</result>
 		</action>
 	</package>
-	
 	<package name="visitor" namespace="/visitor" extends="struts-default">
 		<action name="Register" class="veilingActions.visitor.Register">
 			<result name="input">/jsp/visitor/register.jsp</result>
