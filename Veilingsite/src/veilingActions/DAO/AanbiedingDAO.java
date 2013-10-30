@@ -258,8 +258,25 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 	@Override
 	public void delete(Object T) {
-		// TODO Auto-generated method stub
-
+		Aanbieding aanbieding = (Aanbieding) T;
+		System.out.println("v");
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection.prepareStatement("delete from aanbiedingen where id = ?");
+			ps.setInt(1, aanbieding.getId());
+			ResultSet rs = ps.executeQuery();
+			rs.close();
+			ps.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
 	}
 
 	public static ArrayList<Aanbieding> getVeilingenlijst() {

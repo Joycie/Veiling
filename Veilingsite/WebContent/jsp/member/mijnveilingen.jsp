@@ -24,14 +24,17 @@
 				<th>Druk</th>
 				<th>Startprijs</th>
 				<th>Eindtijd</th>
+				<th></th>
 			</tr>
 			<s:iterator value="mijnveilingen">
 				<tr class="tdcolor">
+				
 					<td><s:property value="boek.titel" /></td>
 					<td><s:property value="boek.auteur" /></td>
 					<td><s:property value="drukken_nummer" /></td>
 					<td><s:property value="startprijs" /></td>
 					<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+					<td><a href="../member/VeilingVerwijderen.action?id=<s:property value="id"/>">verwijderen</a></td>
 				</tr>
 			</s:iterator>
 		</s:else>

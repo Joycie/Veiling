@@ -107,5 +107,8 @@
 		<action name="MijnVeilingen" class="veilingActions.member.GetMijnVeiling">
 			<result name="success">/jsp/member/mijnveilingen.jsp</result>
 		</action>
+		<action name="VeilingVerwijderen" class="veilingActions.member.VeilingVerwijderen">
+			<result name="success" type="redirectAction">MijnVeilingen</result>
+		</action>
 	</package>
 </struts>

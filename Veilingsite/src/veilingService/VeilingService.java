@@ -156,13 +156,13 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
 	}
-<<<<<<< HEAD
+
 	
 	public static Aanbieding getAanbieding(int id) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getAanbieding(id);
 	}
-=======
+
 	public static boolean checkEmail(String email) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		ArrayList<String> alle_emails = gebruikerDAO.retrieveEmail();
@@ -176,5 +176,11 @@ public class VeilingService {
 		return false;
 	}
 
->>>>>>> 0b397e498b77b233281dc401cce2e1681830eff6
+	public static void deleteAanbieding(Aanbieding aanbieding) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		aanbiedingDAO.delete(aanbieding);
+		
+	}
+
+
 }
