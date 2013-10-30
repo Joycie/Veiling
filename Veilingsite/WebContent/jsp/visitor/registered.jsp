@@ -5,7 +5,7 @@
 	U bent succesvol geregistreerd. U ontvangt nu een mail op
 	<s:property value="Gebruiker.email"></s:property>
 	<br> <i>U wordt nu doorgestuurd naar de homepage</i> <br><a
-		href="<%=request.getContextPath()%>index.jsp">Klik hier als u
+		href="<%=request.getContextPath()%>">Klik hier als u
 		binnen 5 seconde niet wordt doorgestuurd.</a>
 </div>
 <%@ include file="../main/footer.jsp"%>

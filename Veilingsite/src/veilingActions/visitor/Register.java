@@ -11,14 +11,15 @@ public class Register extends ActionSupport {
 	private String voornaam, tussenvoegsel, achternaam, password,
 			passwordCheck, email, adres, postcode, plaats;
 	private int telefoonnummer, rekeningnummer;
+	private Gebruiker gebruiker;
 
 	public String execute() {
 		if (!VeilingService.checkEmail(email)) {
 			if (VeilingService.createGebruiker(voornaam, tussenvoegsel,
 					achternaam, adres, postcode, plaats, email, password,
 					telefoonnummer, rekeningnummer)) {
-				Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
-						achternaam, adres, postcode, plaats, email, password,
+				gebruiker = new Gebruiker(voornaam, tussenvoegsel, achternaam,
+						adres, postcode, plaats, email, password,
 						telefoonnummer, rekeningnummer);
 				return ActionSupport.SUCCESS;
 			}
@@ -84,23 +85,18 @@ public class Register extends ActionSupport {
 
 	public void setVoornaam(String voornaam) {
 		this.voornaam = voornaam;
-
 	}
 
 	public void setTussenvoegsel(String tussenvoegsel) {
 		this.tussenvoegsel = tussenvoegsel;
-
 	}
 
 	public void setAchternaam(String achternaam) {
 		this.achternaam = achternaam;
-
 	}
 
 	public void setPassword(String password) {
-
 		this.password = password;
-
 	}
 
 	public void setPasswordCheck(String passwordCheck) {
@@ -155,13 +151,10 @@ public class Register extends ActionSupport {
 	public void setPostcode(String postcode) {
 
 		this.postcode = postcode;
-
 	}
 
 	public void setPlaats(String plaats) {
-
 		this.plaats = plaats;
-
 	}
 
 	public int getTelefoonnummer() {
@@ -180,4 +173,11 @@ public class Register extends ActionSupport {
 		this.rekeningnummer = rekeningnummer;
 	}
 
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
+
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
+	}
 }
