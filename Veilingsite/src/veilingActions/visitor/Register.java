@@ -11,21 +11,25 @@ public class Register extends ActionSupport {
 	private String voornaam, tussenvoegsel, achternaam, password,
 			passwordCheck, email, adres, postcode, plaats;
 	private int telefoonnummer, rekeningnummer;
-	public String execute() {
 
-		if (VeilingService.createGebruiker(voornaam, tussenvoegsel, achternaam,
-				adres, postcode, plaats, email, password, telefoonnummer,
-				rekeningnummer)) {
-			Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel, achternaam,
-				adres, postcode, plaats, email, password, telefoonnummer,
-				rekeningnummer);
-			return ActionSupport.SUCCESS;
+	public String execute() {
+		if (!VeilingService.checkEmail(email)) {
+			if (VeilingService.createGebruiker(voornaam, tussenvoegsel,
+					achternaam, adres, postcode, plaats, email, password,
+					telefoonnummer, rekeningnummer)) {
+				Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
+						achternaam, adres, postcode, plaats, email, password,
+						telefoonnummer, rekeningnummer);
+				return ActionSupport.SUCCESS;
+			}
+			return ActionSupport.INPUT;
 		}
+		addFieldError("email", "email al in gebruik");
 		return ActionSupport.INPUT;
 	}
 
 	public void validate() {
-		
+
 		String stringTelefoonnummer = Integer.toString(telefoonnummer);
 		String stringRekeningnummer = Integer.toString(rekeningnummer);
 		System.out.println("|| Start register ||");
@@ -69,7 +73,8 @@ public class Register extends ActionSupport {
 		if (stringTelefoonnummer == null) {
 			addFieldError("telefoonnummer", "Geef een telefoonnummer op");
 		}
-		if (!stringTelefoonnummer.equals("") && !stringTelefoonnummer.matches("[0-9]{9}")) {
+		if (!stringTelefoonnummer.equals("")
+				&& !stringTelefoonnummer.matches("[0-9]{9}")) {
 			addFieldError("telefoonnummer", "Geef een geldig telefoonnummer op");
 		}
 		if (stringRekeningnummer.equals("")) {
@@ -174,6 +179,5 @@ public class Register extends ActionSupport {
 	public void setRekeningnummer(int rekeningnummer) {
 		this.rekeningnummer = rekeningnummer;
 	}
-	
 
 }

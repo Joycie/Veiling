@@ -156,5 +156,17 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
 	}
+	public static boolean checkEmail(String email) {
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		ArrayList<String> alle_emails = gebruikerDAO.retrieveEmail();
+		if (!alle_emails.isEmpty()) {
+			for (int i = 0; i < alle_emails.size(); i++) {
+				if (email.equals(alle_emails.get(i))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 }
