@@ -33,7 +33,8 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 			} else {
 				System.out.println("|| Connection failed ||");
 			}
-			PreparedStatement ps = connection.prepareStatement("SELECT * from GEBRUIKERS");
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * from GEBRUIKERS");
 			ResultSet rs = ps.executeQuery();
 			gebruikerslijst.clear();
 			while (rs.next()) {
@@ -49,9 +50,10 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 				rekeningnummer = rs.getInt("REKENINGNUMMER");
 				krediet = rs.getDouble("KREDIET");
 				rol = rs.getInt("ROL");
-				
+
 				Gebruiker geb = new Gebruiker(klantnummer, voornaam,
-						tussenvoegsel, achternaam, adres, postcode, plaats, email, "", telefoonnummer, rekeningnummer, krediet, rol);
+						tussenvoegsel, achternaam, adres, postcode, plaats,
+						email, "", telefoonnummer, rekeningnummer, krediet, rol);
 				gebruikerslijst.add(geb);
 				System.out.println("Klantnr: " + klantnummer + " || voornaam: "
 						+ voornaam + " || tussenvoegsel: " + tussenvoegsel
@@ -63,7 +65,6 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 		GetConnection.closeConnection();
 		return null;
 	}
-	
 
 	@Override
 	public boolean update(Object T) {
@@ -77,6 +78,41 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 
 	}
 
+	public Gebruiker retrieveUser(int klantnummer) {
+		Gebruiker gebruiker = null;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * from GEBRUIKERS WHERE KLANTNUMMER = klantnummer");
+			ResultSet rs = ps.executeQuery();
+			voornaam = rs.getString("VOORNAAM");
+			tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+			achternaam = rs.getString("ACHTERNAAM");
+			adres = rs.getString("ADRES");
+			postcode = rs.getString("POSTCODE");
+			plaats = rs.getString("PLAATS");
+			email = rs.getString("EMAIL");
+			telefoonnummer = rs.getInt("TELEFOONNUMMER");
+			rekeningnummer = rs.getInt("REKENINGNUMMER");
+			krediet = rs.getDouble("KREDIET");
+			rol = rs.getInt("ROL");
+
+			gebruiker = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
+					achternaam, adres, postcode, plaats, email, "",
+					telefoonnummer, rekeningnummer, krediet, rol);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return gebruiker;
+	}
+
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
 		return gebruikerslijst;
 	}
@@ -84,5 +120,5 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 	public static void setGebruikerslijst(ArrayList<Gebruiker> gebruikerslijst) {
 		AdminDAO.gebruikerslijst = gebruikerslijst;
 	}
-	
+
 }

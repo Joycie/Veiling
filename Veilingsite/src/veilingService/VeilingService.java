@@ -51,6 +51,10 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		aanbiedingDAO.retrieve(categorie);
 	}
+	public static Gebruiker retrieveUser(int klantnummer) {
+		AdminDAO adminDAO = new AdminDAO();
+		return adminDAO.retrieveUser(klantnummer);
+	}
 
 	public static boolean checkBoek(String isbn) {
 		BoekDAO boekDAO = new BoekDAO();
