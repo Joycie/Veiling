@@ -46,6 +46,9 @@
 		<action name="HuidigeVeilingen" class="veilingActions.visitor.GetVeilingen">
 			<result name="success">/jsp/visitor/huidigeveilingen.jsp</result>
 		</action>
+		<action name="GetVeiling" class="veilingActions.visitor.GetVeiling">
+			<result name="success">/jsp/visitor/veiling.jsp</result>
+		</action>
 	</package>
 
 	<package name="member" namespace="/member" extends="struts-default">
