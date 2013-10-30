@@ -18,7 +18,7 @@ public class UserDeblokkeren extends ActionSupport {
 	}
 	public void validate()
 	{
-		if (klantnummer == 0 || klantnummer == 1)
+		if (gebruiker.getRol() == 0 || gebruiker.getRol() == 1)
 		{
 			addActionMessage("De gebruiker is niet geblokkeerd.");
 		}

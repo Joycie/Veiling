@@ -1,10 +1,18 @@
 package veilingActions.DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import veilingActions.database.GetConnection;
 import veilingDomain.Gebruiker;
@@ -49,6 +57,28 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			return false;
 		}
 		GetConnection.closeConnection();
+		try {
+			Properties props = new Properties();
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", 465);
+			props.put("mail.smtp.ssl.enable", true);
+			Session mailSession = Session.getInstance(props);
+			MimeMessage msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress("multatuliveiling@gmail.com",
+					"Multatuli Veilingen"));
+			msg.setRecipients(Message.RecipientType.TO, gebruiker.getEmail());
+			msg.setSubject("Uw registratie bij Multatuli Veilingen");
+			msg.setSentDate(Calendar.getInstance().getTime());
+			msg.setText("Beste " + gebruiker.getVoornaam() + " "
+					+ gebruiker.getTussenvoegsel() + " "
+					+ gebruiker.getAchternaam()
+					+ ", Uw registratie is voltooid \n \n Email: "
+					+ gebruiker.getEmail() + "\n Wachtwoord: "
+					+ gebruiker.getWachtwoord());
+			Transport.send(msg, "multatuliveiling@gmail.com", "register_3");
+		} catch (Exception e) {
+		}
+
 		return true;
 	}
 
@@ -93,6 +123,31 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		}
 		GetConnection.closeConnection();
 		return geb;
+	}
+
+	public ArrayList<String> retrieveEmail() {
+		ArrayList<String> alle_emails = new ArrayList<String>();
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("select email from gebruikers");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String email = rs.getString("email");
+				alle_emails.add(email);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return alle_emails;
+
 	}
 
 	@Override

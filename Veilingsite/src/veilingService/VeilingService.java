@@ -156,9 +156,25 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
 	}
+<<<<<<< HEAD
 	
 	public static Aanbieding getAanbieding(int id) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getAanbieding(id);
 	}
+=======
+	public static boolean checkEmail(String email) {
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		ArrayList<String> alle_emails = gebruikerDAO.retrieveEmail();
+		if (!alle_emails.isEmpty()) {
+			for (int i = 0; i < alle_emails.size(); i++) {
+				if (email.equals(alle_emails.get(i))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+>>>>>>> 0b397e498b77b233281dc401cce2e1681830eff6
 }
