@@ -27,6 +27,7 @@ public class BoekDAO implements VeilingInterface<Boek> {
 	private static int druk;
 	private static File img;
 	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
+	private static ArrayList<Integer> drukkenlijst = new ArrayList<Integer>();
 
 	@Override
 	public boolean create(Object T) {
@@ -84,7 +85,7 @@ public class BoekDAO implements VeilingInterface<Boek> {
 
 	@Override
 	public Boek retrieve(String ID) {
-		
+
 		Boek boek = null;
 		Categorie categorie = null;
 		Connection connection = null;
@@ -128,9 +129,32 @@ public class BoekDAO implements VeilingInterface<Boek> {
 		GetConnection.closeConnection();
 		return boek;
 	}
-	
-	public void addImage(Veiling veiling, byte[] blob) {
-		
+
+	public ArrayList<Integer> retrieveDrukken(String isbn) {
+		drukkenlijst.clear();
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		try {
+			if (connection != null) {
+
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps2 = connection
+					.prepareStatement("select * from drukken where boeken_isbn="
+							+ isbn);
+			ResultSet rs2 = ps2.executeQuery();
+			boekenlijst.clear();
+			while (rs2.next()) {
+				druk = rs2.getInt("nummer");
+				drukkenlijst.add(druk);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return drukkenlijst;
+		}
+		return drukkenlijst;
 	}
 
 	@Override

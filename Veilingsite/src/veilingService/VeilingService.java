@@ -14,29 +14,35 @@ public class VeilingService {
 	private static ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
 	private static ArrayList<Categorie> categorielijst = new ArrayList<Categorie>();
 
-	public static boolean createGebruiker(String voornaam, String tussenvoegsel,
-			String achternaam, String adres, String postcode, String plaats, String email,
-			String password, int telefoonnummer, int rekeningnummer) {
+	public static boolean createGebruiker(String voornaam,
+			String tussenvoegsel, String achternaam, String adres,
+			String postcode, String plaats, String email, String password,
+			int telefoonnummer, int rekeningnummer) {
 
 		Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel,
-				achternaam, adres, postcode, plaats, email, password, telefoonnummer, rekeningnummer);
+				achternaam, adres, postcode, plaats, email, password,
+				telefoonnummer, rekeningnummer);
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.create(gebruiker);
 	}
-	
-	public static boolean updateGebruiker(String voornaam, String tussenvoegsel,
-			String achternaam, String adres, String postcode, String plaats, String email, int telefoonnummer, int rekeningnummer, int klantnr) {
+
+	public static boolean updateGebruiker(String voornaam,
+			String tussenvoegsel, String achternaam, String adres,
+			String postcode, String plaats, String email, int telefoonnummer,
+			int rekeningnummer, int klantnr) {
 		Gebruiker gebruiker = new Gebruiker(klantnr, voornaam, tussenvoegsel,
-				achternaam, adres, postcode, plaats, email, telefoonnummer, rekeningnummer);
+				achternaam, adres, postcode, plaats, email, telefoonnummer,
+				rekeningnummer);
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.update(gebruiker);
 	}
-	public static boolean updateKrediet(int klantnr, double saldo)
-	{
+
+	public static boolean updateKrediet(int klantnr, double saldo) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.updateKrediet(klantnr, saldo);
-		
+
 	}
+
 	public static Gebruiker validateUser(String email) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.retrieve(email);
@@ -51,6 +57,7 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		aanbiedingDAO.retrieve(categorie);
 	}
+
 	public static Gebruiker retrieveUser(int klantnummer) {
 		AdminDAO adminDAO = new AdminDAO();
 		return adminDAO.retrieveUser(klantnummer);
@@ -77,7 +84,8 @@ public class VeilingService {
 		BoekDAO boekDAO = new BoekDAO();
 		return boekDAO.create(boek);
 	}
-	public static boolean voegVeilingToe(Aanbieding aanbieding){
+
+	public static boolean voegVeilingToe(Aanbieding aanbieding) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.create(aanbieding);
 	}
@@ -121,9 +129,23 @@ public class VeilingService {
 				BoekDAO.getBoekenlijst());
 		return boekenlijst;
 	}
-	public static Boek getBoek(String isbn){
+
+	public static Boek getBoek(String isbn) {
 		BoekDAO boekDAO = new BoekDAO();
 		return boekDAO.retrieve(isbn);
+	}
+
+	public static boolean checkDruk(String isbn, int nummer) {
+		BoekDAO boekDAO = new BoekDAO();
+		ArrayList<Integer> drukkenlijst = boekDAO.retrieveDrukken(isbn);
+		if (!drukkenlijst.isEmpty()) {
+			for (int i = 0; i < drukkenlijst.size(); i++) {
+				if (nummer == drukkenlijst.get(i)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
