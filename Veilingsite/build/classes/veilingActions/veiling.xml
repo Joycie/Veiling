@@ -26,11 +26,11 @@
 			<result name="input" type="redirectAction">UserList</result>
 		</action>
 		<action name="UserBlokkeren" class="veilingActions.admin.UserBlokkeren">
-			<result name="success" type="redirectAction">UserZoeken</result>
+			<result name="success">/jsp/admin/userinformation.jsp</result>
 			<result name="input" type="redirectAction">UserList</result>
 		</action>
 		<action name="UserDeblokkeren" class="veilingActions.admin.UserDeblokkeren">
-			<result name="success" type="redirectAction">UserZoeken</result>
+			<result name="success">/jsp/admin/userinformation.jsp</result>
 			<result name="input" type="redirectAction">UserList</result>
 		</action>
 	</package>

@@ -27,12 +27,17 @@
 		<br>
 		Rol: <s:property value="Gebruiker.rol" />
 		<br>
+		<s:if test="hasActionMessages()">
+			<s:actionmessage />
+		</s:if>
 		<s:if test="Gebruiker.rol == 0 || Gebruiker.rol == 1">
-			<a href="../admin/UserBlokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
+			<a
+				href="../admin/UserBlokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				blokkeren</a>
 		</s:if>
 		<s:if test="Gebruiker.rol == 2">
-			<a href="../admin/UserDeblokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
+			<a
+				href="../admin/UserDeblokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				Blokkering opheffen</a>
 		</s:if>
 	</s:if>

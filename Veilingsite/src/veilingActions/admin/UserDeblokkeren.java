@@ -13,9 +13,16 @@ public class UserDeblokkeren extends ActionSupport {
 	public String execute() {
 		System.out.println("Klantnummer: " + klantnummer);
 		VeilingService.deblockUser(klantnummer);
+		gebruiker = VeilingService.retrieveUser(klantnummer);
 		return SUCCESS;
 	}
-
+	public void validate()
+	{
+		if (klantnummer == 0 || klantnummer == 1)
+		{
+			addActionMessage("De gebruiker is niet geblokkeerd.");
+		}
+	}
 	public Gebruiker getGebruiker() {
 		return gebruiker;
 	}
