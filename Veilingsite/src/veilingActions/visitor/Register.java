@@ -1,11 +1,13 @@
 package veilingActions.visitor;
 
+import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class Register extends ActionSupport {
 
+	private static final long serialVersionUID = 1L;
 	private String voornaam, tussenvoegsel, achternaam, password,
 			passwordCheck, email, adres, postcode, plaats;
 	private int telefoonnummer, rekeningnummer;
@@ -14,6 +16,9 @@ public class Register extends ActionSupport {
 		if (VeilingService.createGebruiker(voornaam, tussenvoegsel, achternaam,
 				adres, postcode, plaats, email, password, telefoonnummer,
 				rekeningnummer)) {
+			Gebruiker gebruiker = new Gebruiker(voornaam, tussenvoegsel, achternaam,
+				adres, postcode, plaats, email, password, telefoonnummer,
+				rekeningnummer);
 			return ActionSupport.SUCCESS;
 		}
 		return ActionSupport.INPUT;

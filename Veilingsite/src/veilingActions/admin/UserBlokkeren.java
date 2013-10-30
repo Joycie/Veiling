@@ -18,7 +18,7 @@ public class UserBlokkeren extends ActionSupport {
 	}
 	public void validate()
 	{
-		if (klantnummer == 2)
+		if (gebruiker.getRol() == 2)
 		{
 			addActionMessage("De gebruiker is al geblokkeerd.");
 		}

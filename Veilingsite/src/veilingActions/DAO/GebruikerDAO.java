@@ -1,10 +1,17 @@
 package veilingActions.DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import veilingActions.database.GetConnection;
 import veilingDomain.Gebruiker;
@@ -49,6 +56,26 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 			return false;
 		}
 		GetConnection.closeConnection();
+		try {
+			Properties props = new Properties();
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", 465);
+			props.put("mail.smtp.ssl.enable", true);
+			Session mailSession = Session.getInstance(props);
+			MimeMessage msg = new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(
+					"multatuliveiling@gmail.com", "Multatuli Veilingen"));
+			msg.setRecipients(Message.RecipientType.TO,
+					gebruiker.getEmail());
+			msg.setSubject("Uw registratie bij Multatuli Veilingen");
+			msg.setSentDate(Calendar.getInstance().getTime());
+			msg.setText("Beste " + gebruiker.getVoornaam() + " " + gebruiker.getTussenvoegsel() + " " + gebruiker.getAchternaam() + 
+					", Uw registratie is voltooid \n \n Email: " + gebruiker.getEmail() + "\n Wachtwoord: " +  gebruiker.getWachtwoord());
+			Transport.send(msg, "multatuliveiling@gmail.com",
+					"register_3");
+		} catch (Exception e) {
+		}
+		
 		return true;
 	}
 
