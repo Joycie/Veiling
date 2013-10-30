@@ -40,6 +40,26 @@
 				href="../admin/UserDeblokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				Blokkering opheffen</a>
 		</s:if>
+		<hr>
+		Aanbiedingen van deze gebruiker:
+		<table>
+			<tr class="thcolor">
+				<th>ID</th>
+				<th>Titel</th>
+				<th>Auteur</th>
+				<th>Eindtijd</th>
+			</tr>
+			<s:iterator value="aanbiedingen">
+				<tr class="tdcolor">
+					<td><a
+						href="../member/GetAanbieding.action?id=<s:property value="id"/>"><s:property
+								value="id" /></a></td>
+					<td><s:property value="boek.titel" /></td>
+					<td><s:property value="boek.auteur" /></td>
+					<td><s:property value="eindtijd" /></td>
+				</tr>
+			</s:iterator>
+		</table>
 	</s:if>
 	<s:else>
 	    	Geen toegang.

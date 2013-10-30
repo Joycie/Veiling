@@ -182,20 +182,29 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 
 		PreparedStatement ps = connection
-				.prepareStatement("SELECT startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where gebruikers_klantnr = ? and boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
+				.prepareStatement("SELECT * from boeken, drukken, aanbiedingen where gebruikers_klantnr = ? and boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
 		ps.setInt(1, klantnr);
 		ResultSet rs = ps.executeQuery();
 		mijnveilingenlijst.clear();
 		while (rs.next()) {
+			int id = rs.getInt("ID");
+			String isbn = rs.getString("ISBN");
+			int aantalpagina = rs.getInt("AANTALPAGINA");
 			String titel = rs.getString("TITEL");
+			int druk = rs.getInt("NUMMER");
+			String beschrijving = rs.getString("BESCHRIJVING");
+			String uitgeverij = rs.getString("BESCHRIJVING");
+			String taal = rs.getString("TAAL");	
 			String auteur = rs.getString("AUTEUR");
+			Date datum = rs.getDate("DATUM");
+			int categorie = rs.getInt("CATEGORIE");
 			double startprijs = rs.getDouble("STARTPRIJS");
 			Timestamp eindtijd = rs.getTimestamp("EINDTIJD");
 			int drukken_nummer = rs.getInt("NUMMER");
-			Date datum = rs.getDate("DATUM");
-			boek = new Boek("", 0, titel, 0, titel, "", "", auteur,
-					datum, 0);
-			aanb = new Aanbieding(0, startprijs, eindtijd, 0, "",
+			String drukken_isbn = rs.getString("DRUKKEN_BOEKEN_ISBN");
+			boek = new Boek(isbn, aantalpagina, titel, druk, beschrijving, uitgeverij, taal, auteur,
+					datum, categorie);
+			aanb = new Aanbieding(id, startprijs, eindtijd, klantnr, drukken_isbn,
 					drukken_nummer, boek);
 			mijnveilingenlijst.add(aanb);
 		}} catch (Exception e) {
