@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import veilingActions.database.GetConnection;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
+import veilingDomain.Gebruiker;
 import veilingInterface.VeilingInterface;
 import veilingService.VeilingService;
 
@@ -59,6 +60,39 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		return true;
 
 	}
+	
+	public Aanbieding getAanbieding(int id) {
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		Aanbieding aanbieding = null;
+		try {
+			PreparedStatement ps = connection.prepareStatement("select * from boeken, aanbiedingen where aanbiedingen.id = ? and boeken.isbn = aanbiedingen.drukken_boeken_isbn");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Boek boek = new Boek(rs.getString("isbn"), 
+						rs.getInt("aantalpagina"), 
+						rs.getString("titel"), 
+						rs.getInt("drukken_nummer"), 
+						rs.getString("beschrijving"), 
+						rs.getString("uitgeverij"), 
+						rs.getString("taal"), 
+						rs.getString("auteur"), 
+						rs.getDate("datum"), 
+						rs.getInt("categorie"));
+				//int gebruiker = new Gebruiker(0, null, null, null, null, null, null, null, 0, 0);
+				aanbieding = new Aanbieding(rs.getInt("id"), 
+						rs.getDouble("startprijs"), 
+						rs.getTimestamp("eindtijd"), 
+						rs.getInt("gebruikers_klantnr"), 
+						rs.getString("isbn"), 
+						rs.getInt("drukken_nummer"), boek);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return aanbieding;
+	}
 
 	@Override
 	public Aanbieding retrieve(String stringCategorie) {
@@ -79,10 +113,11 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 				// Alle lopende veilingen
 				PreparedStatement ps = connection
-						.prepareStatement("SELECT startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
+						.prepareStatement("SELECT id, startprijs, eindtijd, titel, datum, drukken.nummer, auteur from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
+					int id = rs.getInt("id");
 					String titel = rs.getString("TITEL");
 					String auteur = rs.getString("AUTEUR");
 					double startprijs = rs.getDouble("STARTPRIJS");
@@ -91,7 +126,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 					Date datum = rs.getDate("DATUM");
 					boek = new Boek("", 0, titel, 0, titel, "", "", auteur,
 							datum, 0);
-					aanb = new Aanbieding(0, startprijs, eindtijd, 0, "",
+					aanb = new Aanbieding(id, startprijs, eindtijd, 0, "",
 							drukken_nummer, boek);
 					veilingenlijst.add(aanb);
 				}

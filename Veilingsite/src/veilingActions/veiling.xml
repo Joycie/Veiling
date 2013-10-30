@@ -46,8 +46,8 @@
 		<action name="HuidigeVeilingen" class="veilingActions.visitor.GetVeilingen">
 			<result name="success">/jsp/visitor/huidigeveilingen.jsp</result>
 		</action>
-		<action name="GetVeiling" class="veilingActions.visitor.GetVeiling">
-			<result name="success">/jsp/visitor/veiling.jsp</result>
+		<action name="GetAanbieding" class="veilingActions.visitor.GetAanbieding">
+			<result name="success">/jsp/visitor/aanbieding.jsp</result>
 		</action>
 	</package>
 

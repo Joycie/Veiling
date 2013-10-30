@@ -156,5 +156,9 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
 	}
-
+	
+	public static Aanbieding getAanbieding(int id) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.getAanbieding(id);
+	}
 }

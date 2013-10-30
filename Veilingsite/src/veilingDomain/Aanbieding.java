@@ -13,9 +13,9 @@ public class Aanbieding {
 	private Boek boek;
 	private byte[] img;
 
-	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b) 
+	public Aanbieding(int boekid, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b) 
 	{
-		this.id = id;
+		id = boekid;
 		startprijs = start;
 		eindtijd = eind;
 		gebruikers_klantnr = geb_klant;
@@ -24,9 +24,9 @@ public class Aanbieding {
 		boek = b;
 	}
 	
-	public Aanbieding(int id, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b, byte[] i) 
+	public Aanbieding(int boekid, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b, byte[] i) 
 	{
-		this.id = id;
+		id = boekid;
 		startprijs = start;
 		eindtijd = eind;
 		gebruikers_klantnr = geb_klant;
