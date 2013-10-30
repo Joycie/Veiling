@@ -42,8 +42,9 @@ public class VeilingService {
 		return gebruikerDAO.retrieve(email);
 	}
 
-	public static void validateUserList() {
-		UserListDAO.validate();
+	public static Gebruiker validateUserList(String ID) {
+		AdminDAO adminDAO = new AdminDAO();
+		return (Gebruiker) adminDAO.retrieve(ID);
 	}
 
 	public static void retrieveVeilingen(String categorie) {
@@ -81,12 +82,12 @@ public class VeilingService {
 
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
 		ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>(
-				UserListDAO.getGebruikerslijst());
+				AdminDAO.getGebruikerslijst());
 		return gebruikerslijst;
 	}
 
 	public static void setGebruikerslijst() {
-		VeilingService.gebruikerslijst = UserListDAO.getGebruikerslijst();
+		VeilingService.gebruikerslijst = AdminDAO.getGebruikerslijst();
 	}
 
 	public static ArrayList<Categorie> getCategorielijst() {
