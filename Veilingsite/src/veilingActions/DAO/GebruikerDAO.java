@@ -124,6 +124,48 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		GetConnection.closeConnection();
 		return geb;
 	}
+	
+	public Gebruiker retrieveById(int klantnr) {
+		Gebruiker geb = null;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("select * from gebruikers where klantnr=?");
+			ps.setInt(1, klantnr);
+			System.out.println("Gebruiker: " + klantnr);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int klantnummer = rs.getInt("KLANTNR");
+				String voornaam = rs.getString("VOORNAAM");
+				String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+				String achternaam = rs.getString("ACHTERNAAM");
+				String adres = rs.getString("ADRES");
+				String postcode = rs.getString("POSTCODE");
+				String email = rs.getString("EMAIL");
+				String wachtwoord = rs.getString("WACHTWOORD");
+				int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+				int rekeningnummer = rs.getInt("REKENINGNUMMER");
+				String plaats = rs.getString("PLAATS");
+				double krediet = rs.getDouble("KREDIET");
+				int rol = rs.getInt("rol");
+
+				geb = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
+						achternaam, adres, postcode, plaats, email, wachtwoord,
+						telefoonnummer, rekeningnummer, krediet, rol);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return geb;
+	}
 
 	public ArrayList<String> retrieveEmail() {
 		ArrayList<String> alle_emails = new ArrayList<String>();

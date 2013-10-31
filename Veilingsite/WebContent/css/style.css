@@ -251,5 +251,112 @@ td {
 	padding: 3px;
 }
 
+.block
+{
+	background-color: #EBEBEB;
+	padding: 15px;
+}
+
+.block img
+{
+	float: left;
+	width: 200px;
+	height: 200px;
+}
+
+.block .info
+{
+	float: left;
+	padding-left: 15px;
+}
+
+.block p, .block h3, .block .info div
+{
+	padding: 0px;
+	padding-bottom: 0px;
+	font-size: 12pt;
+	margin: 0px;
+	width: 755px;
+}
+
+.block input[type="text"]
+{
+	border: 1px solid #007893;
+	margin-top: 10px;
+	font-size: 10pt;
+	font-family: arial;
+	padding: 5px;
+	margin-right: 0px;
+	width: 70px;
+}
+
+.block input[type="submit"]
+{
+	border: 1px solid #007893;
+	border-left: 0px;
+	background-color: #007893;
+	color: white;
+	margin-top: 10px;
+	font-size: 10pt;
+	font-family: arial;
+	padding: 5px;
+	margin-left: 0px;
+}
+
+.block input[type="submit"]:hover
+{
+	background-color: #0094B5;
+}
+
+.action-block
+{
+	padding-bottom: 0px;
+}
+
+.action-block h4, .action-block p
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+.action-block
+{
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+.block h3
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 35pt;
+	height: 125px;
+	color: #007893;
+}
+
+.info form
+{
+	float: right;
+	margin-bottom: 0px;
+	padding-right: 0px;
+}
+
+.sidebar
+{
+	float: left;
+	padding: 15px;
+	width:  200px;
+	padding-bottom: 0px;
+}
+
+.sidebar h4
+{
+	margin-bottom: 0px;
+}
+
+.sidebar p
+{
+	margin-top: 5px;
+}
 
 
