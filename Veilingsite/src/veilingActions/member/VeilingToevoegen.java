@@ -13,13 +13,11 @@ import org.apache.struts2.interceptor.SessionAware;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
-import veilingDomain.Veiling;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class VeilingToevoegen extends ActionSupport implements SessionAware {
-	private Veiling veiling = new Veiling();
 	private int id = 0;
 	private double startprijs;
 	private Timestamp eindtijd;

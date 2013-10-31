@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import veilingActions.database.GetConnection;
+import veilingActions.visitor.GetAanbieding;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
@@ -268,8 +269,9 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			} else {
 				System.out.println("|| Connection failed ||");
 			}
-			PreparedStatement ps = connection.prepareStatement("delete from aanbiedingen where id = ?");
+			PreparedStatement ps = connection.prepareStatement("delete from aanbiedingen where id = ? and gebruikers_klantnr =?");
 			ps.setInt(1, aanbieding.getId());
+			ps.setInt(2, aanbieding.getGebruikers_klantnr());
 			ResultSet rs = ps.executeQuery();
 			rs.close();
 			ps.close();
@@ -294,6 +296,11 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	public static void setRecenteveilinglijst(
 			ArrayList<Aanbieding> recenteveilinglijst) {
 		AanbiedingDAO.recenteveilinglijst = recenteveilinglijst;
+	}
+
+	public static GetAanbieding findById(String veilingid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

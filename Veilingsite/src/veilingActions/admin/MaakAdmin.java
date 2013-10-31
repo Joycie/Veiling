@@ -13,37 +13,36 @@ import veilingService.VeilingService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
-public class UserDeblokkeren extends ActionSupport implements SessionAware {
+public class MaakAdmin extends ActionSupport implements SessionAware {
 	private SessionMap session;
 	private int klantnummer;
 	private Gebruiker gebruiker, sessionGebruiker;
 	private ArrayList<Aanbieding> aanbiedingen = new ArrayList<Aanbieding>();
+
 	public String execute() {
-		VeilingService.deblockUser(klantnummer);
+		VeilingService.giveAdmin(klantnummer);
 		gebruiker = VeilingService.retrieveUser(klantnummer);
 		return SUCCESS;
 	}
-	public void validate()
-	{
-		gebruiker = VeilingService.retrieveUser(klantnummer);
-		
+
+	public void validate() {
 		SessionMap<String, String> sessionmap;
 		sessionGebruiker = (Gebruiker) session.get("gebruiker");
+		
+		gebruiker = VeilingService.retrieveUser(klantnummer);
 		aanbiedingen = VeilingService.getMijnveilingen(klantnummer);
 		
-		if (gebruiker.getRol() == 0)
-		{
-			addActionError("De gebruiker is niet geblokkeerd.");
+		if (gebruiker.getRol() == 2) {
+			addActionError("De gebruiker is geblokkeerd.");
 		}
-		if (gebruiker.getRol() == 1)
-		{
-			addActionError("De gebruiker is een administrator en kan dus niet worden geblokkeerd.");
+		if (gebruiker.getRol() == 1) {
+			addActionError("De gebruiker is al een admin.");
 		}
-		if (sessionGebruiker.getKlantnummer() == gebruiker.getKlantnummer())
-		{
-			addActionError("Je kan je eigen blokkering niet opheffen.");
+		if (sessionGebruiker.getKlantnummer() == gebruiker.getKlantnummer()) {
+			addActionError("Je kan je eigen adminrechten niet innemen.");
 		}
 	}
+
 	public Gebruiker getGebruiker() {
 		return gebruiker;
 	}
@@ -59,20 +58,25 @@ public class UserDeblokkeren extends ActionSupport implements SessionAware {
 	public void setKlantnummer(int klantnummer) {
 		this.klantnummer = klantnummer;
 	}
+
 	@Override
 	public void setSession(Map<String, Object> session) {
 		// TODO Auto-generated method stub
 		this.session = (SessionMap) session;
 	}
+
 	public Gebruiker getSessionGebruiker() {
 		return sessionGebruiker;
 	}
+
 	public void setSessionGebruiker(Gebruiker sessionGebruiker) {
 		this.sessionGebruiker = sessionGebruiker;
 	}
+
 	public ArrayList<Aanbieding> getAanbiedingen() {
 		return aanbiedingen;
 	}
+
 	public void setAanbiedingen(ArrayList<Aanbieding> aanbiedingen) {
 		this.aanbiedingen = aanbiedingen;
 	}

@@ -1,27 +1,47 @@
 package veilingActions.admin;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
+import veilingDomain.Aanbieding;
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
-public class UserBlokkeren extends ActionSupport {
-	private Gebruiker gebruiker;
+public class UserBlokkeren extends ActionSupport implements SessionAware {
+	private SessionMap session;
 	private int klantnummer;
-
+	private Gebruiker gebruiker, sessionGebruiker;
+	private ArrayList<Aanbieding> aanbiedingen = new ArrayList<Aanbieding>();
 	public String execute() {
-		System.out.println("Klantnummer: " + klantnummer);
 		VeilingService.blockUser(klantnummer);
 		gebruiker = VeilingService.retrieveUser(klantnummer);
 		return SUCCESS;
 	}
 	public void validate()
 	{
+		SessionMap<String, String> sessionmap;
+		sessionGebruiker = (Gebruiker) session.get("gebruiker");
+		gebruiker = VeilingService.retrieveUser(klantnummer);
+		aanbiedingen = VeilingService.getMijnveilingen(klantnummer);
 		if (gebruiker.getRol() == 2)
 		{
-			addActionMessage("De gebruiker is al geblokkeerd.");
+			addActionError("De gebruiker is al geblokkeerd.");
 		}
+		if (gebruiker.getRol() == 1)
+		{
+			addActionError("U kunt een administrator niet blokkeren.");
+		}
+		if (sessionGebruiker.getKlantnummer() == gebruiker.getKlantnummer())
+		{
+			addActionError("Je kan jezelf niet blokkeren.");
+		}
+
 	}
 	public Gebruiker getGebruiker() {
 		return gebruiker;
@@ -38,5 +58,22 @@ public class UserBlokkeren extends ActionSupport {
 	public void setKlantnummer(int klantnummer) {
 		this.klantnummer = klantnummer;
 	}
-
+	@Override
+	public void setSession(Map<String, Object> session) {
+		// TODO Auto-generated method stub
+		this.session = (SessionMap) session;
+	}
+	public Gebruiker getSessionGebruiker() {
+		return sessionGebruiker;
+	}
+	public void setSessionGebruiker(Gebruiker sessionGebruiker) {
+		this.sessionGebruiker = sessionGebruiker;
+	}
+	public ArrayList<Aanbieding> getAanbiedingen() {
+		return aanbiedingen;
+	}
+	public void setAanbiedingen(ArrayList<Aanbieding> aanbiedingen) {
+		this.aanbiedingen = aanbiedingen;
+	}
+	
 }

@@ -27,39 +27,61 @@
 		<br>
 		Rol: <s:property value="Gebruiker.rol" />
 		<br>
+		<s:if test="hasActionErrors()">
+			<s:actionerror />
+		</s:if>
 		<s:if test="hasActionMessages()">
 			<s:actionmessage />
 		</s:if>
-		<s:if test="Gebruiker.rol == 0 || Gebruiker.rol == 1">
+		<s:if
+			test="Gebruiker.rol == 0 && Gebruiker.klantnummer != 11 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
 			<a
 				href="../admin/UserBlokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				blokkeren</a>
 		</s:if>
-		<s:if test="Gebruiker.rol == 2">
+		<s:if
+			test="Gebruiker.rol == 2 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
 			<a
 				href="../admin/UserDeblokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				Blokkering opheffen</a>
 		</s:if>
+		<s:if
+			test="Gebruiker.rol == 0 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
+			<a
+				href="../admin/MaakAdmin.action?klantnummer=<s:property value="klantnummer"/>">Geef
+				administrator rechten</a>
+		</s:if>
+		<s:if
+			test="Gebruiker.rol == 1 && Gebruiker.klantnummer != 11 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
+			<a
+				href="../admin/OntneemAdmin.action?klantnummer=<s:property value="klantnummer"/>">Neem
+				administrator rechten in</a>
+		</s:if>
 		<hr>
+		<s:if test="%{aanbiedingen.isEmpty()}">
+		Deze gebruiker heeft geen aanbiedingen
+		</s:if>
+		<s:else>
 		Aanbiedingen van deze gebruiker:
 		<table>
-			<tr class="thcolor">
-				<th>ID</th>
-				<th>Titel</th>
-				<th>Auteur</th>
-				<th>Eindtijd</th>
-			</tr>
-			<s:iterator value="aanbiedingen">
-				<tr class="tdcolor">
-					<td><a
-						href="../member/GetAanbieding.action?id=<s:property value="id"/>"><s:property
-								value="id" /></a></td>
-					<td><s:property value="boek.titel" /></td>
-					<td><s:property value="boek.auteur" /></td>
-					<td><s:property value="eindtijd" /></td>
+				<tr class="thcolor">
+					<th>ID</th>
+					<th>Titel</th>
+					<th>Auteur</th>
+					<th>Eindtijd</th>
 				</tr>
-			</s:iterator>
-		</table>
+				<s:iterator value="aanbiedingen">
+					<tr class="tdcolor">
+						<td><a
+							href="../member/GetAanbieding.action?id=<s:property value="id"/>"><s:property
+									value="id" /></a></td>
+						<td><s:property value="boek.titel" /></td>
+						<td><s:property value="boek.auteur" /></td>
+						<td><s:property value="eindtijd" /></td>
+					</tr>
+				</s:iterator>
+			</table>
+		</s:else>
 	</s:if>
 	<s:else>
 	    	Geen toegang.

@@ -27,11 +27,23 @@
 		</action>
 		<action name="UserBlokkeren" class="veilingActions.admin.UserBlokkeren">
 			<result name="success">/jsp/admin/userinformation.jsp</result>
-			<result name="input" type="redirectAction">UserList</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
 		</action>
 		<action name="UserDeblokkeren" class="veilingActions.admin.UserDeblokkeren">
 			<result name="success">/jsp/admin/userinformation.jsp</result>
-			<result name="input" type="redirectAction">UserList</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
+		</action>
+		<action name="MaakAdmin" class="veilingActions.admin.MaakAdmin">
+			<result name="success">/jsp/admin/userinformation.jsp</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
+		</action>
+		<action name="OntneemAdmin" class="veilingActions.admin.OntneemAdmin">
+			<result name="success">/jsp/admin/userinformation.jsp</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
+		</action>
+		<action name="GetStatistieken" class="veilingActions.admin.GetStatistieken">
+			<result name="success">/jsp/admin/statistieken.jsp</result>
+			<result name="input" type="redirectAction">Menu</result>
 		</action>
 	</package>
 	<package name="visitor" namespace="/visitor" extends="struts-default">
@@ -74,8 +86,11 @@
 			<result name="success">/jsp/member/checkisbn.jsp</result>
 		</action>
 		<action name="CheckIsbn" class="veilingActions.member.CheckIsbn">
-			<result name="input">/jsp/member/boektoevoegen.jsp</result>
+			<result name="input" type="redirectAction">GetCategorie</result>
 			<result name="success" type="redirectAction">BookInfo</result>
+		</action>
+		<action name="GetCategorie" class="veilingActions.member.GetCategorie">
+			<result name="success">/jsp/member/boektoevoegen.jsp</result>
 		</action>
 		<action name="BookInfo" class="veilingActions.member.BoekInfo">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
@@ -96,6 +111,10 @@
 		</action>
 		
 		<action name="BoekToevoegen" class="veilingActions.member.BoekToevoegen">
+			<result name="success">/jsp/member/checkisbn.jsp</result>
+			<result name="input">/jsp/member/checkisbn.jsp</result>
+		</action>
+		<action name="BoekWijzigen" class="veilingActions.member.BoekWijzigen">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
 			<result name="input">/jsp/member/checkisbn.jsp</result>
 		</action>

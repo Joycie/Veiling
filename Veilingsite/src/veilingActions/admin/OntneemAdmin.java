@@ -13,35 +13,39 @@ import veilingService.VeilingService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
-public class UserDeblokkeren extends ActionSupport implements SessionAware {
+public class OntneemAdmin extends ActionSupport implements SessionAware{
 	private SessionMap session;
 	private int klantnummer;
 	private Gebruiker gebruiker, sessionGebruiker;
 	private ArrayList<Aanbieding> aanbiedingen = new ArrayList<Aanbieding>();
 	public String execute() {
-		VeilingService.deblockUser(klantnummer);
+		VeilingService.takeAdmin(klantnummer);
 		gebruiker = VeilingService.retrieveUser(klantnummer);
 		return SUCCESS;
 	}
 	public void validate()
 	{
-		gebruiker = VeilingService.retrieveUser(klantnummer);
-		
 		SessionMap<String, String> sessionmap;
 		sessionGebruiker = (Gebruiker) session.get("gebruiker");
+		
+		gebruiker = VeilingService.retrieveUser(klantnummer);
 		aanbiedingen = VeilingService.getMijnveilingen(klantnummer);
 		
+		if (gebruiker.getRol() == 2)
+		{
+			addActionError("De gebruiker is geblokkeerd.");
+		}
 		if (gebruiker.getRol() == 0)
 		{
-			addActionError("De gebruiker is niet geblokkeerd.");
+			addActionError("De gebruiker is geen admin.");
 		}
-		if (gebruiker.getRol() == 1)
+		if (gebruiker.getKlantnummer() == 11)
 		{
-			addActionError("De gebruiker is een administrator en kan dus niet worden geblokkeerd.");
+			addActionError("Dit is een superadmin.");
 		}
 		if (sessionGebruiker.getKlantnummer() == gebruiker.getKlantnummer())
 		{
-			addActionError("Je kan je eigen blokkering niet opheffen.");
+			addActionMessage("Je kan je eigen adminrechten niet innemen.");
 		}
 	}
 	public Gebruiker getGebruiker() {

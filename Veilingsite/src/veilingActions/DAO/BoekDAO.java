@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
 import veilingDomain.Categorie;
-import veilingDomain.Veiling;
 import veilingInterface.VeilingInterface;
 
 public class BoekDAO implements VeilingInterface<Boek> {
@@ -159,9 +158,36 @@ public class BoekDAO implements VeilingInterface<Boek> {
 
 	@Override
 	public boolean update(Object T) {
-		// TODO Auto-generated method stub
-		return false;
+		Boek boek = (Boek) T;
+		Categorie categorie = null;
+		Connection connection = null;
+		try {
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE BOEKEN SET TITEL = ? , BESCHRIJVING = ?, UITGEVERIJ = ?, DATUM = ?, TAAL = ?, AANTALPAGINA = ?, AUTEUR = ?, CATEGORIE = ? WHERE ISBN = ?");
+			ps.setString(9, boek.getIsbn());
+			ps.setString(1, boek.getTitel());
+			ps.setString(2, boek.getBeschrijving());
+			ps.setString(3, boek.getUitgeverij());
+			ps.setDate(4, boek.getDatum());
+			ps.setString(5, boek.getTaal());
+			ps.setInt(6, boek.getAantalpagina());
+			ps.setString(7, boek.getAuteur());
+			ps.setInt(8, boek.getCategorie());
+			ResultSet rs = ps.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
 	}
+
 
 	@Override
 	public void delete(Object T) {
