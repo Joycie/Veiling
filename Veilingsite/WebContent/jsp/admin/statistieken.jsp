@@ -3,9 +3,9 @@
 <%@ include file="../main/header.jsp"%>
 <div class="content">
 	<s:if test="#session.gebruiker.rol == 1">
-		Aantal gebruikers: <s:property value="Statistiek.aantalgebruikers" /><br>
+		Aantal gebruikers: <a href="<%=request.getContextPath()%>/admin/UserList.action"><s:property value="Statistiek.aantalgebruikers" /></a><br>
 		Totaal Aantal aanbiedingen: <s:property value="Statistiek.totaalaantalaanbiedingen" /><br>
-		Aantal lopende aanbiedingen: <s:property value="Statistiek.aantallopendeaanbiedingen" /><br>
+		Aantal lopende aanbiedingen: <a href="<%=request.getContextPath()%>/Menu.action"><s:property value="Statistiek.aantallopendeaanbiedingen" /></a><br>
 		Aantal boeken: <s:property value="Statistiek.aantalboeken" /><br>
 		Hoogste bod:
 		<ul>
