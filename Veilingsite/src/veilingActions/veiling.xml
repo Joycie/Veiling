@@ -33,6 +33,10 @@
 			<result name="success">/jsp/admin/userinformation.jsp</result>
 			<result name="input" type="redirectAction">UserList</result>
 		</action>
+		<action name="GetStatistieken" class="veilingActions.admin.GetStatistieken">
+			<result name="success">/jsp/admin/statistieken.jsp</result>
+			<result name="input" type="redirectAction">Menu</result>
+		</action>
 	</package>
 	<package name="visitor" namespace="/visitor" extends="struts-default">
 		<action name="Register" class="veilingActions.visitor.Register">

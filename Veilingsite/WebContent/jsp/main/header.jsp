@@ -21,6 +21,9 @@
 										<li><a href="<%=request.getContextPath()%>/member/MijnVeilingen.action">Mijn veilingen</a></li>
 										<li><a href="<%=request.getContextPath()%>/member/AccountWijzigenForm.action">Account wijzigen</a></li>
 										<li><a href="<%=request.getContextPath()%>/member/KredietOpwaarderenForm.action">Saldo wijzigen (<s:property value="krediet" />)</a></li>
+										<s:if test="#session.gebruiker.rol == 1">
+										<li><a href="<%=request.getContextPath()%>/admin/GetStatistieken.action">Statistieken</a></li>
+										</s:if>
 										<li>
 									       <a
 											href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>

@@ -8,6 +8,7 @@ import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingDomain.Categorie;
 import veilingDomain.Gebruiker;
+import veilingDomain.Statistiek;
 import veilingActions.DAO.AanbiedingDAO;
 
 public class VeilingService {
@@ -47,22 +48,27 @@ public class VeilingService {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.retrieve(email);
 	}
+
 	public static Gebruiker validateUserList(String ID) {
 		AdminDAO adminDAO = new AdminDAO();
 		return (Gebruiker) adminDAO.retrieve(ID);
 	}
+
 	public static Gebruiker retrieveUser(int klantnummer) {
 		AdminDAO adminDAO = new AdminDAO();
 		return adminDAO.retrieveUser(klantnummer);
 	}
+
 	public static void blockUser(int klantnummer) {
 		AdminDAO adminDAO = new AdminDAO();
 		adminDAO.blockUser(klantnummer);
 	}
+
 	public static void deblockUser(int klantnummer) {
 		AdminDAO adminDAO = new AdminDAO();
 		adminDAO.deblockUser(klantnummer);
 	}
+
 	public static void retrieveVeilingen(String categorie) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		aanbiedingDAO.retrieve(categorie);
@@ -94,12 +100,13 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.create(aanbieding);
 	}
+
 	public static boolean checkEmail(String email) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		ArrayList<String> alle_emails = gebruikerDAO.retrieveEmail();
 		if (!alle_emails.isEmpty()) {
 			for (int i = 0; i < alle_emails.size(); i++) {
-				if (email.equals(alle_emails.get(i))){
+				if (email.equals(alle_emails.get(i))) {
 					return true;
 				}
 			}
@@ -110,12 +117,16 @@ public class VeilingService {
 	public static void deleteAanbieding(Aanbieding aanbieding) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		aanbiedingDAO.delete(aanbieding);
-		
+
 	}
 
-public static boolean BoekWijzigen(Boek boek) {
+	public static boolean BoekWijzigen(Boek boek) {
 		BoekDAO boekDAO = new BoekDAO();
 		return boekDAO.update(boek);
+	}
+	public static Statistiek retrieveStatistieken() {
+		AdminDAO adminDAO = new AdminDAO();
+		return adminDAO.retrieveStatistieken();
 	}
 	// vanaf hier getters en setters
 
@@ -167,25 +178,22 @@ public static boolean BoekWijzigen(Boek boek) {
 		ArrayList<Integer> drukkenlijst = boekDAO.retrieveDrukken(isbn);
 		if (!drukkenlijst.isEmpty()) {
 			for (int i = 0; i < drukkenlijst.size(); i++) {
-				if (nummer == drukkenlijst.get(i)){
+				if (nummer == drukkenlijst.get(i)) {
 					return true;
 				}
 			}
 		}
 		return false;
 	}
+
 	public static ArrayList<Aanbieding> getMijnveilingen(int klantnr) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
 	}
 
-	
 	public static Aanbieding getAanbieding(int id) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getAanbieding(id);
 	}
-
-	
-
 
 }
