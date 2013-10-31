@@ -27,11 +27,19 @@
 		</action>
 		<action name="UserBlokkeren" class="veilingActions.admin.UserBlokkeren">
 			<result name="success">/jsp/admin/userinformation.jsp</result>
-			<result name="input" type="redirectAction">UserList</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
 		</action>
 		<action name="UserDeblokkeren" class="veilingActions.admin.UserDeblokkeren">
 			<result name="success">/jsp/admin/userinformation.jsp</result>
-			<result name="input" type="redirectAction">UserList</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
+		</action>
+		<action name="MaakAdmin" class="veilingActions.admin.MaakAdmin">
+			<result name="success">/jsp/admin/userinformation.jsp</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
+		</action>
+		<action name="OntneemAdmin" class="veilingActions.admin.OntneemAdmin">
+			<result name="success">/jsp/admin/userinformation.jsp</result>
+			<result name="input">/jsp/admin/userinformation.jsp</result>
 		</action>
 		<action name="GetStatistieken" class="veilingActions.admin.GetStatistieken">
 			<result name="success">/jsp/admin/statistieken.jsp</result>

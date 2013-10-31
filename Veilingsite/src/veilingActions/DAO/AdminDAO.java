@@ -160,8 +160,49 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 			e.printStackTrace();
 		}
 		GetConnection.closeConnection();
+
 	}
 
+	public void giveAdmin(int klantnummer) {
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET ROL = 1 WHERE KLANTNR ="
+							+ klantnummer);
+			ResultSet rs = ps.executeQuery();
+			ps.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+	}
+	public void takeAdmin(int klantnummer) {
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET ROL = 0 WHERE KLANTNR ="
+							+ klantnummer);
+			ResultSet rs = ps.executeQuery();
+			ps.close();
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+	}
 	public Statistiek retrieveStatistieken() {
 		Statistiek statistiek = new Statistiek(null, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 				0, 0);
@@ -289,8 +330,7 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 					.prepareStatement("SELECT SUM(EINDPRIJS) AS EINDPRIJS FROM AANBIEDINGEN");
 			ResultSet rsTotaleOmzet = psTotaleOmzet.executeQuery();
 			while (rsTotaleOmzet.next()) {
-				double totaleomzet = rsTotaleOmzet
-						.getDouble("EINDPRIJS");
+				double totaleomzet = rsTotaleOmzet.getDouble("EINDPRIJS");
 				statistiek.setTotaleomzet(totaleomzet);
 			}
 			psTotaleOmzet.close();

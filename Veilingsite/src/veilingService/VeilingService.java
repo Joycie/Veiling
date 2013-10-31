@@ -68,7 +68,14 @@ public class VeilingService {
 		AdminDAO adminDAO = new AdminDAO();
 		adminDAO.deblockUser(klantnummer);
 	}
-
+	public static void giveAdmin(int klantnummer) {
+		AdminDAO adminDAO = new AdminDAO();
+		adminDAO.giveAdmin(klantnummer);
+	}
+	public static void takeAdmin(int klantnummer) {
+		AdminDAO adminDAO = new AdminDAO();
+		adminDAO.takeAdmin(klantnummer);
+	}
 	public static void retrieveVeilingen(String categorie) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		aanbiedingDAO.retrieve(categorie);
