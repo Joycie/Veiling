@@ -7,7 +7,7 @@ public class Aanbieding {
 
 	private int id;
 	private double startprijs;
-	private Timestamp eindtijd;
+	private Timestamp eindtijd, insert_date;
 	private int gebruikers_klantnr, drukken_nummer;
 	private String drukken_isbn;
 	private Boek boek;
@@ -24,11 +24,12 @@ public class Aanbieding {
 		boek = b;
 	}
 	
-	public Aanbieding(int boekid, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b, byte[] i) 
+	public Aanbieding(int boekid, double start, Timestamp eind, Timestamp i_date, int geb_klant, String druk_isbn, int druk_nr, Boek b, byte[] i) 
 	{
 		id = boekid;
 		startprijs = start;
 		eindtijd = eind;
+		insert_date = i_date;
 		gebruikers_klantnr = geb_klant;
 		drukken_isbn = druk_isbn;
 		drukken_nummer = druk_nr;
@@ -97,6 +98,14 @@ public class Aanbieding {
 
 	public void setImg(byte[] img) {
 		this.img = img;
+	}
+
+	public Timestamp getInsert_date() {
+		return insert_date;
+	}
+
+	public void setInsert_date(Timestamp insert_date) {
+		this.insert_date = insert_date;
 	}
 	
 	

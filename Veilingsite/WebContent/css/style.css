@@ -307,7 +307,24 @@ td {
 {
 	background-color: #0094B5;
 }
+.button
+{
+	border: 1px solid #007893;
+	border-left: 0px;
+	background-color: #007893;
+	color: white;
+	margin-top: 10px;
+	font-size: 10pt;
+	font-family: arial;
+	padding: 5px;
+	margin-left: 0px;
+	text-decoration: none;
+}
 
+.button:hover
+{
+	background-color: #0094B5;
+}
 .action-block
 {
 	padding-bottom: 0px;

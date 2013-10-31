@@ -20,7 +20,7 @@
 					<td><s:property value="voornaam" /></td>
 					<td><s:property value="tussenvoegsel" /></td>
 					<td><s:property value="achternaam" /></td>
-					<td><a
+					<td><a 
 						href="../admin/UserZoeken.action?klantnummer=<s:property value="klantnummer"/>">Bekijken</a></td>
 				</tr>
 			</s:iterator>

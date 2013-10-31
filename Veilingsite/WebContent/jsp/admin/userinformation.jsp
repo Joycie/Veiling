@@ -33,27 +33,28 @@
 		<s:if test="hasActionMessages()">
 			<s:actionmessage />
 		</s:if>
+		<br>
 		<s:if
 			test="Gebruiker.rol == 0 && Gebruiker.klantnummer != 11 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
-			<a
+			<a class="button"
 				href="../admin/UserBlokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				blokkeren</a>
 		</s:if>
 		<s:if
 			test="Gebruiker.rol == 2 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
-			<a
+			<a class="button"
 				href="../admin/UserDeblokkeren.action?klantnummer=<s:property value="klantnummer"/>">User
 				Blokkering opheffen</a>
 		</s:if>
 		<s:if
 			test="Gebruiker.rol == 0 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
-			<a
+			<a class="button"
 				href="../admin/MaakAdmin.action?klantnummer=<s:property value="klantnummer"/>">Geef
 				administrator rechten</a>
 		</s:if>
 		<s:if
 			test="Gebruiker.rol == 1 && Gebruiker.klantnummer != 11 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
-			<a
+			<a class="button"
 				href="../admin/OntneemAdmin.action?klantnummer=<s:property value="klantnummer"/>">Neem
 				administrator rechten in</a>
 		</s:if>

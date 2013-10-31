@@ -35,7 +35,7 @@
 	<h4>Aanbieder</h4>
 	<s:iterator value="gebruiker"><p><s:property value="voornaam" /> <s:property value="tussenvoegsel" /> <s:property value="achternaam" /> uit <s:property value="plaats" /></s:iterator></p>
 	<h4>Geplaatst op</h4>
-	<p><s:date name="datum" format="dd-MMM-yyyy 'om' HH:mm"/></p>
+	<p><s:date name="insert_date" format="dd-MMM-yyyy 'om' HH:mm"/></p>
 	<h4>Sluitingsdatum</h4>
 	<p><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm"/></p>
 </div>
