@@ -135,6 +135,10 @@ public class VeilingService {
 		AdminDAO adminDAO = new AdminDAO();
 		return adminDAO.retrieveStatistieken();
 	}
+	public static boolean aanbiedingWijzigen(Aanbieding aanbieding) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.update(aanbieding);
+	}
 	// vanaf hier getters en setters
 
 	public static ArrayList<Gebruiker> getGebruikerslijst() {

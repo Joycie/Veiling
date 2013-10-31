@@ -254,8 +254,41 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 	@Override
 	public boolean update(Object T) {
-		// TODO Auto-generated method stub
-		return false;
+		Aanbieding aanbieding = (Aanbieding) T;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection.prepareStatement("update aanbiedingen set startprijs = ?, eindtijd = ?, gebruikers_klantnr = ?, drukken_boeken_isbn = ?, drukken_nummer = ?, image = ? where id = ?");
+			ps.setDouble(1, aanbieding.getStartprijs());
+			ps.setTimestamp(2, aanbieding.getEindtijd());
+			ps.setInt(3, aanbieding.getGebruikers_klantnr());
+			ps.setString(4, aanbieding.getDrukken_isbn());
+			ps.setInt(5, aanbieding.getDrukken_nummer());
+			ps.setBytes(6, aanbieding.getImg());
+			ps.setInt(7, aanbieding.getId());
+			ResultSet rs = ps.executeQuery();
+			rs.close();
+			ps.close();
+			if (!VeilingService.checkDruk(aanbieding.getDrukken_isbn(), aanbieding.getDrukken_nummer())) {
+				PreparedStatement ps2 = connection
+						.prepareStatement("INSERT INTO DRUKKEN (BOEKEN_ISBN, NUMMER) VALUES (?, ?)");
+				ps2.setString(1, aanbieding.getDrukken_isbn());
+				ps2.setInt(2, aanbieding.getDrukken_nummer());
+				ResultSet rs2 = ps2.executeQuery();
+				rs2.close();
+				ps2.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		GetConnection.closeConnection();
+		return true;
 	}
 
 	@Override

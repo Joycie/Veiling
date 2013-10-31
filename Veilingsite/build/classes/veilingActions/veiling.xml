@@ -129,5 +129,12 @@
 		<action name="VeilingVerwijderen" class="veilingActions.member.VeilingVerwijderen">
 			<result name="success" type="redirectAction">MijnVeilingen</result>
 		</action>
+		<action name="AanbiedingWijzgenForm" class="veilingActions.member.AanbiedingForm">
+			<result name="success">/jsp/member/veilingwijzigen.jsp</result>
+		</action>
+		<action name="VeilingWijzigen" class="veilingActions.member.VeilingWijzigen">
+			<result name="success">/jsp/member/veilingwijzigen.jsp</result>
+			<result name="input">/jsp/member/veilingwijzigen.jsp</result>
+		</action>
 	</package>
 </struts>
