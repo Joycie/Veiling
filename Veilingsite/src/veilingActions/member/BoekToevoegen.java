@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.sql.Date;
 
 import veilingDomain.Boek;
-import veilingDomain.Veiling;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;

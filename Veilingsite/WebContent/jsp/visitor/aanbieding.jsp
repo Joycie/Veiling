@@ -3,7 +3,9 @@
 <%@ include file="../main/header.jsp"%>
 <div class="content">
 	<s:iterator value="aanbieding">
-		<h2><s:property value="boek.titel" /></h2>
+		<h2>
+			<s:property value="boek.titel" />
+		</h2>
 		<ul>
 			<li>Boekgegevens
 				<ul>
@@ -25,6 +27,30 @@
 				</ul>
 			</li>
 		</ul>
+
 	</s:iterator>
+
+	<table>
+
+		<tr class="thcolor">
+			<th>Bieder naam</th>
+			<th>Bod</th>
+		</tr>
+		<s:iterator value="veiling.biedingen">
+			<tr class="tdcolor">
+				<td><s:property value="gebruiker.naam" />
+				<td><s:property value="gulden" />
+			</tr>
+		</s:iterator>
+	</table>
+
+	<s:form action="biedAction">
+		<hr />
+		<s:textfield name="guldens" label="Je bod:" />
+		<s:hidden name="veilingId" value="%{veiling.id}" />
+		<s:hidden name="id" value="%{account.id}" />
+		<s:submit />
+	</s:form>
+
 </div>
 <%@ include file="../main/footer.jsp"%>

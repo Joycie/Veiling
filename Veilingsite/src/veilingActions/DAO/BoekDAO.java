@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import veilingActions.database.GetConnection;
 import veilingDomain.Boek;
 import veilingDomain.Categorie;
-import veilingDomain.Veiling;
 import veilingInterface.VeilingInterface;
 
 public class BoekDAO implements VeilingInterface<Boek> {
