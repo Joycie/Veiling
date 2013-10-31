@@ -94,7 +94,29 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.create(aanbieding);
 	}
+	public static boolean checkEmail(String email) {
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		ArrayList<String> alle_emails = gebruikerDAO.retrieveEmail();
+		if (!alle_emails.isEmpty()) {
+			for (int i = 0; i < alle_emails.size(); i++) {
+				if (email.equals(alle_emails.get(i))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
+	public static void deleteAanbieding(Aanbieding aanbieding) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		aanbiedingDAO.delete(aanbieding);
+		
+	}
+
+public static boolean BoekWijzigen(Boek boek) {
+		BoekDAO boekDAO = new BoekDAO();
+		return boekDAO.update(boek);
+	}
 	// vanaf hier getters en setters
 
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
@@ -163,24 +185,7 @@ public class VeilingService {
 		return aanbiedingDAO.getAanbieding(id);
 	}
 
-	public static boolean checkEmail(String email) {
-		GebruikerDAO gebruikerDAO = new GebruikerDAO();
-		ArrayList<String> alle_emails = gebruikerDAO.retrieveEmail();
-		if (!alle_emails.isEmpty()) {
-			for (int i = 0; i < alle_emails.size(); i++) {
-				if (email.equals(alle_emails.get(i))){
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static void deleteAanbieding(Aanbieding aanbieding) {
-		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
-		aanbiedingDAO.delete(aanbieding);
-		
-	}
+	
 
 
 }

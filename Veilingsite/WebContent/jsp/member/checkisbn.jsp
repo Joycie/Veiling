@@ -13,9 +13,9 @@
 		<s:actionmessage />
 	</s:if>
 
-	<s:form action="BoekToevoegen" namespace="/member">
+	<s:form action="BoekWijzigen" namespace="/member">
 		<s:iterator value="books">
-			<s:textfield name="isbn" label="Isbn" />
+			<s:textfield name="isbn" label="Isbn"/>
 			<s:textfield name="titel" label="Titel" />
 			<s:textfield name="beschrijving" label="Beschrijving" />
 			Categorie:
@@ -33,7 +33,7 @@
 			<s:textfield name="aantalpagina" label="Aantal Pagina's" />
 			<s:textfield name="datum" label="Datum" />
 		</s:iterator>
-		<s:submit value="Voeg Toe" />
+		<s:submit value="Wijzig Boek" />
 	</s:form>
 </div>
 <%@ include file="../main/footer.jsp"%>
