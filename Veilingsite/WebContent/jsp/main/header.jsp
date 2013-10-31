@@ -62,6 +62,8 @@
 						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=4">Techniek</a></li>
 						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=5">Kookboeken</a></li>
 						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=6">Flora en fauna</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=7">Kunst en cultuur</a></li>
+						<li><a href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=8">Psychologie</a></li>
 					</ul></li>
 				<s:if test="#session.gebruiker != null">
 					<li><a
