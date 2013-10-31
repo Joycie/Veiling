@@ -347,7 +347,7 @@ td {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	font-size: 35pt;
-	height: 125px;
+	min-height: 125px;
 	color: #007893;
 }
 

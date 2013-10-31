@@ -8,9 +8,17 @@
 		<p><s:property value="boek.auteur" /></p>
 		<h3><s:property value="boek.titel" /></h3>
 		<div class="action-block">
-		<form>
-			<input type="text" name="bid" placeholder="Bedrag"/><input type="submit" value="Bod plaatsen" />
-		</form>
+		
+			<s:if test="#session.gebruiker.klantnummer==gebruiker.klantnummer">
+				<form>
+					<a class="button" href="<%=request.getContextPath()%>/member/AanbiedingWijzgenForm.action?id=<s:property value="id" />">Aanbieding wijzigen</a>
+				</form>
+			</s:if>
+			<s:else>
+				<form>
+					<input type="text" name="bid" placeholder="Bedrag"/><input type="submit" value="Bod plaatsen" />
+				</form>
+			</s:else>
 			<h4>Huidig bod</h4>
 			<p>20,00</p>
 		</div>
