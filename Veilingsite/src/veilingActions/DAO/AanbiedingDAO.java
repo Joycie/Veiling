@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import veilingActions.database.GetConnection;
+import veilingActions.visitor.GetAanbieding;
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
 import veilingDomain.Gebruiker;
@@ -295,6 +296,11 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	public static void setRecenteveilinglijst(
 			ArrayList<Aanbieding> recenteveilinglijst) {
 		AanbiedingDAO.recenteveilinglijst = recenteveilinglijst;
+	}
+
+	public static GetAanbieding findById(String veilingid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
