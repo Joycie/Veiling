@@ -28,8 +28,7 @@
 			</tr>
 			<s:iterator value="mijnveilingen">
 				<tr class="tdcolor">
-				
-					<td><s:property value="boek.titel" /></td>
+				<td><a href="<%=request.getContextPath()%>/visitor/GetAanbieding.action?id=<s:property value="id" />"><s:property value="boek.titel" /></a></td>
 					<td><s:property value="boek.auteur" /></td>
 					<td><s:property value="drukken_nummer" /></td>
 					<td><s:property value="startprijs" /></td>
