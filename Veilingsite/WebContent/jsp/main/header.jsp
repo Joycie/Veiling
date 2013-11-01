@@ -75,6 +75,10 @@
 								en cultuur</a></li>
 						<li><a
 							href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=8">Psychologie</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=9">Kinderboeken</a></li>	
+						<li><a
+							href="<%=request.getContextPath()%>/visitor/HuidigeVeilingen.action?categorie=10">Poëzie</a></li>	
 					</ul></li>
 				<s:if test="#session.gebruiker != null">
 					<li><a
