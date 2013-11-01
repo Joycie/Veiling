@@ -21,7 +21,6 @@ public class GetVeilingen extends ActionSupport {
 		java.util.Date date = new java.util.Date();
 		sysdate = new Timestamp(date.getTime());
 		sysdate.setDate(sysdate.getDate() - 1);
-		System.out.println("Tijd: " + sysdate);
 		String stringCategorie = Integer.toString(categorie);
 		VeilingService.retrieveVeilingen(stringCategorie);
 

@@ -61,6 +61,9 @@
 		<action name="GetAanbieding" class="veilingActions.visitor.GetAanbieding">
 			<result name="success">/jsp/visitor/aanbieding.jsp</result>
 		</action>
+		<action name="AanbiedingZoeken" class="veilingActions.visitor.AanbiedingZoeken">
+			<result name="success">/jsp/visitor/aanbiedinggevonden.jsp</result>
+		</action>
 	</package>
 
 	<package name="member" namespace="/member" extends="struts-default">

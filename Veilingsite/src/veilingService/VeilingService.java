@@ -81,7 +81,6 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		aanbiedingDAO.retrieve(categorie);
 	}
-
 	public static boolean checkBoek(String isbn) {
 		BoekDAO boekDAO = new BoekDAO();
 		boekDAO.retrieve(isbn);
@@ -208,7 +207,10 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.retrieveMijnVeilingen(klantnr);
 	}
-
+	public static ArrayList<Aanbieding> getGezochteVeilingen(String invoer) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.searchVeilingen(invoer);
+	}
 	public static Aanbieding getAanbieding(int id) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getAanbieding(id);
