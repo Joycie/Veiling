@@ -38,6 +38,18 @@ public class Bieden extends ActionSupport implements SessionAware{
 			addActionMessage("U moet ingelogd zijn om te mogen bieden");
 			return INPUT;
 		}
+		if (gebruiker.getKlantnummer() == aanbieding.getGebruikers_klantnr()){
+			addActionMessage("U kunt niet op eigen veiling bieden");
+			return INPUT;
+		}
+		if (bid == 0){
+			addActionMessage("U moet een bedrag invullen");
+			return INPUT;
+		}
+		if (bid <= aanbieding.getStartprijs() || bid <= VeilingService.getEindprijs(id)) {
+			addActionMessage("Het bod moet hoger zijn");
+			return INPUT;
+		}
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Date biedtijd = new java.sql.Date(currentDate.getTime());
@@ -50,10 +62,9 @@ public class Bieden extends ActionSupport implements SessionAware{
 			addActionMessage("Bieden niet gelukt");
 			return INPUT;
 		}
-
-		
 		
 	}
+
 	
 	//getters en setters
 	

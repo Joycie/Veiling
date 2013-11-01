@@ -216,4 +216,9 @@ public class VeilingService {
 		return aanbiedingDAO.getAanbieding(id);
 	}
 
+	public static double getEindprijs(int id) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.getLaatsteBieding(id);
+	}
+
 }

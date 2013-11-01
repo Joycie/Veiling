@@ -166,6 +166,31 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		return aanb;
 	}
 
+	public double getLaatsteBieding(int id) {
+		double eindprijs = 0;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT EINDPRIJS from AANBIEDINGEN where ID = ?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				eindprijs = rs.getDouble("EINDPRIJS");
+			} 
+			return eindprijs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return eindprijs;
+		}
+	}
+
 	public ArrayList<Aanbieding> searchVeilingen(String invoer) {
 		gezochteveilingenlijst.clear();
 		System.out.println("Invoer: " + invoer);
@@ -181,12 +206,15 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			}
 			// Alle lopende veilingen
 			PreparedStatement ps = connection
-					.prepareStatement("SELECT * from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and (LOWER(titel) like LOWER('%"+invoer+"%') OR LOWER(auteur) like LOWER('%"+invoer+"%'))");
+					.prepareStatement("SELECT * from boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and (LOWER(titel) like LOWER('%"
+							+ invoer
+							+ "%') OR LOWER(auteur) like LOWER('%"
+							+ invoer + "%'))");
 			ResultSet rs = ps.executeQuery();
-//			ps.setString(1, invoer);
-//			ps.setString(2, invoer);
-			while (rs.next()) {			
-				//Boek
+			// ps.setString(1, invoer);
+			// ps.setString(2, invoer);
+			while (rs.next()) {
+				// Boek
 				String isbn = rs.getString("ISBN");
 				int aantalpagina = rs.getInt("AANTALPAGINA");
 				String titel = rs.getString("TITEL");
@@ -196,18 +224,18 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				String auteur = rs.getString("AUTEUR");
 				Date datum = rs.getDate("DATUM");
 				int categorie = rs.getInt("categorie");
-				
-				//Aanbieding
+
+				// Aanbieding
 				int id = rs.getInt("id");
 				double startprijs = rs.getDouble("STARTPRIJS");
 				Timestamp eindtijd = rs.getTimestamp("EINDTIJD");
 				Timestamp insert_date = rs.getTimestamp("INSERT_DATE");
 				int drukken_nummer = rs.getInt("NUMMER");
 				int gebruikers_klantnr = rs.getInt("GEBRUIKERS_KLANTNR");
-				boek = new Boek(isbn, aantalpagina, titel, 0, beschrijving, uitgeverij, taal, auteur, datum,
-						categorie);
-				aanb = new Aanbieding(id, startprijs, eindtijd, insert_date, gebruikers_klantnr,
-						isbn, drukken_nummer, boek, null);
+				boek = new Boek(isbn, aantalpagina, titel, 0, beschrijving,
+						uitgeverij, taal, auteur, datum, categorie);
+				aanb = new Aanbieding(id, startprijs, eindtijd, insert_date,
+						gebruikers_klantnr, isbn, drukken_nummer, boek, null);
 				gezochteveilingenlijst.add(aanb);
 				System.out.println("DAO: " + gezochteveilingenlijst);
 			}
@@ -308,5 +336,5 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }
