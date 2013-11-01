@@ -139,5 +139,9 @@
 			<result name="success">/jsp/member/veilingwijzigen.jsp</result>
 			<result name="input">/jsp/member/veilingwijzigen.jsp</result>
 		</action>
+		<action name="Bieden" class="veilingActions.member.Bieden">
+			<result name="success">/jsp/visitor/aanbieding.jsp</result>
+			<result name="input">/jsp/visitor/aanbieding.jsp</result>
+		</action>
 	</package>
 </struts>
