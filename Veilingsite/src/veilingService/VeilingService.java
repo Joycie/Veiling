@@ -143,7 +143,7 @@ public class VeilingService {
 	
 	public static boolean bieden(Bod bod){
 		BodDAO bodDAO = new BodDAO();
-		return BodDAO.create(bieden);
+		return bodDAO.create(bod);
 	}
 	
 	

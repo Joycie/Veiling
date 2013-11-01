@@ -35,20 +35,24 @@ public class Bieden extends ActionSupport implements SessionAware{
 		Aanbieding aanbieding = VeilingService.getAanbieding(id);
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
 		if (gebruiker == null) {
-		addActionMessage("U moet ingelogd zijn om te mogen bieden");
-		return INPUT;
+			addActionMessage("U moet ingelogd zijn om te mogen bieden");
+			return INPUT;
 		}
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Date biedtijd = new java.sql.Date(currentDate.getTime());
 		Bod bod = new Bod(biedtijd, gebruiker, aanbieding, bid);
-		VeilingService.bieden(bod);
+		if (VeilingService.bieden(bod)){
+			addActionMessage("Bieden gelukt");
+			return SUCCESS;
+		}
+		else {
+			addActionMessage("Bieden niet gelukt");
+			return INPUT;
+		}
 
 		
 		
-		
-		
-		return SUCCESS;
 	}
 	
 	//getters en setters

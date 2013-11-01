@@ -7,10 +7,11 @@ import java.sql.SQLException;
 
 import veilingActions.database.GetConnection;
 import veilingDomain.Bod;
+import veilingInterface.VeilingInterface;
 
-public class BodDAO {
+public class BodDAO implements VeilingInterface {
 	
-	public void create(Object T) {
+	public boolean create(Object T) {
 		Bod bod = (Bod) T;
 		Connection connection = null;
 		connection = GetConnection.getDBConnection();
@@ -21,9 +22,11 @@ public class BodDAO {
 		}
 		try {
 			System.out.println(" || Excecuting query ");
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO BIEDINGEN (BOD) VALUES (?)");
-			ps.setDouble(1,bod.getGeld());
-
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO BIEDINGEN (GEBRUIKER_KLANTNR, BOD, AANBIEDING_ID, DATUM) VALUES (?, ?, ?, ?)");
+			ps.setInt(1,bod.getGebruiker().getKlantnummer());
+			ps.setDouble(2, bod.getGeld());
+			ps.setInt(3, bod.getAanbieding().getId());
+			ps.setDate(4, bod.getDatumTijd());
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -34,8 +37,10 @@ public class BodDAO {
 	
 			System.out.println("|| Failed to complete query || ");
 			e.printStackTrace();
+			return false;
 		}
 		GetConnection.closeConnection();
+		return true;
 	}
 	
 	public void retrieve(Object T){
@@ -43,12 +48,19 @@ public class BodDAO {
 	}
 	
 		
-	public void update(Object T) {
+	public boolean update(Object T) {
+		return false;
 		
 	}
 	public void delete(Object T) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Object retrieve(String ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 }
