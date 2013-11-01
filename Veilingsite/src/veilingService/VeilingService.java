@@ -171,13 +171,7 @@ public class VeilingService {
 				AanbiedingDAO.getVeilingenlijst());
 		return veilingenlijst;
 	}
-
-	public static ArrayList<Aanbieding> getRecenteveilingen() {
-		ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>(
-				AanbiedingDAO.getRecenteveilinglijst());
-		return recenteveilingen;
-	}
-
+	
 	public static ArrayList<Boek> getBoekenlijst() {
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(
 				BoekDAO.getBoekenlijst());

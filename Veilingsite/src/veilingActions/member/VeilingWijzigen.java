@@ -14,7 +14,7 @@ import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 
 public class VeilingWijzigen extends ActionSupport implements SessionAware {
-	private int id;
+	private int id, dagen;
 	private double startprijs;
 	private Timestamp eindtijd;
 	private int gebruikers_klantnr, drukken_nummer;
@@ -27,6 +27,10 @@ public class VeilingWijzigen extends ActionSupport implements SessionAware {
 	public String execute(){
 		Gebruiker geb = (Gebruiker) session.get("gebruiker");
 		gebruikers_klantnr = geb.getKlantnummer();
+		System.out.println("ID: " + id);
+		System.out.println("Eindtijd: " + eindtijd);
+		eindtijd.setDate(eindtijd.getDate() + dagen);
+		System.out.println("Eindtijd na toevoegen: " + eindtijd);
 		Aanbieding aanbieding = new Aanbieding(id, startprijs, eindtijd, gebruikers_klantnr, drukken_isbn, drukken_nummer, boek);
 		if (VeilingService.aanbiedingWijzigen(aanbieding)){
 			addActionMessage("Veiling is gewijzigd.");
@@ -81,6 +85,14 @@ public class VeilingWijzigen extends ActionSupport implements SessionAware {
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = (SessionMap) session;
+	}
+
+	public int getDagen() {
+		return dagen;
+	}
+
+	public void setDagen(int dagen) {
+		this.dagen = dagen;
 	}
 	
 	

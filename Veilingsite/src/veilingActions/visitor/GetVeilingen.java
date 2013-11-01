@@ -1,5 +1,6 @@
 package veilingActions.visitor;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import veilingDomain.Aanbieding;
@@ -14,13 +15,17 @@ public class GetVeilingen extends ActionSupport {
 	private ArrayList<Aanbieding> recenteveilingen = new ArrayList<Aanbieding>();
 	private ArrayList<Boek> boeken = new ArrayList<Boek>();
 	private int categorie;
+	private Timestamp sysdate;
 	
 	public String execute() {
+		java.util.Date date = new java.util.Date();
+		sysdate = new Timestamp(date.getTime());
+		sysdate.setDate(sysdate.getDate() - 1);
+		System.out.println("Tijd: " + sysdate);
 		String stringCategorie = Integer.toString(categorie);
 		VeilingService.retrieveVeilingen(stringCategorie);
 
 		veilingen = VeilingService.getVeilingenlijst();
-		recenteveilingen = VeilingService.getRecenteveilingen();
 
 		return SUCCESS;
 	}
@@ -55,6 +60,14 @@ public class GetVeilingen extends ActionSupport {
 
 	public void setCategorie(int categorie) {
 		this.categorie = categorie;
+	}
+
+	public Timestamp getSysdate() {
+		return sysdate;
+	}
+
+	public void setSysdate(Timestamp sysdate) {
+		this.sysdate = sysdate;
 	}
 	
 	

@@ -38,6 +38,7 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Date date = new java.sql.Date(currentDate.getTime());
 		eindtijd = new Timestamp(date.getTime());
+		System.out.println("Dagen: " + dagen);
 		eindtijd.setDate(eindtijd.getDate()+ dagen);
 		System.out.println(eindtijd);
 		Gebruiker geb = (Gebruiker) session.get("gebruiker");
