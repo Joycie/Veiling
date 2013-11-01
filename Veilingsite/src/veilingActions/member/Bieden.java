@@ -23,7 +23,7 @@ public class Bieden extends ActionSupport{
 	public String execute() {
 		getAanbieding = (GetAanbieding) AanbiedingDAO.findById(veilingId);
 		if (gebruiker == null) {
-			addActionMessage("U moet ingelogd zijn om te mogen bieden");
+			addFieldError("ingelogd", "U moet ingelogd zijn om te mogen bieden");
 			return INPUT;
 		}
 		
