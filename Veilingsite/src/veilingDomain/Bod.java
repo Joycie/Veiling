@@ -4,14 +4,12 @@ import java.sql.Date;
 
 public class Bod {
 	
-	  private int id;
 	  private Date datumTijd;
 	  private Gebruiker gebruiker;
 	  private Aanbieding aanbieding;
 	  private double geld;
 	  
-	  public Bod(int id, Date datumTijd, Gebruiker gebruiker, Aanbieding aanbieding, double geld) {
-		this.id = id;
+	  public Bod(Date datumTijd, Gebruiker gebruiker, Aanbieding aanbieding, double geld) {
 		this.datumTijd = datumTijd;
 		this.gebruiker = gebruiker;
 		this.aanbieding = aanbieding;
@@ -21,14 +19,6 @@ public class Bod {
 	  public Bod(double geld){
 		  this.geld = geld;
 	  }
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public Date getDatumTijd() {
 		return datumTijd;

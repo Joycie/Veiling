@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import veilingActions.DAO.*;
 import veilingDomain.Aanbieding;
+import veilingDomain.Bod;
 import veilingDomain.Boek;
 import veilingDomain.Categorie;
 import veilingDomain.Gebruiker;
@@ -139,6 +140,13 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.update(aanbieding);
 	}
+	
+	public static boolean bieden(Bod bod){
+		BodDAO bodDAO = new BodDAO();
+		return BodDAO.create(bieden);
+	}
+	
+	
 	// vanaf hier getters en setters
 
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
