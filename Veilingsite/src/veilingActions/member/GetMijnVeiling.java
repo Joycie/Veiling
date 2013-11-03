@@ -1,5 +1,6 @@
 package veilingActions.member;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -16,8 +17,12 @@ public class GetMijnVeiling extends ActionSupport implements SessionAware {
 	private SessionMap session;
 	private ArrayList<Aanbieding> mijnveilingen = new ArrayList<Aanbieding>();
 	SessionMap<String, String> sessionmap;
+	private Timestamp sysdate;
 	
 	public String execute(){
+		java.util.Date date = new java.util.Date();
+		sysdate = new Timestamp(date.getTime());
+		sysdate.setDate(sysdate.getDate() - 1);
 		Gebruiker geb = (Gebruiker) session.get("gebruiker");
 		int klantnr = geb.getKlantnummer();
 		mijnveilingen = VeilingService.getMijnveilingen(klantnr);
@@ -35,5 +40,11 @@ public class GetMijnVeiling extends ActionSupport implements SessionAware {
 	public void setMijnveilingen(ArrayList<Aanbieding> mijnveilingen) {
 		this.mijnveilingen = mijnveilingen;
 	}
-	
+	public Timestamp getSysdate() {
+		return sysdate;
+	}
+
+	public void setSysdate(Timestamp sysdate) {
+		this.sysdate = sysdate;
+	}
 }

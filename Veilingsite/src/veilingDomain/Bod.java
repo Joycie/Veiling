@@ -1,57 +1,56 @@
 package veilingDomain;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+
 
 public class Bod {
 	
-	  private Date datumTijd;
-	  private Gebruiker gebruiker;
-	  private Aanbieding aanbieding;
-	  private double geld;
+	  private Timestamp datumTijd;
+	  private int klantnr;
+	  private int aanbiedingid;
+	  private double bedrag;
 	  
-	  public Bod(Date datumTijd, Gebruiker gebruiker, Aanbieding aanbieding, double geld) {
+	  public Bod(Timestamp datumTijd, int klantnr, int aanbiedingid, double bedrag) {
 		this.datumTijd = datumTijd;
-		this.gebruiker = gebruiker;
-		this.aanbieding = aanbieding;
-		this.geld = geld;
+		this.klantnr = klantnr;
+		this.aanbiedingid = aanbiedingid;
+		this.bedrag = bedrag;
 	}
 	  
-	  public Bod(double geld){
-		  this.geld = geld;
+	  public Bod(double bedrag){
+		  this.bedrag = bedrag;
 	  }
 
-	public Date getDatumTijd() {
+	public Timestamp getDatumTijd() {
 		return datumTijd;
 	}
 
-	public void setDatumTijd(Date datumTijd) {
+	public void setDatumTijd(Timestamp datumTijd) {
 		this.datumTijd = datumTijd;
 	}
 
-	public Gebruiker getGebruiker() {
-		return gebruiker;
+	public int getKlantnr() {
+		return klantnr;
 	}
 
-	public void setGebruiker(Gebruiker gebruiker) {
-		this.gebruiker = gebruiker;
+	public void setKlantnr(int klantnr) {
+		this.klantnr = klantnr;
 	}
 
-	public Aanbieding getAanbieding() {
-		return aanbieding;
+	public int getAanbiedingid() {
+		return aanbiedingid;
 	}
 
-	public void setAanbieding(Aanbieding aanbieding) {
-		this.aanbieding = aanbieding;
+	public void setAanbiedingid(int aanbiedingid) {
+		this.aanbiedingid = aanbiedingid;
 	}
 
-	public double getGeld() {
-		return geld;
+	public double getBedrag() {
+		return bedrag;
 	}
 
-	public void setGeld(double geld) {
-		this.geld = geld;
+	public void setBedrag(double bedrag) {
+		this.bedrag = bedrag;
 	}
-	  
-	  
-
+	
 }

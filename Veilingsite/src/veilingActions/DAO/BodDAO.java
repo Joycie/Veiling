@@ -23,10 +23,10 @@ public class BodDAO implements VeilingInterface {
 		try {
 			System.out.println(" || Excecuting query ");
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO BIEDINGEN (GEBRUIKER_KLANTNR, BOD, AANBIEDING_ID, DATUM) VALUES (?, ?, ?, ?)");
-			ps.setInt(1,bod.getGebruiker().getKlantnummer());
-			ps.setDouble(2, bod.getGeld());
-			ps.setInt(3, bod.getAanbieding().getId());
-			ps.setDate(4, bod.getDatumTijd());
+			ps.setInt(1,bod.getKlantnr());
+			ps.setDouble(2, bod.getBedrag());
+			ps.setInt(3, bod.getAanbiedingid());
+			ps.setTimestamp(4, bod.getDatumTijd());
 			
 			ResultSet rs = ps.executeQuery();
 			

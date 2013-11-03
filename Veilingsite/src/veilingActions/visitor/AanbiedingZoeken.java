@@ -21,6 +21,10 @@ public class AanbiedingZoeken extends ActionSupport {
 		System.out.println(gezochteveilingen);
 		return SUCCESS;
 	}
+	public void validate()
+	{
+		invoer.trim();
+	}
 
 	public ArrayList<Aanbieding> getGezochteveilingen() {
 		return gezochteveilingen;

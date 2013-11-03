@@ -19,7 +19,7 @@ Probeer een andere zoekterm:
 				<th>Titel</th>
 				<th>Auteur</th>
 				<th>Druk</th>
-				<th>Startprijs</th>
+				<th>Prijs</th>
 				<th>Eindtijd</th>
 				<th>Recent</th>
 			</tr>
@@ -30,7 +30,12 @@ Probeer een andere zoekterm:
 								value="boek.titel" /></a></td>
 					<td><s:property value="boek.auteur" /></td>
 					<td><s:property value="drukken_nummer" /></td>
-					<td><s:property value="startprijs" /></td>
+					<td><s:if test="bod.bedrag > startprijs">
+							<b><s:property value="bod.bedrag" /> (Bod)</b>
+						</s:if> <s:else>
+							<s:property value="startprijs" />
+							(Start)
+						</s:else></td>
 					<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
 					<s:if test="insert_date > sysdate">
 						<th><img

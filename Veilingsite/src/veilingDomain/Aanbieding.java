@@ -11,9 +11,10 @@ public class Aanbieding {
 	private int gebruikers_klantnr, drukken_nummer;
 	private String drukken_isbn;
 	private Boek boek;
+	private Bod bod;
 	private byte[] img;
 
-	public Aanbieding(int boekid, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek b) 
+	public Aanbieding(int boekid, double start, Timestamp eind, int geb_klant, String druk_isbn, int druk_nr, Boek boek) 
 	{
 		id = boekid;
 		startprijs = start;
@@ -21,10 +22,10 @@ public class Aanbieding {
 		gebruikers_klantnr = geb_klant;
 		drukken_isbn = druk_isbn;
 		drukken_nummer = druk_nr;
-		boek = b;
+		this.boek = boek;
 	}
 	
-	public Aanbieding(int boekid, double start, Timestamp eind, Timestamp i_date, int geb_klant, String druk_isbn, int druk_nr, Boek b, byte[] i) 
+	public Aanbieding(int boekid, double start, Timestamp eind, Timestamp i_date, int geb_klant, String druk_isbn, int druk_nr, Boek boek, Bod bod, byte[] i) 
 	{
 		id = boekid;
 		startprijs = start;
@@ -33,7 +34,8 @@ public class Aanbieding {
 		gebruikers_klantnr = geb_klant;
 		drukken_isbn = druk_isbn;
 		drukken_nummer = druk_nr;
-		boek = b;
+		this.boek = boek;
+		this.bod = bod;
 		img = i;
 	}
 
@@ -106,6 +108,14 @@ public class Aanbieding {
 
 	public void setInsert_date(Timestamp insert_date) {
 		this.insert_date = insert_date;
+	}
+
+	public Bod getBod() {
+		return bod;
+	}
+
+	public void setBod(Bod bod) {
+		this.bod = bod;
 	}
 	
 	

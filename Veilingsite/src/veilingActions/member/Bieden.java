@@ -52,8 +52,8 @@ public class Bieden extends ActionSupport implements SessionAware{
 		}
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
-		java.sql.Date biedtijd = new java.sql.Date(currentDate.getTime());
-		Bod bod = new Bod(biedtijd, gebruiker, aanbieding, bid);
+		java.sql.Timestamp biedtijd = new java.sql.Timestamp(currentDate.getTime());
+		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(), aanbieding.getId(), bid);
 		if (VeilingService.bieden(bod)){
 			addActionMessage("Bieden gelukt");
 			return SUCCESS;
