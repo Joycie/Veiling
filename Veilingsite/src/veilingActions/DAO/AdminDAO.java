@@ -267,7 +267,7 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 
 			// Hoogste bod van de dag
 			PreparedStatement psHoogsteBodDag = connection
-					.prepareStatement("SELECT MAX(BOD) AS HOOGSTEBODVANDAAG FROM BIEDINGEN WHERE DATUM + 1 > sysdate");
+					.prepareStatement("SELECT MAX(BEDRAG) AS HOOGSTEBODVANDAAG FROM BIEDINGEN WHERE BIEDINGDATUM + 1 > sysdate");
 			ResultSet rsHoogsteBodDag = psHoogsteBodDag.executeQuery();
 			while (rsHoogsteBodDag.next()) {
 				double hoogsteboddag = rsHoogsteBodDag
@@ -279,7 +279,7 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 
 			// Hoogste bod van de week
 			PreparedStatement psHoogsteBodWeek = connection
-					.prepareStatement("SELECT MAX(BOD) AS HOOGSTEBODWEEK FROM BIEDINGEN WHERE DATUM + 7 > sysdate");
+					.prepareStatement("SELECT MAX(BEDRAG) AS HOOGSTEBODWEEK FROM BIEDINGEN WHERE BIEDINGDATUM + 7 > sysdate");
 			ResultSet rsHoogsteBodWeek = psHoogsteBodWeek.executeQuery();
 			while (rsHoogsteBodWeek.next()) {
 				double hoogstebodweek = rsHoogsteBodWeek
@@ -291,7 +291,7 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 
 			// Hoogste bod van de maand
 			PreparedStatement psHoogsteBodMaand = connection
-					.prepareStatement("SELECT MAX(BOD) AS HOOGSTEBODMAAND FROM BIEDINGEN WHERE DATUM + 31 > sysdate");
+					.prepareStatement("SELECT MAX(BEDRAG) AS HOOGSTEBODMAAND FROM BIEDINGEN WHERE BIEDINGDATUM + 31 > sysdate");
 			ResultSet rsHoogsteBodMaand = psHoogsteBodMaand.executeQuery();
 			while (rsHoogsteBodMaand.next()) {
 				double hoogstebodmaand = rsHoogsteBodMaand
@@ -303,7 +303,7 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 
 			// Hoogste bod van de jaar
 			PreparedStatement psHoogsteBodJaar = connection
-					.prepareStatement("SELECT MAX(BOD) AS HOOGSTEBODJAAR FROM BIEDINGEN WHERE DATUM + 365 > sysdate");
+					.prepareStatement("SELECT MAX(BEDRAG) AS HOOGSTEBODJAAR FROM BIEDINGEN WHERE BIEDINGDATUM + 365 > sysdate");
 			ResultSet rsHoogsteBodJaar = psHoogsteBodJaar.executeQuery();
 			while (rsHoogsteBodJaar.next()) {
 				double hoogstebodjaar = rsHoogsteBodJaar
