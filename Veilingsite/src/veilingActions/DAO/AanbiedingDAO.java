@@ -98,49 +98,42 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		}
 		return aanbieding;
 	}
-	
+
 	public ArrayList<Bod> getBiedingen(int id) {
 		ArrayList<Bod> biedingen = new ArrayList<Bod>();
+		Bod bod = null;
+		Gebruiker gebruiker = null;
 		Connection connection = null;
 		connection = GetConnection.getDBConnection();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from biedingen where aanbiedingen_id  = ?");
+					.prepareStatement("select * from gebruikers, biedingen where gebruikers.klantnr = biedingen.gebruiker_klantnr and biedingen.aanbiedingen_id=? order by bedrag desc");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				PreparedStatement ps2 = connection
-						.prepareStatement("select * from gebruikers where klantnr = ?");
-				ps2.setInt(1, id);
-				ResultSet rs2 = ps2.executeQuery();
-				
-				Gebruiker gebruiker = null;
-				
-				while (rs2.next()) {
-					int klantnummer = rs.getInt("KLANTNR");
-					String voornaam = rs.getString("VOORNAAM");
-					String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-					String achternaam = rs.getString("ACHTERNAAM");
-					String adres = rs.getString("ADRES");
-					String postcode = rs.getString("POSTCODE");
-					String email = rs.getString("EMAIL");
-					String wachtwoord = rs.getString("WACHTWOORD");
-					int telefoonnummer = rs.getInt("TELEFOONNUMMER");
-					int rekeningnummer = rs.getInt("REKENINGNUMMER");
-					String plaats = rs.getString("PLAATS");
-					double krediet = rs.getDouble("KREDIET");
-					int rol = rs.getInt("rol");
+				int klantnummer = rs.getInt("KLANTNR");
+				String voornaam = rs.getString("VOORNAAM");
+				String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+				String achternaam = rs.getString("ACHTERNAAM");
+				String adres = rs.getString("ADRES");
+				String postcode = rs.getString("POSTCODE");
+				String email = rs.getString("EMAIL");
+				String wachtwoord = rs.getString("WACHTWOORD");
+				int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+				int rekeningnummer = rs.getInt("REKENINGNUMMER");
+				String plaats = rs.getString("PLAATS");
+				double krediet = rs.getDouble("KREDIET");
+				int rol = rs.getInt("rol");
 
-					gebruiker = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
-							achternaam, adres, postcode, plaats, email, wachtwoord,
-							telefoonnummer, rekeningnummer, krediet, rol);
-				}
-				
-				Bod bod = new Bod(rs.getTimestamp("biedingdatum"), rs.getInt("gebruiker_klantnr"), 
-						rs.getInt("aanbiedingen_id"),
-						rs.getInt("bedrag"), 
+				gebruiker = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
+						achternaam, adres, postcode, plaats, email, wachtwoord,
+						telefoonnummer, rekeningnummer, krediet, rol);
+				bod = new Bod(rs.getTimestamp("biedingdatum"),
+						rs.getInt("gebruiker_klantnr"),
+						rs.getInt("aanbiedingen_id"), rs.getInt("bedrag"),
 						gebruiker);
 				biedingen.add(bod);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,8 +160,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 				// Alle lopende veilingen
 				PreparedStatement ps = connection
-						.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
-								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn");
+						.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"
+								+ "as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn order by eindtijd asc");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
@@ -186,7 +179,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 							datum, 0);
 					Bod bod = new Bod(null, 0, id, bedrag);
 					aanb = new Aanbieding(id, startprijs, eindtijd,
-							insert_date, gebruikers_klantnr, "", drukken_nummer, boek, bod, null);
+							insert_date, gebruikers_klantnr, "",
+							drukken_nummer, boek, bod, null);
 					veilingenlijst.add(aanb);
 				}
 				ps.close();
@@ -197,8 +191,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			else if (categorie > 0) {
 				// Alle lopende veilingen
 				PreparedStatement ps = connection
-						.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
-								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and categorie=?");
+						.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"
+								+ "as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and categorie=? order by eindtijd asc");
 				ps.setInt(1, categorie);
 				System.out.println("Boek in categorie: " + categorie);
 				ResultSet rs = ps.executeQuery();
@@ -218,7 +212,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 							datum, 0);
 					Bod bod = new Bod(null, 0, id, bedrag);
 					aanb = new Aanbieding(id, startprijs, eindtijd,
-							insert_date, gebruikers_klantnr, "", drukken_nummer, boek, bod, null);
+							insert_date, gebruikers_klantnr, "",
+							drukken_nummer, boek, bod, null);
 					veilingenlijst.add(aanb);
 
 				}
@@ -270,8 +265,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			}
 			// Alle lopende veilingen
 			PreparedStatement ps = connection
-					.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
-								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and (LOWER(titel) like LOWER('%"
+					.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"
+							+ "as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and (LOWER(titel) like LOWER('%"
 							+ invoer
 							+ "%') OR LOWER(auteur) like LOWER('%"
 							+ invoer + "%'))");
@@ -288,11 +283,11 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				Date datum = rs.getDate("DATUM");
 				int gebruikers_klantnr = rs.getInt("GEBRUIKERS_KLANTNR");
 				Timestamp insert_date = rs.getTimestamp("INSERT_DATE");
-				boek = new Boek("", 0, titel, 0, titel, "", "", auteur,
-						datum, 0);
+				boek = new Boek("", 0, titel, 0, titel, "", "", auteur, datum,
+						0);
 				Bod bod = new Bod(null, 0, id, bedrag);
-				aanb = new Aanbieding(id, startprijs, eindtijd,
-						insert_date, gebruikers_klantnr, "", drukken_nummer, boek, bod, null);
+				aanb = new Aanbieding(id, startprijs, eindtijd, insert_date,
+						gebruikers_klantnr, "", drukken_nummer, boek, bod, null);
 				gezochteveilingenlijst.add(aanb);
 			}
 		} catch (Exception e) {
@@ -316,8 +311,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			}
 
 			PreparedStatement ps = connection
-					.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
-								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and gebruikers_klantnr =?");
+					.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"
+							+ "as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and gebruikers_klantnr =?");
 			ps.setInt(1, klantnr);
 			ResultSet rs = ps.executeQuery();
 			mijnveilingenlijst.clear();
@@ -341,8 +336,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				boek = new Boek(isbn, aantalpagina, titel, druk, beschrijving,
 						uitgeverij, taal, auteur, datum, categorie);
 				Bod bod = new Bod(null, 0, id, bedrag);
-				aanb = new Aanbieding(id, startprijs, eindtijd,
-						insert_date, klantnr, "", drukken_nummer, boek, bod, null);
+				aanb = new Aanbieding(id, startprijs, eindtijd, insert_date,
+						klantnr, "", drukken_nummer, boek, bod, null);
 				mijnveilingenlijst.add(aanb);
 			}
 		} catch (Exception e) {
@@ -355,7 +350,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	@Override
 	public boolean update(Object T) {
 		Aanbieding aanbieding = (Aanbieding) T;
-	
+
 		try {
 			Connection connection = null;
 			connection = GetConnection.getDBConnection();
@@ -375,7 +370,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			e.printStackTrace();
 		}
 		GetConnection.closeConnection();
-		
+
 		return false;
 	}
 
@@ -391,21 +386,21 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				System.out.println("|| Connection failed ||");
 			}
 			if (aanbieding.getGebruikers_klantnr() == 0) {
-				
+
 				PreparedStatement ps = connection
 						.prepareStatement("delete from biedingen where aanbiedingen_id = ?");
 				ps.setInt(1, aanbieding.getId());
 				ResultSet rs = ps.executeQuery();
 				rs.close();
 				ps.close();
-				
+
 				PreparedStatement ps2 = connection
 						.prepareStatement("delete from aanbiedingen where id = ?");
 				ps2.setInt(1, aanbieding.getId());
 				ResultSet rs2 = ps2.executeQuery();
 				rs2.close();
 				ps2.close();
-						
+
 			} else {
 				PreparedStatement ps3 = connection
 						.prepareStatement("delete from aanbiedingen where id = ? and gebruikers_klantnr =?");

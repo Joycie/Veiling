@@ -2,14 +2,13 @@ package veilingDomain;
 
 import java.sql.Timestamp;
 
-
 public class Bod {
-	
-  private Timestamp datumTijd;
-  private int klantnr;
-  private int aanbiedingid;
-  private double bedrag;
-  private Gebruiker bieder;
+
+	private Timestamp datumTijd;
+	private int klantnr;
+	private int aanbiedingid;
+	private double bedrag;
+	private Gebruiker bieder;
 
 	public Bod(Timestamp datumTijd, int klantnr, int aanbiedingid, double bedrag) {
 		this.datumTijd = datumTijd;
@@ -17,18 +16,19 @@ public class Bod {
 		this.aanbiedingid = aanbiedingid;
 		this.bedrag = bedrag;
 	}
-	  
-	  public Bod(Timestamp datumTijd, int klantnr, int aanbiedingid, double bedrag, Gebruiker bieder) {
-			this.datumTijd = datumTijd;
-			this.klantnr = klantnr;
-			this.aanbiedingid = aanbiedingid;
-			this.bedrag = bedrag;
-			this.bieder = bieder;
-		}
-	  
-	  public Bod(double bedrag){
-		  this.bedrag = bedrag;
-	  }
+
+	public Bod(Timestamp datumTijd, int klantnr, int aanbiedingid,
+			double bedrag, Gebruiker bieder) {
+		this.datumTijd = datumTijd;
+		this.klantnr = klantnr;
+		this.aanbiedingid = aanbiedingid;
+		this.bedrag = bedrag;
+		this.bieder = bieder;
+	}
+
+	public Bod(double bedrag) {
+		this.bedrag = bedrag;
+	}
 
 	public Timestamp getDatumTijd() {
 		return datumTijd;
@@ -61,7 +61,7 @@ public class Bod {
 	public void setBedrag(double bedrag) {
 		this.bedrag = bedrag;
 	}
-	
+
 	public Gebruiker getBieder() {
 		return bieder;
 	}
@@ -69,5 +69,5 @@ public class Bod {
 	public void setBieder(Gebruiker bieder) {
 		this.bieder = bieder;
 	}
-	
+
 }

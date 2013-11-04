@@ -13,45 +13,57 @@
 				<s:property value="boek.titel" />
 			</h3>
 			<div class="action-block">
-				<s:if test="#session.gebruiker.klantnummer==gebruiker.klantnummer">
-					<form>Je kunt niet op je eigen aanbieding bieden.
-					</form>
+				<s:if test="#session.gebruiker.klantnummer == gebruiker.klantnummer">
+					<form>Je kunt niet op je eigen aanbieding bieden.</form>
 				</s:if>
 				<s:elseif test="#session.gebruiker==null">
-					<form>Je moet <a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">inloggen</a> om te bieden.
+					<form>
+						Je moet <a
+							href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">inloggen</a>
+						om te bieden.
 					</form>
 				</s:elseif>
 				<s:else>
-					 <s:form action="biedAction" namespace="/member" theme="simple">
-						<s:textfield name="guldens" label="" placeholder="bedrag"/>
+					<s:if test="hasActionErrors()">
+							<s:actionerror/>
+					</s:if>
+					<s:if test="hasActionMessages()">
+						<s:actionmessage />
+					</s:if>
+					<s:form action="biedAction" namespace="/member" theme="simple">
+						<s:textfield name="guldens" label="" placeholder="bedrag" />
 						<s:hidden name="id" />
-						<s:submit value="Bieden"/>
-					</s:form> 
+						<s:submit value="Bieden" />
+					</s:form>
 				</s:else>
 
 				<s:if test="bod.bedrag > startprijs">
 					<h4>Huidig bod</h4>
 					<p>
-						ƒ<s:property value="bod.bedrag" />
+						ƒ
+						<s:property value="bod.bedrag" />
 					</p>
 				</s:if>
 				<s:else>
 					<h4>Startprijs</h4>
 					<p>
-						ƒ<s:property value="startprijs" />
+						ƒ
+						<s:property value="startprijs" />
 					</p>
 				</s:else>
-				
+
 			</div>
 		</div>
 		<div class="clear"></div>
 	</div>
 	<div class="sidebar">
 		<s:if test="#session.gebruiker.rol == 1">
-		<p>
-			<a class="button" href="<%=request.getContextPath()%>/admin/AanbiedingWijzigenForm.action?id=<s:property value="id" />">Wijzigen</a> 
-			<a class="button" href="<%=request.getContextPath()%>/member/VeilingVerwijderen.action?id=<s:property value="id" />">Verwijderen</a>
-		</p>
+			<p>
+				<a class="button"
+					href="<%=request.getContextPath()%>/admin/AanbiedingWijzigenForm.action?id=<s:property value="id" />">Wijzigen</a>
+				<a class="button"
+					href="<%=request.getContextPath()%>/member/VeilingVerwijderen.action?id=<s:property value="id" />">Verwijderen</a>
+			</p>
 		</s:if>
 		<h4>Uitgeverij</h4>
 		<p>
@@ -104,23 +116,29 @@
 		<h2>Beschrijving</h2>
 		<p>
 			<s:property value="boek.beschrijving" />
-		</p><h2>Biedingen</h2>
-		<div class="content-object">
-			<table>
-				<tr class="thcolor">
-					<th>Bieder</th>
-					<th>Bod</th>
-					<th>Datum</th>
-				</tr>
-				<s:iterator value="biedingen">
-					<tr class="tdcolor">
-						<td><s:property value="gebruiker.naam" /></td>
-						<td><s:property value="bedrag" /></td>
-						<td><s:date name="datumTijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+		</p>
+		<h2>Biedingen</h2>
+		<s:if test="%{biedingen.isEmpty()}">
+			Er zijn nog geen biedingen.
+		</s:if>
+		<s:else>
+			<div class="content-object">
+				<table>
+					<tr class="thcolor">
+						<th>Bieder</th>
+						<th>Bod</th>
+						<th>Datum</th>
 					</tr>
-				</s:iterator>
-			</table>
-		</div>
+					<s:iterator value="biedingen">
+						<tr class="tdcolor">
+							<td><s:property value="bieder.voornaam" /></td>
+							<td><s:property value="bedrag" /></td>
+							<td><s:date name="datumTijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+						</tr>
+					</s:iterator>
+				</table>
+			</div>
+		</s:else>
 		<div class="clear"></div>
 	</div>
 </s:iterator>

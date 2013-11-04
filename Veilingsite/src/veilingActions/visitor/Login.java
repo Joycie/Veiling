@@ -23,6 +23,8 @@ public class Login extends ActionSupport {
 	}
 
 	public void validate() {
+		email = email.trim();
+		pass = pass.trim();
 		Gebruiker geb = VeilingService.validateUser(email);
 		if (geb != null) {
 			if (geb.getRol() != 2) {

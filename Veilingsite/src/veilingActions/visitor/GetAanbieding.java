@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class GetAanbieding extends ActionSupport {
 	private int id;
+	private Gebruiker gebruiker;
 	private Aanbieding aanbieding;
 	private ArrayList<Bod> biedingen = new ArrayList<Bod>();
 	
@@ -23,6 +24,7 @@ public class GetAanbieding extends ActionSupport {
 	public String execute() {
 		aanbieding = VeilingService.getAanbieding(id);
 		biedingen = VeilingService.getBiedingenById(id);
+		gebruiker = VeilingService.getGebruiker(aanbieding.getGebruikers_klantnr());
 		return SUCCESS;
 	}
 
@@ -41,4 +43,13 @@ public class GetAanbieding extends ActionSupport {
 	public int getId() {
 		return id;
 	}
+
+	public Gebruiker getGebruiker() {
+		return gebruiker;
+	}
+
+	public void setGebruiker(Gebruiker gebruiker) {
+		this.gebruiker = gebruiker;
+	}
+	
 }
