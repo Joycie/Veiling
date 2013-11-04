@@ -117,7 +117,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 				// Alle lopende veilingen
 				PreparedStatement ps = connection
-						.prepareStatement("select aanbiedingen.gebruikers_klantnr, boeken.datum, aanbiedingen.drukken_nummer, boeken.auteur, aanbiedingen.eindtijd, aanbiedingen.id, biedingen.bedrag, aanbiedingen.insert_date, aanbiedingen.startprijs, boeken.titel from boeken, aanbiedingen left join biedingen on aanbiedingen.id = biedingen.aanbiedingen_id where aanbiedingen.drukken_boeken_isbn = boeken.isbn");
+						.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
+								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn");
 				ResultSet rs = ps.executeQuery();
 				veilingenlijst.clear();
 				while (rs.next()) {
@@ -146,7 +147,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			else if (categorie > 0) {
 				// Alle lopende veilingen
 				PreparedStatement ps = connection
-						.prepareStatement("select aanbiedingen.gebruikers_klantnr, boeken.datum, aanbiedingen.drukken_nummer, boeken.auteur, aanbiedingen.eindtijd, aanbiedingen.id, biedingen.bedrag, aanbiedingen.insert_date, aanbiedingen.startprijs, boeken.titel from boeken, aanbiedingen left join biedingen on aanbiedingen.id = biedingen.aanbiedingen_id where categorie=? and aanbiedingen.drukken_boeken_isbn = boeken.isbn");
+						.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
+								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and categorie=?");
 				ps.setInt(1, categorie);
 				System.out.println("Boek in categorie: " + categorie);
 				ResultSet rs = ps.executeQuery();
@@ -218,7 +220,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			}
 			// Alle lopende veilingen
 			PreparedStatement ps = connection
-					.prepareStatement("SELECT * from biedingen, boeken, drukken, aanbiedingen where boeken.isbn = drukken.boeken_isbn and drukken.boeken_isbn = aanbiedingen.drukken_boeken_isbn and drukken.nummer = aanbiedingen.drukken_nummer and eindtijd > sysdate and (LOWER(titel) like LOWER('%"
+					.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
+								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and (LOWER(titel) like LOWER('%"
 							+ invoer
 							+ "%') OR LOWER(auteur) like LOWER('%"
 							+ invoer + "%'))");
@@ -263,7 +266,8 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			}
 
 			PreparedStatement ps = connection
-					.prepareStatement("select boeken.beschrijving, boeken.isbn, boeken.uitgeverij, boeken.taal, boeken.aantalpagina, boeken.categorie, aanbiedingen.gebruikers_klantnr, boeken.datum, aanbiedingen.drukken_nummer, boeken.auteur, aanbiedingen.eindtijd, aanbiedingen.id, biedingen.bedrag, aanbiedingen.insert_date, aanbiedingen.startprijs, boeken.titel from boeken, aanbiedingen left join biedingen on aanbiedingen.id = biedingen.aanbiedingen_id where gebruikers_klantnr =? and aanbiedingen.drukken_boeken_isbn = boeken.isbn");
+					.prepareStatement("select (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id)"+
+								"as bedrag, aanbiedingen.*, boeken.* from aanbiedingen, boeken where eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and gebruikers_klantnr =?");
 			ps.setInt(1, klantnr);
 			ResultSet rs = ps.executeQuery();
 			mijnveilingenlijst.clear();

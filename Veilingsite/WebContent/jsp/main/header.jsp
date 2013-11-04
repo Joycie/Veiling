@@ -26,7 +26,7 @@
 										wijzigen</a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/member/KredietOpwaarderenForm.action">Saldo
-										wijzigen (<s:property value="krediet" />)
+										wijzigen (ƒ <s:property value="krediet" />)
 								</a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/member/Logout.action">Uitloggen</a>

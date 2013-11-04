@@ -27,15 +27,20 @@
 							type="submit" value="Bod plaatsen" />
 					</form>
 				</s:else>
-				<h4>Huidig bod</h4>
-				<p>
-					<s:if test="bod.bedrag > startprijs">
-						<s:property value="bod.bedrag" />
-						</s:if>
-					<s:else>
-						<s:property value="startprijs" />
-					</s:else>ƒ
-				</p>
+
+				<s:if test="bod.bedrag > startprijs">
+					<h4>Huidig bod</h4>
+					<p>
+						ƒ<s:property value="bod.bedrag" />
+					</p>
+				</s:if>
+				<s:else>
+					<h4>Startprijs</h4>
+					<p>
+						ƒ<s:property value="startprijs" />
+					</p>
+				</s:else>
+				
 			</div>
 		</div>
 		<div class="clear"></div>

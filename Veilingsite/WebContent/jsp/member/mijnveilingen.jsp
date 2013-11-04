@@ -35,9 +35,9 @@
 					<td><s:property value="boek.auteur" /></td>
 					<td><s:property value="drukken_nummer" /></td>
 					<td><s:if test="bod.bedrag > startprijs">
-							<b><s:property value="bod.bedrag" /> (Bod)</b>
+							<b>ƒ <s:property value="bod.bedrag" /> (Bod)</b>
 						</s:if> <s:else>
-							<s:property value="startprijs" />
+							ƒ <s:property value="startprijs" />
 							(Start)
 						</s:else></td>
 					<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>

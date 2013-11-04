@@ -14,6 +14,8 @@ public class AanbiedingZoeken extends ActionSupport {
 	private String invoer;
 	private Timestamp sysdate;
 	public String execute() {
+		invoer = invoer.trim();
+		System.out.println("Invoer: " + invoer);
 		java.util.Date date = new java.util.Date();
 		sysdate = new Timestamp(date.getTime());
 		sysdate.setDate(sysdate.getDate() - 1);
@@ -23,7 +25,7 @@ public class AanbiedingZoeken extends ActionSupport {
 	}
 	public void validate()
 	{
-		invoer.trim();
+		
 	}
 
 	public ArrayList<Aanbieding> getGezochteveilingen() {
