@@ -11,19 +11,10 @@
 	<s:iterator value="aanbieding">
 		<s:form action="VeilingWijzigen" namespace="/member"
 			enctype="multipart/form-data">
-			<s:textfield name="id" label="ID"/>
+			<s:hidden name="id" label="ID"/>
 			<s:textfield name="startprijs" label="Startprijs" />
-			Eindtijd:
-			<select name="dagen" id="dagen">
-				<option value=1>1 dag</option>
-				<option value=2>2 dagen</option>
-				<option value=4>4 dagen</option>
-				<option value=6>6 dagen</option>
-				<option value=7>1 week</option>
-			</select>
 			<s:file name="image" label="Selecteer foto" />
-			
-			<s:textfield name="<s:property value="eindtijd" />" label="Eindtijd"/>
+			<s:textfield name="eindtijd" label="Eindtijd"/>
 			<s:submit value="Wijzig Veiling" />
 		</s:form>
 	</s:iterator>

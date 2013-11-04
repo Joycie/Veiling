@@ -13,7 +13,10 @@
 				<s:property value="boek.titel" />
 			</h3>
 			<div class="action-block">
-
+				<s:if test="#session.gebruiker.rol == 1">
+						<a href="<%=request.getContextPath()%>/admin/AanbiedingWijzigenForm.action?id=<s:property value="id" />">Wijzigen</a>
+						<a href="<%=request.getContextPath()%>/member/VeilingVerwijderen.action?id=<s:property value="id" />">Verwijderen</a>
+					</s:if>
 				<s:if test="#session.gebruiker.klantnummer==gebruiker.klantnummer">
 					<form>
 						<a class="button"

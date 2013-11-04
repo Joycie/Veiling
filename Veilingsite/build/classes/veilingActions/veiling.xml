@@ -5,9 +5,8 @@
 
 <struts>
 	<package name="admin" namespace="/admin" extends="struts-default">
-	<interceptors>
-			<interceptor name="adminInterceptor"
-				class="veilingInterceptors.AdminInterceptor" />
+		<interceptors>
+			<interceptor name="adminInterceptor" class="veilingInterceptors.AdminInterceptor" />
 			<interceptor-stack name="AdminStack">
 				<interceptor-ref name="adminInterceptor" />
 				<interceptor-ref name="defaultStack" />
@@ -44,6 +43,13 @@
 		<action name="GetStatistieken" class="veilingActions.admin.GetStatistieken">
 			<result name="success">/jsp/admin/statistieken.jsp</result>
 			<result name="input" type="redirectAction">Menu</result>
+		</action>
+		<action name="AanbiedingWijzigenForm" class="veilingActions.admin.AanbiedingWijzigenForm">
+			<result name="success">/jsp/admin/veilingwijzigen.jsp</result>
+		</action>
+		<action name="VeilingWijzigen" class="veilingActions.admin.VeilingWijzigen">
+			<result name="success">/jsp/admin/veilingwijzigen.jsp</result>
+			<result name="input">/jsp/admin/veilingwijzigen.jsp</result>
 		</action>
 	</package>
 	<package name="visitor" namespace="/visitor" extends="struts-default">
@@ -112,7 +118,7 @@
 			<result name="success">/jsp/member/kredietopwaarderen.jsp</result>
 			<result name="input">/jsp/member/kredietopwaarderen.jsp</result>
 		</action>
-		
+
 		<action name="BoekToevoegen" class="veilingActions.member.BoekToevoegen">
 			<result name="success">/jsp/member/checkisbn.jsp</result>
 			<result name="input">/jsp/member/checkisbn.jsp</result>
@@ -131,13 +137,6 @@
 		</action>
 		<action name="VeilingVerwijderen" class="veilingActions.member.VeilingVerwijderen">
 			<result name="success" type="redirectAction">MijnVeilingen</result>
-		</action>
-		<action name="AanbiedingWijzgenForm" class="veilingActions.member.AanbiedingForm">
-			<result name="success">/jsp/member/veilingwijzigen.jsp</result>
-		</action>
-		<action name="VeilingWijzigen" class="veilingActions.member.VeilingWijzigen">
-			<result name="success">/jsp/member/veilingwijzigen.jsp</result>
-			<result name="input">/jsp/member/veilingwijzigen.jsp</result>
 		</action>
 		<action name="biedAction" class="veilingActions.member.Bieden">
 			<result name="success">/jsp/visitor/aanbieding.jsp</result>

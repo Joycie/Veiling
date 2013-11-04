@@ -1,11 +1,11 @@
-package veilingActions.member;
+package veilingActions.admin;
 
 import veilingDomain.Aanbieding;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AanbiedingForm extends ActionSupport{
+public class AanbiedingWijzigenForm extends ActionSupport{
 private int id;
 private Aanbieding aanbieding;
 

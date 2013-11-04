@@ -341,13 +341,22 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			} else {
 				System.out.println("|| Connection failed ||");
 			}
-			PreparedStatement ps = connection
-					.prepareStatement("delete from aanbiedingen where id = ? and gebruikers_klantnr =?");
-			ps.setInt(1, aanbieding.getId());
-			ps.setInt(2, aanbieding.getGebruikers_klantnr());
-			ResultSet rs = ps.executeQuery();
-			rs.close();
-			ps.close();
+			if (aanbieding.getGebruikers_klantnr() == 0) {
+				PreparedStatement ps = connection
+						.prepareStatement("delete from aanbiedingen where id = ?");
+				ps.setInt(1, aanbieding.getId());
+				ResultSet rs = ps.executeQuery();
+				rs.close();
+				ps.close();
+			} else {
+				PreparedStatement ps2 = connection
+						.prepareStatement("delete from aanbiedingen where id = ? and gebruikers_klantnr =?");
+				ps2.setInt(1, aanbieding.getId());
+				ps2.setInt(2, aanbieding.getGebruikers_klantnr());
+				ResultSet rs2 = ps2.executeQuery();
+				rs2.close();
+				ps2.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

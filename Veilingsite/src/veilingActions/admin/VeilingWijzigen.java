@@ -1,4 +1,4 @@
-package veilingActions.member;
+package veilingActions.admin;
 
 import java.sql.Timestamp;
 import java.util.Map;
