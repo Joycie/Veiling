@@ -22,6 +22,12 @@
 					</form>
 				</s:if>
 				<s:else>
+					<!--  <s:form action="biedAction">
+						<s:textfield name="guldens" label="Je bod:" />
+						<s:hidden name="veilingId" value="%{veiling.id}" />
+						<s:hidden name="id" value="%{account.id}" />
+						<s:submit />
+					</s:form> -->
 					<form>
 						<input type="text" name="bid" placeholder="Bedrag" /><input
 							type="submit" value="Bod plaatsen" />
@@ -97,29 +103,24 @@
 		<h2>Beschrijving</h2>
 		<p>
 			<s:property value="boek.beschrijving" />
-		</p>
-		<div class="clear"></div>
-		<table>
-
-			<tr class="thcolor">
-				<th>Bieder naam</th>
-				<th>Bod</th>
-			</tr>
-			<s:iterator value="veiling.biedingen">
-				<tr class="tdcolor">
-					<td><s:property value="gebruiker.naam" />
-					<td><s:property value="gulden" />
+		</p><h2>Biedingen</h2>
+		<div class="content-object">
+			<table>
+				<tr class="thcolor">
+					<th>Bieder</th>
+					<th>Bod</th>
+					<th>Datum</th>
 				</tr>
-			</s:iterator>
-		</table>
-
-		<s:form action="biedAction">
-			<hr />
-			<s:textfield name="guldens" label="Je bod:" />
-			<s:hidden name="veilingId" value="%{veiling.id}" />
-			<s:hidden name="id" value="%{account.id}" />
-			<s:submit />
-		</s:form>
+				<s:iterator value="veiling.biedingen">
+					<tr class="tdcolor">
+						<td><s:property value="gebruiker.naam" /></td>
+						<td><s:property value="gulden" /></td>
+						<td><s:property value="datum" /></td>
+					</tr>
+				</s:iterator>
+			</table>
+		</div>
+		<div class="clear"></div>
 	</div>
 </s:iterator>
 <%@ include file="../main/footer.jsp"%>

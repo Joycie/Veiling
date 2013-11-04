@@ -376,4 +376,8 @@ td {
 	margin-top: 5px;
 }
 
-
+.content-object
+{
+	width:750px;
+	float:left
+}
