@@ -21,12 +21,12 @@
 					</form>
 				</s:if>
 				<s:else>
-					 <s:form action="biedAction" namespace="/member" >
-						<s:textfield name="guldens" label="Je bod:" />
+					 <s:form action="biedAction" namespace="/member" theme="simple">
+						<s:textfield name="guldens" label="" placeholder="bedrag"/>
 						<s:hidden name="id" />
 						<!--<s:hidden name="veilingId" value="%{veiling.id}" />
 						<s:hidden name="id" value="%{account.id}" />-->
-						<s:submit />
+						<s:submit value="Bieden"/>
 					</s:form> 
 					<!--<form>
 						<input type="text" name="bid" placeholder="Bedrag" /><input
