@@ -13,10 +13,6 @@
 				<s:property value="boek.titel" />
 			</h3>
 			<div class="action-block">
-				<s:if test="#session.gebruiker.rol == 1">
-						<a href="<%=request.getContextPath()%>/admin/AanbiedingWijzigenForm.action?id=<s:property value="id" />">Wijzigen</a>
-						<a href="<%=request.getContextPath()%>/member/VeilingVerwijderen.action?id=<s:property value="id" />">Verwijderen</a>
-					</s:if>
 				<s:if test="#session.gebruiker.klantnummer==gebruiker.klantnummer">
 					<form>
 						<a class="button"
@@ -56,6 +52,12 @@
 		<div class="clear"></div>
 	</div>
 	<div class="sidebar">
+		<s:if test="#session.gebruiker.rol == 1">
+		<p>
+			<a class="button" href="<%=request.getContextPath()%>/admin/AanbiedingWijzigenForm.action?id=<s:property value="id" />">Wijzigen</a> 
+			<a class="button" href="<%=request.getContextPath()%>/member/VeilingVerwijderen.action?id=<s:property value="id" />">Verwijderen</a>
+		</p>
+		</s:if>
 		<h4>Uitgeverij</h4>
 		<p>
 			<s:property value="boek.uitgeverij" />
