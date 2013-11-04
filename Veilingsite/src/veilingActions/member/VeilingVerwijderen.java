@@ -19,17 +19,22 @@ public class VeilingVerwijderen extends ActionSupport implements SessionAware {
 	public String execute() {
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
 		if (gebruiker.getRol() == 1) {
-			Aanbieding aanbieding = new Aanbieding(id, 0, null, 0, null, 0,
-					null);
+			Aanbieding aanbieding = VeilingService.getAanbieding(id);
+			aanbieding.setGebruikers_klantnr(0);
 			VeilingService.deleteAanbieding(aanbieding);
 		} else {
-			Aanbieding aanbieding = new Aanbieding(id, 0, null,
-					gebruiker.getKlantnummer(), null, 0, null);
+			Aanbieding aanbieding = VeilingService.getAanbieding(id);
+			System.out.println("Bedrag: " + aanbieding.getBod().getBedrag() + " startprijs: " + aanbieding.getStartprijs());
+			if(aanbieding.getBod().getBedrag() > aanbieding.getStartprijs())
+			{
+				addActionError("Je mag een veiling niet verwijderen als er op geboden is.");
+				return INPUT;
+			}
+			
 			VeilingService.deleteAanbieding(aanbieding);
 		}
 		return SUCCESS;
 	}
-
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = (SessionMap) session;

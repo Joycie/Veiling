@@ -137,6 +137,7 @@
 		</action>
 		<action name="VeilingVerwijderen" class="veilingActions.member.VeilingVerwijderen">
 			<result name="success" type="redirectAction">MijnVeilingen</result>
+			<result name="input" type="redirectAction">MijnVeilingen</result>
 		</action>
 		<action name="biedAction" class="veilingActions.member.Bieden">
 			<result name="success">/jsp/visitor/aanbieding.jsp</result>

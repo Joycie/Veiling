@@ -18,6 +18,12 @@
 			</tr>
 		</s:if>
 		<s:else>
+			<s:if test="hasActionErrors()">
+				<s:actionerror />
+			</s:if>
+			<s:if test="hasActionMessages()">
+				<s:actionmessage />
+			</s:if>
 			<tr class="thcolor">
 				<th>Titel</th>
 				<th>Auteur</th>
@@ -35,17 +41,22 @@
 					<td><s:property value="boek.auteur" /></td>
 					<td><s:property value="drukken_nummer" /></td>
 					<td><s:if test="bod.bedrag > startprijs">
-							<b>ƒ <s:property value="bod.bedrag" /> (Bod)</b>
+							<b>ƒ <s:property value="bod.bedrag" /> (Bod)
+							</b>
 						</s:if> <s:else>
 							ƒ <s:property value="startprijs" />
 							(Start)
 						</s:else></td>
 					<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
 					<s:if test="insert_date > sysdate">
-					<th><img src="<%=request.getContextPath()%>/css/images/is_recent.png" height="16px" width="16px"></th>
+						<th><img
+							src="<%=request.getContextPath()%>/css/images/is_recent.png"
+							height="16px" width="16px"></th>
 					</s:if>
 					<s:else>
-					<th><img src="<%=request.getContextPath()%>/css/images/is_nietrecent.png" height="16px" width="16px" ></th>
+						<th><img
+							src="<%=request.getContextPath()%>/css/images/is_nietrecent.png"
+							height="16px" width="16px"></th>
 					</s:else>
 					<td><a
 						href="../member/VeilingVerwijderen.action?id=<s:property value="id"/>">verwijderen</a></td>
