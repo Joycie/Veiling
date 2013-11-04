@@ -332,7 +332,6 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 	@Override
 	public void delete(Object T) {
 		Aanbieding aanbieding = (Aanbieding) T;
-		System.out.println("v");
 		try {
 			Connection connection = null;
 			connection = GetConnection.getDBConnection();

@@ -22,7 +22,7 @@ public class KredietOpwaarderen extends ActionSupport implements SessionAware {
 		gebruiker = (Gebruiker) session.get("gebruiker");
 		System.out.println("Klantnr: " + gebruiker.getKlantnummer());
 		if (VeilingService.updateKrediet(gebruiker.getKlantnummer(), saldo)) {
-			gebruiker = new Gebruiker(gebruiker.getKlantnummer(), gebruiker.getVoornaam(), gebruiker.getTussenvoegsel(), gebruiker.getAchternaam(), gebruiker.getAdres(), gebruiker.getPostcode(), gebruiker.getPlaats(), gebruiker.getEmail(), gebruiker.getTelefoonnummer(), gebruiker.getRekeningnummer(), gebruiker.getKrediet());
+			gebruiker = new Gebruiker(gebruiker.getKlantnummer(), gebruiker.getVoornaam(), gebruiker.getTussenvoegsel(), gebruiker.getAchternaam(), gebruiker.getAdres(), gebruiker.getPostcode(), gebruiker.getPlaats(), gebruiker.getEmail(), gebruiker.getWachtwoord(), gebruiker.getTelefoonnummer(), gebruiker.getRekeningnummer(), gebruiker.getKrediet(), gebruiker.getRol());
 			Map<String, Object> session = ActionContext.getContext()
 					.getSession();
 			
