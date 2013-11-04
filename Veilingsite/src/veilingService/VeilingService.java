@@ -144,7 +144,11 @@ public class VeilingService {
 		BodDAO bodDAO = new BodDAO();
 		return bodDAO.create(bod);
 	}
-	
+	public static void updateEindtijdAanbieding(Aanbieding aanbieding) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		aanbiedingDAO.update(aanbieding);
+		
+	}
 	
 	// vanaf hier getters en setters
 
@@ -220,5 +224,7 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getLaatsteBieding(id);
 	}
+
+	
 
 }

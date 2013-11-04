@@ -64,7 +64,16 @@ public class Bieden extends ActionSupport implements SessionAware{
 		}
 		
 	}
-
+	public void validate(){
+		Calendar calendar = Calendar.getInstance();
+		java.util.Date currentDate = calendar.getTime();
+		java.sql.Timestamp biedtijd = new java.sql.Timestamp(currentDate.getTime());
+		Aanbieding aanbieding = VeilingService.getAanbieding(id);
+		if (aanbieding.getEindtijd().getTime()-10000 < biedtijd.getTime()){
+			aanbieding.getEindtijd().setSeconds(aanbieding.getEindtijd().getSeconds() + 15);
+			VeilingService.updateEindtijdAanbieding(aanbieding);
+		}
+	}
 	
 	//getters en setters
 	

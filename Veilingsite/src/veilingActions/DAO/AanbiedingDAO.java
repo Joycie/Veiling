@@ -304,7 +304,28 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 
 	@Override
 	public boolean update(Object T) {
-		// TODO Auto-generated method stub
+		Aanbieding aanbieding = (Aanbieding) T;
+	
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			PreparedStatement ps = connection
+					.prepareStatement("update aanbiedingen set eindtijd = ? where id = ?");
+			ps.setTimestamp(1, aanbieding.getEindtijd());
+			ps.setInt(2, aanbieding.getId());
+			ResultSet rs = ps.executeQuery();
+			rs.close();
+			ps.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		
 		return false;
 	}
 
