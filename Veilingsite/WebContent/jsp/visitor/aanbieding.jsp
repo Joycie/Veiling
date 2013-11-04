@@ -22,16 +22,17 @@
 					</form>
 				</s:if>
 				<s:else>
-					<!--  <s:form action="biedAction">
+					 <s:form action="biedAction" namespace="/member" >
 						<s:textfield name="guldens" label="Je bod:" />
-						<s:hidden name="veilingId" value="%{veiling.id}" />
-						<s:hidden name="id" value="%{account.id}" />
+						<s:hidden name="id" />
+						<!--<s:hidden name="veilingId" value="%{veiling.id}" />
+						<s:hidden name="id" value="%{account.id}" />-->
 						<s:submit />
-					</s:form> -->
-					<form>
+					</s:form> 
+					<!--<form>
 						<input type="text" name="bid" placeholder="Bedrag" /><input
 							type="submit" value="Bod plaatsen" />
-					</form>
+					</form>-->
 				</s:else>
 
 				<s:if test="bod.bedrag > startprijs">

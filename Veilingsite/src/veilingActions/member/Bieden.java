@@ -23,7 +23,7 @@ public class Bieden extends ActionSupport implements SessionAware{
 	private GetAanbieding getAanbieding;
 	private Gebruiker gebruiker;
 	private int id;
-	private double bid;
+	private double guldens;
 	private SessionMap session;
 	SessionMap<String, String> sessionmap;
 	
@@ -34,26 +34,22 @@ public class Bieden extends ActionSupport implements SessionAware{
 	public String execute() {
 		Aanbieding aanbieding = VeilingService.getAanbieding(id);
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
-		if (gebruiker == null) {
-			addActionMessage("U moet ingelogd zijn om te mogen bieden");
-			return INPUT;
-		}
 		if (gebruiker.getKlantnummer() == aanbieding.getGebruikers_klantnr()){
 			addActionMessage("U kunt niet op eigen veiling bieden");
 			return INPUT;
 		}
-		if (bid == 0){
+		if (guldens == 0){
 			addActionMessage("U moet een bedrag invullen");
 			return INPUT;
 		}
-		if (bid <= aanbieding.getStartprijs() || bid <= VeilingService.getEindprijs(id)) {
+		if (guldens <= aanbieding.getStartprijs() || guldens <= aanbieding.getBod().getBedrag()) {
 			addActionMessage("Het bod moet hoger zijn");
 			return INPUT;
 		}
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(currentDate.getTime());
-		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(), aanbieding.getId(), bid);
+		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(), aanbieding.getId(), guldens);
 		if (VeilingService.bieden(bod)){
 			addActionMessage("Bieden gelukt");
 			return SUCCESS;
@@ -67,7 +63,8 @@ public class Bieden extends ActionSupport implements SessionAware{
 	public void validate(){
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
-		java.sql.Timestamp biedtijd = new java.sql.Timestamp(currentDate.getTime());
+		java.sql.Date date = new java.sql.Date(currentDate.getTime());
+		java.sql.Timestamp biedtijd = new java.sql.Timestamp(date.getTime());
 		Aanbieding aanbieding = VeilingService.getAanbieding(id);
 		if (aanbieding.getEindtijd().getTime()-10000 < biedtijd.getTime()){
 			aanbieding.getEindtijd().setSeconds(aanbieding.getEindtijd().getSeconds() + 15);
@@ -81,12 +78,12 @@ public class Bieden extends ActionSupport implements SessionAware{
 		return bodDAO;
 	}
 
-	public double getBid() {
-		return bid;
+	public double getGuldens() {
+		return guldens;
 	}
 
-	public void setBid(double bid) {
-		this.bid = bid;
+	public void setGuldens(double guldens) {
+		this.guldens = guldens;
 	}
 
 	public void setBodDAO(BodDAO bodDAO) {

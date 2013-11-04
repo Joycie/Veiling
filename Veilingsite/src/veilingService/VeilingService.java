@@ -141,6 +141,7 @@ public class VeilingService {
 	}
 	
 	public static boolean bieden(Bod bod){
+		System.out.println("nee");
 		BodDAO bodDAO = new BodDAO();
 		return bodDAO.create(bod);
 	}
