@@ -34,38 +34,42 @@ public class Bieden extends ActionSupport implements SessionAware {
 	public String execute() {
 		Aanbieding aanbieding = VeilingService.getAanbieding(id);
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
-		if (gebruiker.getKlantnummer() == aanbieding.getGebruikers_klantnr()){
+		if (gebruiker.getKlantnummer() == aanbieding.getGebruikers_klantnr()) {
 			addActionMessage("U kunt niet op eigen veiling bieden");
 			return INPUT;
 		}
-		if (guldens == 0){
+		if (guldens == 0) {
 			addActionMessage("U moet een bedrag invullen");
 			return INPUT;
 		}
-		if (guldens <= aanbieding.getStartprijs() || guldens <= aanbieding.getBod().getBedrag()) {
+		if (guldens <= aanbieding.getStartprijs()
+				|| guldens <= aanbieding.getBod().getBedrag()) {
 			addActionMessage("Het bod moet hoger zijn");
 			return INPUT;
 		}
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
-		java.sql.Timestamp biedtijd = new java.sql.Timestamp(currentDate.getTime());
-		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(), aanbieding.getId(), guldens);
-		
-		if (VeilingService.bieden(bod)){
+		java.sql.Timestamp biedtijd = new java.sql.Timestamp(
+				currentDate.getTime());
+		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(),
+				aanbieding.getId(), guldens);
+
+		if (VeilingService.bieden(bod)) {
 			addActionMessage("Bieden gelukt");
-			if (VeilingService.kredietInleveren(gebruiker.getKlantnummer(), gebruiker.getKrediet() - guldens)){
-			session.put("gebruiker", gebruiker);
-			return SUCCESS;
-			}else{
+			if (VeilingService.kredietInleveren(gebruiker.getKlantnummer(),
+					gebruiker.getKrediet() - guldens)) {
+				gebruiker.setKrediet(gebruiker.getKrediet() - guldens);
+				session.put("gebruiker", gebruiker);
+				return SUCCESS;
+			} else {
 				addActionMessage(" Bieden niet gelukt");
 				return INPUT;
 			}
-		}
-		else {
+		} else {
 			addActionMessage("Bieden niet gelukt");
 			return INPUT;
 		}
-		
+
 	}
 
 	public void validate() {
