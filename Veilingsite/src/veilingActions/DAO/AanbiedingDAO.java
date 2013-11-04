@@ -12,6 +12,7 @@ import veilingActions.visitor.GetAanbieding;
 import veilingDomain.Aanbieding;
 import veilingDomain.Bod;
 import veilingDomain.Boek;
+import veilingDomain.Gebruiker;
 import veilingInterface.VeilingInterface;
 import veilingService.VeilingService;
 
@@ -96,6 +97,55 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 			e.printStackTrace();
 		}
 		return aanbieding;
+	}
+	
+	public ArrayList<Bod> getBiedingen(int id) {
+		ArrayList<Bod> biedingen = new ArrayList<Bod>();
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("select * from biedingen where aanbiedingen_id  = ?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				PreparedStatement ps2 = connection
+						.prepareStatement("select * from gebruikers where klantnr = ?");
+				ps2.setInt(1, id);
+				ResultSet rs2 = ps2.executeQuery();
+				
+				Gebruiker gebruiker = null;
+				
+				while (rs2.next()) {
+					int klantnummer = rs.getInt("KLANTNR");
+					String voornaam = rs.getString("VOORNAAM");
+					String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+					String achternaam = rs.getString("ACHTERNAAM");
+					String adres = rs.getString("ADRES");
+					String postcode = rs.getString("POSTCODE");
+					String email = rs.getString("EMAIL");
+					String wachtwoord = rs.getString("WACHTWOORD");
+					int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+					int rekeningnummer = rs.getInt("REKENINGNUMMER");
+					String plaats = rs.getString("PLAATS");
+					double krediet = rs.getDouble("KREDIET");
+					int rol = rs.getInt("rol");
+
+					gebruiker = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
+							achternaam, adres, postcode, plaats, email, wachtwoord,
+							telefoonnummer, rekeningnummer, krediet, rol);
+				}
+				
+				Bod bod = new Bod(rs.getTimestamp("biedingdatum"), rs.getInt("gebruiker_klantnr"), 
+						rs.getInt("aanbiedingen_id"),
+						rs.getInt("bedrag"), 
+						gebruiker);
+				biedingen.add(bod);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return biedingen;
 	}
 
 	@Override

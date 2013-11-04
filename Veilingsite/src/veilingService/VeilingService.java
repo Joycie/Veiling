@@ -223,6 +223,11 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getAanbieding(id);
 	}
+	
+	public static ArrayList<Bod> getBiedingenById(int id) {
+		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
+		return aanbiedingDAO.getBiedingen(id);
+	}
 
 	public static double getEindprijs(int id) {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();

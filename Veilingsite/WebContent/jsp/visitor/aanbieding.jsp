@@ -112,11 +112,11 @@
 					<th>Bod</th>
 					<th>Datum</th>
 				</tr>
-				<s:iterator value="veiling.biedingen">
+				<s:iterator value="biedingen">
 					<tr class="tdcolor">
 						<td><s:property value="gebruiker.naam" /></td>
-						<td><s:property value="gulden" /></td>
-						<td><s:property value="datum" /></td>
+						<td><s:property value="bedrag" /></td>
+						<td><s:date name="datumTijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
 					</tr>
 				</s:iterator>
 			</table>

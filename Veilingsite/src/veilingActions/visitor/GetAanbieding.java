@@ -1,5 +1,8 @@
 package veilingActions.visitor;
+import java.util.ArrayList;
+
 import veilingDomain.Aanbieding;
+import veilingDomain.Bod;
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -7,11 +10,19 @@ import com.opensymphony.xwork2.ActionSupport;
 public class GetAanbieding extends ActionSupport {
 	private int id;
 	private Aanbieding aanbieding;
-	private Gebruiker gebruiker;
+	private ArrayList<Bod> biedingen = new ArrayList<Bod>();
 	
+	public ArrayList<Bod> getBiedingen() {
+		return biedingen;
+	}
+
+	public void setBiedingen(ArrayList<Bod> biedingen) {
+		this.biedingen = biedingen;
+	}
+
 	public String execute() {
 		aanbieding = VeilingService.getAanbieding(id);
-		gebruiker = VeilingService.getGebruiker(aanbieding.getGebruikers_klantnr());
+		biedingen = VeilingService.getBiedingenById(id);
 		return SUCCESS;
 	}
 
@@ -29,13 +40,5 @@ public class GetAanbieding extends ActionSupport {
 
 	public int getId() {
 		return id;
-	}
-
-	public Gebruiker getGebruiker() {
-		return gebruiker;
-	}
-
-	public void setGebruiker(Gebruiker gebruiker) {
-		this.gebruiker = gebruiker;
 	}
 }

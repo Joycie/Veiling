@@ -128,6 +128,14 @@ public class Gebruiker {
 	public void setAchternaam(String achternaam) {
 		this.achternaam = achternaam;
 	}
+	
+	public String getNaam() {
+		String naam = getVoornaam();
+		if(!getTussenvoegsel().equals(""))
+			naam = naam + " " + getTussenvoegsel();
+		naam = naam + " " + getAchternaam();
+		return naam;
+	}
 
 	public String getAdres() {
 		return adres;
