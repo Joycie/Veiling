@@ -96,7 +96,7 @@ public class BoekDAO implements VeilingInterface<Boek> {
 				System.out.println("|| Connection failed ||");
 			}
 			PreparedStatement ps = connection
-					.prepareStatement("select * from boeken where isbn=" + ID);
+					.prepareStatement("select * from boeken where isbn= '" + ID + "'");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				isbn = rs.getString("isbn");
@@ -110,8 +110,8 @@ public class BoekDAO implements VeilingInterface<Boek> {
 				categorieboek = rs.getInt("categorie");
 			}
 			PreparedStatement ps2 = connection
-					.prepareStatement("select * from drukken where boeken_isbn="
-							+ ID);
+					.prepareStatement("select * from drukken where boeken_isbn='"
+							+ ID + "'");
 			ResultSet rs2 = ps2.executeQuery();
 			boekenlijst.clear();
 			while (rs2.next()) {
@@ -141,8 +141,8 @@ public class BoekDAO implements VeilingInterface<Boek> {
 				System.out.println("|| Connection failed ||");
 			}
 			PreparedStatement ps2 = connection
-					.prepareStatement("select * from drukken where boeken_isbn="
-							+ isbn);
+					.prepareStatement("select * from drukken where boeken_isbn='"
+							+ isbn + "'");
 			ResultSet rs2 = ps2.executeQuery();
 			boekenlijst.clear();
 			while (rs2.next()) {
