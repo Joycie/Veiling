@@ -1,11 +1,15 @@
 package veilingActions.member;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Map;
+
+import javax.activation.MimetypesFileTypeMap;
+import javax.imageio.ImageIO;
 
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
@@ -39,10 +43,11 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 		java.sql.Date date = new java.sql.Date(currentDate.getTime());
 		eindtijd = new Timestamp(date.getTime());
 		System.out.println("Dagen: " + dagen);
-		eindtijd.setDate(eindtijd.getDate()+ dagen);
+		eindtijd.setDate(eindtijd.getDate() + dagen);
 		System.out.println(eindtijd);
 		Gebruiker geb = (Gebruiker) session.get("gebruiker");
 		gebruikers_klantnr = geb.getKlantnummer();
+
 		if (!VeilingService.checkBoek(isbn)) {
 			addActionError("Boek bestaat niet");
 			return ERROR;
@@ -55,30 +60,40 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 		Boek boek = VeilingService.getBoek(isbn);
 		aanbieding = new Aanbieding(id, startprijs, eindtijd,
 				gebruikers_klantnr, isbn, druk, boek);
-		if(img != null){
+		
+		if (img != null) {
+			try {
+				Image image = ImageIO.read(img);
+				if (image == null) {
+					addActionError("File is geen image");
+					System.out.println("File is geen image.");
+					return INPUT;
+
+				}
+			} catch (IOException ex) {
+				System.out.println("Kan bestand niet openen");
+			}
+
 			blob = new byte[(int) img.length()];
 			try {
 				FileInputStream fileInputStream = new FileInputStream(img);
-			     //convert file into array of bytes
-			     fileInputStream.read(blob);
-			     fileInputStream.close();
+				// convert file into array of bytes
+				fileInputStream.read(blob);
+				fileInputStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			aanbieding.setImg(blob);
-			
+
 		}
-		
-		
 
 		if (!VeilingService.voegVeilingToe(aanbieding)) {
 			addActionError("Toevoegen niet gelukt");
 			return INPUT;
 		}
 		addActionError("Veiling toegevoegd");
-		
-		
+
 		return SUCCESS;
 
 	}
@@ -143,7 +158,7 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = (SessionMap) session;
 	}
-	
+
 	public File getImg() {
 		return img;
 	}
