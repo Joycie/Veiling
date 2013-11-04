@@ -66,19 +66,38 @@
 		Aanbiedingen van deze gebruiker:
 		<table>
 				<tr class="thcolor">
-					<th>ID</th>
 					<th>Titel</th>
 					<th>Auteur</th>
+					<th>Druk</th>
+					<th>Prijs</th>
 					<th>Eindtijd</th>
+					<th>Recent</th>
 				</tr>
 				<s:iterator value="aanbiedingen">
 					<tr class="tdcolor">
 						<td><a
-							href="../member/GetAanbieding.action?id=<s:property value="id"/>"><s:property
-									value="id" /></a></td>
-						<td><s:property value="boek.titel" /></td>
+							href="<%=request.getContextPath()%>/visitor/GetAanbieding.action?id=<s:property value="id" />"><s:property
+									value="boek.titel" /></a></td>
 						<td><s:property value="boek.auteur" /></td>
-						<td><s:property value="eindtijd" /></td>
+						<td><s:property value="drukken_nummer" /></td>
+						<td><s:if test="bod.bedrag > startprijs">
+								<b>ƒ <s:property value="bod.bedrag" /> (Bod)
+								</b>
+							</s:if> <s:else>
+							ƒ <s:property value="startprijs" />
+							(Start)
+						</s:else></td>
+						<td><s:date name="eindtijd" format="dd-MMM-yyyy 'om' HH:mm" /></td>
+						<s:if test="insert_date > sysdate">
+							<th><img
+								src="<%=request.getContextPath()%>/css/images/is_recent.png"
+								height="16px" width="16px"></th>
+						</s:if>
+						<s:else>
+							<th><img
+								src="<%=request.getContextPath()%>/css/images/is_nietrecent.png"
+								height="16px" width="16px"></th>
+						</s:else>
 					</tr>
 				</s:iterator>
 			</table>
