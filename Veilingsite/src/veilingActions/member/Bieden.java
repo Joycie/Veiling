@@ -16,8 +16,8 @@ import veilingDomain.Bod;
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 
-public class Bieden extends ActionSupport implements SessionAware{
-	
+public class Bieden extends ActionSupport implements SessionAware {
+
 	private BodDAO bodDAO;
 	private Bod bod = new Bod(0);
 	private GetAanbieding getAanbieding;
@@ -26,11 +26,11 @@ public class Bieden extends ActionSupport implements SessionAware{
 	private double guldens;
 	private SessionMap session;
 	SessionMap<String, String> sessionmap;
-	
+
 	public Bieden() {
 		bodDAO = new BodDAO();
 	}
-	
+
 	public String execute() {
 		Aanbieding aanbieding = VeilingService.getAanbieding(id);
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
@@ -50,9 +50,16 @@ public class Bieden extends ActionSupport implements SessionAware{
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(currentDate.getTime());
 		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(), aanbieding.getId(), guldens);
+		
 		if (VeilingService.bieden(bod)){
 			addActionMessage("Bieden gelukt");
+			if (VeilingService.kredietInleveren(gebruiker.getKlantnummer(), gebruiker.getKrediet() - guldens)){
+			session.put("gebruiker", gebruiker);
 			return SUCCESS;
+			}else{
+				addActionMessage(" Bieden niet gelukt");
+				return INPUT;
+			}
 		}
 		else {
 			addActionMessage("Bieden niet gelukt");
@@ -60,20 +67,26 @@ public class Bieden extends ActionSupport implements SessionAware{
 		}
 		
 	}
-	public void validate(){
+
+	public void validate() {
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Date date = new java.sql.Date(currentDate.getTime());
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(date.getTime());
 		Aanbieding aanbieding = VeilingService.getAanbieding(id);
-		if (aanbieding.getEindtijd().getTime()-10000 < biedtijd.getTime()){
-			aanbieding.getEindtijd().setSeconds(aanbieding.getEindtijd().getSeconds() + 15);
+		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
+		if (aanbieding.getEindtijd().getTime() - 10000 < biedtijd.getTime()) {
+			aanbieding.getEindtijd().setSeconds(
+					aanbieding.getEindtijd().getSeconds() + 15);
 			VeilingService.updateEindtijdAanbieding(aanbieding);
 		}
+		if (gebruiker.getKrediet() < guldens) {
+			addFieldError("guldens", "u hebt te weinig geld");
+		}
 	}
-	
-	//getters en setters
-	
+
+	// getters en setters
+
 	public BodDAO getBodDAO() {
 		return bodDAO;
 	}
@@ -121,7 +134,7 @@ public class Bieden extends ActionSupport implements SessionAware{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = (SessionMap) session;

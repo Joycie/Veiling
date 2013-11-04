@@ -281,4 +281,34 @@ public class GebruikerDAO implements VeilingInterface<Gebruiker> {
 		return true;
 
 	}
+	public boolean betalen(int klantnr, double saldo) {
+		System.out.println("Saldo: " + saldo);
+		Connection connection = null;
+		connection = GetConnection.getDBConnection();
+		if (connection != null) {
+			System.out.println("|| Connection ready || ");
+		} else {
+			System.out.println("|| Connection failed ||");
+		}
+		try {
+
+			System.out.println(" || Excecuting query ");
+			PreparedStatement ps = connection
+					.prepareStatement("UPDATE GEBRUIKERS SET KREDIET = ? WHERE KLANTNR = ?");
+			ps.setDouble(1, saldo);
+			ps.setInt(2, klantnr);
+			ResultSet rs = ps.executeQuery();
+			ps.close();
+			rs.close();
+
+		} catch (SQLException e) {
+
+			System.out.println("|| Failed to complete query || ");
+			e.printStackTrace();
+			return false;
+		}
+		GetConnection.closeConnection();
+		return true;
+
+	}
 }

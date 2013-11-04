@@ -150,7 +150,10 @@ public class VeilingService {
 		aanbiedingDAO.update(aanbieding);
 		
 	}
-	
+	public static boolean kredietInleveren(int klantnummer, double bedrag){
+		GebruikerDAO gebruikerDAO = new GebruikerDAO();
+		return gebruikerDAO.betalen(klantnummer, bedrag);
+	}
 	// vanaf hier getters en setters
 
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
