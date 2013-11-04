@@ -14,24 +14,19 @@
 			</h3>
 			<div class="action-block">
 				<s:if test="#session.gebruiker.klantnummer==gebruiker.klantnummer">
-					<form>
-						<a class="button"
-							href="<%=request.getContextPath()%>/member/AanbiedingWijzgenForm.action?id=<s:property value="id" />">Aanbieding
-							wijzigen</a>
+					<form>Je kunt niet op je eigen aanbieding bieden.
 					</form>
 				</s:if>
+				<s:elseif test="#session.gebruiker==null">
+					<form>Je moet <a href="<%=request.getContextPath()%>/jsp/visitor/login.jsp">inloggen</a> om te bieden.
+					</form>
+				</s:elseif>
 				<s:else>
 					 <s:form action="biedAction" namespace="/member" theme="simple">
 						<s:textfield name="guldens" label="" placeholder="bedrag"/>
 						<s:hidden name="id" />
-						<!--<s:hidden name="veilingId" value="%{veiling.id}" />
-						<s:hidden name="id" value="%{account.id}" />-->
 						<s:submit value="Bieden"/>
 					</s:form> 
-					<!--<form>
-						<input type="text" name="bid" placeholder="Bedrag" /><input
-							type="submit" value="Bod plaatsen" />
-					</form>-->
 				</s:else>
 
 				<s:if test="bod.bedrag > startprijs">
