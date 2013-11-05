@@ -6,6 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import veilingActions.database.GetConnection;
 import veilingActions.visitor.GetAanbieding;
@@ -70,7 +78,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		Aanbieding aanbieding = null;
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from (select * from biedingen, aanbiedingen, boeken where aanbiedingen_id = ? and boeken.isbn = aanbiedingen.drukken_boeken_isbn and aanbiedingen.id = biedingen.aanbiedingen_id order by biedingen.bedrag desc) where ROWNUM <= 1");
+					.prepareStatement("select boeken.*, aanbiedingen.*, (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id) as bedrag from boeken, aanbiedingen where aanbiedingen.id = ? and eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and rownum <= 1");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -83,9 +91,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 						rs.getInt("categorie"));
 				// int gebruiker = new Gebruiker(0, null, null, null, null,
 				// null, null, null, 0, 0);
-				Bod bod = new Bod(rs.getTimestamp("BIEDINGDATUM"),
-						rs.getInt("GEBRUIKER_KLANTNR"),
-						rs.getInt("AANBIEDINGEN_ID"), rs.getDouble("BEDRAG"));
+				Bod bod = new Bod (null, 0, 0, rs.getDouble("BEDRAG"));
 				aanbieding = new Aanbieding(rs.getInt("id"),
 						rs.getDouble("startprijs"),
 						rs.getTimestamp("eindtijd"),
@@ -182,9 +188,117 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 							insert_date, gebruikers_klantnr, "",
 							drukken_nummer, boek, bod, null);
 					veilingenlijst.add(aanb);
+
 				}
+				PreparedStatement ps2 = connection
+						.prepareStatement("select * from gebruikers, boeken, aanbiedingen where eindtijd < sysdate and isgemaild = 0 and gebruikers.klantnr = aanbiedingen.gebruikers_klantnr and boeken.isbn = aanbiedingen.drukken_boeken_isbn");
+				ResultSet rs2 = ps2.executeQuery();
+
+				while (rs2.next()) {
+					// Eigenaar van aanbieding
+					String voornaamEigenaaraanbieding = rs2
+							.getString("voornaam");
+					String tussenvoegselEigenaaraanbieding = rs2
+							.getString("tussenvoegsel");
+					String achternaamEigenaaraanbieding = rs2
+							.getString("achternaam");
+					String emailEigenaaraanbieding = rs2.getString("email");
+					String titelBoek = rs2.getString("titel");
+					
+					String tussenvoegsel = "";
+					if (tussenvoegselEigenaaraanbieding != null)
+					{
+						tussenvoegsel = tussenvoegselEigenaaraanbieding + " ";
+					}
+					try {
+						Properties props = new Properties();
+						props.put("mail.smtp.host", "smtp.gmail.com");
+						props.put("mail.smtp.port", 465);
+						props.put("mail.smtp.ssl.enable", true);
+						Session mailSession = Session.getInstance(props);
+						MimeMessage msg = new MimeMessage(mailSession);
+						msg.setFrom(new InternetAddress(
+								"multatuliveiling@gmail.com",
+								"Multatuli Veilingen"));
+						msg.setRecipients(Message.RecipientType.TO,
+								emailEigenaaraanbieding);
+						msg.setSubject("Uw aanbieding is afgelopen");
+						msg.setSentDate(Calendar.getInstance().getTime());
+						msg.setText("Beste " + voornaamEigenaaraanbieding + " "
+								+ tussenvoegsel
+								+ achternaamEigenaaraanbieding
+								+ ", Uw veiling van het boek \n \n Titel: "
+								+ titelBoek + " is afgelopen ");
+						Transport.send(msg, "multatuliveiling@gmail.com",
+								"register_3");
+						System.out.println("Mail verstuurd naar aanbieder");
+					} catch (Exception e) {
+
+					}
+					
+				}
+
+				PreparedStatement ps3 = connection
+						.prepareStatement("select aanbiedingen.eindprijs, gebruikers.*, biedingen.*, boeken.* from boeken, biedingen, gebruikers, aanbiedingen where eindtijd < sysdate and isgemaild = 0 and eindprijs = biedingen.bedrag and gebruikers.klantnr = biedingen.gebruiker_klantnr and aanbiedingen.drukken_boeken_isbn = boeken.isbn ");
+				ResultSet rs3 = ps3.executeQuery();
+
+				while (rs3.next()) {
+					// Winnaar
+					String voornaamWinnaar = rs3
+							.getString("voornaam");
+					String tussenvoegselWinnaar = rs3
+							.getString("tussenvoegsel");
+					String achternaamWinnaar = rs3
+							.getString("achternaam");
+					String emailWinnaar = rs3.getString("email");
+					String titelBoek = rs3.getString("titel");
+					String auteurBoek = rs3.getString("auteur");
+					double eindprijs = rs3.getDouble("eindprijs");
+					
+					String tussenvoegsel = "";
+					if (tussenvoegselWinnaar != null)
+					{
+						tussenvoegsel = tussenvoegselWinnaar + " ";
+					}
+					try {
+						Properties props = new Properties();
+						props.put("mail.smtp.host", "smtp.gmail.com");
+						props.put("mail.smtp.port", 465);
+						props.put("mail.smtp.ssl.enable", true);
+						Session mailSession = Session.getInstance(props);
+						MimeMessage msg = new MimeMessage(mailSession);
+						msg.setFrom(new InternetAddress(
+								"multatuliveiling@gmail.com",
+								"Multatuli Veilingen"));
+						msg.setRecipients(Message.RecipientType.TO,
+								emailWinnaar);
+						msg.setSubject("U heeft een veiling gewonnen");
+						msg.setSentDate(Calendar.getInstance().getTime());
+						msg.setText("Beste " + voornaamWinnaar + " "
+								+ tussenvoegsel
+								+ achternaamWinnaar
+								+ ", U heeft een veiling gewonnen! \n \n Titel: "
+								+ titelBoek + " \n Auteur: " + auteurBoek
+								+ "\n\n Met het winnende bod van: " + eindprijs + " ! \n GEFELICITEERD!!");
+						Transport.send(msg, "multatuliveiling@gmail.com",
+								"register_3");
+						System.out.println("Mail verstuurd naar winnaar");
+					} catch (Exception e) {
+
+					}
+	
+				}
+				PreparedStatement ps4 = connection
+						.prepareStatement("update aanbiedingen set isgemaild = 1 where eindtijd < sysdate");
+				ResultSet rs4 = ps4.executeQuery();
 				ps.close();
 				rs.close();
+				ps2.close();
+				rs2.close();
+				ps3.close();
+				rs3.close();
+				ps4.close();
+				rs4.close();
 			}
 
 			// Als er wel een boekcategorie is meegegeven

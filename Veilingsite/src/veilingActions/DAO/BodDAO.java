@@ -32,7 +32,14 @@ public class BodDAO implements VeilingInterface {
 			
 			ps.close();
 			rs.close();
-	
+			
+			PreparedStatement ps2 = connection.prepareStatement("UPDATE AANBIEDINGEN SET EINDPRIJS = ? WHERE AANBIEDINGEN.ID = ?");
+			ps2.setDouble(1, bod.getBedrag());
+			ps2.setInt(2, bod.getAanbiedingid());
+			ResultSet rs2 = ps.executeQuery();
+			
+			ps2.close();
+			rs2.close();
 		} catch (SQLException e) {
 	
 			System.out.println("|| Failed to complete query || ");

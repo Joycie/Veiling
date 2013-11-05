@@ -25,7 +25,6 @@ public class GetVeilingen extends ActionSupport {
 		VeilingService.retrieveVeilingen(stringCategorie);
 
 		veilingen = VeilingService.getVeilingenlijst();
-
 		return SUCCESS;
 	}
 

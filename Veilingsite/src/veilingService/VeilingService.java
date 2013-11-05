@@ -186,7 +186,6 @@ public class VeilingService {
 				AanbiedingDAO.getVeilingenlijst());
 		return veilingenlijst;
 	}
-	
 	public static ArrayList<Boek> getBoekenlijst() {
 		ArrayList<Boek> boekenlijst = new ArrayList<Boek>(
 				BoekDAO.getBoekenlijst());
