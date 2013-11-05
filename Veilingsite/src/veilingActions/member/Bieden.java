@@ -37,13 +37,17 @@ public class Bieden extends ActionSupport implements SessionAware {
 
 	public String execute() {
 		
+		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
+		aanbieding = VeilingService.getAanbieding(id);
+		biedingen = VeilingService.getBiedingenById(id);
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(
 				currentDate.getTime());
+		VeilingService.updateKrediet(aanbieding.getBod().getKlantnr(), aanbieding.getBod().getBedrag());
 		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(),
 				aanbieding.getId(), guldens);
-
+	
 		if (VeilingService.bieden(bod)) {
 			addActionMessage("Bieden gelukt");
 			if (VeilingService.kredietInleveren(gebruiker.getKlantnummer(),
@@ -83,7 +87,7 @@ public class Bieden extends ActionSupport implements SessionAware {
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Date date = new java.sql.Date(currentDate.getTime());
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(date.getTime());
-		Aanbieding aanbieding = VeilingService.getAanbieding(id);
+		aanbieding = VeilingService.getAanbieding(id);
 		if (aanbieding.getEindtijd().getTime() - 10000 < biedtijd.getTime()) {
 			aanbieding.getEindtijd().setSeconds(
 					aanbieding.getEindtijd().getSeconds() + 15);

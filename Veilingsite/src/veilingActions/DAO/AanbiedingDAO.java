@@ -70,7 +70,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		Aanbieding aanbieding = null;
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select * from boeken, aanbiedingen left join biedingen on aanbiedingen.id = biedingen.aanbiedingen_id where aanbiedingen.id = ?  and boeken.isbn = aanbiedingen.drukken_boeken_isbn");
+					.prepareStatement("select * from (select * from biedingen, aanbiedingen, boeken where aanbiedingen_id = ? and boeken.isbn = aanbiedingen.drukken_boeken_isbn and aanbiedingen.id = biedingen.aanbiedingen_id order by biedingen.bedrag desc) where ROWNUM <= 1");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
