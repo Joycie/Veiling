@@ -4,7 +4,7 @@
 <div class="content">
 	<h2>Krediet opwaarderen</h2>
 
-	Huiding saldo:
+	Huiding saldo: fl. 
 	<s:iterator value="#session.gebruiker">
 		<s:property value="krediet" />
 	</s:iterator>

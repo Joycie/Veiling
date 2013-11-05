@@ -29,11 +29,11 @@
 					<td><s:property value="drukken_nummer" /></td>
 					<td>
 						<s:if test="bod.bedrag > startprijs">
-							<b>ƒ <s:property value="bod.bedrag" />
+							<b>fl. <s:property value="bod.bedrag" />
 							(Bod)</b>
 						</s:if>
 						<s:else>
-							ƒ <s:property value="startprijs" />
+							fl. <s:property value="startprijs" />
 							(Start)
 						</s:else>
 					</td>

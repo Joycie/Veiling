@@ -18,15 +18,15 @@
 		<hr>
 		
 		<img src="<%=request.getContextPath()%>/css/images/pig.png" height="200px" width="300px" >
-		<h2>Financeele statistieken</h2>
+		<h2>Financiële statistieken</h2>
 		Hoogste bod:
-		<p>Vandaag: <s:property value="Statistiek.hoogstebod_dag" />
-		<p>Week: <s:property value="Statistiek.hoogstebod_week" /></p>
-		<p>Maand: <s:property value="Statistiek.hoogstebod_maand" /></p>
-		<p>Jaar: <s:property value="Statistiek.hoogstebod_jaar" /></p>
+		<p>Vandaag: fl. <s:property value="Statistiek.hoogstebod_dag" />
+		<p>Week: fl. <s:property value="Statistiek.hoogstebod_week" /></p>
+		<p>Maand: fl. <s:property value="Statistiek.hoogstebod_maand" /></p>
+		<p>Jaar: fl. <s:property value="Statistiek.hoogstebod_jaar" /></p>
 
-		Hoogste krediet in het systeem: <s:property value="Statistiek.hoogstekrediet" /><br>
-		Totale omzet: <s:property value="Statistiek.totaleomzet" /><br>
+		Hoogste krediet in het systeem: fl. <s:property value="Statistiek.hoogstekrediet" /><br>
+		Totale omzet: fl. <s:property value="Statistiek.totaleomzet" /><br>
 		<hr>
 		</div>
 		</div>

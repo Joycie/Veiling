@@ -40,14 +40,14 @@
 				<s:if test="bod.bedrag > startprijs">
 					<h4>Huidig bod</h4>
 					<p>
-						ƒ
+						fl.
 						<s:property value="bod.bedrag" />
 					</p>
 				</s:if>
 				<s:else>
 					<h4>Startprijs</h4>
 					<p>
-						ƒ
+						fl.
 						<s:property value="startprijs" />
 					</p>
 				</s:else>
