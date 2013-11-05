@@ -44,6 +44,8 @@ public class Bieden extends ActionSupport implements SessionAware {
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(
 				currentDate.getTime());
+		System.out.println("Vorige bieder: " + aanbieding.getBod().getKlantnr());
+		System.out.println("Bedrag dat er bij komt: " + aanbieding.getBod().getBedrag());
 		VeilingService.updateKrediet(aanbieding.getBod().getKlantnr(), aanbieding.getBod().getBedrag());
 		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(),
 				aanbieding.getId(), guldens);

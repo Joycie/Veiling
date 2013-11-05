@@ -78,7 +78,9 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		Aanbieding aanbieding = null;
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("select boeken.*, aanbiedingen.*, (select max(bedrag) from biedingen where biedingen.aanbiedingen_id = aanbiedingen.id) as bedrag from boeken, aanbiedingen where aanbiedingen.id = ? and eindtijd > sysdate and aanbiedingen.drukken_boeken_isbn = boeken.isbn and rownum <= 1");
+					.prepareStatement("select * from (select aanbiedingen.*, biedingen.*, boeken.* from boeken, aanbiedingen " +
+							"left join biedingen on aanbiedingen.id = biedingen.aanbiedingen_id where aanbiedingen.id = ? " +
+							"and boeken.isbn = aanbiedingen.drukken_boeken_isbn order by bedrag desc) where rownum <= 1");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -91,7 +93,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 						rs.getInt("categorie"));
 				// int gebruiker = new Gebruiker(0, null, null, null, null,
 				// null, null, null, 0, 0);
-				Bod bod = new Bod (null, 0, 0, rs.getDouble("BEDRAG"));
+				Bod bod = new Bod (rs.getTimestamp("biedingdatum"), rs.getInt("gebruiker_klantnr"), rs.getInt("AANBIEDINGEN_ID"), rs.getDouble("BEDRAG"));
 				aanbieding = new Aanbieding(rs.getInt("id"),
 						rs.getDouble("startprijs"),
 						rs.getTimestamp("eindtijd"),
