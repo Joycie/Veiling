@@ -148,7 +148,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		}
 		return biedingen;
 	}
-
+	
 	@Override
 	public Aanbieding retrieve(String stringCategorie) {
 		int categorie = Integer.parseInt(stringCategorie);
@@ -476,18 +476,21 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				System.out.println("|| Connection failed ||");
 			}
 			PreparedStatement ps = connection
-					.prepareStatement("update aanbiedingen set eindtijd = ? where id = ?");
+					.prepareStatement("update aanbiedingen set eindtijd = ?, startprijs =?, image =? where id = ?");
 			ps.setTimestamp(1, aanbieding.getEindtijd());
-			ps.setInt(2, aanbieding.getId());
+			ps.setDouble(2, aanbieding.getStartprijs());
+			ps.setBytes(3, aanbieding.getImg());
+			ps.setInt(4, aanbieding.getId());
 			ResultSet rs = ps.executeQuery();
 			rs.close();
 			ps.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		GetConnection.closeConnection();
-
-		return false;
+		return true;
+		
 	}
 
 	@Override

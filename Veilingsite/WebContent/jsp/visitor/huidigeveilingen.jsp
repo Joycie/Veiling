@@ -28,7 +28,7 @@
 					<td><s:property value="boek.auteur" /></td>
 					<td><s:property value="drukken_nummer" /></td>
 					<td>
-						<s:if test="bod.bedrag > startprijs">
+						<s:if test="bod.bedrag >= startprijs">
 							<b>fl. <s:property value="bod.bedrag" />
 							(Bod)</b>
 						</s:if>

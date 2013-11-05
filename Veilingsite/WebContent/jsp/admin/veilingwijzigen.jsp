@@ -13,7 +13,7 @@
 			enctype="multipart/form-data">
 			<s:hidden name="id" label="ID"/>
 			<s:textfield name="startprijs" label="Startprijs" />
-			<s:file name="image" label="Selecteer foto" />
+			<s:file name="img" label="Selecteer foto" />
 			<s:textfield name="eindtijd" label="Eindtijd"/>
 			<s:submit value="Wijzig Veiling" />
 		</s:form>
