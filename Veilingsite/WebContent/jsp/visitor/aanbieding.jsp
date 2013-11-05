@@ -3,6 +3,12 @@
 <%@ include file="../main/header.jsp"%>
 <s:iterator value="aanbieding">
 	<div class="block">
+		<s:if test="hasActionErrors()">
+			<s:actionerror/>
+		</s:if>
+		<s:if test="hasActionMessages()">
+			<s:actionmessage />
+		</s:if>
 		<img
 			src="http://www.buynothingnew.nl/wp-content/uploads/vintage-boeken.jpeg" />
 		<div class="info">
@@ -24,12 +30,6 @@
 					</form>
 				</s:elseif>
 				<s:else>
-					<s:if test="hasActionErrors()">
-							<s:actionerror/>
-					</s:if>
-					<s:if test="hasActionMessages()">
-						<s:actionmessage />
-					</s:if>
 					<s:form action="biedAction" namespace="/member" theme="simple">
 						<s:textfield name="guldens" label="" placeholder="bedrag" />
 						<s:hidden name="id" />

@@ -381,3 +381,32 @@ td {
 	width:750px;
 	float:left
 }
+
+.errorMessage, .infoMessage, .actionMessage
+{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 10px;
+}
+
+.errorMessage li, .infoMessage li, .actionMessage li
+{
+	padding: 5px;
+	color: white;
+}
+
+.errorMessage li
+{
+	background-color: red;
+}
+
+.infoMessage li
+{
+	background-color: green;
+}
+
+.actionMessage li
+{
+	background-color: green;
+}
