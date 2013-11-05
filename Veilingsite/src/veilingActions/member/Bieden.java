@@ -38,15 +38,13 @@ public class Bieden extends ActionSupport implements SessionAware {
 	public String execute() {
 		
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
+		gebruiker = VeilingService.validateUser(gebruiker.getEmail());
 		aanbieding = VeilingService.getAanbieding(id);
 		biedingen = VeilingService.getBiedingenById(id);
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date currentDate = calendar.getTime();
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(
 				currentDate.getTime());
-		System.out.println("Vorige bieder: " + aanbieding.getBod().getKlantnr());
-		System.out.println("Bedrag dat er bij komt: " + aanbieding.getBod().getBedrag());
-		VeilingService.updateKrediet(aanbieding.getBod().getKlantnr(), aanbieding.getBod().getBedrag());
 		Bod bod = new Bod(biedtijd, gebruiker.getKlantnummer(),
 				aanbieding.getId(), guldens);
 	
@@ -56,6 +54,7 @@ public class Bieden extends ActionSupport implements SessionAware {
 					gebruiker.getKrediet() - guldens)) {
 				gebruiker.setKrediet(gebruiker.getKrediet() - guldens);
 				session.put("gebruiker", gebruiker);
+				VeilingService.updateKrediet(aanbieding.getBod().getKlantnr(), aanbieding.getBod().getBedrag());
 				aanbieding = VeilingService.getAanbieding(id);
 				biedingen = VeilingService.getBiedingenById(id);
 				return SUCCESS;
@@ -69,6 +68,7 @@ public class Bieden extends ActionSupport implements SessionAware {
 
 	public void validate() {
 		Gebruiker gebruiker = (Gebruiker) session.get("gebruiker");
+		gebruiker = VeilingService.validateUser(gebruiker.getEmail());
 		aanbieding = VeilingService.getAanbieding(id);
 		biedingen = VeilingService.getBiedingenById(id);
 		if (gebruiker.getKrediet() < guldens) {
@@ -90,9 +90,8 @@ public class Bieden extends ActionSupport implements SessionAware {
 		java.sql.Date date = new java.sql.Date(currentDate.getTime());
 		java.sql.Timestamp biedtijd = new java.sql.Timestamp(date.getTime());
 		aanbieding = VeilingService.getAanbieding(id);
-		if (aanbieding.getEindtijd().getTime() - 10000 < biedtijd.getTime()) {
-			aanbieding.getEindtijd().setSeconds(
-					aanbieding.getEindtijd().getSeconds() + 15);
+		if (aanbieding.getEindtijd().getTime() - 20000 < biedtijd.getTime()) {
+			aanbieding.getEindtijd().setSeconds(aanbieding.getEindtijd().getSeconds() + 60);
 			VeilingService.updateEindtijdAanbieding(aanbieding);
 		}
 	}

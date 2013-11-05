@@ -281,7 +281,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 								+ achternaamWinnaar
 								+ ", U heeft een veiling gewonnen! \n \n Titel: "
 								+ titelBoek + " \n Auteur: " + auteurBoek
-								+ "\n\n Met het winnende bod van: " + eindprijs + " ! \n GEFELICITEERD!!");
+								+ "\n\n Met het winnende bod van: ƒ " + eindprijs + " ! \n GEFELICITEERD!!");
 						Transport.send(msg, "multatuliveiling@gmail.com",
 								"register_3");
 						System.out.println("Mail verstuurd naar winnaar");
