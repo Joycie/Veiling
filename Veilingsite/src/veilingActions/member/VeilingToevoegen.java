@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -16,6 +18,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import veilingDomain.Aanbieding;
 import veilingDomain.Boek;
+import veilingDomain.Categorie;
 import veilingDomain.Gebruiker;
 import veilingService.VeilingService;
 
@@ -32,6 +35,8 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 	private File img;
 	private byte[] blob;
 	SessionMap<String, String> sessionmap;
+	private ArrayList<Categorie> categorielijst = new ArrayList<Categorie>(VeilingService.getCategorielijst());
+	private List<Categorie> categories = new ArrayList<Categorie>();
 
 	public VeilingToevoegen() {
 
@@ -47,14 +52,22 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 		System.out.println(eindtijd);
 		Gebruiker geb = (Gebruiker) session.get("gebruiker");
 		gebruikers_klantnr = geb.getKlantnummer();
-
+		
 		if (!VeilingService.checkBoek(isbn)) {
 			addActionError("Boek bestaat niet");
+			VeilingService.retrieveCategories();
+			categorielijst = new ArrayList<Categorie>(VeilingService.getCategorielijst());
+			categories = categorielijst;	
+			System.out.println(categories);
 			return ERROR;
 
 		}
 		if (VeilingService.getBoek(isbn) == null) {
 			addActionError("Boek bestaat niet");
+			VeilingService.retrieveCategories();
+			categorielijst = new ArrayList<Categorie>(VeilingService.getCategorielijst());
+			categories = categorielijst;
+			System.out.println(categories);
 			return ERROR;
 		}
 		Boek boek = VeilingService.getBoek(isbn);
@@ -92,7 +105,7 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 			addActionError("Toevoegen niet gelukt");
 			return INPUT;
 		}
-		addActionError("Veiling toegevoegd");
+		addActionMessage("Veiling toegevoegd");
 
 		return SUCCESS;
 
@@ -166,4 +179,21 @@ public class VeilingToevoegen extends ActionSupport implements SessionAware {
 	public void setImg(File img) {
 		this.img = img;
 	}
+
+	public List<Categorie> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
+	}
+
+	public ArrayList<Categorie> getCategorielijst() {
+		return categorielijst;
+	}
+
+	public void setCategorielijst(ArrayList<Categorie> categorielijst) {
+		this.categorielijst = categorielijst;
+	}
+	
 }

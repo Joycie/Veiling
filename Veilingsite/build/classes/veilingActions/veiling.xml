@@ -91,18 +91,8 @@
 		<action name="Logout" class="veilingActions.member.Logout">
 			<result name="success">/jsp/visitor/login.jsp</result>
 		</action>
-		<action name="BoekToevoegenForm">
-			<result name="success">/jsp/member/checkisbn.jsp</result>
-		</action>
-		<action name="CheckIsbn" class="veilingActions.member.CheckIsbn">
-			<result name="input" type="redirectAction">GetCategorie</result>
-			<result name="success" type="redirectAction">BookInfo</result>
-		</action>
 		<action name="GetCategorie" class="veilingActions.member.GetCategorie">
 			<result name="success">/jsp/member/boektoevoegen.jsp</result>
-		</action>
-		<action name="BookInfo" class="veilingActions.member.BoekInfo">
-			<result name="success">/jsp/member/checkisbn.jsp</result>
 		</action>
 		<action name="AccountWijzigenForm">
 			<result name="success">/jsp/member/accountwijzigen.jsp</result>
@@ -120,17 +110,17 @@
 		</action>
 
 		<action name="BoekToevoegen" class="veilingActions.member.BoekToevoegen">
-			<result name="success">/jsp/member/checkisbn.jsp</result>
-			<result name="input">/jsp/member/checkisbn.jsp</result>
+			<result name="success">/jsp/member/veilingtoevoegen.jsp</result>
+			<result name="input">/jsp/member/boektoevoegen.jsp</result>
 		</action>
 		<action name="BoekWijzigen" class="veilingActions.member.BoekWijzigen">
-			<result name="success">/jsp/member/checkisbn.jsp</result>
-			<result name="input">/jsp/member/checkisbn.jsp</result>
+			<result name="success">/jsp/member/veilingtoevoegen.jsp</result>
+			<result name="input">/jsp/member/boektoevoegen.jsp</result>
 		</action>
 		<action name="VeilingToevoegen" class="veilingActions.member.VeilingToevoegen">
 			<result name="success">/jsp/member/veilingtoevoegen.jsp</result>
 			<result name="input">/jsp/member/veilingtoevoegen.jsp</result>
-			<result name="error">/jsp/member/checkisbn.jsp</result>
+			<result name="error">/jsp/member/boektoevoegen.jsp</result>
 		</action>
 		<action name="MijnVeilingen" class="veilingActions.member.GetMijnVeiling">
 			<result name="success">/jsp/member/mijnveilingen.jsp</result>

@@ -14,16 +14,6 @@ import veilingDomain.Categorie;
 import veilingInterface.VeilingInterface;
 
 public class BoekDAO implements VeilingInterface<Boek> {
-	private static String isbn;
-	private static String titel;
-	private static String beschrijving;
-	private static String uitgeverij;
-	private static Date datum;
-	private static String taal;
-	private static int aantalpagina;
-	private static String auteur;
-	private static int categorieboek;
-	private static int druk;
 	private static File img;
 	private static ArrayList<Boek> boekenlijst = new ArrayList<Boek>();
 	private static ArrayList<Integer> drukkenlijst = new ArrayList<Integer>();
@@ -64,15 +54,7 @@ public class BoekDAO implements VeilingInterface<Boek> {
 			ResultSet rs2 = ps2.executeQuery();
 			ps2.close();
 			rs2.close();
-
-			PreparedStatement ps3 = connection
-					.prepareStatement("INSERT INTO BOEKCATEGORIE (ID , BOEKEN_ISBN) VALUES (?, ?)");
-			ps3.setInt(1, boek.getCategorie());
-			ps3.setString(2, boek.getIsbn());
-
-			ResultSet rs3 = ps3.executeQuery();
-			ps3.close();
-			rs3.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -95,33 +77,26 @@ public class BoekDAO implements VeilingInterface<Boek> {
 			} else {
 				System.out.println("|| Connection failed ||");
 			}
+			boekenlijst.clear();
 			PreparedStatement ps = connection
-					.prepareStatement("select * from boeken where isbn= '" + ID + "'");
+					.prepareStatement("select * from boeken, drukken where isbn= '" + ID + "' and drukken.boeken_isbn='" + ID + "'");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				isbn = rs.getString("isbn");
-				titel = rs.getString("titel");
-				beschrijving = rs.getString("beschrijving");
-				uitgeverij = rs.getString("uitgeverij");
-				datum = rs.getDate("datum");
-				taal = rs.getString("taal");
-				aantalpagina = rs.getInt("aantalpagina");
-				auteur = rs.getString("auteur");
-				categorieboek = rs.getInt("categorie");
-			}
-			PreparedStatement ps2 = connection
-					.prepareStatement("select * from drukken where boeken_isbn='"
-							+ ID + "'");
-			ResultSet rs2 = ps2.executeQuery();
-			boekenlijst.clear();
-			while (rs2.next()) {
-				druk = rs2.getInt("nummer");
+				String isbn = rs.getString("isbn");
+				String titel = rs.getString("titel");
+				String beschrijving = rs.getString("beschrijving");
+				String uitgeverij = rs.getString("uitgeverij");
+				Date datum = rs.getDate("datum");
+				String taal = rs.getString("taal");
+				int aantalpagina = rs.getInt("aantalpagina");
+				String auteur = rs.getString("auteur");
+				int categorieboek = rs.getInt("categorie");
+				int druk = rs.getInt("NUMMER");
 				boek = new Boek(isbn, aantalpagina, titel, druk, beschrijving,
 						uitgeverij, taal, auteur, datum, categorieboek);
 				System.out.println(boek);
+				boekenlijst.add(boek);
 			}
-			boekenlijst.add(boek);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,7 +121,7 @@ public class BoekDAO implements VeilingInterface<Boek> {
 			ResultSet rs2 = ps2.executeQuery();
 			boekenlijst.clear();
 			while (rs2.next()) {
-				druk = rs2.getInt("nummer");
+				int druk = rs2.getInt("nummer");
 				drukkenlijst.add(druk);
 			}
 		} catch (Exception e) {

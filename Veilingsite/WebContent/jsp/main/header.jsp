@@ -80,12 +80,6 @@
 					</ul></li>
 				<s:if test="#session.gebruiker != null">
 					<li><a
-						href="<%=request.getContextPath()%>/<s:url action='BoekToevoegenForm' namespace="member"/>">Boek
-							toevoegen</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/<s:url action='HuidigeVeilingen' namespace="visitor"/>">Huidige
-							veilingen</a></li>
-					<li><a
 						href="<%=request.getContextPath()%>/jsp/member/veilingtoevoegen.jsp">Veiling
 							toevoegen</a></li>
 				</s:if>

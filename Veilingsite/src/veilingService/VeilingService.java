@@ -126,7 +126,11 @@ public class VeilingService {
 		aanbiedingDAO.delete(aanbieding);
 
 	}
-
+	public static Categorie retrieveCategories()
+	{
+		CategorieDAO categorieDAO = new CategorieDAO();
+		return categorieDAO.retrieve("");
+	}
 	public static boolean BoekWijzigen(Boek boek) {
 		BoekDAO boekDAO = new BoekDAO();
 		return boekDAO.update(boek);

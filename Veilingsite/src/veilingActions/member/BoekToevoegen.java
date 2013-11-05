@@ -4,8 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import veilingDomain.Boek;
+import veilingDomain.Categorie;
 import veilingService.VeilingService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -22,7 +27,8 @@ public class BoekToevoegen extends ActionSupport {
 	private String auteur;
 	private String categorielijst;
 	private int categorie;
-
+	private ArrayList<Categorie> categorielijstdb = new ArrayList<Categorie>(VeilingService.getCategorielijst());
+	private List<Categorie> categories = new ArrayList<Categorie>();
 
 	public String execute() {
 		categorie = Integer.parseInt(categorielijst);
@@ -34,7 +40,53 @@ public class BoekToevoegen extends ActionSupport {
 			return SUCCESS;
 		} else {
 			addActionError("Toevoegen niet gelukt");
+			VeilingService.retrieveCategories();
+			categorielijstdb = new ArrayList<Categorie>(VeilingService.getCategorielijst());
+			categories = categorielijstdb;
 			return INPUT;
+		}
+	}
+	public void validate() {
+		VeilingService.retrieveCategories();
+		categorielijstdb = new ArrayList<Categorie>(VeilingService.getCategorielijst());
+		categories = categorielijstdb;
+		if(isbn.equals(""))
+		{
+			addFieldError("isbn", "ISBN mag niet leeg zijn");
+		}
+		if(titel.equals(""))
+		{
+			addFieldError("titel", "Titel mag niet leeg zijn");
+		}
+		if(beschrijving.equals(""))
+		{
+			addFieldError("beschrijving", "Beschrijving mag niet leeg zijn");
+		}
+		if(uitgeverij.equals(""))
+		{
+			addFieldError("uitgeverij", "Uitgeverij mag niet leeg zijn");
+		}
+		if(taal.equals(""))
+		{
+			addFieldError("taal", "Taal mag niet leeg zijn");
+		}
+		if(auteur.equals(""))
+		{
+			addFieldError("auteur", "Auteur mag niet leeg zijn");
+		}
+		if(categorielijst.equals(""))
+		{
+			addFieldError("categorielijst", "Categorie mag niet leeg zijn");
+		}
+		String stringDruk = Integer.toString(druk);
+		if(stringDruk.equals(""))
+		{
+			addFieldError("druk", "Druk mag niet leeg zijn");
+		}
+		String stringAantalpagina = Integer.toString(aantalbladzijde);
+		if(stringAantalpagina.equals(""))
+		{
+			addFieldError("aantalbladzijde", "Aantal pagina's mag niet leeg zijn");
 		}
 	}
 
@@ -127,6 +179,12 @@ public class BoekToevoegen extends ActionSupport {
 
 	public void setCategorie(int categorie) {
 		this.categorie = categorie;
+	}
+	public List<Categorie> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
 	}
 	
 }
