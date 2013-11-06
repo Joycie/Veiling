@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import veilingActions.database.GetConnection;
+import veilingDomain.BiedingenStatistiek;
 import veilingDomain.Gebruiker;
 import veilingDomain.Statistiek;
 import veilingInterface.VeilingInterface;
@@ -340,6 +341,34 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 		return statistiek;
 	}
 
+	public ArrayList<BiedingenStatistiek> getBiedingenStatistieken() {
+		ArrayList<BiedingenStatistiek> biedingenStatistieken = new ArrayList<BiedingenStatistiek>();
+
+		try {
+			
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			// Aantal gebruikers ophalen
+			PreparedStatement ps = connection
+					.prepareStatement("select aanbiedingen.id, gebruikers.voornaam, gebruikers.tussenvoegsel, gebruikers.achternaam, boeken.titel, (select count(*) from biedingen where aanbiedingen_id = aanbiedingen.id)as biedingen from aanbiedingen, boeken, gebruikers where aanbiedingen.drukken_boeken_isbn = boeken.isbn and aanbiedingen.gebruikers_klantnr = gebruikers.klantnr order by biedingen desc");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				BiedingenStatistiek BiedingenStatistiek = new BiedingenStatistiek(rs.getInt("id"), rs.getString("voornaam"), rs.getString("tussenvoegsel"), rs.getString("achternaam"), rs.getString("titel"), rs.getInt("biedingen"));
+				biedingenStatistieken.add(BiedingenStatistiek);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			biedingenStatistieken = null;
+		}
+		GetConnection.closeConnection();
+		return biedingenStatistieken;
+	}
+
 	// Getters & setters
 	public static ArrayList<Gebruiker> getGebruikerslijst() {
 		return gebruikerslijst;
@@ -347,6 +376,30 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 
 	public static void setGebruikerslijst(ArrayList<Gebruiker> gebruikerslijst) {
 		AdminDAO.gebruikerslijst = gebruikerslijst;
+	}
+	
+	public static int getOpbrengst(String van, String tot) {
+		int opbrengst = 0;
+		try {
+			Connection connection = null;
+			connection = GetConnection.getDBConnection();
+			if (connection != null) {
+				System.out.println("|| Connection ready || ");
+			} else {
+				System.out.println("|| Connection failed ||");
+			}
+			// Aantal gebruikers ophalen
+			PreparedStatement ps = connection
+					.prepareStatement("select sum((select max(bedrag) as bedrag from biedingen where aanbiedingen_id = aanbiedingen.id))as opbrengst from aanbiedingen where eindtijd between to_date('" + van + "','dd/mm/yyyy') AND to_date('" + tot + "','dd/mm/yyyy')");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				opbrengst = rs.getInt("opbrengst");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		GetConnection.closeConnection();
+		return opbrengst;
 	}
 
 }
