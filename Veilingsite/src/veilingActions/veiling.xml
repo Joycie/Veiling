@@ -42,7 +42,7 @@
 		</action>
 		<action name="GetStatistieken" class="veilingActions.admin.GetStatistieken">
 			<result name="success">/jsp/admin/statistieken.jsp</result>
-			<result name="input" type="redirectAction">Menu</result>
+			<result name="input">/jsp/admin/statistieken.jsp</result>
 		</action>
 		<action name="AanbiedingWijzigenForm" class="veilingActions.admin.AanbiedingWijzigenForm">
 			<result name="success">/jsp/admin/veilingwijzigen.jsp</result>

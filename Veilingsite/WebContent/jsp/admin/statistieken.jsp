@@ -30,6 +30,30 @@
 		<hr>
 		</div>
 		</div>
+	<table>
+		<tr class="thcolor">
+			<th>ID</th>
+			<th>Aanbieder</th>
+			<th>Titel</th>
+			<th>Biedingen</th>
+		</tr>
+		<h2>Aanbiedingen met de meeste biedingen</h2>
+		<s:iterator value="biedingenStatistieken">
+			<tr class="tdcolor">
+				<td><a href="<%=request.getContextPath()%>/visitor/GetAanbieding.action?id=<s:property value="id" />"><s:property value="id" /></a></td>
+				<td><s:property value="voornaam" /> <s:property value="tussenvoegsel" /> <s:property value="achternaam" /></td>
+				<td><s:property value="titel" /></td>
+				<td><s:property value="biedingen" /></td>
+			</tr>
+		</s:iterator>
+	</table>
+	<h2>Opbrengst in een bepaalde periode</h2>
+	<s:form action="GetStatistieken">
+			<s:textfield name="van" label="Van"/>
+			<s:textfield name="tot" label="Tot"/>
+			<s:submit value="Opvragen" />
+			<s:textfield name="opbrengst" label="Opbrengst" disabled="true"/>
+	</s:form>
 	</s:if>
 	<s:else>
 	    	Geen toegang.

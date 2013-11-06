@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import veilingActions.DAO.*;
 import veilingDomain.Aanbieding;
+import veilingDomain.BiedingenStatistiek;
 import veilingDomain.Bod;
 import veilingDomain.Boek;
 import veilingDomain.Categorie;
@@ -240,6 +241,17 @@ public class VeilingService {
 		AanbiedingDAO aanbiedingDAO = new AanbiedingDAO();
 		return aanbiedingDAO.getLaatsteBieding(id);
 	}
+
+	public static ArrayList<BiedingenStatistiek> getBiedingenStatistieken() {
+		AdminDAO adminDAO = new AdminDAO();
+		return adminDAO.getBiedingenStatistieken();
+	}
+	
+	public static int getOpbrengst(String van, String tot) {
+		AdminDAO adminDAO = new AdminDAO();
+		return adminDAO.getOpbrengst(van, tot);
+	}
+	
 
 	
 

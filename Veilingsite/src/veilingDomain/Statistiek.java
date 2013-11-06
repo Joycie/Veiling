@@ -1,11 +1,15 @@
 package veilingDomain;
 
+import java.util.ArrayList;
+
 public class Statistiek {
 	private Aanbieding aanbieding;
 	private int aantalgebruikers, totaalaantalaanbiedingen,
 			aantallopendeaanbiedingen, aantalboeken;
 	private double hoogstebod_dag, hoogstebod_week, hoogstebod_maand, hoogstebod_jaar, hoogstekrediet, hoogstekredietopwaardering,
 			totaleomzet;
+	private ArrayList<BiedingenStatistiek> biedingen = new ArrayList<BiedingenStatistiek>();
+	
 
 	public Statistiek(Aanbieding aanbieding, int aantalgebruikers,
 			int totaalaantalaanbiedingen, int aantallopendeaanbiedingen,
