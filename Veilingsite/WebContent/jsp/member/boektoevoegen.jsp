@@ -9,7 +9,7 @@
 <div class="content">
 	<h2>Boek Toevoegen</h2>
 	<s:form action="BoekToevoegen" namespace="/member">
-		<s:textfield name="isbn" label="Isbn" />
+		<s:textfield name="isbn" label="Isbn" readonly="true"/>
 		<s:textfield name="titel" label="Titel" />
 		<s:textfield name="beschrijving" label="Beschrijving" />
 		Categorie:
@@ -19,7 +19,7 @@
 					<s:property value="naam" />
 				</option>
 			</s:iterator>
-			<s:textfield name="druk" label="Druk" />
+			<s:textfield name="druk" label="Druk" readonly="true"/>
 			<s:textfield name="uitgeverij" label="Uitgeverij" />
 			<s:textfield name="auteur" label="Auteur" />
 			<s:textfield name="taal" label="Taal" />
