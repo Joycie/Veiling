@@ -51,7 +51,7 @@ public class ImageAction extends ActionSupport implements ServletRequestAware {
 						aanbieding.getImg()));
 				// convert BufferedImage to byte array
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(originalImage, "jpg", baos);
+				ImageIO.write(originalImage, "png", baos);
 				baos.flush();
 				imageInByte = baos.toByteArray();
 				baos.close();

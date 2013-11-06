@@ -23,7 +23,7 @@ public class BoekToevoegen extends ActionSupport {
 	private Date datum;
 	private int druk;
 	private String taal;
-	private int aantalbladzijde;
+	private int aantalpagina;
 	private String auteur;
 	private String categorielijst;
 	private int categorie;
@@ -32,7 +32,7 @@ public class BoekToevoegen extends ActionSupport {
 
 	public String execute() {
 		categorie = Integer.parseInt(categorielijst);
-		Boek boek = new Boek(isbn, aantalbladzijde, titel, druk, beschrijving,
+		Boek boek = new Boek(isbn, aantalpagina, titel, druk, beschrijving,
 				uitgeverij, taal, auteur, datum, categorie);
 		if (VeilingService.voegBoekToe(boek) == true) {
 			addActionMessage("Boek : " + titel + " is toegevoegd.");
@@ -83,7 +83,7 @@ public class BoekToevoegen extends ActionSupport {
 		{
 			addFieldError("druk", "Druk mag niet leeg zijn");
 		}
-		String stringAantalpagina = Integer.toString(aantalbladzijde);
+		String stringAantalpagina = Integer.toString(aantalpagina);
 		if(stringAantalpagina.equals(""))
 		{
 			addFieldError("aantalbladzijde", "Aantal pagina's mag niet leeg zijn");
@@ -148,15 +148,13 @@ public class BoekToevoegen extends ActionSupport {
 	public void setTaal(String taal) {
 		this.taal = taal;
 	}
-
-	public int getAantalbladzijde() {
-		return aantalbladzijde;
+	
+	public int getAantalpagina() {
+		return aantalpagina;
 	}
-
-	public void setAantalbladzijde(int aantalbladzijde) {
-		this.aantalbladzijde = aantalbladzijde;
+	public void setAantalpagina(int aantalpagina) {
+		this.aantalpagina = aantalpagina;
 	}
-
 	public String getAuteur() {
 		return auteur;
 	}
