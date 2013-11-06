@@ -23,6 +23,7 @@ public class UserZoeken extends ActionSupport {
 		sysdate.setDate(sysdate.getDate() - 1);
 		System.out.println("Klantnummer: " + klantnummer);
 		gebruiker = VeilingService.retrieveUser(klantnummer);
+		System.out.println("Gebruiker klantnr: " + gebruiker.getKlantnummer());
 		aanbiedingen = VeilingService.getMijnveilingen(klantnummer);
 		return SUCCESS;
 	}

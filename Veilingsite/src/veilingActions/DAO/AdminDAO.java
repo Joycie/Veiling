@@ -11,10 +11,6 @@ import veilingDomain.Statistiek;
 import veilingInterface.VeilingInterface;
 
 public class AdminDAO<T> implements VeilingInterface<T> {
-	private static String voornaam, tussenvoegsel, achternaam, adres, postcode,
-			plaats, email, wachtwoord;
-	private static int klantnummer, telefoonnummer, rekeningnummer, rol;
-	private static double krediet;
 	private static ArrayList<Gebruiker> gebruikerslijst = new ArrayList<Gebruiker>();
 
 	@Override
@@ -39,18 +35,18 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 			ResultSet rs = ps.executeQuery();
 			gebruikerslijst.clear();
 			while (rs.next()) {
-				klantnummer = rs.getInt("KLANTNR");
-				voornaam = rs.getString("VOORNAAM");
-				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-				achternaam = rs.getString("ACHTERNAAM");
-				adres = rs.getString("ADRES");
-				postcode = rs.getString("POSTCODE");
-				plaats = rs.getString("PLAATS");
-				email = rs.getString("EMAIL");
-				telefoonnummer = rs.getInt("TELEFOONNUMMER");
-				rekeningnummer = rs.getInt("REKENINGNUMMER");
-				krediet = rs.getDouble("KREDIET");
-				rol = rs.getInt("ROL");
+				int klantnummer = rs.getInt("KLANTNR");
+				String voornaam = rs.getString("VOORNAAM");
+				String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+				String achternaam = rs.getString("ACHTERNAAM");
+				String adres = rs.getString("ADRES");
+				String postcode = rs.getString("POSTCODE");
+				String plaats = rs.getString("PLAATS");
+				String email = rs.getString("EMAIL");
+				int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+				int rekeningnummer = rs.getInt("REKENINGNUMMER");
+				double krediet = rs.getDouble("KREDIET");
+				int rol = rs.getInt("ROL");
 
 				Gebruiker geb = new Gebruiker(klantnummer, voornaam,
 						tussenvoegsel, achternaam, adres, postcode, plaats,
@@ -96,23 +92,25 @@ public class AdminDAO<T> implements VeilingInterface<T> {
 							+ klantnummer);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				voornaam = rs.getString("VOORNAAM");
-				tussenvoegsel = rs.getString("TUSSENVOEGSEL");
-				achternaam = rs.getString("ACHTERNAAM");
-				adres = rs.getString("ADRES");
-				postcode = rs.getString("POSTCODE");
-				plaats = rs.getString("PLAATS");
-				email = rs.getString("EMAIL");
-				telefoonnummer = rs.getInt("TELEFOONNUMMER");
-				rekeningnummer = rs.getInt("REKENINGNUMMER");
-				krediet = rs.getDouble("KREDIET");
-				rol = rs.getInt("ROL");
+				int klantnummerDB = rs.getInt("klantnr");
+				String voornaam = rs.getString("VOORNAAM");
+				String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+				String achternaam = rs.getString("ACHTERNAAM");
+				String adres = rs.getString("ADRES");
+				String postcode = rs.getString("POSTCODE");
+				String plaats = rs.getString("PLAATS");
+				String email = rs.getString("EMAIL");
+				int telefoonnummer = rs.getInt("TELEFOONNUMMER");
+				int rekeningnummer = rs.getInt("REKENINGNUMMER");
+				double krediet = rs.getDouble("KREDIET");
+				int rol = rs.getInt("ROL");
+				gebruiker = new Gebruiker(klantnummerDB, voornaam, tussenvoegsel,
+						achternaam, adres, postcode, plaats, email, "",
+						telefoonnummer, rekeningnummer, krediet, rol);
 			}
 			ps.close();
 			rs.close();
-			gebruiker = new Gebruiker(klantnummer, voornaam, tussenvoegsel,
-					achternaam, adres, postcode, plaats, email, "",
-					telefoonnummer, rekeningnummer, krediet, rol);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

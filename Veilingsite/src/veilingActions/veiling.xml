@@ -51,6 +51,13 @@
 			<result name="success">/jsp/admin/veilingwijzigen.jsp</result>
 			<result name="input">/jsp/admin/veilingwijzigen.jsp</result>
 		</action>
+		<action name="UserWijzigenForm" class="veilingActions.admin.UserZoeken">
+			<result name="success">/jsp/admin/userwijzigen.jsp</result>
+		</action>
+		<action name="UserWijzigen" class="veilingActions.admin.UserWijzigen">
+			<result name="success">/jsp/admin/userwijzigen.jsp</result>
+			<result name="input">/jsp/admin/userwijzigen.jsp</result>
+		</action>
 	</package>
 	<package name="visitor" namespace="/visitor" extends="struts-default">
 		<result-types>

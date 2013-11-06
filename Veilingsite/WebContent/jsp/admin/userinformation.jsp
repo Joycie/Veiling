@@ -34,6 +34,10 @@
 			<s:actionmessage />
 		</s:if>
 		<br>
+		<a class="button"
+				href="../admin/UserWijzigenForm.action?klantnummer=<s:property value="klantnummer"/>">Gegevens wijzigen</a>
+		<br>
+		<br>
 		<s:if
 			test="Gebruiker.rol == 0 && Gebruiker.klantnummer != 11 && #session.gebruiker.klantnummer != Gebruiker.klantnummer">
 			<a class="button"
@@ -58,6 +62,7 @@
 				href="../admin/OntneemAdmin.action?klantnummer=<s:property value="klantnummer"/>">Neem
 				administrator rechten in</a>
 		</s:if>
+		<br>
 		<hr>
 		<s:if test="%{aanbiedingen.isEmpty()}">
 		Deze gebruiker heeft geen aanbiedingen
