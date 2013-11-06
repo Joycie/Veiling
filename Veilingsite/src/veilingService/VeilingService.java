@@ -38,7 +38,11 @@ public class VeilingService {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.update(gebruiker);
 	}
-
+	public static void setWachtwoord(int klantnr, String wachtwoord)
+	{	
+		GebruikerDAO gebruikerdao = new GebruikerDAO();
+		gebruikerdao.setWachtwoord(klantnr, wachtwoord);
+	}
 	public static boolean updateKrediet(int klantnr, double saldo) {
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.updateKrediet(klantnr, saldo);

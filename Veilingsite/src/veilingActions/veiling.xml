@@ -108,6 +108,10 @@
 			<result name="success">/jsp/member/accountwijzigen.jsp</result>
 			<result name="input">/jsp/member/accountwijzigen.jsp</result>
 		</action>
+		<action name="WachtwoordWijzigen" class="veilingActions.member.WachtwoordWijzigen">
+			<result name="success">/jsp/member/wachtwoordwijzigen.jsp</result>
+			<result name="input">/jsp/member/wachtwoordwijzigen.jsp</result>
+		</action>
 		<action name="KredietOpwaarderenForm">
 			<result name="success">/jsp/member/kredietopwaarderen.jsp</result>
 		</action>
