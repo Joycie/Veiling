@@ -52,9 +52,9 @@ public class Bieden extends ActionSupport implements SessionAware {
 			addActionMessage("Bieden gelukt");
 			if (VeilingService.kredietInleveren(gebruiker.getKlantnummer(),
 					gebruiker.getKrediet() - guldens)) {
-				gebruiker.setKrediet(gebruiker.getKrediet() - guldens);
-				session.put("gebruiker", gebruiker);
 				VeilingService.updateKrediet(aanbieding.getBod().getKlantnr(), aanbieding.getBod().getBedrag());
+				gebruiker = VeilingService.getGebruiker(gebruiker.getKlantnummer());
+				session.put("gebruiker", gebruiker);
 				aanbieding = VeilingService.getAanbieding(id);
 				biedingen = VeilingService.getBiedingenById(id);
 				return SUCCESS;
@@ -80,8 +80,8 @@ public class Bieden extends ActionSupport implements SessionAware {
 		if (guldens < 1) {
 			addActionError("U moet een bedrag invullen van minimaal ƒ 1.0");
 		}
-		if (guldens <= aanbieding.getStartprijs()
-				|| guldens <= aanbieding.getBod().getBedrag()) {
+		if (guldens < aanbieding.getStartprijs()
+				|| guldens < aanbieding.getBod().getBedrag()) {
 			addActionError("Het bod moet hoger zijn dan het huidige bod.");
 
 		}
