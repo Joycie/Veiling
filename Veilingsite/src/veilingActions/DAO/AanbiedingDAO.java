@@ -414,7 +414,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 		return gezochteveilingenlijst;
 
 	}
-
+	
 	public ArrayList<Aanbieding> retrieveMijnVeilingen(int klantnr) {
 		Aanbieding aanb = null;
 		Boek boek = null;
@@ -442,7 +442,7 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				int druk = rs.getInt("DRUKKEN_NUMMER");
 				String beschrijving = rs.getString("BESCHRIJVING");
 				String uitgeverij = rs.getString("BESCHRIJVING");
-				String taal = rs.getString("TAAL");
+				String taal = rs.getString("TAAL"); //            p
 				String auteur = rs.getString("AUTEUR");
 				Date datum = rs.getDate("DATUM");
 				int categorie = rs.getInt("CATEGORIE");

@@ -34,7 +34,7 @@ public class VeilingService {
 			String postcode, String plaats, String email, int telefoonnummer,
 			int rekeningnummer, int klantnr) {
 		Gebruiker gebruiker = new Gebruiker(klantnr, voornaam, tussenvoegsel,
-				achternaam, adres, postcode, plaats, email, telefoonnummer,
+				achternaam, adres, postcode, plaats, email, telefoonnummer, 																																														//      u
 				rekeningnummer);
 		GebruikerDAO gebruikerDAO = new GebruikerDAO();
 		return gebruikerDAO.update(gebruiker);

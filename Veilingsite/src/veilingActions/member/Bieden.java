@@ -166,5 +166,5 @@ public class Bieden extends ActionSupport implements SessionAware {
 	public void setBiedingen(ArrayList<Bod> biedingen) {
 		this.biedingen = biedingen;
 	}
-	
+	//c
 }

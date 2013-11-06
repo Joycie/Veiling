@@ -51,6 +51,7 @@ public class Statistiek {
 
 	public void setAantalboeken(int aantalboeken) {
 		this.aantalboeken = aantalboeken;
+		//                       t
 	}
 	
 

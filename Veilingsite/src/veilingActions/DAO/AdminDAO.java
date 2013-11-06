@@ -3,6 +3,7 @@ package veilingActions.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+/*         r         */
 import java.util.ArrayList;
 
 import veilingActions.database.GetConnection;

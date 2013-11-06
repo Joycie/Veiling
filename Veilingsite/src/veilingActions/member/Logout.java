@@ -15,5 +15,7 @@ public class Logout  extends ActionSupport{
 //		session.put("gebruiker", null);
 		session.clear();
 		return SUCCESS;
+		
+		//e
 	}
 }

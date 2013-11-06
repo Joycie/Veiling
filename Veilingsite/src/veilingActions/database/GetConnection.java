@@ -4,6 +4,17 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/*
+ *  In dit project zijn op verschillende plekken letters verstopt.
+ *  Wij willen natuurlijk dat de code zorgvuldig en met veel liefde wordt gelezen. 
+ *  Het lijkt ons daarom de beste manier om dat te doen doormiddel van een spelletje.
+ *  Weet jij de letters te vinden en er een woord van te maken?
+ *  de letters zijn als te vinden in een comment dus bijvoorbeeld : // z
+ *  
+ *  Mvg, Team 3
+ *  
+ *  P.s. veel zoekplezier
+ */
 public class GetConnection {
 	static Connection dbConnection = null;
 	public static Connection getDBConnection() {
