@@ -9,8 +9,12 @@
 		<s:if test="hasActionMessages()">
 			<s:actionmessage />
 		</s:if>
-		<img
-			src="http://www.buynothingnew.nl/wp-content/uploads/vintage-boeken.jpeg" />
+		<s:if test="img != null">
+		<img src="<s:url action='ImageAction?imageId=%{id}'/>" />
+		</s:if>
+		<s:else>
+			<img src="<%=request.getContextPath()%>/css/images/boeken.jpeg" />
+		</s:else>
 		<div class="info">
 			<p>
 				<s:property value="boek.auteur" />

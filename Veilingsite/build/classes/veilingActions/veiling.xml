@@ -53,6 +53,10 @@
 		</action>
 	</package>
 	<package name="visitor" namespace="/visitor" extends="struts-default">
+		<result-types>
+			<result-type name="imageResult" class="result.CustomResult" />
+		</result-types>
+
 		<action name="Register" class="veilingActions.visitor.Register">
 			<result name="input">/jsp/visitor/register.jsp</result>
 			<result name="success">/jsp/visitor/registered.jsp</result>
@@ -69,6 +73,9 @@
 		</action>
 		<action name="AanbiedingZoeken" class="veilingActions.visitor.AanbiedingZoeken">
 			<result name="success">/jsp/visitor/aanbiedinggevonden.jsp</result>
+		</action>
+		<action name="ImageAction" class="veilingActions.visitor.ImageAction">
+			<result name="success" type="imageResult"></result>
 		</action>
 	</package>
 

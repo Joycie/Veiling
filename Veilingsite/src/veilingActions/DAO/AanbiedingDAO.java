@@ -94,12 +94,13 @@ public class AanbiedingDAO implements VeilingInterface<Aanbieding> {
 				// int gebruiker = new Gebruiker(0, null, null, null, null,
 				// null, null, null, 0, 0);
 				Bod bod = new Bod (rs.getTimestamp("biedingdatum"), rs.getInt("gebruiker_klantnr"), rs.getInt("AANBIEDINGEN_ID"), rs.getDouble("BEDRAG"));
+				
 				aanbieding = new Aanbieding(rs.getInt("id"),
 						rs.getDouble("startprijs"),
 						rs.getTimestamp("eindtijd"),
 						rs.getTimestamp("insert_date"),
 						rs.getInt("gebruikers_klantnr"), rs.getString("isbn"),
-						rs.getInt("drukken_nummer"), boek, bod, null);
+						rs.getInt("drukken_nummer"), boek, bod, rs.getBytes("image"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
